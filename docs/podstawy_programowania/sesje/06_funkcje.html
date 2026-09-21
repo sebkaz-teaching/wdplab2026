@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-5" id="toc-sprawdź-się-z-sesji-5" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-5">✅ Sprawdź się z sesji 5</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-5" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-5">✅ Sprawdź się z sesji 5</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja06",
+  title: "Sesja 5: Tablice — pierwsza maszyna wirtualna",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co się stanie przy wykonaniu tego kodu?",
+      code: "int tab[3] = {10, 20, 30};\nprintf(\"%d\\n\", tab[3]);",
+      options: [
+        {v:"A", t:"Wypisze 30"},
+        {v:"B", t:"Niezdefiniowane zachowanie — indeks 3 jest poza zakresem tablicy (elementy to tab[0]..tab[2])"},
+        {v:"C", t:"Błąd kompilacji"},
+        {v:"D", t:"Wypisze 0"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod?",
+      code: "int program[] = {1, 5, 2, 3, 3, 0};\nint akumulator = 0;\nfor (int i = 0; i < 6; i += 2) {\n    int kod = program[i], wartosc = program[i+1];\n    switch (kod) {\n        case 1: akumulator = wartosc; break;\n        case 2: akumulator += wartosc; break;\n        case 3: printf(\"%d\\n\", akumulator); break;\n    }\n}",
+      options: [
+        {v:"A", t:"5"},
+        {v:"B", t:"8"},
+        {v:"C", t:"3"},
+        {v:"D", t:"0"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Nauczyć się pisać własne funkcje i użyć ich, żeby uporządkować “maszynę” z sesji 5 — wydzielić wykonywanie pojedynczej instrukcji do osobnej funkcji zamiast trzymać wszystko w <code>main</code>.</p>

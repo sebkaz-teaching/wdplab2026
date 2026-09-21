@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-9" id="toc-sprawdź-się-z-sesji-9" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-9">✅ Sprawdź się z sesji 9</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-9" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-9">✅ Sprawdź się z sesji 9</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja10",
+  title: "Sesja 9: Rejestry",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze rejestry[2]?",
+      code: "int rejestry[4] = {0,0,0,0};\nrejestry[0] = 10;\nrejestry[1] = 5;\nrejestry[2] = rejestry[0] + rejestry[1];\nprintf(\"%d\\n\", rejestry[2]);",
+      options: [
+        {v:"A", t:"0"},
+        {v:"B", t:"5"},
+        {v:"C", t:"15"},
+        {v:"D", t:"10"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod? (porównaj z sesją 6, gdzie zwieksz(int x) nie zmieniało a w main)",
+      code: "void zeruj(int rej[], int n) {\n    for (int i = 0; i < n; i++) rej[i] = 0;\n}\nint main(void) {\n    int rejestry[3] = {1,2,3};\n    zeruj(rejestry, 3);\n    printf(\"%d\\n\", rejestry[1]);\n}",
+      options: [
+        {v:"A", t:"2 — tablice też są kopiowane jak zwykłe zmienne"},
+        {v:"B", t:"0 — tablice przekazane do funkcji zachowują się jak wskaźniki, zeruj naprawdę modyfikuje oryginał"},
+        {v:"C", t:"Niezdefiniowane zachowanie"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Zrozumieć, czym jest adres w pamięci i wskaźnik — i wyjaśnić zagadkę z sesji 9: dlaczego zmiana tablicy wewnątrz funkcji <strong>jest</strong> widoczna na zewnątrz, skoro w sesji 6 zmiana zwykłej zmiennej (<code>int x</code>) wewnątrz funkcji <strong>nie była</strong>.</p>

@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-10" id="toc-sprawdź-się-z-sesji-10" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-10">✅ Sprawdź się z sesji 10</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-10" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-10">✅ Sprawdź się z sesji 10</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja11",
+  title: "Sesja 10: Wskaźniki — podstawy",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "int a = 5;\nint *p = &a;\n*p = 10;\nprintf(\"%d\\n\", a);",
+      options: [
+        {v:"A", t:"5"},
+        {v:"B", t:"10"},
+        {v:"C", t:"Adres zmiennej a"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co jest nie tak z tym wywołaniem funkcji?",
+      code: "void zamien(int *a, int *b) {\n    int tmp = *a;\n    *a = *b;\n    *b = tmp;\n}\nint main(void) {\n    int x = 1, y = 2;\n    zamien(&x, y);\n    printf(\"%d %d\\n\", x, y);\n}",
+      options: [
+        {v:"A", t:"Nic — kod jest poprawny i wypisze 2 1"},
+        {v:"B", t:"Drugi argument powinien być &y, nie y — zamien oczekuje adresu (int*), nie wartości"},
+        {v:"C", t:"Funkcja zamien powinna zwracać int, nie void"},
+        {v:"D", t:"Zmienna tmp powinna być wskaźnikiem"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Połączyć struktury (sesja 7) ze wskaźnikami (sesja 10) — dokładnie tak, jak wyglądają funkcje w emulatorze CHIP-8 (<code>void chip8_init(Chip8 *c)</code>), które zaczniecie pisać za dwie sesje.</p>

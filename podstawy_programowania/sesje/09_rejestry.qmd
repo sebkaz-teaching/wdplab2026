@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 8
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja09",
+  title: "Sesja 8: Enumy",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "enum Kolor { CZERWONY, ZIELONY, NIEBIESKI };\nprintf(\"%d\\n\", ZIELONY);",
+      options: [
+        {v:"A", t:"0"},
+        {v:"B", t:"1"},
+        {v:"C", t:"2"},
+        {v:"D", t:"Błąd kompilacji — enum nie ma wartości liczbowej"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod?",
+      code: "enum OpCode { OP_LOAD = 1, OP_ADD = 2, OP_PRINT = 3 };\nenum OpCode kod = OP_ADD;\nswitch (kod) {\n    case OP_LOAD: printf(\"load\\n\"); break;\n    case 2: printf(\"add\\n\"); break;\n    case OP_PRINT: printf(\"print\\n\"); break;\n}",
+      options: [
+        {v:"A", t:"load"},
+        {v:"B", t:"add"},
+        {v:"C", t:"print"},
+        {v:"D", t:"Błąd kompilacji — nie można mieszać case OP_LOAD z case 2"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Zastąpić pojedynczy `akumulator` z poprzednich sesji tablicą kilku "rejestrów" —

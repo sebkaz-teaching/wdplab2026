@@ -4,6 +4,42 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 17
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja18",
+  title: "Sesja 17: Pliki",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co zwraca fopen(), jeśli podany plik nie istnieje?",
+      options: [
+        {v:"A", t:"Rzuca wyjątek i przerywa program"},
+        {v:"B", t:"NULL"},
+        {v:"C", t:"Pusty string"},
+        {v:"D", t:"Tworzy plik automatycznie i zwraca do niego uchwyt"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Plik dane.txt zawiera tylko '5 10' (dwie liczby, nie trzy). Co wypisze n?",
+      code: "FILE *f = fopen(\"dane.txt\", \"r\");\nint a, b, c;\nint n = fscanf(f, \"%d %d %d\", &a, &b, &c);\nprintf(\"%d\\n\", n);",
+      options: [
+        {v:"A", t:"3"},
+        {v:"B", t:"2"},
+        {v:"C", t:"0"},
+        {v:"D", t:"Program się wywali (crash)"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Poznać operacje na tekstach (`char[]`, `strcmp`, `strtok`) i napisać prosty parser,

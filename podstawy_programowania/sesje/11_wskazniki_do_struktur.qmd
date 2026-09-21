@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 10
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja11",
+  title: "Sesja 10: Wskaźniki — podstawy",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "int a = 5;\nint *p = &a;\n*p = 10;\nprintf(\"%d\\n\", a);",
+      options: [
+        {v:"A", t:"5"},
+        {v:"B", t:"10"},
+        {v:"C", t:"Adres zmiennej a"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co jest nie tak z tym wywołaniem funkcji?",
+      code: "void zamien(int *a, int *b) {\n    int tmp = *a;\n    *a = *b;\n    *b = tmp;\n}\nint main(void) {\n    int x = 1, y = 2;\n    zamien(&x, y);\n    printf(\"%d %d\\n\", x, y);\n}",
+      options: [
+        {v:"A", t:"Nic — kod jest poprawny i wypisze 2 1"},
+        {v:"B", t:"Drugi argument powinien być &y, nie y — zamien oczekuje adresu (int*), nie wartości"},
+        {v:"C", t:"Funkcja zamien powinna zwracać int, nie void"},
+        {v:"D", t:"Zmienna tmp powinna być wskaźnikiem"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Połączyć struktury (sesja 7) ze wskaźnikami (sesja 10) — dokładnie tak, jak wyglądają

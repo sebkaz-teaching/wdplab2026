@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 4
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja05",
+  title: "Sesja 4: Pętle i REPL",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co się stanie po uruchomieniu tego kodu?",
+      code: "int i = 0;\nwhile (i < 3) {\n    printf(\"%d\\n\", i);\n}",
+      options: [
+        {v:"A", t:"Wypisze 0, 1, 2"},
+        {v:"B", t:"Pętla nieskończona — wypisuje 0 w kółko, bo i nigdy się nie zwiększa"},
+        {v:"C", t:"Błąd kompilacji"},
+        {v:"D", t:"Nic się nie wypisze"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Użytkownik wpisuje kolejno: +, -, q. Co wypisze program na końcu?",
+      code: "int licznik = 0;\nwhile (1) {\n    char op;\n    scanf(\" %c\", &op);\n    if (op == 'q') break;\n    licznik++;\n}\nprintf(\"Wykonano %d dzialan.\\n\", licznik);",
+      options: [
+        {v:"A", t:"Wykonano 3 dzialan."},
+        {v:"B", t:"Wykonano 2 dzialan."},
+        {v:"C", t:"Wykonano 0 dzialan."},
+        {v:"D", t:"Pętla nigdy się nie zakończy"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Poznać tablice i użyć ich, żeby napisać **pierwszą, bardzo prostą wersję maszyny

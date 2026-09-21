@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-14" id="toc-sprawdź-się-z-sesji-14" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-14">✅ Sprawdź się z sesji 14</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-14" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-14">✅ Sprawdź się z sesji 14</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja15",
+  title: "Sesja 14: Flagi i skoki warunkowe",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "int flaga_zero = (5 == 5);\nprintf(\"%d\\n\", flaga_zero);",
+      options: [
+        {v:"A", t:"5"},
+        {v:"B", t:"1"},
+        {v:"C", t:"true"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod?",
+      code: "int rejestr = 2;\nint flaga_zero;\nint wynik = 0;\nwhile (1) {\n    flaga_zero = (rejestr == 0);\n    if (flaga_zero) break;\n    wynik++;\n    rejestr--;\n}\nprintf(\"%d\\n\", wynik);",
+      options: [
+        {v:"A", t:"1"},
+        {v:"B", t:"2"},
+        {v:"C", t:"3"},
+        {v:"D", t:"Pętla nieskończona"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Zaimplementować stos (LIFO — <em>Last In, First Out</em>) jako tablicę + wskaźnik szczytu, i dodać <code>PUSH</code>/<code>POP</code> do maszyny wirtualnej. To bezpośredni przygotowanie do <code>CALL</code>/<code>RET</code> w sesji 16 i w ćwiczeniu 2 CHIP-8.</p>

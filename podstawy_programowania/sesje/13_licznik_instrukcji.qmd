@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 12
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja13",
+  title: "Sesja 12: Pamięć dynamiczna",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "int *tab = malloc(3 * sizeof(int));\ntab[0] = 1; tab[1] = 2; tab[2] = 3;\nprintf(\"%d\\n\", tab[1]);\nfree(tab);",
+      options: [
+        {v:"A", t:"1"},
+        {v:"B", t:"2"},
+        {v:"C", t:"3"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co jest nie tak z tym kodem?",
+      code: "int *p = malloc(sizeof(int));\n*p = 5;\nfree(p);\nprintf(\"%d\\n\", *p);",
+      options: [
+        {v:"A", t:"Nic — kod jest poprawny, wypisze 5"},
+        {v:"B", t:"Use-after-free — odczyt spod wskaźnika po jego zwolnieniu (free) to niezdefiniowane zachowanie"},
+        {v:"C", t:"malloc powinien dostać sizeof(int*), nie sizeof(int)"},
+        {v:"D", t:"free powinno być wywołane przed *p = 5"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Zamienić pętlę `for` (która zawsze idzie po kolei, o jeden do przodu) na jawny

@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-11" id="toc-sprawdź-się-z-sesji-11" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-11">✅ Sprawdź się z sesji 11</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-11" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-11">✅ Sprawdź się z sesji 11</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja12",
+  title: "Sesja 11: Wskaźniki do struktur",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "struct Maszyna { int rejestry[4]; };\nstruct Maszyna m;\nstruct Maszyna *wsk = &m;\nwsk->rejestry[0] = 5;\nprintf(\"%d\\n\", m.rejestry[0]);",
+      options: [
+        {v:"A", t:"0"},
+        {v:"B", t:"5"},
+        {v:"C", t:"Adres rejestry[0]"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod i dlaczego?",
+      code: "struct Maszyna { int rejestry[4]; };\nvoid maszyna_init(struct Maszyna m) {\n    for (int i = 0; i < 4; i++) m.rejestry[i] = 0;\n}\nint main(void) {\n    struct Maszyna m;\n    m.rejestry[0] = 99;\n    maszyna_init(m);\n    printf(\"%d\\n\", m.rejestry[0]);\n}",
+      options: [
+        {v:"A", t:"0 — maszyna_init poprawnie zeruje rejestry"},
+        {v:"B", t:"99 — struktura przekazana przez wartość (bez *) to kopia, zmiana wewnątrz funkcji nie jest widoczna na zewnątrz"},
+        {v:"C", t:"Niezdefiniowane zachowanie"},
+        {v:"D", t:"Błąd kompilacji — brakuje wskaźnika w parametrze"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Poznać dynamiczną alokację pamięci (<code>malloc</code>/<code>free</code>) i użyć jej tam, gdzie tablice o stałym rozmiarze przestają wystarczać — gdy rozmiar “programu” nie jest znany w momencie pisania kodu.</p>

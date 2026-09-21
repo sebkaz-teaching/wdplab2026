@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-8" id="toc-sprawdź-się-z-sesji-8" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-8">✅ Sprawdź się z sesji 8</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-8" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-8">✅ Sprawdź się z sesji 8</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja09",
+  title: "Sesja 8: Enumy",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "enum Kolor { CZERWONY, ZIELONY, NIEBIESKI };\nprintf(\"%d\\n\", ZIELONY);",
+      options: [
+        {v:"A", t:"0"},
+        {v:"B", t:"1"},
+        {v:"C", t:"2"},
+        {v:"D", t:"Błąd kompilacji — enum nie ma wartości liczbowej"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod?",
+      code: "enum OpCode { OP_LOAD = 1, OP_ADD = 2, OP_PRINT = 3 };\nenum OpCode kod = OP_ADD;\nswitch (kod) {\n    case OP_LOAD: printf(\"load\\n\"); break;\n    case 2: printf(\"add\\n\"); break;\n    case OP_PRINT: printf(\"print\\n\"); break;\n}",
+      options: [
+        {v:"A", t:"load"},
+        {v:"B", t:"add"},
+        {v:"C", t:"print"},
+        {v:"D", t:"Błąd kompilacji — nie można mieszać case OP_LOAD z case 2"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Zastąpić pojedynczy <code>akumulator</code> z poprzednich sesji tablicą kilku “rejestrów” — dokładnie tak, jak robi to prawdziwy procesor (i CHIP-8, z jego 16 rejestrami <code>V</code>).</p>

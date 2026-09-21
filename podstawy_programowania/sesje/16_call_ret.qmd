@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 15
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja16",
+  title: "Sesja 15: Stos",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "int stos[10]; int sp = 0;\nstos[sp++] = 5;\nstos[sp++] = 10;\nprintf(\"%d\\n\", stos[--sp]);",
+      options: [
+        {v:"A", t:"5"},
+        {v:"B", t:"10"},
+        {v:"C", t:"0"},
+        {v:"D", t:"Błąd — sp wyszedł poza zakres"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod?",
+      code: "int stos[10]; int sp = 0;\nstos[sp++] = 1;\nstos[sp++] = 2;\nstos[sp++] = 3;\nint a = stos[--sp];\nint b = stos[--sp];\nprintf(\"%d %d\\n\", a, b);",
+      options: [
+        {v:"A", t:"1 2"},
+        {v:"B", t:"3 2"},
+        {v:"C", t:"1 3"},
+        {v:"D", t:"3 1"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Użyć stosu z sesji 15 do zaimplementowania `CALL`/`RET` — mechanizmu "podprogramów" w

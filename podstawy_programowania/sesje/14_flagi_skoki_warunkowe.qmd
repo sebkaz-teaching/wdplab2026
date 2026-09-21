@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 13
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja14",
+  title: "Sesja 13: Licznik instrukcji (PC)",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze pc na końcu?",
+      code: "int pc = 0, kroki = 0;\nwhile (pc < 5 && kroki < 10) {\n    if (pc == 2) pc = 4;\n    else pc++;\n    kroki++;\n}\nprintf(\"%d\\n\", pc);",
+      options: [
+        {v:"A", t:"4"},
+        {v:"B", t:"5"},
+        {v:"C", t:"2"},
+        {v:"D", t:"10"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co się stanie po uruchomieniu tego kodu?",
+      code: "int pc = 0;\nwhile (pc < 10) {\n    if (pc == 3) pc = 0;\n    else pc++;\n}",
+      options: [
+        {v:"A", t:"Pętla zakończy się, gdy pc osiągnie 10"},
+        {v:"B", t:"Pętla nieskończona — pc zawsze wraca do 0 po dojściu do 3, nigdy nie osiągnie 10"},
+        {v:"C", t:"Błąd kompilacji"},
+        {v:"D", t:"Pętla wykona się dokładnie 3 razy"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Dodać porównania i **warunkowy** skok — rozwiązać problem zostawiony otwartym w

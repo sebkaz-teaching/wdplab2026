@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-6" id="toc-sprawdź-się-z-sesji-6" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-6">✅ Sprawdź się z sesji 6</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-6" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-6">✅ Sprawdź się z sesji 6</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja07",
+  title: "Sesja 6: Funkcje",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "void zwieksz(int x) { x = x + 1; }\nint main(void) {\n    int a = 5;\n    zwieksz(a);\n    printf(\"%d\\n\", a);\n}",
+      options: [
+        {v:"A", t:"6"},
+        {v:"B", t:"5"},
+        {v:"C", t:"0"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze silnia(0)?",
+      code: "int silnia(int n) {\n    int wynik = 1;\n    for (int i = 1; i <= n; i++) wynik *= i;\n    return wynik;\n}\n\nprintf(\"%d\\n\", silnia(0));",
+      options: [
+        {v:"A", t:"0"},
+        {v:"B", t:"1"},
+        {v:"C", t:"Błąd — pętla wymaga przynajmniej jednego przebiegu"},
+        {v:"D", t:"Niezdefiniowane zachowanie"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Poznać <code>struct</code> i użyć go, żeby zamienić “parę liczb w tablicy” (kod operacji + wartość, osobno) na jeden, spójny typ danych reprezentujący instrukcję.</p>

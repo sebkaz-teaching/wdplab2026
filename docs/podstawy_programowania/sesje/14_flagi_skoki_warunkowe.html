@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-13" id="toc-sprawdź-się-z-sesji-13" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-13">✅ Sprawdź się z sesji 13</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-13" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-13">✅ Sprawdź się z sesji 13</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja14",
+  title: "Sesja 13: Licznik instrukcji (PC)",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze pc na końcu?",
+      code: "int pc = 0, kroki = 0;\nwhile (pc < 5 && kroki < 10) {\n    if (pc == 2) pc = 4;\n    else pc++;\n    kroki++;\n}\nprintf(\"%d\\n\", pc);",
+      options: [
+        {v:"A", t:"4"},
+        {v:"B", t:"5"},
+        {v:"C", t:"2"},
+        {v:"D", t:"10"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co się stanie po uruchomieniu tego kodu?",
+      code: "int pc = 0;\nwhile (pc < 10) {\n    if (pc == 3) pc = 0;\n    else pc++;\n}",
+      options: [
+        {v:"A", t:"Pętla zakończy się, gdy pc osiągnie 10"},
+        {v:"B", t:"Pętla nieskończona — pc zawsze wraca do 0 po dojściu do 3, nigdy nie osiągnie 10"},
+        {v:"C", t:"Błąd kompilacji"},
+        {v:"D", t:"Pętla wykona się dokładnie 3 razy"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Dodać porównania i <strong>warunkowy</strong> skok — rozwiązać problem zostawiony otwartym w sesji 13 (bezwarunkowy <code>OP_JUMP</code> nie wystarcza do pętli, która sama się kończy).</p>

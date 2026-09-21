@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 9
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja10",
+  title: "Sesja 9: Rejestry",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze rejestry[2]?",
+      code: "int rejestry[4] = {0,0,0,0};\nrejestry[0] = 10;\nrejestry[1] = 5;\nrejestry[2] = rejestry[0] + rejestry[1];\nprintf(\"%d\\n\", rejestry[2]);",
+      options: [
+        {v:"A", t:"0"},
+        {v:"B", t:"5"},
+        {v:"C", t:"15"},
+        {v:"D", t:"10"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod? (porównaj z sesją 6, gdzie zwieksz(int x) nie zmieniało a w main)",
+      code: "void zeruj(int rej[], int n) {\n    for (int i = 0; i < n; i++) rej[i] = 0;\n}\nint main(void) {\n    int rejestry[3] = {1,2,3};\n    zeruj(rejestry, 3);\n    printf(\"%d\\n\", rejestry[1]);\n}",
+      options: [
+        {v:"A", t:"2 — tablice też są kopiowane jak zwykłe zmienne"},
+        {v:"B", t:"0 — tablice przekazane do funkcji zachowują się jak wskaźniki, zeruj naprawdę modyfikuje oryginał"},
+        {v:"C", t:"Niezdefiniowane zachowanie"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Zrozumieć, czym jest adres w pamięci i wskaźnik — i wyjaśnić zagadkę z sesji 9:

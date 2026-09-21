@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-7" id="toc-sprawdź-się-z-sesji-7" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-7">✅ Sprawdź się z sesji 7</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-7" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-7">✅ Sprawdź się z sesji 7</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja08",
+  title: "Sesja 7: Struktury",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze n?",
+      code: "struct Instrukcja { int kod; int wartosc; };\nstruct Instrukcja program[] = {{1,10},{2,5}};\nint n = sizeof(program) / sizeof(program[0]);\nprintf(\"%d\\n\", n);",
+      options: [
+        {v:"A", t:"4"},
+        {v:"B", t:"2"},
+        {v:"C", t:"8"},
+        {v:"D", t:"1"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod?",
+      code: "struct Instrukcja { int kod; int wartosc; };\nstruct Instrukcja i = {1, 10};\nstruct Instrukcja kopia = i;\nkopia.wartosc = 99;\nprintf(\"%d\\n\", i.wartosc);",
+      options: [
+        {v:"A", t:"99"},
+        {v:"B", t:"10"},
+        {v:"C", t:"0"},
+        {v:"D", t:"Błąd kompilacji — nie można przypisać struct = struct"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Poznać <code>enum</code> i użyć go, żeby zastąpić kody operacji (<code>1</code>, <code>2</code>, <code>3</code>…) w maszynie wirtualnej czytelnymi nazwami.</p>

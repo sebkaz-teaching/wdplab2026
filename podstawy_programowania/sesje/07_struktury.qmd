@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 6
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja07",
+  title: "Sesja 6: Funkcje",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "void zwieksz(int x) { x = x + 1; }\nint main(void) {\n    int a = 5;\n    zwieksz(a);\n    printf(\"%d\\n\", a);\n}",
+      options: [
+        {v:"A", t:"6"},
+        {v:"B", t:"5"},
+        {v:"C", t:"0"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze silnia(0)?",
+      code: "int silnia(int n) {\n    int wynik = 1;\n    for (int i = 1; i <= n; i++) wynik *= i;\n    return wynik;\n}\n\nprintf(\"%d\\n\", silnia(0));",
+      options: [
+        {v:"A", t:"0"},
+        {v:"B", t:"1"},
+        {v:"C", t:"Błąd — pętla wymaga przynajmniej jednego przebiegu"},
+        {v:"D", t:"Niezdefiniowane zachowanie"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Poznać `struct` i użyć go, żeby zamienić "parę liczb w tablicy" (kod operacji +

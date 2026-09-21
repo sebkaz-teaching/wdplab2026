@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 7
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja08",
+  title: "Sesja 7: Struktury",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze n?",
+      code: "struct Instrukcja { int kod; int wartosc; };\nstruct Instrukcja program[] = {{1,10},{2,5}};\nint n = sizeof(program) / sizeof(program[0]);\nprintf(\"%d\\n\", n);",
+      options: [
+        {v:"A", t:"4"},
+        {v:"B", t:"2"},
+        {v:"C", t:"8"},
+        {v:"D", t:"1"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod?",
+      code: "struct Instrukcja { int kod; int wartosc; };\nstruct Instrukcja i = {1, 10};\nstruct Instrukcja kopia = i;\nkopia.wartosc = 99;\nprintf(\"%d\\n\", i.wartosc);",
+      options: [
+        {v:"A", t:"99"},
+        {v:"B", t:"10"},
+        {v:"C", t:"0"},
+        {v:"D", t:"Błąd kompilacji — nie można przypisać struct = struct"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Poznać `enum` i użyć go, żeby zastąpić kody operacji (`1`, `2`, `3`...) w maszynie

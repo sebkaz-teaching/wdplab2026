@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-15" id="toc-sprawdź-się-z-sesji-15" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-15">✅ Sprawdź się z sesji 15</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-15" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-15">✅ Sprawdź się z sesji 15</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja16",
+  title: "Sesja 15: Stos",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze ten kod?",
+      code: "int stos[10]; int sp = 0;\nstos[sp++] = 5;\nstos[sp++] = 10;\nprintf(\"%d\\n\", stos[--sp]);",
+      options: [
+        {v:"A", t:"5"},
+        {v:"B", t:"10"},
+        {v:"C", t:"0"},
+        {v:"D", t:"Błąd — sp wyszedł poza zakres"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co wypisze ten kod?",
+      code: "int stos[10]; int sp = 0;\nstos[sp++] = 1;\nstos[sp++] = 2;\nstos[sp++] = 3;\nint a = stos[--sp];\nint b = stos[--sp];\nprintf(\"%d %d\\n\", a, b);",
+      options: [
+        {v:"A", t:"1 2"},
+        {v:"B", t:"3 2"},
+        {v:"C", t:"1 3"},
+        {v:"D", t:"3 1"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Użyć stosu z sesji 15 do zaimplementowania <code>CALL</code>/<code>RET</code> — mechanizmu “podprogramów” w maszynie wirtualnej. To zdejmuje zasłonę z tego, co C robi automatycznie za każdym razem, gdy wywołujecie zwykłą funkcję.</p>

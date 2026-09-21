@@ -1,21 +1,10 @@
 [
   {
-    "objectID": "podstawy_programowania/sesje/18_stringi_parser.html",
-    "href": "podstawy_programowania/sesje/18_stringi_parser.html",
-    "title": "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb",
-    "section": "",
-    "text": "Poznać operacje na tekstach (char[], strcmp, strtok) i napisać prosty parser, który zamienia czytelny tekst (np. LOAD R0 10) na instrukcje maszyny — zamiast wymagać od użytkownika pamiętania, że 1 znaczy LOAD. To ostatnia sesja fundamentów przed ćwiczeniami CHIP-8.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/18_stringi_parser.html#cel",
     "href": "podstawy_programowania/sesje/18_stringi_parser.html#cel",
     "title": "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb",
-    "section": "",
-    "text": "Poznać operacje na tekstach (char[], strcmp, strtok) i napisać prosty parser, który zamienia czytelny tekst (np. LOAD R0 10) na instrukcje maszyny — zamiast wymagać od użytkownika pamiętania, że 1 znaczy LOAD. To ostatnia sesja fundamentów przed ćwiczeniami CHIP-8.",
+    "section": "Cel",
+    "text": "Cel\nPoznać operacje na tekstach (char[], strcmp, strtok) i napisać prosty parser, który zamienia czytelny tekst (np. LOAD R0 10) na instrukcje maszyny — zamiast wymagać od użytkownika pamiętania, że 1 znaczy LOAD. To ostatnia sesja fundamentów przed ćwiczeniami CHIP-8.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb"
@@ -66,22 +55,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/16_call_ret.html",
-    "href": "podstawy_programowania/sesje/16_call_ret.html",
-    "title": "Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji",
-    "section": "",
-    "text": "Użyć stosu z sesji 15 do zaimplementowania CALL/RET — mechanizmu “podprogramów” w maszynie wirtualnej. To zdejmuje zasłonę z tego, co C robi automatycznie za każdym razem, gdy wywołujecie zwykłą funkcję.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/16_call_ret.html#cel",
     "href": "podstawy_programowania/sesje/16_call_ret.html#cel",
     "title": "Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji",
-    "section": "",
-    "text": "Użyć stosu z sesji 15 do zaimplementowania CALL/RET — mechanizmu “podprogramów” w maszynie wirtualnej. To zdejmuje zasłonę z tego, co C robi automatycznie za każdym razem, gdy wywołujecie zwykłą funkcję.",
+    "section": "Cel",
+    "text": "Cel\nUżyć stosu z sesji 15 do zaimplementowania CALL/RET — mechanizmu “podprogramów” w maszynie wirtualnej. To zdejmuje zasłonę z tego, co C robi automatycznie za każdym razem, gdy wywołujecie zwykłą funkcję.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji"
@@ -121,22 +99,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html",
-    "href": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html",
-    "title": "Sesja 14 — Flagi i skoki warunkowe",
-    "section": "",
-    "text": "Dodać porównania i warunkowy skok — rozwiązać problem zostawiony otwartym w sesji 13 (bezwarunkowy OP_JUMP nie wystarcza do pętli, która sama się kończy).",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 14 — Flagi i skoki warunkowe"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html#cel",
     "href": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html#cel",
     "title": "Sesja 14 — Flagi i skoki warunkowe",
-    "section": "",
-    "text": "Dodać porównania i warunkowy skok — rozwiązać problem zostawiony otwartym w sesji 13 (bezwarunkowy OP_JUMP nie wystarcza do pętli, która sama się kończy).",
+    "section": "Cel",
+    "text": "Cel\nDodać porównania i warunkowy skok — rozwiązać problem zostawiony otwartym w sesji 13 (bezwarunkowy OP_JUMP nie wystarcza do pętli, która sama się kończy).",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 14 — Flagi i skoki warunkowe"
@@ -176,22 +143,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html",
-    "href": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html",
-    "title": "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry",
-    "section": "",
-    "text": "Poznać dynamiczną alokację pamięci (malloc/free) i użyć jej tam, gdzie tablice o stałym rozmiarze przestają wystarczać — gdy rozmiar “programu” nie jest znany w momencie pisania kodu.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html#cel",
     "href": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html#cel",
     "title": "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry",
-    "section": "",
-    "text": "Poznać dynamiczną alokację pamięci (malloc/free) i użyć jej tam, gdzie tablice o stałym rozmiarze przestają wystarczać — gdy rozmiar “programu” nie jest znany w momencie pisania kodu.",
+    "section": "Cel",
+    "text": "Cel\nPoznać dynamiczną alokację pamięci (malloc/free) i użyć jej tam, gdzie tablice o stałym rozmiarze przestają wystarczać — gdy rozmiar “programu” nie jest znany w momencie pisania kodu.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry"
@@ -231,22 +187,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/10_wskazniki_podstawy.html",
-    "href": "podstawy_programowania/sesje/10_wskazniki_podstawy.html",
-    "title": "Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’",
-    "section": "",
-    "text": "Zrozumieć, czym jest adres w pamięci i wskaźnik — i wyjaśnić zagadkę z sesji 9: dlaczego zmiana tablicy wewnątrz funkcji jest widoczna na zewnątrz, skoro w sesji 6 zmiana zwykłej zmiennej (int x) wewnątrz funkcji nie była.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 10 — Wskaźniki: dlaczego tablice 'po prostu działały'"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/10_wskazniki_podstawy.html#cel",
     "href": "podstawy_programowania/sesje/10_wskazniki_podstawy.html#cel",
     "title": "Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’",
-    "section": "",
-    "text": "Zrozumieć, czym jest adres w pamięci i wskaźnik — i wyjaśnić zagadkę z sesji 9: dlaczego zmiana tablicy wewnątrz funkcji jest widoczna na zewnątrz, skoro w sesji 6 zmiana zwykłej zmiennej (int x) wewnątrz funkcji nie była.",
+    "section": "Cel",
+    "text": "Cel\nZrozumieć, czym jest adres w pamięci i wskaźnik — i wyjaśnić zagadkę z sesji 9: dlaczego zmiana tablicy wewnątrz funkcji jest widoczna na zewnątrz, skoro w sesji 6 zmiana zwykłej zmiennej (int x) wewnątrz funkcji nie była.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 10 — Wskaźniki: dlaczego tablice 'po prostu działały'"
@@ -286,22 +231,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/08_enumy.html",
-    "href": "podstawy_programowania/sesje/08_enumy.html",
-    "title": "Sesja 8 — Enumy: nazwane liczby zamiast magicznych stałych",
-    "section": "",
-    "text": "Poznać enum i użyć go, żeby zastąpić kody operacji (1, 2, 3…) w maszynie wirtualnej czytelnymi nazwami.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 8 — Enumy: nazwane liczby zamiast magicznych stałych"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/08_enumy.html#cel",
     "href": "podstawy_programowania/sesje/08_enumy.html#cel",
     "title": "Sesja 8 — Enumy: nazwane liczby zamiast magicznych stałych",
-    "section": "",
-    "text": "Poznać enum i użyć go, żeby zastąpić kody operacji (1, 2, 3…) w maszynie wirtualnej czytelnymi nazwami.",
+    "section": "Cel",
+    "text": "Cel\nPoznać enum i użyć go, żeby zastąpić kody operacji (1, 2, 3…) w maszynie wirtualnej czytelnymi nazwami.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 8 — Enumy: nazwane liczby zamiast magicznych stałych"
@@ -341,22 +275,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/06_funkcje.html",
-    "href": "podstawy_programowania/sesje/06_funkcje.html",
-    "title": "Sesja 6 — Funkcje: porządkowanie maszyny wirtualnej",
-    "section": "",
-    "text": "Nauczyć się pisać własne funkcje i użyć ich, żeby uporządkować “maszynę” z sesji 5 — wydzielić wykonywanie pojedynczej instrukcji do osobnej funkcji zamiast trzymać wszystko w main.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 6 — Funkcje: porządkowanie maszyny wirtualnej"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/06_funkcje.html#cel",
     "href": "podstawy_programowania/sesje/06_funkcje.html#cel",
     "title": "Sesja 6 — Funkcje: porządkowanie maszyny wirtualnej",
-    "section": "",
-    "text": "Nauczyć się pisać własne funkcje i użyć ich, żeby uporządkować “maszynę” z sesji 5 — wydzielić wykonywanie pojedynczej instrukcji do osobnej funkcji zamiast trzymać wszystko w main.",
+    "section": "Cel",
+    "text": "Cel\nNauczyć się pisać własne funkcje i użyć ich, żeby uporządkować “maszynę” z sesji 5 — wydzielić wykonywanie pojedynczej instrukcji do osobnej funkcji zamiast trzymać wszystko w main.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 6 — Funkcje: porządkowanie maszyny wirtualnej"
@@ -1009,22 +932,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.html",
-    "href": "podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.html",
-    "title": "Sesja 5 — Tablice: Twoja pierwsza maszyna wirtualna",
-    "section": "",
-    "text": "Poznać tablice i użyć ich, żeby napisać pierwszą, bardzo prostą wersję maszyny wirtualnej — programu, który wykonuje sekwencję instrukcji zapisaną jako dane, a nie jako kod źródłowy C. To moment, w którym kurs zaczyna wyraźnie zmierzać w stronę CHIP-8.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 5 — Tablice: Twoja pierwsza maszyna wirtualna"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.html#cel",
     "href": "podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.html#cel",
     "title": "Sesja 5 — Tablice: Twoja pierwsza maszyna wirtualna",
-    "section": "",
-    "text": "Poznać tablice i użyć ich, żeby napisać pierwszą, bardzo prostą wersję maszyny wirtualnej — programu, który wykonuje sekwencję instrukcji zapisaną jako dane, a nie jako kod źródłowy C. To moment, w którym kurs zaczyna wyraźnie zmierzać w stronę CHIP-8.",
+    "section": "Cel",
+    "text": "Cel\nPoznać tablice i użyć ich, żeby napisać pierwszą, bardzo prostą wersję maszyny wirtualnej — programu, który wykonuje sekwencję instrukcji zapisaną jako dane, a nie jako kod źródłowy C. To moment, w którym kurs zaczyna wyraźnie zmierzać w stronę CHIP-8.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 5 — Tablice: Twoja pierwsza maszyna wirtualna"
@@ -1064,22 +976,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/07_struktury.html",
-    "href": "podstawy_programowania/sesje/07_struktury.html",
-    "title": "Sesja 7 — Struktury: instrukcja jako jedna rzecz",
-    "section": "",
-    "text": "Poznać struct i użyć go, żeby zamienić “parę liczb w tablicy” (kod operacji + wartość, osobno) na jeden, spójny typ danych reprezentujący instrukcję.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 7 — Struktury: instrukcja jako jedna rzecz"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/07_struktury.html#cel",
     "href": "podstawy_programowania/sesje/07_struktury.html#cel",
     "title": "Sesja 7 — Struktury: instrukcja jako jedna rzecz",
-    "section": "",
-    "text": "Poznać struct i użyć go, żeby zamienić “parę liczb w tablicy” (kod operacji + wartość, osobno) na jeden, spójny typ danych reprezentujący instrukcję.",
+    "section": "Cel",
+    "text": "Cel\nPoznać struct i użyć go, żeby zamienić “parę liczb w tablicy” (kod operacji + wartość, osobno) na jeden, spójny typ danych reprezentujący instrukcję.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 7 — Struktury: instrukcja jako jedna rzecz"
@@ -1119,22 +1020,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/09_rejestry.html",
-    "href": "podstawy_programowania/sesje/09_rejestry.html",
-    "title": "Sesja 9 — Rejestry: więcej niż jeden akumulator",
-    "section": "",
-    "text": "Zastąpić pojedynczy akumulator z poprzednich sesji tablicą kilku “rejestrów” — dokładnie tak, jak robi to prawdziwy procesor (i CHIP-8, z jego 16 rejestrami V).",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 9 — Rejestry: więcej niż jeden akumulator"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/09_rejestry.html#cel",
     "href": "podstawy_programowania/sesje/09_rejestry.html#cel",
     "title": "Sesja 9 — Rejestry: więcej niż jeden akumulator",
-    "section": "",
-    "text": "Zastąpić pojedynczy akumulator z poprzednich sesji tablicą kilku “rejestrów” — dokładnie tak, jak robi to prawdziwy procesor (i CHIP-8, z jego 16 rejestrami V).",
+    "section": "Cel",
+    "text": "Cel\nZastąpić pojedynczy akumulator z poprzednich sesji tablicą kilku “rejestrów” — dokładnie tak, jak robi to prawdziwy procesor (i CHIP-8, z jego 16 rejestrami V).",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 9 — Rejestry: więcej niż jeden akumulator"
@@ -1174,22 +1064,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html",
-    "href": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html",
-    "title": "Sesja 11 — Wskaźniki do struktur: operator ->",
-    "section": "",
-    "text": "Połączyć struktury (sesja 7) ze wskaźnikami (sesja 10) — dokładnie tak, jak wyglądają funkcje w emulatorze CHIP-8 (void chip8_init(Chip8 *c)), które zaczniecie pisać za dwie sesje.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 11 — Wskaźniki do struktur: operator ->"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html#cel",
     "href": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html#cel",
     "title": "Sesja 11 — Wskaźniki do struktur: operator ->",
-    "section": "",
-    "text": "Połączyć struktury (sesja 7) ze wskaźnikami (sesja 10) — dokładnie tak, jak wyglądają funkcje w emulatorze CHIP-8 (void chip8_init(Chip8 *c)), które zaczniecie pisać za dwie sesje.",
+    "section": "Cel",
+    "text": "Cel\nPołączyć struktury (sesja 7) ze wskaźnikami (sesja 10) — dokładnie tak, jak wyglądają funkcje w emulatorze CHIP-8 (void chip8_init(Chip8 *c)), które zaczniecie pisać za dwie sesje.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 11 — Wskaźniki do struktur: operator ->"
@@ -1229,22 +1108,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/13_licznik_instrukcji.html",
-    "href": "podstawy_programowania/sesje/13_licznik_instrukcji.html",
-    "title": "Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’",
-    "section": "",
-    "text": "Zamienić pętlę for (która zawsze idzie po kolei, o jeden do przodu) na jawny licznik instrukcji (pc, program counter) — zmienną, którą sama instrukcja może zmienić, żeby wykonanie “skoczyło” gdzie indziej. To dokładnie mechanizm JP z ćwiczenia 1 CHIP-8.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 13 — Licznik instrukcji: skoki zamiast tylko 'do przodu'"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/13_licznik_instrukcji.html#cel",
     "href": "podstawy_programowania/sesje/13_licznik_instrukcji.html#cel",
     "title": "Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’",
-    "section": "",
-    "text": "Zamienić pętlę for (która zawsze idzie po kolei, o jeden do przodu) na jawny licznik instrukcji (pc, program counter) — zmienną, którą sama instrukcja może zmienić, żeby wykonanie “skoczyło” gdzie indziej. To dokładnie mechanizm JP z ćwiczenia 1 CHIP-8.",
+    "section": "Cel",
+    "text": "Cel\nZamienić pętlę for (która zawsze idzie po kolei, o jeden do przodu) na jawny licznik instrukcji (pc, program counter) — zmienną, którą sama instrukcja może zmienić, żeby wykonanie “skoczyło” gdzie indziej. To dokładnie mechanizm JP z ćwiczenia 1 CHIP-8.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 13 — Licznik instrukcji: skoki zamiast tylko 'do przodu'"
@@ -1284,22 +1152,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/15_stos.html",
-    "href": "podstawy_programowania/sesje/15_stos.html",
-    "title": "Sesja 15 — Stos: LIFO w tablicy",
-    "section": "",
-    "text": "Zaimplementować stos (LIFO — Last In, First Out) jako tablicę + wskaźnik szczytu, i dodać PUSH/POP do maszyny wirtualnej. To bezpośredni przygotowanie do CALL/RET w sesji 16 i w ćwiczeniu 2 CHIP-8.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 15 — Stos: LIFO w tablicy"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/15_stos.html#cel",
     "href": "podstawy_programowania/sesje/15_stos.html#cel",
     "title": "Sesja 15 — Stos: LIFO w tablicy",
-    "section": "",
-    "text": "Zaimplementować stos (LIFO — Last In, First Out) jako tablicę + wskaźnik szczytu, i dodać PUSH/POP do maszyny wirtualnej. To bezpośredni przygotowanie do CALL/RET w sesji 16 i w ćwiczeniu 2 CHIP-8.",
+    "section": "Cel",
+    "text": "Cel\nZaimplementować stos (LIFO — Last In, First Out) jako tablicę + wskaźnik szczytu, i dodać PUSH/POP do maszyny wirtualnej. To bezpośredni przygotowanie do CALL/RET w sesji 16 i w ćwiczeniu 2 CHIP-8.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 15 — Stos: LIFO w tablicy"
@@ -1339,22 +1196,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/17_pliki.html",
-    "href": "podstawy_programowania/sesje/17_pliki.html",
-    "title": "Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym",
-    "section": "",
-    "text": "Wczytać “program” dla maszyny wirtualnej z pliku na dysku, zamiast wpisywać go na sztywno w kodzie C. To dokładnie to, co zrobi chip8_load_rom w ćwiczeniu 1 CHIP-8 — dziś ćwiczycie tę samą operację na prostszym formacie danych.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/17_pliki.html#cel",
     "href": "podstawy_programowania/sesje/17_pliki.html#cel",
     "title": "Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym",
-    "section": "",
-    "text": "Wczytać “program” dla maszyny wirtualnej z pliku na dysku, zamiast wpisywać go na sztywno w kodzie C. To dokładnie to, co zrobi chip8_load_rom w ćwiczeniu 1 CHIP-8 — dziś ćwiczycie tę samą operację na prostszym formacie danych.",
+    "section": "Cel",
+    "text": "Cel\nWczytać “program” dla maszyny wirtualnej z pliku na dysku, zamiast wpisywać go na sztywno w kodzie C. To dokładnie to, co zrobi chip8_load_rom w ćwiczeniu 1 CHIP-8 — dziś ćwiczycie tę samą operację na prostszym formacie danych.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym"
