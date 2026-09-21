@@ -20,6 +20,34 @@ website:
     style: "docked"
     contents:
       - index.qmd
+      - section: "Fundamenty C (sesje 1-18)"
+        contents:
+          - podstawy_programowania/sesje/01_pierwszy_program.qmd
+          - podstawy_programowania/sesje/02_zmienne_kalkulator.qmd
+          - podstawy_programowania/sesje/03_warunki_dispatcher.qmd
+          - podstawy_programowania/sesje/04_petle_repl.qmd
+          - podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.qmd
+          - podstawy_programowania/sesje/06_funkcje.qmd
+          - podstawy_programowania/sesje/07_struktury.qmd
+          - podstawy_programowania/sesje/08_enumy.qmd
+          - podstawy_programowania/sesje/09_rejestry.qmd
+          - podstawy_programowania/sesje/10_wskazniki_podstawy.qmd
+          - podstawy_programowania/sesje/11_wskazniki_do_struktur.qmd
+          - podstawy_programowania/sesje/12_pamiec_dynamiczna.qmd
+          - podstawy_programowania/sesje/13_licznik_instrukcji.qmd
+          - podstawy_programowania/sesje/14_flagi_skoki_warunkowe.qmd
+          - podstawy_programowania/sesje/15_stos.qmd
+          - podstawy_programowania/sesje/16_call_ret.qmd
+          - podstawy_programowania/sesje/17_pliki.qmd
+          - podstawy_programowania/sesje/18_stringi_parser.qmd
+      - section: "Projekt końcowy: CHIP-8"
+        contents:
+          - podstawy_programowania/cwiczenia_chip8/index.qmd
+          - podstawy_programowania/cwiczenia_chip8/01_szkielet_vm.qmd
+          - podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.qmd
+          - podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.qmd
+          - podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.qmd
+          - podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.qmd
   page-footer: "Copyright 2026, Sebastian Zając"
 format:
   html:
