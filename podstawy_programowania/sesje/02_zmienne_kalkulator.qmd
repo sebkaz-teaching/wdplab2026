@@ -1,0 +1,133 @@
+---
+title: "Sesja 2 — Zmienne i pierwszy kalkulator"
+format: html
+toc: true
+---
+
+## Cel
+
+Nauczyć się przechowywać dane w pamięci pod nazwaną etykietą (zmienna) i wczytywać
+dane od użytkownika. Napisać program, który dodaje dwie liczby podane przez
+użytkownika.
+
+## Teoria w pigułce
+
+### Czym jest zmienna?
+
+Zmienna to **nazwane miejsce w pamięci** przechowujące wartość określonego typu. Kiedy
+piszesz:
+
+```c
+int wiek = 20;
+```
+
+dzieje się kolejno: (1) komputer rezerwuje kawałek pamięci wystarczający na liczbę
+całkowitą, (2) nadaje mu etykietę `wiek`, żebyś Ty (i kompilator) mogli się do niego
+odwoływać po nazwie zamiast po adresie, (3) zapisuje tam wartość `20`.
+
+::: {.callout-note}
+## Zapowiedź z przyszłości
+Za kilka tygodni, pisząc emulator CHIP-8, zobaczycie to z drugiej strony: `V[0]` to
+też "nazwana" (a właściwie zaindeksowana) komórka pamięci — tylko że tam sami
+zarządzacie, gdzie leży, zamiast zostawiać to kompilatorowi C. Zmienna w C to wygoda,
+którą kompilator dokłada na wierzchu tego samego pomysłu.
+:::
+
+### Podstawowe typy
+
+| Typ | Przechowuje | Przykład |
+|-----|--------------|----------|
+| `int` | liczbę całkowitą | `42`, `-7` |
+| `float` / `double` | liczbę zmiennoprzecinkową | `3.14` |
+| `char` | pojedynczy znak | `'A'` |
+
+Każdy typ ma **stały rozmiar w bajtach** (np. `int` to zwykle 4 bajty) — to nie jest
+przypadek, to bezpośrednia konsekwencja tego, że pamięć jest zorganizowana w bajty
+(zobaczycie to dosłownie, kiedy `Chip8.memory` będzie tablicą `uint8_t`).
+
+### Wejście i wyjście: `printf` i `scanf`
+
+`printf` już znacie z sesji 1 — wypisuje na ekran. `scanf` robi coś przeciwnego: czyta
+to, co użytkownik wpisze, i zapisuje do zmiennej.
+
+```c
+int a;
+printf("Podaj liczbe: ");
+scanf("%d", &a);
+```
+
+`%d` mówi `scanf`, jakiego typu danych się spodziewać (`d` = *decimal integer*).
+`&a` to **adres zmiennej `a`** — `scanf` musi wiedzieć **gdzie** zapisać wynik, nie
+tylko jaki ma być typ. Znak `&` (ampersand) do tego właśnie służy: "adres tej
+zmiennej", a nie "wartość tej zmiennej". Do samego pojęcia adresu wrócimy dokładniej
+przy wskaźnikach (sesja 11) — na razie zapamiętaj to jako regułę: **`scanf` zawsze
+dostaje `&zmienna`, `printf` nigdy**.
+
+## Zadania
+
+### Zadanie 1 — przywitanie z imieniem
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int wiek;
+    printf("Ile masz lat? ");
+    scanf("%d", &wiek);
+    printf("Za rok bedziesz mial/a %d lat.\n", wiek + 1);
+    return 0;
+}
+```
+
+Zwróć uwagę: `wiek + 1` liczy się w miejscu, `printf` dostaje już wynik działania, nie
+osobną zmienną.
+
+### Zadanie 2 — kalkulator dwóch liczb
+
+Napisz program `kalkulator.c`, który:
+
+1. pyta o dwie liczby całkowite (`a` i `b`),
+2. wypisuje ich sumę, różnicę i iloczyn.
+
+Szkielet:
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int a, b;
+    printf("Podaj pierwsza liczbe: ");
+    scanf("%d", &a);
+    printf("Podaj druga liczbe: ");
+    scanf("%d", &b);
+
+    printf("Suma: %d\n", a + b);
+    // TODO: roznica
+    // TODO: iloczyn
+
+    return 0;
+}
+```
+
+### Zadanie 3 — dzielenie i pułapka liczb całkowitych
+
+Dodaj dzielenie: `printf("Iloraz: %d\n", a / b);`. Podaj `a=7`, `b=2`. Wynik Cię
+zaskoczy — `7 / 2` w C, gdy oba są `int`, daje `3`, nie `3.5`. To **dzielenie
+całkowitoliczbowe**: wynik jest obcinany do części całkowitej, nie zaokrąglany.
+
+Napraw to: zmień typ `a`, `b` na `float`, formatowanie na `%f`, i przelicz.
+
+### Zadanie 4 — dzielenie przez zero
+
+Podaj `b = 0` w wersji z `int`. Zobacz, co się stanie (zwykle: program się wywala albo
+zwraca śmieciową wartość — zależnie od systemu). Zapamiętaj to zachowanie — dzielenie
+przez zero na liczbach całkowitych to **niezdefiniowane zachowanie** w C, nie
+kontrolowany błąd jak w niektórych innych językach. Będzie to ważne, gdy w ćwiczeniach
+CHIP-8 sami będziecie musieli pilnować takich przypadków ręcznie.
+
+## Kryterium sukcesu
+
+- Kalkulator wczytuje dwie liczby i poprawnie liczy sumę, różnicę, iloczyn.
+- Wersja z dzieleniem rozróżnia jawnie `int` (dzielenie całkowitoliczbowe) od `float`
+  (dzielenie rzeczywiste) — i potrafisz wytłumaczyć różnicę własnymi słowami.
+- Wiesz, co to `&` w `scanf` i dlaczego tam jest.

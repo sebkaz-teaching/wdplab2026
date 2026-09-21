@@ -1,0 +1,117 @@
+---
+title: "Sesja 3 — Warunki: kalkulator wybiera działanie"
+format: html
+toc: true
+---
+
+## Cel
+
+Poznać `if`/`else` oraz `switch` i użyć ich do rozbudowania kalkulatora z sesji 2 —
+tak, żeby to **użytkownik** wybierał działanie, zamiast mieć wszystkie wypisane na
+sztywno. Ten wzorzec — "wczytaj kod operacji, zdecyduj co zrobić" — wróci w kursie
+jeszcze wielokrotnie, aż po `switch (opcode & 0xF000)` w emulatorze CHIP-8.
+
+## Teoria w pigułce
+
+### `if` / `else if` / `else`
+
+```c
+if (a > b) {
+    printf("a jest wieksze\n");
+} else if (a < b) {
+    printf("b jest wieksze\n");
+} else {
+    printf("sa rowne\n");
+}
+```
+
+Warunki sprawdzane są **po kolei, od góry** — jak tylko jeden się sprawdzi, reszta
+jest pomijana. Kolejność ma znaczenie.
+
+### Operatory porównania i logiczne
+
+| Operator | Znaczenie |
+|----------|-----------|
+| `==` | równe (**nie** mylić z `=`, które przypisuje wartość!) |
+| `!=` | różne |
+| `<`, `>`, `<=`, `>=` | mniejsze/większe (opcjonalnie równe) |
+| `&&` | i (oba warunki muszą być prawdziwe) |
+| `\|\|` | lub (przynajmniej jeden musi być prawdziwy) |
+
+::: {.callout-important}
+## Najczęstszy błąd początkujących w C
+`if (a = 5)` **kompiluje się** (czasem tylko z ostrzeżeniem, jeśli masz `-Wall`) i robi
+coś zupełnie innego niż zamierzone: **przypisuje** `5` do `a`, zamiast **porównywać**.
+Wynikiem przypisania w C jest przypisana wartość, a każda niezerowa wartość jest
+"prawdą" — więc warunek zawsze wychodzi prawdziwy, a `a` po drodze zmienia wartość na
+5. Zawsze pisz `if (a == 5)`. To dokładnie dlatego kompilujemy z `-Wall` od sesji 1 —
+ten kompilator ostrzeże Cię o tym błędzie, jeśli go popełnisz.
+:::
+
+### `switch` — wybór spośród wielu opcji
+
+Kiedy porównujesz **jedną zmienną** z wieloma konkretnymi wartościami, `switch` jest
+czytelniejszy niż długi łańcuch `if-else if`:
+
+```c
+char operacja = '+';
+
+switch (operacja) {
+    case '+':
+        printf("dodawanie\n");
+        break;
+    case '-':
+        printf("odejmowanie\n");
+        break;
+    default:
+        printf("nieznana operacja\n");
+}
+```
+
+**`break` jest obowiązkowy** na końcu każdego `case` (poza specjalnymi przypadkami,
+których dziś nie używamy) — bez niego wykonanie "spada" do kolejnego `case` (tzw.
+*fall-through*), nawet jeśli warunek tego `case`a nie jest spełniony. To jeden z
+klasycznych błędów w C, wart zapamiętania na zawsze.
+
+::: {.callout-note}
+## To jest dokładnie ten sam wzorzec, co "dekodowanie opcode'u"
+Za kilka tygodni w CHIP-8 zobaczycie: `switch (opcode & 0xF000) { case 0x1000: ...
+case 0x6000: ... }`. To jest **identyczna konstrukcja** co powyżej — tylko zamiast
+znaku `'+'` porównujecie liczbę reprezentującą typ instrukcji. "Procesor rozpoznaje
+rozkaz" i "Wasz kalkulator rozpoznaje operację" to ten sam problem programistyczny.
+:::
+
+## Zadania
+
+### Zadanie 1 — kalkulator z wyborem znaku
+
+Rozbuduj kalkulator z sesji 2: zamiast liczyć od razu sumę/różnicę/iloczyn, wczytaj
+**trzeci** input — znak operacji (`char`):
+
+```c
+char op;
+printf("Podaj dzialanie (+, -, *, /): ");
+scanf(" %c", &op);   // spacja przed %c: pomija biale znaki (Enter) z poprzedniego scanf
+```
+
+Użyj `switch` do wybrania odpowiedniego działania i wypisania tylko jednego wyniku —
+tego, o który poprosił użytkownik.
+
+### Zadanie 2 — walidacja: nieznana operacja
+
+Dodaj `default:` w `switch`u, który wypisuje `"Nieznana operacja!\n"` zamiast nic nie
+robić albo (gorzej) cicho zwrócić zły wynik. To ten sam mechanizm obronny, który
+zobaczyliście w ćwiczeniu 1 CHIP-8 przy nieznanym opcodzie — nawet w kalkulatorze
+warto się bronić przed nieoczekiwanym wejściem.
+
+### Zadanie 3 — dzielenie przez zero, tym razem obsłużone
+
+W `case '/'`, zanim podzielisz, sprawdź `if (b == 0)` i wypisz komunikat błędu zamiast
+dzielić. Teraz, w przeciwieństwie do sesji 2, **Ty** kontrolujesz, co się stanie —
+zamiast zdawać się na niezdefiniowane zachowanie.
+
+## Kryterium sukcesu
+
+- Kalkulator pyta o dwie liczby i znak operacji, wykonuje tylko wybraną operację.
+- Nieznany znak operacji daje czytelny komunikat, a nie ciszę ani błąd programu.
+- Dzielenie przez zero jest wykryte i obsłużone, zanim dojdzie do samego dzielenia.

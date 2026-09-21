@@ -1,129 +1,215 @@
 [
   {
-    "objectID": "podstawy_programowania/sesje/01_pierwszy_program.html",
-    "href": "podstawy_programowania/sesje/01_pierwszy_program.html",
-    "title": "Sesja 1 — Pierwszy program",
+    "objectID": "podstawy_programowania/sesje/04_petle_repl.html",
+    "href": "podstawy_programowania/sesje/04_petle_repl.html",
+    "title": "Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu",
     "section": "",
-    "text": "Napisać, skompilować i uruchomić swój pierwszy program w C — i zrozumieć, co dokładnie dzieje się między wpisaniem tekstu a zobaczeniem wyniku na ekranie. To jedyna sesja w tym kursie, w której zakładamy, że nigdy wcześniej nie napisałeś/aś ani jednej linijki kodu."
+    "text": "Poznać pętle while i for, i użyć ich, żeby kalkulator z sesji 3 wykonywał wiele działań pod rząd, zamiast kończyć się po jednym — aż użytkownik sam zdecyduje, że kończy."
   },
   {
-    "objectID": "podstawy_programowania/sesje/01_pierwszy_program.html#cel",
-    "href": "podstawy_programowania/sesje/01_pierwszy_program.html#cel",
-    "title": "Sesja 1 — Pierwszy program",
+    "objectID": "podstawy_programowania/sesje/04_petle_repl.html#cel",
+    "href": "podstawy_programowania/sesje/04_petle_repl.html#cel",
+    "title": "Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu",
     "section": "",
-    "text": "Napisać, skompilować i uruchomić swój pierwszy program w C — i zrozumieć, co dokładnie dzieje się między wpisaniem tekstu a zobaczeniem wyniku na ekranie. To jedyna sesja w tym kursie, w której zakładamy, że nigdy wcześniej nie napisałeś/aś ani jednej linijki kodu."
+    "text": "Poznać pętle while i for, i użyć ich, żeby kalkulator z sesji 3 wykonywał wiele działań pod rząd, zamiast kończyć się po jednym — aż użytkownik sam zdecyduje, że kończy."
   },
   {
-    "objectID": "podstawy_programowania/sesje/01_pierwszy_program.html#teoria-w-pigułce",
-    "href": "podstawy_programowania/sesje/01_pierwszy_program.html#teoria-w-pigułce",
-    "title": "Sesja 1 — Pierwszy program",
+    "objectID": "podstawy_programowania/sesje/04_petle_repl.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/04_petle_repl.html#teoria-w-pigułce",
+    "title": "Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu",
     "section": "Teoria w pigułce",
-    "text": "Teoria w pigułce\n\nCzym jest program?\nProgram to lista instrukcji, którą komputer wykonuje krok po kroku, od góry do dołu, dokładnie tak jak jest napisana — bez domyślania się, bez “chyba o to chodziło”. Komputer nie jest inteligentny — jest posłuszny co do przecinka.\n\n\nDlaczego kod trzeba “kompilować”?\nTo, co piszesz (kod źródłowy, plik .c) to tekst czytelny dla człowieka. Procesor rozumie tylko liczby — konkretne rozkazy zakodowane jako bajty (do tego wrócimy przy CHIP-8 pod koniec kursu). Kompilator to program, który tłumaczy Twój tekst na taki plik binarny — coś, co system operacyjny potrafi uruchomić jako proces.\nkod źródłowy (hello.c)  --[kompilator: gcc]--&gt;  plik wykonywalny (hello)\n   tekst dla człowieka                              zera i jedynki dla procesora\n\n\n\n\n\n\nNoteDlaczego C, a nie coś “łatwiejszego” na start?\n\n\n\nZa kilka tygodni będziecie pisać własny emulator procesora (CHIP-8) — program, który sam symuluje pamięć, rejestry i wykonywanie instrukcji. C nie ukrywa przed Wami tego, co komputer naprawdę robi (pamięć, adresy, bajty) — inne języki (Python, JavaScript) celowo to chowają, żeby było wygodniej. Wygoda na starcie oznaczałaby brak fundamentów pod koniec semestru.\n\n\n\n\nCykl edit → compile → run\nZa każdym razem, gdy zmienisz choć jeden znak w pliku .c, musisz go skompilować od nowa — inaczej program użyje starej wersji. To jest inne niż np. edycja strony internetowej, gdzie zmiana widoczna jest “od razu” po odświeżeniu. W C:\n\nEdit — zmieniasz plik .c w edytorze,\nCompile — uruchamiasz kompilator (gcc),\nRun — dopiero teraz uruchamiasz efekt (./hello).\n\nZapomnienie kroku 2. to najczęstsza przyczyna “dlaczego moja zmiana nic nie robi” u początkujących — i to nie tylko dziś, to będzie Was ścigać przez cały semestr."
+    "text": "Teoria w pigułce\n\nwhile — powtarzaj, dopóki warunek jest prawdziwy\nint licznik = 0;\nwhile (licznik &lt; 5) {\n    printf(\"%d\\n\", licznik);\n    licznik++;\n}\nWarunek sprawdzany jest przed każdym powtórzeniem. Jeśli od razu jest fałszywy, ciało pętli nie wykona się ani razu.\n\n\n\n\n\n\nImportantPętla nieskończona — jak ją rozpoznać i jak z niej wyjść\n\n\n\nJeśli zapomnisz licznik++, warunek licznik &lt; 5 będzie zawsze prawdziwy — program “zawiesza się”, wypisując 0 w nieskończoność. To jeden z najczęstszych błędów początkujących. Ctrl+C w terminalu zawsze przerywa działający program — zapamiętaj ten skrót, przyda się wielokrotnie w tym kursie.\n\n\n\n\nfor — pętla ze znaną z góry liczbą powtórzeń\nfor (int i = 0; i &lt; 5; i++) {\n    printf(\"%d\\n\", i);\n}\nTo dokładnie ten sam efekt co while powyżej, tylko trzy elementy sterujące (start, warunek, krok) są zebrane w jednym miejscu. Użyj for, gdy z góry wiesz, ile razy chcesz coś powtórzyć (np. “16 razy” przy inicjalizacji rejestrów CHIP-8 — zobaczycie to niedługo); użyj while, gdy koniec zależy od czegoś, co dzieje się w trakcie (np. “dopóki użytkownik nie wpisze ‘koniec’”).\n\n\nPętla sterowana wejściem użytkownika — REPL\nREPL (Read-Eval-Print Loop) to pętla, która w kółko: czyta wejście, wykonuje coś na jego podstawie, wypisuje wynik. To dokładnie schemat, według którego działa interpreter Pythona, powłoka bash — i, nieprzypadkowo, procesor w trybie fetch-decode-execute, który zobaczycie w emulatorze.\nchar op;\nint kontynuuj = 1;\n\nwhile (kontynuuj) {\n    printf(\"Podaj dzialanie (+, -, *, / albo 'q' aby zakonczyc): \");\n    scanf(\" %c\", &op);\n\n    if (op == 'q') {\n        kontynuuj = 0;\n    } else {\n        // TODO: reszta logiki z sesji 3\n    }\n}"
   },
   {
-    "objectID": "podstawy_programowania/sesje/01_pierwszy_program.html#zadania",
-    "href": "podstawy_programowania/sesje/01_pierwszy_program.html#zadania",
-    "title": "Sesja 1 — Pierwszy program",
+    "objectID": "podstawy_programowania/sesje/04_petle_repl.html#zadania",
+    "href": "podstawy_programowania/sesje/04_petle_repl.html#zadania",
+    "title": "Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu",
     "section": "Zadania",
-    "text": "Zadania\n\nZadanie 1 — sprawdź, czy masz kompilator\nW terminalu:\ngcc --version\nJeśli polecenie nie istnieje — zgłoś się, zainstalujemy razem (macOS: Xcode Command Line Tools, Linux: pakiet build-essential/gcc).\n\n\nZadanie 2 — pierwszy program\nUtwórz plik hello.c:\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    printf(\"Czesc, swiecie!\\n\");\n    return 0;\n}\nZanim skompilujesz — spróbuj zgadnąć, co robi każda linijka, zanim wyjaśnimy na głos:\n\n#include &lt;stdio.h&gt; — “dołącz zestaw narzędzi do wejścia/wyjścia” (Standard Input/Output) — bez tego printf nie istnieje.\nint main(void) — to jest punkt startowy każdego programu w C; system operacyjny zawsze zaczyna wykonywanie właśnie tutaj.\nprintf(\"...\") — wypisz tekst na ekran. \\n na końcu to znak nowej linii — bez niego kolejne wypisania sklejałyby się w jednym wierszu.\nreturn 0; — zakończ program i zgłoś systemowi “wszystko OK” (0 = sukces — to konwencja, do której wrócimy przy okazji obsługi błędów).\n\n\n\nZadanie 3 — kompilacja i uruchomienie\ngcc -std=c99 -Wall -Wextra hello.c -o hello\n./hello\n\n-std=c99 — którego standardu C używamy (będziemy trzymać się go przez cały kurs).\n-Wall -Wextra — włącz wszystkie ostrzeżenia. Zawsze kompiluj z tymi flagami — ostrzeżenie dziś to błąd, którego unikasz jutro.\n-o hello — nazwa pliku wynikowego (bez tego dostaniesz domyślnie a.out).\n\n\n\nZadanie 4 — zepsuj coś celowo\nUsuń średnik po printf(...) i skompiluj ponownie. Przeczytaj komunikat błędu od kompilatora — nie ignoruj go, nie zgaduj, przeczytaj dokładnie który numer linii. Komunikaty błędów kompilatora będą Twoim głównym narzędziem diagnostycznym przez cały semestr — im szybciej nauczysz się je czytać, tym mniej będziesz czekać na pomoc.\nNapraw błąd, skompiluj ponownie, upewnij się, że znowu działa.\n\n\nZadanie 5 — Twoja zmiana\nZmień treść komunikatu tak, żeby wypisywał Twoje imię, np. \"Czesc, jestem Kasia!\\n\". Pamiętaj o kroku “compile” — sama zmiana pliku nic nie zrobi, dopóki nie skompilujesz ponownie."
+    "text": "Zadania\n\nZadanie 1 — kalkulator w pętli\nPrzerób kalkulator z sesji 3 tak, żeby po wykonaniu jednego działania pytał ponownie, zamiast kończyć program. Użyj wzorca REPL z sekcji teorii — 'q' kończy program.\n\n\nZadanie 2 — licznik wykonanych działań\nDodaj zmienną int licznik_dzialan = 0; przed pętlą, zwiększaj ją po każdym wykonanym (nie: każdej próbie) działaniu. Po wpisaniu 'q', przed zakończeniem programu wypisz: \"Wykonano %d dzialan.\\n\".\n\n\nZadanie 3 — suma wszystkich wyników\nDodaj float suma_wynikow = 0;, dodawaj do niej wynik każdego działania (niezależnie jaka to była operacja). Wypisz sumę na końcu. To wymaga, żebyś zapamiętał wynik działania w zmiennej przed wypisaniem go — nie tylko wypisywał go bezpośrednio w printf, jak dotąd.\n\n\nZadanie 4 (dla chętnych) — pętla for w praktyce\nNapisz osobny mini-program, który używając for wypisuje tabliczkę mnożenia liczby wpisanej przez użytkownika (od 1×n do 10×n). To ćwiczenie z for, gdy liczba powtórzeń jest znana z góry (zawsze 10) — w odróżnieniu od kalkulatora, gdzie liczba powtórzeń zależy od użytkownika (stąd while, nie for)."
   },
   {
-    "objectID": "podstawy_programowania/sesje/01_pierwszy_program.html#kryterium-sukcesu",
-    "href": "podstawy_programowania/sesje/01_pierwszy_program.html#kryterium-sukcesu",
-    "title": "Sesja 1 — Pierwszy program",
+    "objectID": "podstawy_programowania/sesje/04_petle_repl.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/04_petle_repl.html#kryterium-sukcesu",
+    "title": "Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu",
     "section": "Kryterium sukcesu",
-    "text": "Kryterium sukcesu\n\ngcc -std=c99 -Wall -Wextra hello.c -o hello kompiluje się bez żadnych ostrzeżeń.\n./hello wypisuje spersonalizowany komunikat zakończony nową linią.\nPotrafisz wskazać, w którym miejscu kodu i dlaczego pojawił się błąd z zadania 4 (nie tylko “naprawiłem”, ale “wiem czemu się psuło”)."
+    "text": "Kryterium sukcesu\n\nKalkulator działa w pętli — można wykonać kilka działań pod rząd bez ponownego uruchamiania programu.\n'q' kończy program czysto (bez błędów, bez pętli nieskończonej).\nLicznik działań i suma wyników są poprawne po kilku różnych operacjach.\nRozumiesz różnicę: for, gdy liczba powtórzeń jest znana z góry; while, gdy zależy od czegoś, co dzieje się w trakcie."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html",
-    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html",
-    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
+    "objectID": "podstawy_programowania/sesje/02_zmienne_kalkulator.html",
+    "href": "podstawy_programowania/sesje/02_zmienne_kalkulator.html",
+    "title": "Sesja 2 — Zmienne i pierwszy kalkulator",
     "section": "",
-    "text": "Bez nowego kodu — to moment “wow” na koniec: emulator z ćwiczeń 1-4 uruchamia prawdziwe, publicznie dostępne gry CHIP-8 z lat 70./80."
+    "text": "Nauczyć się przechowywać dane w pamięci pod nazwaną etykietą (zmienna) i wczytywać dane od użytkownika. Napisać program, który dodaje dwie liczby podane przez użytkownika."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#cel",
-    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#cel",
-    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
+    "objectID": "podstawy_programowania/sesje/02_zmienne_kalkulator.html#cel",
+    "href": "podstawy_programowania/sesje/02_zmienne_kalkulator.html#cel",
+    "title": "Sesja 2 — Zmienne i pierwszy kalkulator",
     "section": "",
-    "text": "Bez nowego kodu — to moment “wow” na koniec: emulator z ćwiczeń 1-4 uruchamia prawdziwe, publicznie dostępne gry CHIP-8 z lat 70./80."
+    "text": "Nauczyć się przechowywać dane w pamięci pod nazwaną etykietą (zmienna) i wczytywać dane od użytkownika. Napisać program, który dodaje dwie liczby podane przez użytkownika."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#skąd-wziąć-rom-y",
-    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#skąd-wziąć-rom-y",
-    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
-    "section": "Skąd wziąć ROM-y",
-    "text": "Skąd wziąć ROM-y\nCHIP-8 to platforma z bogatą sceną hobbystyczną — większość klasycznych ROM-ów (Pong, Tetris, Space Invaders, Breakout) jest domeną publiczną albo swobodnie udostępniana przez społeczność retro-computingową. Wyszukaj “chip8 roms public domain” albo “chip8-test-suite” (Timendus) — ten ostatni to zestaw ROM-ów testowych, które systematycznie sprawdzają poprawność implementacji każdej instrukcji (świetne do wykrycia błędów, które przetrwały ćwiczenia 1-4).\nZacznij od małych ROM-ów testowych (IBM logo, test opcode’ów), potem przejdź do właściwych gier — plik .ch8 to zwykły binarny plik, ten sam format co używane w ćwiczeniach testowe “ROM-y” ręcznie sklejane w tablicach bajtów."
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#sterowanie",
-    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#sterowanie",
-    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
-    "section": "Sterowanie",
-    "text": "Sterowanie\nTypowe gry (np. Pong) używają klawiszy 1, 4, 7, A (jedna kolumna klawiatury CHIP-8) do ruchu — sprawdź dokumentację konkretnej gry, jeśli nie reaguje na oczekiwane klawisze."
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#checklist-rozwiązywania-problemów",
-    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#checklist-rozwiązywania-problemów",
-    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
-    "section": "Checklist rozwiązywania problemów",
-    "text": "Checklist rozwiązywania problemów\nJeśli gra się nie uruchamia albo działa źle:\n\nCzarny ekran, brak reakcji — sprawdź czy chip8_load_rom poprawnie odczytuje cały plik (fread zwraca liczbę odczytanych elementów — porównaj z oczekiwanym rozmiarem).\n“Śmieci” na ekranie zamiast grafiki — najczęściej błąd w DXYN (zła kolejność bitów w bajcie sprite’u, albo brakujące zawijanie %).\nGra działa, ale za szybko/wolno — sprawdź stosunek cykli CPU do klatek w pętli main (ćwiczenie 4) — różne gry były pisane z założeniem różnej prędkości procesora, czasem trzeba dostroić liczbę cykli na klatkę.\nProgram “wisi” na starcie — prawdopodobnie ROM zaczyna się od FX0A (czekaj na klawisz) i emulator nie odczytuje stdin w trybie non-blocking poprawnie.\nUnknown opcode na stderr — brakująca instrukcja z poprzednich ćwiczeń, albo gra korzysta z rzadziej używanego opcode’u (np. FX33 BCD, FX55/FX65 zapis/odczyt rejestrów do pamięci) — dobra okazja do rozszerzenia zestawu poza 4 podstawowe ćwiczenia."
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#rozszerzenia-dla-chętnych-dodatkowe-punkty",
-    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#rozszerzenia-dla-chętnych-dodatkowe-punkty",
-    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
-    "section": "Rozszerzenia (dla chętnych / dodatkowe punkty)",
-    "text": "Rozszerzenia (dla chętnych / dodatkowe punkty)\n\nFX33 (BCD): rozłóż V[x] na cyfry dziesiętne i zapisz pod memory[I..I+2] — potrzebne w niektórych grach do wyświetlania wyniku.\nFX55/FX65: zapis/odczyt rejestrów V0..Vx do/z pamięci od adresu I.\nDźwięk: sound_timer &gt; 0 powinno grać dźwięk — najprościej putchar('\\a') (bell terminala) zamiast prawdziwego audio.\nDebugger krokowy: pauza po każdej instrukcji, podgląd rejestrów i stosu — bezcenne narzędzie dydaktyczne samo w sobie.\nDisassembler: osobny program, który zamiast wykonywać ROM, wypisuje go jako czytelny asembler (JP 0x204 zamiast 0x1204) — naturalne uzupełnienie tematu “asembler” z pierwszej rozmowy o pomysłach na ćwiczenia."
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#podsumowanie-kursu",
-    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#podsumowanie-kursu",
-    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
-    "section": "Podsumowanie kursu",
-    "text": "Podsumowanie kursu\nPo tych 5 ćwiczeniach studenci przeszli przez: reprezentację danych w pamięci, architekturę fetch-decode-execute, arytmetykę i flagi procesora, stos wywołań, manipulację bitową, oraz interakcję z urządzeniami wejścia/wyjścia w czasie rzeczywistym — cały czas pisząc jeden, rosnący, kompilowalny program w C, który na koniec realnie uruchamia grę. To rzadka okazja, żeby “podstawy programowania” skończyły się czymś namacalnie efektownym zamiast kolejnego kalkulatora."
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html",
-    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html",
-    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
-    "section": "",
-    "text": "Dodać ekran: bufor pikseli, poprawną obsługę CLS, rysowanie sprite’ów przez DXYN (z wykrywaniem kolizji) i renderowanie do terminala.\nStartujesz od kodu z ćwiczenia 2."
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#cel",
-    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#cel",
-    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
-    "section": "",
-    "text": "Dodać ekran: bufor pikseli, poprawną obsługę CLS, rysowanie sprite’ów przez DXYN (z wykrywaniem kolizji) i renderowanie do terminala.\nStartujesz od kodu z ćwiczenia 2."
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#teoria-w-pigułce",
-    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#teoria-w-pigułce",
-    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
+    "objectID": "podstawy_programowania/sesje/02_zmienne_kalkulator.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/02_zmienne_kalkulator.html#teoria-w-pigułce",
+    "title": "Sesja 2 — Zmienne i pierwszy kalkulator",
     "section": "Teoria w pigułce",
-    "text": "Teoria w pigułce\n\nFramebuffer: obraz jako tablica liczb\nEkran CHIP-8 to 64×32 pikseli monochromatycznych — piksel jest zapalony albo nie, bez odcieni szarości. display[64*32] to framebuffer — pojęcie, które dotyczy każdego wyświetlacza, jaki kiedykolwiek obsługiwaliście: karta graficzna w Waszym komputerze też trzyma obraz jako tablicę liczb (tylko z 3-4 bajtami koloru na piksel zamiast jednego bitu), a monitor po prostu regularnie ją odczytuje i wyświetla.\n\n\n\n\n\n\nNoteMemory-mapped I/O — dlaczego CHIP-8 tego NIE robi\n\n\n\nW wykładzie 3 wspominaliśmy magistralę i urządzenia I/O. Wiele prawdziwych komputerów domowych z epoki CHIP-8 (Commodore 64, Apple II) implementowało ekran przez memory-mapped I/O — pamięć wideo była po prostu fragmentem tej samej przestrzeni adresowej co reszta RAM-u; zapis pod konkretny adres natychmiast zmieniał to, co widać na ekranie, bez żadnej specjalnej instrukcji. CHIP-8 tego nie robi — display to osobna tablica w C, oddzielona od memory, a jedyny sposób na zmianę ekranu to wywołanie instrukcji DXYN. To uproszczenie ułatwia implementację (nie trzeba pilnować kolizji adresów), ale warto wiedzieć, że prawdziwy sprzęt tamtej epoki często robił to inaczej.\n\n\n\n\nXOR jako operacja rysowania\nSprite’y są rysowane przez XOR: każdy bit sprite’u jest XOR-owany z aktualnym stanem piksela (display[idx] ^= 1). To ta sama bitowa operacja XOR, którą ALU wykonuje w instrukcji 8XY3 z poprzedniego ćwiczenia — tu stosowana piksel po pikselu do całego obrazu.\nDlaczego akurat XOR, a nie np. “ustaw piksel na 1”? Bo XOR jest swoją własną odwrotnością: narysowanie tego samego sprite’u w tym samym miejscu drugi raz usuwa go z ekranu (a ^ b ^ b = a). To pozwala grom animować obiekty bez osobnego bufora “co było wcześniej” — żeby przesunąć sprite, gra rysuje go (znika), zmienia współrzędne, rysuje ponownie (pojawia się w nowym miejscu).\nEfektem ubocznym tej sztuczki jest wykrywanie kolizji za darmo: jeśli jakikolwiek piksel przez XOR zgasł (był 1, jest 0), VF jest ustawiane na 1 — to podstawowy mechanizm sprawdzania, czy np. pocisk trafił przeciwnika, bez żadnej dodatkowej geometrii czy porównywania współrzędnych.\n\n\nFormat sprite’u i zestaw czcionek\nSprite ma szerokość zawsze 8 pikseli (1 bajt = 1 wiersz, każdy bit = jeden piksel) i wysokość N (1-15 wierszy), dane sprite’u leżą w pamięci pod adresem I — kolejny przykład tego, że w CHIP-8 kod i dane (tu: dane graficzne) żyją w tej samej, wspólnej pamięci, zgodnie z modelem Von Neumanna z wykładu 3.\nCHIP-8 ma wbudowany zestaw czcionek dla cyfr 0-F — każda cyfra to sprite 4×5 pikseli, standardowo ładowany pod adres 0x050."
+    "text": "Teoria w pigułce\n\nCzym jest zmienna?\nZmienna to nazwane miejsce w pamięci przechowujące wartość określonego typu. Kiedy piszesz:\nint wiek = 20;\ndzieje się kolejno: (1) komputer rezerwuje kawałek pamięci wystarczający na liczbę całkowitą, (2) nadaje mu etykietę wiek, żebyś Ty (i kompilator) mogli się do niego odwoływać po nazwie zamiast po adresie, (3) zapisuje tam wartość 20.\n\n\n\n\n\n\nNoteZapowiedź z przyszłości\n\n\n\nZa kilka tygodni, pisząc emulator CHIP-8, zobaczycie to z drugiej strony: V[0] to też “nazwana” (a właściwie zaindeksowana) komórka pamięci — tylko że tam sami zarządzacie, gdzie leży, zamiast zostawiać to kompilatorowi C. Zmienna w C to wygoda, którą kompilator dokłada na wierzchu tego samego pomysłu.\n\n\n\n\nPodstawowe typy\n\n\n\nTyp\nPrzechowuje\nPrzykład\n\n\n\n\nint\nliczbę całkowitą\n42, -7\n\n\nfloat / double\nliczbę zmiennoprzecinkową\n3.14\n\n\nchar\npojedynczy znak\n'A'\n\n\n\nKażdy typ ma stały rozmiar w bajtach (np. int to zwykle 4 bajty) — to nie jest przypadek, to bezpośrednia konsekwencja tego, że pamięć jest zorganizowana w bajty (zobaczycie to dosłownie, kiedy Chip8.memory będzie tablicą uint8_t).\n\n\nWejście i wyjście: printf i scanf\nprintf już znacie z sesji 1 — wypisuje na ekran. scanf robi coś przeciwnego: czyta to, co użytkownik wpisze, i zapisuje do zmiennej.\nint a;\nprintf(\"Podaj liczbe: \");\nscanf(\"%d\", &a);\n%d mówi scanf, jakiego typu danych się spodziewać (d = decimal integer). &a to adres zmiennej a — scanf musi wiedzieć gdzie zapisać wynik, nie tylko jaki ma być typ. Znak & (ampersand) do tego właśnie służy: “adres tej zmiennej”, a nie “wartość tej zmiennej”. Do samego pojęcia adresu wrócimy dokładniej przy wskaźnikach (sesja 11) — na razie zapamiętaj to jako regułę: scanf zawsze dostaje &zmienna, printf nigdy."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#zadania",
-    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#zadania",
-    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
+    "objectID": "podstawy_programowania/sesje/02_zmienne_kalkulator.html#zadania",
+    "href": "podstawy_programowania/sesje/02_zmienne_kalkulator.html#zadania",
+    "title": "Sesja 2 — Zmienne i pierwszy kalkulator",
     "section": "Zadania",
-    "text": "Zadania\n\nZadanie 1 — bufor ekranu i CLS\nDodaj do struktury Chip8 pole uint8_t display[64 * 32] (1 bajt na piksel, wartość 0 lub 1 — trochę marnotrawne pamięciowo, ale prostsze niż bitpacking). Zaimplementuj 0x00E0 (CLS) tak, żeby faktycznie zerował display i ustawiał flagę do przerysowania.\n\n\nZadanie 2 — zestaw czcionek\nDodaj tablicę fontset[80] (16 cyfr × 5 bajtów, standardowy zestaw CHIP-8 — podany niżej, przepisz go 1:1). W chip8_init skopiuj go do memory pod adres 0x050.\nuint8_t fontset[80] = {\n    0xF0, 0x90, 0x90, 0x90, 0xF0, // 0\n    0x20, 0x60, 0x20, 0x20, 0x70, // 1\n    0xF0, 0x10, 0xF0, 0x80, 0xF0, // 2\n    0xF0, 0x10, 0xF0, 0x10, 0xF0, // 3\n    0x90, 0x90, 0xF0, 0x10, 0x10, // 4\n    0xF0, 0x80, 0xF0, 0x10, 0xF0, // 5\n    0xF0, 0x80, 0xF0, 0x90, 0xF0, // 6\n    0xF0, 0x10, 0x20, 0x40, 0x40, // 7\n    0xF0, 0x90, 0xF0, 0x90, 0xF0, // 8\n    0xF0, 0x90, 0xF0, 0x10, 0xF0, // 9\n    0xF0, 0x90, 0xF0, 0x90, 0x90, // A\n    0xE0, 0x90, 0xE0, 0x90, 0xE0, // B\n    0xF0, 0x80, 0x80, 0x80, 0xF0, // C\n    0xE0, 0x90, 0x90, 0x90, 0xE0, // D\n    0xF0, 0x80, 0xF0, 0x80, 0xF0, // E\n    0xF0, 0x80, 0xF0, 0x80, 0x80, // F\n};\n\n\nZadanie 3 — FX29: lokalizacja sprite’u cyfry\n0xF029 (LD F, Vx): I = 0x050 + (V[x] * 5) — każda cyfra zajmuje 5 bajtów, więc to prosty indeks w tablicy fontów.\n\n\nZadanie 4 — DXYN: rysowanie sprite’u\nNajważniejsza instrukcja tego ćwiczenia. Dla y_line od 0 do N-1:\n\nOdczytaj bajt sprite_byte = memory[I + y_line].\nDla każdego bitu x_bit od 0 do 7 (od najstarszego):\n\njeśli bit jest ustawiony, wylicz docelowy piksel (V[x] + x_bit) % 64, (V[y] + y_line) % 32 (zawijanie na krawędziach ekranu!)\njeśli piksel pod tym adresem już był zapalony, ustaw VF = 1 (kolizja)\nzrób XOR: display[pos] ^= 1\n\nUstaw flagę przerysowania ekranu.\n\nPamiętaj wyzerować VF na początku instrukcji, zanim zaczniesz sprawdzać kolizje.\n\n\nZadanie 5 — renderowanie do terminala\nNapisz chip8_render(Chip8 *c): wyczyść terminal (printf(\"\\x1b[H\\x1b[2J\") — ANSI escape, przenosi kursor do (0,0) i czyści ekran), potem dla każdego z 32 wierszy i 64 kolumn wypisz █ jeśli piksel zapalony, spację w przeciwnym razie.\nWywołuj chip8_render w pętli main tylko gdy flaga przerysowania jest ustawiona (nie ma sensu czyścić i przerysowywać terminala 500 razy na sekundę, jeśli obraz się nie zmienił)."
+    "text": "Zadania\n\nZadanie 1 — przywitanie z imieniem\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    int wiek;\n    printf(\"Ile masz lat? \");\n    scanf(\"%d\", &wiek);\n    printf(\"Za rok bedziesz mial/a %d lat.\\n\", wiek + 1);\n    return 0;\n}\nZwróć uwagę: wiek + 1 liczy się w miejscu, printf dostaje już wynik działania, nie osobną zmienną.\n\n\nZadanie 2 — kalkulator dwóch liczb\nNapisz program kalkulator.c, który:\n\npyta o dwie liczby całkowite (a i b),\nwypisuje ich sumę, różnicę i iloczyn.\n\nSzkielet:\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    int a, b;\n    printf(\"Podaj pierwsza liczbe: \");\n    scanf(\"%d\", &a);\n    printf(\"Podaj druga liczbe: \");\n    scanf(\"%d\", &b);\n\n    printf(\"Suma: %d\\n\", a + b);\n    // TODO: roznica\n    // TODO: iloczyn\n\n    return 0;\n}\n\n\nZadanie 3 — dzielenie i pułapka liczb całkowitych\nDodaj dzielenie: printf(\"Iloraz: %d\\n\", a / b);. Podaj a=7, b=2. Wynik Cię zaskoczy — 7 / 2 w C, gdy oba są int, daje 3, nie 3.5. To dzielenie całkowitoliczbowe: wynik jest obcinany do części całkowitej, nie zaokrąglany.\nNapraw to: zmień typ a, b na float, formatowanie na %f, i przelicz.\n\n\nZadanie 4 — dzielenie przez zero\nPodaj b = 0 w wersji z int. Zobacz, co się stanie (zwykle: program się wywala albo zwraca śmieciową wartość — zależnie od systemu). Zapamiętaj to zachowanie — dzielenie przez zero na liczbach całkowitych to niezdefiniowane zachowanie w C, nie kontrolowany błąd jak w niektórych innych językach. Będzie to ważne, gdy w ćwiczeniach CHIP-8 sami będziecie musieli pilnować takich przypadków ręcznie."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#test",
-    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#test",
-    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
+    "objectID": "podstawy_programowania/sesje/02_zmienne_kalkulator.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/02_zmienne_kalkulator.html#kryterium-sukcesu",
+    "title": "Sesja 2 — Zmienne i pierwszy kalkulator",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nKalkulator wczytuje dwie liczby i poprawnie liczy sumę, różnicę, iloczyn.\nWersja z dzieleniem rozróżnia jawnie int (dzielenie całkowitoliczbowe) od float (dzielenie rzeczywiste) — i potrafisz wytłumaczyć różnicę własnymi słowami.\nWiesz, co to & w scanf i dlaczego tam jest."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/index.html",
+    "href": "podstawy_programowania/cwiczenia_chip8/index.html",
+    "title": "CHIP-8: zbuduj własny emulator",
+    "section": "",
+    "text": "CHIP-8 to nie prawdziwy procesor — to wirtualna maszyna zaprojektowana w latach 70. jako prosty, jednolity cel kompilacji dla mikrokomputerów. Ma tylko 35 instrukcji, 4 KB pamięci i 16 jednobajtowych rejestrów. To sprawia, że jest to idealny pierwszy emulator do napisania — wystarczająco prosty, żeby ogarnąć w kilka ćwiczeń, ale realny: gotowy kod uruchomi prawdziwe gry z lat 70./80. (Pong, Tetris, Space Invaders).\nTo bezpośrednia kontynuacja wykładu o architekturze komputera — zamiast czytać o cyklu fetch-decode-execute, studenci go piszą."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/index.html#o-co-chodzi",
+    "href": "podstawy_programowania/cwiczenia_chip8/index.html#o-co-chodzi",
+    "title": "CHIP-8: zbuduj własny emulator",
+    "section": "",
+    "text": "CHIP-8 to nie prawdziwy procesor — to wirtualna maszyna zaprojektowana w latach 70. jako prosty, jednolity cel kompilacji dla mikrokomputerów. Ma tylko 35 instrukcji, 4 KB pamięci i 16 jednobajtowych rejestrów. To sprawia, że jest to idealny pierwszy emulator do napisania — wystarczająco prosty, żeby ogarnąć w kilka ćwiczeń, ale realny: gotowy kod uruchomi prawdziwe gry z lat 70./80. (Pong, Tetris, Space Invaders).\nTo bezpośrednia kontynuacja wykładu o architekturze komputera — zamiast czytać o cyklu fetch-decode-execute, studenci go piszą."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/index.html#struktura-ćwiczeń",
+    "href": "podstawy_programowania/cwiczenia_chip8/index.html#struktura-ćwiczeń",
+    "title": "CHIP-8: zbuduj własny emulator",
+    "section": "Struktura ćwiczeń",
+    "text": "Struktura ćwiczeń\n\n\n\n\n\n\n\n\n#\nTemat\nNawiązanie do wykładu\n\n\n\n\n1\nSzkielet VM — pamięć, rejestry, pętla fetch-decode-execute\nArchitektura komputera\n\n\n2\nArytmetyka, skoki, stos wywołań\nOperatory i instrukcje sterujące\n\n\n3\nWyświetlacz — rysowanie sprite’ów przez XOR\nTablice, wskaźniki\n\n\n4\nTimery i klawiatura\nPreprocessor, funkcje\n\n\n5\nUruchomienie prawdziwej gry (bonus/pokaz)\n—\n\n\n\nKażde ćwiczenie rozbudowuje kod z poprzedniego — jeden plik chip8.c, który rośnie z tygodnia na tydzień. Wersje _rozwiazanie.qmd zawierają pełny, kompilowalny kod na danym etapie."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/index.html#wymagania",
+    "href": "podstawy_programowania/cwiczenia_chip8/index.html#wymagania",
+    "title": "CHIP-8: zbuduj własny emulator",
+    "section": "Wymagania",
+    "text": "Wymagania\n\nkompilator C (gcc lub clang)\nsystem POSIX (macOS/Linux; na Windows — WSL) — potrzebny do ćwiczenia 4 (termios.h)\nterminal obsługujący znaki UTF-8 (do renderowania wyświetlacza blokami █)\n\nKompilacja na każdym etapie:\ngcc -std=c99 -Wall -Wextra chip8.c -o chip8\n./chip8 rom.ch8"
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html",
+    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html",
+    "title": "Ćwiczenie 4 — Timery i klawiatura",
+    "section": "",
+    "text": "Dodać dwa niezależne od CPU zegary (delay timer, sound timer, oba tykające ze stałą częstotliwością 60 Hz) oraz obsługę 16-przyciskowej klawiatury. Po tym ćwiczeniu emulator jest funkcjonalnie kompletny.\nStartujesz od kodu z ćwiczenia 3."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#cel",
+    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#cel",
+    "title": "Ćwiczenie 4 — Timery i klawiatura",
+    "section": "",
+    "text": "Dodać dwa niezależne od CPU zegary (delay timer, sound timer, oba tykające ze stałą częstotliwością 60 Hz) oraz obsługę 16-przyciskowej klawiatury. Po tym ćwiczeniu emulator jest funkcjonalnie kompletny.\nStartujesz od kodu z ćwiczenia 3."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#teoria-w-pigułce",
+    "title": "Ćwiczenie 4 — Timery i klawiatura",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nDwa zegary, dwie częstotliwości\nCHIP-8 ma dwa 8-bitowe liczniki czasowe: delay_timer (używany przez gry do odmierzania czasu) i sound_timer (dopóki &gt; 0, powinien brzęczeć głośnik — w naszym terminalowym emulatorze pominiemy dźwięk). Oba dekrementują się 60 razy na sekundę, niezależnie od tego, jak szybko wykonują się instrukcje procesora.\nTo pierwszy moment, gdzie prędkość CPU i częstotliwość timerów muszą być rozdzielone — typowa implementacja wykonuje ok. 500-700 instrukcji/s, ale dekrementuje timery dokładnie 60 razy/s.\n\n\n\n\n\n\nNoteTo nie jest specyfika CHIP-8 — to specyfika prawdziwego sprzętu\n\n\n\nWykład 3 wspominał, że współczesne procesory taktowane są zegarem 3-5 GHz. Ale peryferia (timery, kontrolery I/O) rzadko dzielą ten sam zegar co rdzeń CPU — mają własne, wolniejsze oscylatory, bo np. odświeżanie ekranu i tak nie ma sensu robić szybciej niż ludzkie oko dostrzega (stąd standardowe 60 Hz — te same 60 Hz, które znacie z odświeżania monitora). Oryginalny komputer COSMAC VIP, na którym CHIP-8 faktycznie działał w 1977 roku, miał procesor taktowany dosłownie ~1-3 MHz z osobnym zegarem 60 Hz do timerów — nasza pętla main z usleep odtwarza dokładnie ten podział, tylko w software.\n\n\n\n\nPolling zamiast przerwań\nKlawiatura CHIP-8 ma układ 4×4 (0-F), historycznie mapowany na fizyczną klawiaturę hex. Standardowe mapowanie na współczesną klawiaturę QWERTY:\nCHIP-8:        Klawiatura:\n1 2 3 C        1 2 3 4\n4 5 6 D   -&gt;   Q W E R\n7 8 9 E        A S D F\nA 0 B F        Z X C V\n\n\n\n\n\n\nTipDlaczego sprawdzamy klawiaturę w pętli, a nie czekamy na przerwanie?\n\n\n\nWykład 3 wspominał, że prawdziwe urządzenia I/O komunikują się z CPU często przez przerwania (interrupts) — urządzenie samo “budzi” procesor sygnałem “mam dane, obsłuż mnie!”, zamiast żeby procesor musiał bez przerwy pytać “czy coś się zmieniło?”. To, co zrobimy w tym ćwiczeniu — sprawdzanie stdin w każdej klatce, w pętli — to polling (odpytywanie), prostszy, ale mniej wydajny model: CPU marnuje cykle, pytając nawet wtedy, gdy nic się nie zmieniło. Prawdziwe sterowniki klawiatury w systemach operacyjnych używają przerwań właśnie po to, żeby tego uniknąć. Polling wybieramy tu celowo — jest prostszy do zaimplementowania bez sterowników systemowych, a przy 60 klatkach/s koszt jest pomijalny."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#zadania",
+    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#zadania",
+    "title": "Ćwiczenie 4 — Timery i klawiatura",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — pola timerów i podstawowe opcode’y\nDodaj delay_timer, sound_timer do struktury. Zaimplementuj:\n\n0xFX07 (LD Vx, DT): V[x] = delay_timer\n0xFX15 (LD DT, Vx): delay_timer = V[x]\n0xFX18 (LD ST, Vx): sound_timer = V[x]\n\n\n\nZadanie 2 — dekrementacja timerów w pętli głównej\nW main rozdziel dwie prędkości: procesor ma wykonywać ok. 540 instrukcji/s (czyli ok. 9 instrukcji na każdą 1/60 s klatkę), a timery dekrementować się dokładnie 60 razy/s. Użyj usleep (z &lt;unistd.h&gt;) do kontroli tempa pętli.\nSzkielet:\nwhile (running) {\n    for (int i = 0; i &lt; 9; i++) chip8_cycle(&chip8); // ~540 Hz\n\n    if (chip8.delay_timer &gt; 0) chip8.delay_timer--;\n    if (chip8.sound_timer &gt; 0) chip8.sound_timer--;\n\n    if (chip8.draw_flag) { chip8_render(&chip8); chip8.draw_flag = 0; }\n\n    usleep(16667); // ~60 Hz (1/60 s = 16667 us)\n}\n\n\nZadanie 3 — klawiatura: tryb raw terminala\nStandardowy read()/getchar() w terminalu jest buforowany liniami — program dostaje znak dopiero po Enterze, co jest bezużyteczne dla gry w czasie rzeczywistym. Musisz przełączyć terminal w tryb raw i non-blocking przez termios.h.\n#include &lt;termios.h&gt;\n#include &lt;unistd.h&gt;\n#include &lt;fcntl.h&gt;\n\nstruct termios orig_termios;\n\nvoid disable_raw_mode(void) {\n    tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios);\n}\n\nvoid enable_raw_mode(void) {\n    tcgetattr(STDIN_FILENO, &orig_termios);\n    atexit(disable_raw_mode); // zawsze przywroc terminal na wyjsciu\n\n    struct termios raw = orig_termios;\n    raw.c_lflag &= ~(ECHO | ICANON); // no echo, no line buffering\n    tcsetattr(STDIN_FILENO, TCSANOW, &raw);\n\n    // non-blocking read\n    fcntl(STDIN_FILENO, F_SETFL, fcntl(STDIN_FILENO, F_GETFL) | O_NONBLOCK);\n}\nWywołaj enable_raw_mode() na początku main. Teraz getchar() zwróci EOF natychmiast, jeśli nic nie zostało wciśnięte, zamiast czekać.\n\n\nZadanie 4 — mapowanie klawiszy i opcode’y klawiatury\nDodaj uint8_t keypad[16] do struktury. Napisz funkcję map_key(char c) zwracającą indeks 0-15 (lub -1 jeśli klawisz nie należy do mapy) wg tabeli z sekcji teorii. W pętli głównej, przed każdą klatką, wyczyść keypad (wszystko na 0), odczytaj wszystkie dostępne znaki z getchar() (pętla aż do EOF, bo non-blocking), zamapuj i ustaw odpowiedni bit w keypad.\nZaimplementuj:\n\n0xEX9E (SKP Vx): jeśli keypad[V[x]] jest wciśnięty, pomiń następną instrukcję\n0xEXA1 (SKNP Vx): jeśli nie jest wciśnięty, pomiń następną instrukcję\n0xFX0A (LD Vx, K): zablokuj procesor (nie inkrementuj pc dalej, wykonuj tę samą instrukcję w kółko) dopóki jakikolwiek klawisz nie zostanie wciśnięty, wtedy zapisz jego indeks do V[x]\n\nWskazówka do FX0A: najprościej cofnąć pc o 2 na końcu cyklu, jeśli żaden klawisz nie jest wciśnięty — instrukcja “czeka” wykonując się wielokrotnie."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#test",
+    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#test",
+    "title": "Ćwiczenie 4 — Timery i klawiatura",
     "section": "Test",
-    "text": "Test\nIBM Logo to klasyczny, publicznie dostępny mini-ROM testowy dla emulatorów CHIP-8 — tylko rysuje statyczne logo, świetny test rysowania bez konieczności obsługi klawiatury czy timerów. Znajdziesz go łatwo wyszukując “IBM logo.ch8 chip8 test rom” — plik ma 132 bajty. Uruchom go: powinieneś zobaczyć logo “IBM” narysowane blokami w terminalu."
+    "text": "Test\nNapisz mały ręczny ROM, który czeka na wciśnięcie klawisza 5 (FX0A), a potem rysuje odpowiadającą mu cyfrę na środku ekranu (użyj FX29 + DXYN z ćwiczenia 3). To spina w jeden test wszystkie cztery ćwiczenia naraz."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#kryterium-sukcesu",
-    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#kryterium-sukcesu",
-    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
+    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#kryterium-sukcesu",
+    "title": "Ćwiczenie 4 — Timery i klawiatura",
     "section": "Kryterium sukcesu",
-    "text": "Kryterium sukcesu\n\nCLS faktycznie czyści ekran (widoczne przy kolejnych klatkach).\nROM IBM logo renderuje się poprawnie i czytelnie.\nKolizja (VF) działa — możesz to sprawdzić rysując ten sam sprite dwa razy w tym samym miejscu: drugi raz VF powinno wyjść 1."
+    "text": "Kryterium sukcesu\n\nTimery dekrementują się w tempie ok. 60/s niezależnie od tego, ile instrukcji wykonuje procesor na klatkę.\nTerminal nie wymaga Entera, żeby zarejestrować wciśnięcie klawisza.\nProgram przywraca normalny tryb terminala po zakończeniu (sprawdź: terminal działa normalnie po Ctrl+C albo zwykłym zakończeniu programu)."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html",
+    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html",
+    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
+    "section": "",
+    "text": "Rozbudować chip8_cycle z ćwiczenia 1 o rodzinę instrukcji arytmetycznych, warunkowe skoki oraz stos wywołań — mechanizm, dzięki któremu CHIP-8 obsługuje coś w rodzaju funkcji (CALL/RET).\nStartujesz od pliku z ćwiczenia 1 (swojego albo z 01_szkielet_vm_rozwiazanie.qmd)."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#cel",
+    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#cel",
+    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
+    "section": "",
+    "text": "Rozbudować chip8_cycle z ćwiczenia 1 o rodzinę instrukcji arytmetycznych, warunkowe skoki oraz stos wywołań — mechanizm, dzięki któremu CHIP-8 obsługuje coś w rodzaju funkcji (CALL/RET).\nStartujesz od pliku z ćwiczenia 1 (swojego albo z 01_szkielet_vm_rozwiazanie.qmd)."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#teoria-w-pigułce",
+    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nStos wywołań — software’owy, nie ten z wykładu 3\nW wykładzie o architekturze widzieliście stos jako segment pamięci procesu, rosnący w dół od wysokich adresów, współdzielący przestrzeń adresową z resztą programu — tam ląduje przy każdym wywołaniu funkcji w C adres powrotu, argumenty, zmienne lokalne.\nCHIP-8 robi to inaczej, i to celowa różnica architektoniczna warta zauważenia: stack to osobna tablica 16 elementów, całkowicie odseparowana od memory. CALL nnn zapisuje bieżący pc na tym stosie i skacze do nnn. RET zdejmuje adres z powrotem do pc.\n\n\n\n\n\n\nImportantDlaczego to ważna różnica?\n\n\n\nBo oznacza, że w CHIP-8 nie ma czegoś takiego jak stack overflow nadpisujący dane programu (nie da się, jak w C, przez zbyt głęboką rekurencję nadpisać zmienną globalną) — po prostu po 16 zagnieżdżonych wywołaniach sp wyjdzie poza tablicę i program się rozsypie w inny sposób (undefined behavior w C, poza zakresem tablicy). To pokazuje, że “stos jako mechanizm LIFO do wywołań” i “stos jako konkretny fragment pamięci procesu” to dwa osobne pojęcia — na wykładzie widzieliście je połączone, bo tak zaimplementowano je w x86/Linux, ale nie muszą być.\n\n\n\n\nRodzina “skip” — jedyny mechanizm warunkowy\nInstrukcje 3XKK, 4XKK, 5XY0, 9XY0 pomijają następną instrukcję (pc += 2 dodatkowo), jeśli warunek jest spełniony. To jedyny mechanizm warunkowy w CHIP-8 — nie ma if, jest tylko “pomiń następny skok”. W praktyce każdy if w CHIP-8 assembly to para instrukcji: SNE (skip jeśli warunek fałszywy) + JP (skok, który zostanie pominięty, jeśli warunek prawdziwy) — dokładnie ten wzorzec zobaczycie w teście na końcu tego ćwiczenia.\n\n\nVF jako rejestr flag — uproszczony EFLAGS\nPrawdziwe procesory (x86, ARM) mają dedykowany rejestr flag (np. EFLAGS na x86) z osobnymi bitami: CF (carry flag), ZF (zero flag), OF (overflow flag), SF (sign flag)… ALU ustawia je automatycznie po każdej operacji arytmetycznej, a instrukcje skoku warunkowego (JC, JZ, JO…) je odczytują.\nCHIP-8 nie ma osobnego rejestru flag — spłaszcza to wszystko do jednego rejestru ogólnego przeznaczenia, VF. Instrukcje 8XY4 (ADD) i 8XY5/8XY7 (SUB) ustawiają VF na 1/0 w zależności od przeniesienia/pożyczki — to dokładnie ten sam bit carry z wykładu o reprezentacji liczb, tylko bez dedykowanego miejsca w architekturze: musicie pamiętać, że VF jest “brudzony” przy każdej operacji ALU i nie nadaje się do przechowywania własnych danych między instrukcjami arytmetycznymi.\n\n\n\n\n\n\nTipSkąd 0xFF jako -1?\n\n\n\nW zadaniu testowym w tym ćwiczeniu zobaczycie ADD V0, 0xFF używane jako dekrementacja. To nie przypadek notacyjny — to dokładnie kod U2 (uzupełnienie do dwóch) z wykładu 3: 0xFF = 1111 1111 binarnie, czyli \\(-1\\) w reprezentacji U2 na 8 bitach. Ponieważ V[x] to uint8_t, dodawanie modulo 256 w C automatycznie realizuje arytmetykę U2 — dokładnie ten sam mechanizm, dzięki któremu (jak było na wykładzie) procesor “nie widzi różnicy” między dodawaniem a odejmowaniem."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#zadania",
+    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#zadania",
+    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — RET i CALL\n\n0x00EE (RET): pc = stack[--sp]\n0x2000 (2NNN, CALL addr): stack[sp++] = pc; pc = nnn\n\n\n\nZadanie 2 — rodzina “skip”\n\n0x3000 (3XKK, SE Vx, byte): jeśli V[x] == kk, pomiń następną instrukcję\n0x4000 (4XKK, SNE Vx, byte): jeśli V[x] != kk, pomiń\n0x5000 (5XY0, SE Vx, Vy): jeśli V[x] == V[y], pomiń\n0x9000 (9XY0, SNE Vx, Vy): jeśli V[x] != V[y], pomiń\n\n\n\nZadanie 3 — ADD bez przeniesienia\n\n0x7000 (7XKK, ADD Vx, byte): V[x] += kk (bez wpływu na VF)\n\n\n\nZadanie 4 — rodzina ALU 8XY*\nRozpoznaj po opcode & 0x000F:\n\n\n\n\n\n\n\n\nkod\nnazwa\noperacja\n\n\n\n\n0\nLD Vx, Vy\nV[x] = V[y]\n\n\n1\nOR Vx, Vy\nV[x] \\|= V[y]\n\n\n2\nAND Vx, Vy\nV[x] &= V[y]\n\n\n3\nXOR Vx, Vy\nV[x] ^= V[y]\n\n\n4\nADD Vx, Vy\nV[x] += V[y], VF = 1 jeśli wynik &gt; 255, inaczej 0\n\n\n5\nSUB Vx, Vy\nV[x] -= V[y], VF = 1 jeśli V[x] &gt; V[y] przed odejmowaniem (brak pożyczki)\n\n\n6\nSHR Vx\nVF = V[x] & 1; V[x] &gt;&gt;= 1\n\n\n7\nSUBN Vx, Vy\nV[x] = V[y] - V[x], VF = 1 jeśli V[y] &gt; V[x] przed odejmowaniem\n\n\nE\nSHL Vx\nVF = (V[x] &gt;&gt; 7) & 1; V[x] &lt;&lt;= 1\n\n\n\nUwaga na kolejność: przy ADD/SUB musisz wyliczyć VF przed nadpisaniem V[x], inaczej porównujesz z już zmienioną wartością.\n\n\nZadanie 5 — ANNN, BNNN, CXKK\n\n0xA000 (ANNN, LD I, addr): I = nnn\n0xB000 (BNNN, JP V0, addr): pc = nnn + V[0]\n0xC000 (CXKK, RND Vx, byte): V[x] = (rand() % 256) & kk — pamiętaj o srand() w main (np. srand(time(NULL))), inaczej za każdym uruchomieniem dostaniesz te same “losowe” wartości."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#test",
+    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#test",
+    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
+    "section": "Test",
+    "text": "Test\nRęcznie złożony program: policz w dół od 5 do 0, używając SNE + skoku wstecz (pętla), potem wywołaj “funkcję” przez CALL, która ustawia V1 = 0x42, i wróć przez RET.\nuint8_t test_rom[] = {\n    0x60, 0x05,       // 0x200: LD V0, 5\n    0x30, 0x00,       // 0x202: SE V0, 0   (loop check: skip next if V0==0)\n    0x12, 0x08,       // 0x204: JP 0x208   (not zero yet -&gt; continue)\n    0x22, 0x0C,       // 0x206: CALL 0x20C (V0==0 -&gt; call \"function\")\n    0x70, 0xFF,       // 0x208: ADD V0, -1 (0xFF as unsigned = -1 mod 256)\n    0x12, 0x02,       // 0x20A: JP 0x202   (back to loop check)\n    0x61, 0x42,       // 0x20C: LD V1, 0x42  &lt;- \"function\" body\n    0x00, 0xEE,       // 0x20E: RET\n};\nmemcpy(chip8.memory + 0x200, test_rom, sizeof(test_rom));\nDodaj wypisywanie V[0] i V[1] po każdym cyklu. Oczekiwany wynik: V0 maleje 5,4,3,2,1,0, a po dojściu do zera program skacze do 0x20C, ustawia V1 = 0x42 i wraca (RET) — sprawdź, że wraca dokładnie za CALL (czyli do 0x208), a nie do 0x206."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#kryterium-sukcesu",
+    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nWszystkie 9 wariantów 8XY* zaimplementowane i dają poprawny VF.\nTest powyżej: V1 zmienia się na 0x42 dokładnie raz, RET wraca pod właściwy adres.\nrand() daje różne wartości między uruchomieniami programu."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Informacje ogólne",
+    "section": "",
+    "text": "Kod:\nSemestr: zimowy",
+    "crumbs": [
+      "Informacje ogólne"
+    ]
+  },
+  {
+    "objectID": "index.html#wprowadzenie-do-programowania---laboratorium",
+    "href": "index.html#wprowadzenie-do-programowania---laboratorium",
+    "title": "Informacje ogólne",
+    "section": "",
+    "text": "Kod:\nSemestr: zimowy",
+    "crumbs": [
+      "Informacje ogólne"
+    ]
+  },
+  {
+    "objectID": "index.html#kalendarz",
+    "href": "index.html#kalendarz",
+    "title": "Informacje ogólne",
+    "section": "Kalendarz",
+    "text": "Kalendarz\n\n\nLaboratorium dla grup:\n\nTODO: dzień tygodnia, godzina, sala",
+    "crumbs": [
+      "Informacje ogólne"
+    ]
   },
   {
     "objectID": "podstawy_programowania/cwiczenia_chip8/01_szkielet_vm.html",
@@ -175,145 +261,164 @@
     "text": "Kryterium sukcesu\n\nProgram się kompiluje bez warningów (-Wall -Wextra).\nTestowy “ROM” powyżej pokazuje poprawną sekwencję PC: 0x200 -&gt; 0x204 -&gt; 0x206.\nNieznane opcode’y są zgłaszane, a nie ignorowane po cichu."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Informacje ogólne",
+    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html",
+    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html",
+    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
     "section": "",
-    "text": "Kod:\nSemestr: zimowy",
-    "crumbs": [
-      "Informacje ogólne"
-    ]
+    "text": "Dodać ekran: bufor pikseli, poprawną obsługę CLS, rysowanie sprite’ów przez DXYN (z wykrywaniem kolizji) i renderowanie do terminala.\nStartujesz od kodu z ćwiczenia 2."
   },
   {
-    "objectID": "index.html#wprowadzenie-do-programowania---laboratorium",
-    "href": "index.html#wprowadzenie-do-programowania---laboratorium",
-    "title": "Informacje ogólne",
+    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#cel",
+    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#cel",
+    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
     "section": "",
-    "text": "Kod:\nSemestr: zimowy",
-    "crumbs": [
-      "Informacje ogólne"
-    ]
+    "text": "Dodać ekran: bufor pikseli, poprawną obsługę CLS, rysowanie sprite’ów przez DXYN (z wykrywaniem kolizji) i renderowanie do terminala.\nStartujesz od kodu z ćwiczenia 2."
   },
   {
-    "objectID": "index.html#kalendarz",
-    "href": "index.html#kalendarz",
-    "title": "Informacje ogólne",
-    "section": "Kalendarz",
-    "text": "Kalendarz\n\n\nLaboratorium dla grup:\n\nTODO: dzień tygodnia, godzina, sala",
-    "crumbs": [
-      "Informacje ogólne"
-    ]
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html",
-    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html",
-    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
-    "section": "",
-    "text": "Rozbudować chip8_cycle z ćwiczenia 1 o rodzinę instrukcji arytmetycznych, warunkowe skoki oraz stos wywołań — mechanizm, dzięki któremu CHIP-8 obsługuje coś w rodzaju funkcji (CALL/RET).\nStartujesz od pliku z ćwiczenia 1 (swojego albo z 01_szkielet_vm_rozwiazanie.qmd)."
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#cel",
-    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#cel",
-    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
-    "section": "",
-    "text": "Rozbudować chip8_cycle z ćwiczenia 1 o rodzinę instrukcji arytmetycznych, warunkowe skoki oraz stos wywołań — mechanizm, dzięki któremu CHIP-8 obsługuje coś w rodzaju funkcji (CALL/RET).\nStartujesz od pliku z ćwiczenia 1 (swojego albo z 01_szkielet_vm_rozwiazanie.qmd)."
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#teoria-w-pigułce",
-    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#teoria-w-pigułce",
-    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
+    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#teoria-w-pigułce",
+    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
     "section": "Teoria w pigułce",
-    "text": "Teoria w pigułce\n\nStos wywołań — software’owy, nie ten z wykładu 3\nW wykładzie o architekturze widzieliście stos jako segment pamięci procesu, rosnący w dół od wysokich adresów, współdzielący przestrzeń adresową z resztą programu — tam ląduje przy każdym wywołaniu funkcji w C adres powrotu, argumenty, zmienne lokalne.\nCHIP-8 robi to inaczej, i to celowa różnica architektoniczna warta zauważenia: stack to osobna tablica 16 elementów, całkowicie odseparowana od memory. CALL nnn zapisuje bieżący pc na tym stosie i skacze do nnn. RET zdejmuje adres z powrotem do pc.\n\n\n\n\n\n\nImportantDlaczego to ważna różnica?\n\n\n\nBo oznacza, że w CHIP-8 nie ma czegoś takiego jak stack overflow nadpisujący dane programu (nie da się, jak w C, przez zbyt głęboką rekurencję nadpisać zmienną globalną) — po prostu po 16 zagnieżdżonych wywołaniach sp wyjdzie poza tablicę i program się rozsypie w inny sposób (undefined behavior w C, poza zakresem tablicy). To pokazuje, że “stos jako mechanizm LIFO do wywołań” i “stos jako konkretny fragment pamięci procesu” to dwa osobne pojęcia — na wykładzie widzieliście je połączone, bo tak zaimplementowano je w x86/Linux, ale nie muszą być.\n\n\n\n\nRodzina “skip” — jedyny mechanizm warunkowy\nInstrukcje 3XKK, 4XKK, 5XY0, 9XY0 pomijają następną instrukcję (pc += 2 dodatkowo), jeśli warunek jest spełniony. To jedyny mechanizm warunkowy w CHIP-8 — nie ma if, jest tylko “pomiń następny skok”. W praktyce każdy if w CHIP-8 assembly to para instrukcji: SNE (skip jeśli warunek fałszywy) + JP (skok, który zostanie pominięty, jeśli warunek prawdziwy) — dokładnie ten wzorzec zobaczycie w teście na końcu tego ćwiczenia.\n\n\nVF jako rejestr flag — uproszczony EFLAGS\nPrawdziwe procesory (x86, ARM) mają dedykowany rejestr flag (np. EFLAGS na x86) z osobnymi bitami: CF (carry flag), ZF (zero flag), OF (overflow flag), SF (sign flag)… ALU ustawia je automatycznie po każdej operacji arytmetycznej, a instrukcje skoku warunkowego (JC, JZ, JO…) je odczytują.\nCHIP-8 nie ma osobnego rejestru flag — spłaszcza to wszystko do jednego rejestru ogólnego przeznaczenia, VF. Instrukcje 8XY4 (ADD) i 8XY5/8XY7 (SUB) ustawiają VF na 1/0 w zależności od przeniesienia/pożyczki — to dokładnie ten sam bit carry z wykładu o reprezentacji liczb, tylko bez dedykowanego miejsca w architekturze: musicie pamiętać, że VF jest “brudzony” przy każdej operacji ALU i nie nadaje się do przechowywania własnych danych między instrukcjami arytmetycznymi.\n\n\n\n\n\n\nTipSkąd 0xFF jako -1?\n\n\n\nW zadaniu testowym w tym ćwiczeniu zobaczycie ADD V0, 0xFF używane jako dekrementacja. To nie przypadek notacyjny — to dokładnie kod U2 (uzupełnienie do dwóch) z wykładu 3: 0xFF = 1111 1111 binarnie, czyli \\(-1\\) w reprezentacji U2 na 8 bitach. Ponieważ V[x] to uint8_t, dodawanie modulo 256 w C automatycznie realizuje arytmetykę U2 — dokładnie ten sam mechanizm, dzięki któremu (jak było na wykładzie) procesor “nie widzi różnicy” między dodawaniem a odejmowaniem."
+    "text": "Teoria w pigułce\n\nFramebuffer: obraz jako tablica liczb\nEkran CHIP-8 to 64×32 pikseli monochromatycznych — piksel jest zapalony albo nie, bez odcieni szarości. display[64*32] to framebuffer — pojęcie, które dotyczy każdego wyświetlacza, jaki kiedykolwiek obsługiwaliście: karta graficzna w Waszym komputerze też trzyma obraz jako tablicę liczb (tylko z 3-4 bajtami koloru na piksel zamiast jednego bitu), a monitor po prostu regularnie ją odczytuje i wyświetla.\n\n\n\n\n\n\nNoteMemory-mapped I/O — dlaczego CHIP-8 tego NIE robi\n\n\n\nW wykładzie 3 wspominaliśmy magistralę i urządzenia I/O. Wiele prawdziwych komputerów domowych z epoki CHIP-8 (Commodore 64, Apple II) implementowało ekran przez memory-mapped I/O — pamięć wideo była po prostu fragmentem tej samej przestrzeni adresowej co reszta RAM-u; zapis pod konkretny adres natychmiast zmieniał to, co widać na ekranie, bez żadnej specjalnej instrukcji. CHIP-8 tego nie robi — display to osobna tablica w C, oddzielona od memory, a jedyny sposób na zmianę ekranu to wywołanie instrukcji DXYN. To uproszczenie ułatwia implementację (nie trzeba pilnować kolizji adresów), ale warto wiedzieć, że prawdziwy sprzęt tamtej epoki często robił to inaczej.\n\n\n\n\nXOR jako operacja rysowania\nSprite’y są rysowane przez XOR: każdy bit sprite’u jest XOR-owany z aktualnym stanem piksela (display[idx] ^= 1). To ta sama bitowa operacja XOR, którą ALU wykonuje w instrukcji 8XY3 z poprzedniego ćwiczenia — tu stosowana piksel po pikselu do całego obrazu.\nDlaczego akurat XOR, a nie np. “ustaw piksel na 1”? Bo XOR jest swoją własną odwrotnością: narysowanie tego samego sprite’u w tym samym miejscu drugi raz usuwa go z ekranu (a ^ b ^ b = a). To pozwala grom animować obiekty bez osobnego bufora “co było wcześniej” — żeby przesunąć sprite, gra rysuje go (znika), zmienia współrzędne, rysuje ponownie (pojawia się w nowym miejscu).\nEfektem ubocznym tej sztuczki jest wykrywanie kolizji za darmo: jeśli jakikolwiek piksel przez XOR zgasł (był 1, jest 0), VF jest ustawiane na 1 — to podstawowy mechanizm sprawdzania, czy np. pocisk trafił przeciwnika, bez żadnej dodatkowej geometrii czy porównywania współrzędnych.\n\n\nFormat sprite’u i zestaw czcionek\nSprite ma szerokość zawsze 8 pikseli (1 bajt = 1 wiersz, każdy bit = jeden piksel) i wysokość N (1-15 wierszy), dane sprite’u leżą w pamięci pod adresem I — kolejny przykład tego, że w CHIP-8 kod i dane (tu: dane graficzne) żyją w tej samej, wspólnej pamięci, zgodnie z modelem Von Neumanna z wykładu 3.\nCHIP-8 ma wbudowany zestaw czcionek dla cyfr 0-F — każda cyfra to sprite 4×5 pikseli, standardowo ładowany pod adres 0x050."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#zadania",
-    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#zadania",
-    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
+    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#zadania",
+    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#zadania",
+    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
     "section": "Zadania",
-    "text": "Zadania\n\nZadanie 1 — RET i CALL\n\n0x00EE (RET): pc = stack[--sp]\n0x2000 (2NNN, CALL addr): stack[sp++] = pc; pc = nnn\n\n\n\nZadanie 2 — rodzina “skip”\n\n0x3000 (3XKK, SE Vx, byte): jeśli V[x] == kk, pomiń następną instrukcję\n0x4000 (4XKK, SNE Vx, byte): jeśli V[x] != kk, pomiń\n0x5000 (5XY0, SE Vx, Vy): jeśli V[x] == V[y], pomiń\n0x9000 (9XY0, SNE Vx, Vy): jeśli V[x] != V[y], pomiń\n\n\n\nZadanie 3 — ADD bez przeniesienia\n\n0x7000 (7XKK, ADD Vx, byte): V[x] += kk (bez wpływu na VF)\n\n\n\nZadanie 4 — rodzina ALU 8XY*\nRozpoznaj po opcode & 0x000F:\n\n\n\n\n\n\n\n\nkod\nnazwa\noperacja\n\n\n\n\n0\nLD Vx, Vy\nV[x] = V[y]\n\n\n1\nOR Vx, Vy\nV[x] \\|= V[y]\n\n\n2\nAND Vx, Vy\nV[x] &= V[y]\n\n\n3\nXOR Vx, Vy\nV[x] ^= V[y]\n\n\n4\nADD Vx, Vy\nV[x] += V[y], VF = 1 jeśli wynik &gt; 255, inaczej 0\n\n\n5\nSUB Vx, Vy\nV[x] -= V[y], VF = 1 jeśli V[x] &gt; V[y] przed odejmowaniem (brak pożyczki)\n\n\n6\nSHR Vx\nVF = V[x] & 1; V[x] &gt;&gt;= 1\n\n\n7\nSUBN Vx, Vy\nV[x] = V[y] - V[x], VF = 1 jeśli V[y] &gt; V[x] przed odejmowaniem\n\n\nE\nSHL Vx\nVF = (V[x] &gt;&gt; 7) & 1; V[x] &lt;&lt;= 1\n\n\n\nUwaga na kolejność: przy ADD/SUB musisz wyliczyć VF przed nadpisaniem V[x], inaczej porównujesz z już zmienioną wartością.\n\n\nZadanie 5 — ANNN, BNNN, CXKK\n\n0xA000 (ANNN, LD I, addr): I = nnn\n0xB000 (BNNN, JP V0, addr): pc = nnn + V[0]\n0xC000 (CXKK, RND Vx, byte): V[x] = (rand() % 256) & kk — pamiętaj o srand() w main (np. srand(time(NULL))), inaczej za każdym uruchomieniem dostaniesz te same “losowe” wartości."
+    "text": "Zadania\n\nZadanie 1 — bufor ekranu i CLS\nDodaj do struktury Chip8 pole uint8_t display[64 * 32] (1 bajt na piksel, wartość 0 lub 1 — trochę marnotrawne pamięciowo, ale prostsze niż bitpacking). Zaimplementuj 0x00E0 (CLS) tak, żeby faktycznie zerował display i ustawiał flagę do przerysowania.\n\n\nZadanie 2 — zestaw czcionek\nDodaj tablicę fontset[80] (16 cyfr × 5 bajtów, standardowy zestaw CHIP-8 — podany niżej, przepisz go 1:1). W chip8_init skopiuj go do memory pod adres 0x050.\nuint8_t fontset[80] = {\n    0xF0, 0x90, 0x90, 0x90, 0xF0, // 0\n    0x20, 0x60, 0x20, 0x20, 0x70, // 1\n    0xF0, 0x10, 0xF0, 0x80, 0xF0, // 2\n    0xF0, 0x10, 0xF0, 0x10, 0xF0, // 3\n    0x90, 0x90, 0xF0, 0x10, 0x10, // 4\n    0xF0, 0x80, 0xF0, 0x10, 0xF0, // 5\n    0xF0, 0x80, 0xF0, 0x90, 0xF0, // 6\n    0xF0, 0x10, 0x20, 0x40, 0x40, // 7\n    0xF0, 0x90, 0xF0, 0x90, 0xF0, // 8\n    0xF0, 0x90, 0xF0, 0x10, 0xF0, // 9\n    0xF0, 0x90, 0xF0, 0x90, 0x90, // A\n    0xE0, 0x90, 0xE0, 0x90, 0xE0, // B\n    0xF0, 0x80, 0x80, 0x80, 0xF0, // C\n    0xE0, 0x90, 0x90, 0x90, 0xE0, // D\n    0xF0, 0x80, 0xF0, 0x80, 0xF0, // E\n    0xF0, 0x80, 0xF0, 0x80, 0x80, // F\n};\n\n\nZadanie 3 — FX29: lokalizacja sprite’u cyfry\n0xF029 (LD F, Vx): I = 0x050 + (V[x] * 5) — każda cyfra zajmuje 5 bajtów, więc to prosty indeks w tablicy fontów.\n\n\nZadanie 4 — DXYN: rysowanie sprite’u\nNajważniejsza instrukcja tego ćwiczenia. Dla y_line od 0 do N-1:\n\nOdczytaj bajt sprite_byte = memory[I + y_line].\nDla każdego bitu x_bit od 0 do 7 (od najstarszego):\n\njeśli bit jest ustawiony, wylicz docelowy piksel (V[x] + x_bit) % 64, (V[y] + y_line) % 32 (zawijanie na krawędziach ekranu!)\njeśli piksel pod tym adresem już był zapalony, ustaw VF = 1 (kolizja)\nzrób XOR: display[pos] ^= 1\n\nUstaw flagę przerysowania ekranu.\n\nPamiętaj wyzerować VF na początku instrukcji, zanim zaczniesz sprawdzać kolizje.\n\n\nZadanie 5 — renderowanie do terminala\nNapisz chip8_render(Chip8 *c): wyczyść terminal (printf(\"\\x1b[H\\x1b[2J\") — ANSI escape, przenosi kursor do (0,0) i czyści ekran), potem dla każdego z 32 wierszy i 64 kolumn wypisz █ jeśli piksel zapalony, spację w przeciwnym razie.\nWywołuj chip8_render w pętli main tylko gdy flaga przerysowania jest ustawiona (nie ma sensu czyścić i przerysowywać terminala 500 razy na sekundę, jeśli obraz się nie zmienił)."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#test",
-    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#test",
-    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
+    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#test",
+    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#test",
+    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
     "section": "Test",
-    "text": "Test\nRęcznie złożony program: policz w dół od 5 do 0, używając SNE + skoku wstecz (pętla), potem wywołaj “funkcję” przez CALL, która ustawia V1 = 0x42, i wróć przez RET.\nuint8_t test_rom[] = {\n    0x60, 0x05,       // 0x200: LD V0, 5\n    0x30, 0x00,       // 0x202: SE V0, 0   (loop check: skip next if V0==0)\n    0x12, 0x08,       // 0x204: JP 0x208   (not zero yet -&gt; continue)\n    0x22, 0x0C,       // 0x206: CALL 0x20C (V0==0 -&gt; call \"function\")\n    0x70, 0xFF,       // 0x208: ADD V0, -1 (0xFF as unsigned = -1 mod 256)\n    0x12, 0x02,       // 0x20A: JP 0x202   (back to loop check)\n    0x61, 0x42,       // 0x20C: LD V1, 0x42  &lt;- \"function\" body\n    0x00, 0xEE,       // 0x20E: RET\n};\nmemcpy(chip8.memory + 0x200, test_rom, sizeof(test_rom));\nDodaj wypisywanie V[0] i V[1] po każdym cyklu. Oczekiwany wynik: V0 maleje 5,4,3,2,1,0, a po dojściu do zera program skacze do 0x20C, ustawia V1 = 0x42 i wraca (RET) — sprawdź, że wraca dokładnie za CALL (czyli do 0x208), a nie do 0x206."
+    "text": "Test\nIBM Logo to klasyczny, publicznie dostępny mini-ROM testowy dla emulatorów CHIP-8 — tylko rysuje statyczne logo, świetny test rysowania bez konieczności obsługi klawiatury czy timerów. Znajdziesz go łatwo wyszukując “IBM logo.ch8 chip8 test rom” — plik ma 132 bajty. Uruchom go: powinieneś zobaczyć logo “IBM” narysowane blokami w terminalu."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#kryterium-sukcesu",
-    "href": "podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html#kryterium-sukcesu",
-    "title": "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań",
+    "objectID": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html#kryterium-sukcesu",
+    "title": "Ćwiczenie 3 — Wyświetlacz i sprite’y",
     "section": "Kryterium sukcesu",
-    "text": "Kryterium sukcesu\n\nWszystkie 9 wariantów 8XY* zaimplementowane i dają poprawny VF.\nTest powyżej: V1 zmienia się na 0x42 dokładnie raz, RET wraca pod właściwy adres.\nrand() daje różne wartości między uruchomieniami programu."
+    "text": "Kryterium sukcesu\n\nCLS faktycznie czyści ekran (widoczne przy kolejnych klatkach).\nROM IBM logo renderuje się poprawnie i czytelnie.\nKolizja (VF) działa — możesz to sprawdzić rysując ten sam sprite dwa razy w tym samym miejscu: drugi raz VF powinno wyjść 1."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html",
-    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html",
-    "title": "Ćwiczenie 4 — Timery i klawiatura",
+    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html",
+    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html",
+    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
     "section": "",
-    "text": "Dodać dwa niezależne od CPU zegary (delay timer, sound timer, oba tykające ze stałą częstotliwością 60 Hz) oraz obsługę 16-przyciskowej klawiatury. Po tym ćwiczeniu emulator jest funkcjonalnie kompletny.\nStartujesz od kodu z ćwiczenia 3."
+    "text": "Bez nowego kodu — to moment “wow” na koniec: emulator z ćwiczeń 1-4 uruchamia prawdziwe, publicznie dostępne gry CHIP-8 z lat 70./80."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#cel",
-    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#cel",
-    "title": "Ćwiczenie 4 — Timery i klawiatura",
+    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#cel",
+    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#cel",
+    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
     "section": "",
-    "text": "Dodać dwa niezależne od CPU zegary (delay timer, sound timer, oba tykające ze stałą częstotliwością 60 Hz) oraz obsługę 16-przyciskowej klawiatury. Po tym ćwiczeniu emulator jest funkcjonalnie kompletny.\nStartujesz od kodu z ćwiczenia 3."
+    "text": "Bez nowego kodu — to moment “wow” na koniec: emulator z ćwiczeń 1-4 uruchamia prawdziwe, publicznie dostępne gry CHIP-8 z lat 70./80."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#teoria-w-pigułce",
-    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#teoria-w-pigułce",
-    "title": "Ćwiczenie 4 — Timery i klawiatura",
+    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#skąd-wziąć-rom-y",
+    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#skąd-wziąć-rom-y",
+    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
+    "section": "Skąd wziąć ROM-y",
+    "text": "Skąd wziąć ROM-y\nCHIP-8 to platforma z bogatą sceną hobbystyczną — większość klasycznych ROM-ów (Pong, Tetris, Space Invaders, Breakout) jest domeną publiczną albo swobodnie udostępniana przez społeczność retro-computingową. Wyszukaj “chip8 roms public domain” albo “chip8-test-suite” (Timendus) — ten ostatni to zestaw ROM-ów testowych, które systematycznie sprawdzają poprawność implementacji każdej instrukcji (świetne do wykrycia błędów, które przetrwały ćwiczenia 1-4).\nZacznij od małych ROM-ów testowych (IBM logo, test opcode’ów), potem przejdź do właściwych gier — plik .ch8 to zwykły binarny plik, ten sam format co używane w ćwiczeniach testowe “ROM-y” ręcznie sklejane w tablicach bajtów."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#sterowanie",
+    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#sterowanie",
+    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
+    "section": "Sterowanie",
+    "text": "Sterowanie\nTypowe gry (np. Pong) używają klawiszy 1, 4, 7, A (jedna kolumna klawiatury CHIP-8) do ruchu — sprawdź dokumentację konkretnej gry, jeśli nie reaguje na oczekiwane klawisze."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#checklist-rozwiązywania-problemów",
+    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#checklist-rozwiązywania-problemów",
+    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
+    "section": "Checklist rozwiązywania problemów",
+    "text": "Checklist rozwiązywania problemów\nJeśli gra się nie uruchamia albo działa źle:\n\nCzarny ekran, brak reakcji — sprawdź czy chip8_load_rom poprawnie odczytuje cały plik (fread zwraca liczbę odczytanych elementów — porównaj z oczekiwanym rozmiarem).\n“Śmieci” na ekranie zamiast grafiki — najczęściej błąd w DXYN (zła kolejność bitów w bajcie sprite’u, albo brakujące zawijanie %).\nGra działa, ale za szybko/wolno — sprawdź stosunek cykli CPU do klatek w pętli main (ćwiczenie 4) — różne gry były pisane z założeniem różnej prędkości procesora, czasem trzeba dostroić liczbę cykli na klatkę.\nProgram “wisi” na starcie — prawdopodobnie ROM zaczyna się od FX0A (czekaj na klawisz) i emulator nie odczytuje stdin w trybie non-blocking poprawnie.\nUnknown opcode na stderr — brakująca instrukcja z poprzednich ćwiczeń, albo gra korzysta z rzadziej używanego opcode’u (np. FX33 BCD, FX55/FX65 zapis/odczyt rejestrów do pamięci) — dobra okazja do rozszerzenia zestawu poza 4 podstawowe ćwiczenia."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#rozszerzenia-dla-chętnych-dodatkowe-punkty",
+    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#rozszerzenia-dla-chętnych-dodatkowe-punkty",
+    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
+    "section": "Rozszerzenia (dla chętnych / dodatkowe punkty)",
+    "text": "Rozszerzenia (dla chętnych / dodatkowe punkty)\n\nFX33 (BCD): rozłóż V[x] na cyfry dziesiętne i zapisz pod memory[I..I+2] — potrzebne w niektórych grach do wyświetlania wyniku.\nFX55/FX65: zapis/odczyt rejestrów V0..Vx do/z pamięci od adresu I.\nDźwięk: sound_timer &gt; 0 powinno grać dźwięk — najprościej putchar('\\a') (bell terminala) zamiast prawdziwego audio.\nDebugger krokowy: pauza po każdej instrukcji, podgląd rejestrów i stosu — bezcenne narzędzie dydaktyczne samo w sobie.\nDisassembler: osobny program, który zamiast wykonywać ROM, wypisuje go jako czytelny asembler (JP 0x204 zamiast 0x1204) — naturalne uzupełnienie tematu “asembler” z pierwszej rozmowy o pomysłach na ćwiczenia."
+  },
+  {
+    "objectID": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#podsumowanie-kursu",
+    "href": "podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html#podsumowanie-kursu",
+    "title": "Ćwiczenie 5 — Uruchomienie prawdziwej gry",
+    "section": "Podsumowanie kursu",
+    "text": "Podsumowanie kursu\nPo tych 5 ćwiczeniach studenci przeszli przez: reprezentację danych w pamięci, architekturę fetch-decode-execute, arytmetykę i flagi procesora, stos wywołań, manipulację bitową, oraz interakcję z urządzeniami wejścia/wyjścia w czasie rzeczywistym — cały czas pisząc jeden, rosnący, kompilowalny program w C, który na koniec realnie uruchamia grę. To rzadka okazja, żeby “podstawy programowania” skończyły się czymś namacalnie efektownym zamiast kolejnego kalkulatora."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/01_pierwszy_program.html",
+    "href": "podstawy_programowania/sesje/01_pierwszy_program.html",
+    "title": "Sesja 1 — Pierwszy program",
+    "section": "",
+    "text": "Napisać, skompilować i uruchomić swój pierwszy program w C — i zrozumieć, co dokładnie dzieje się między wpisaniem tekstu a zobaczeniem wyniku na ekranie. To jedyna sesja w tym kursie, w której zakładamy, że nigdy wcześniej nie napisałeś/aś ani jednej linijki kodu."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/01_pierwszy_program.html#cel",
+    "href": "podstawy_programowania/sesje/01_pierwszy_program.html#cel",
+    "title": "Sesja 1 — Pierwszy program",
+    "section": "",
+    "text": "Napisać, skompilować i uruchomić swój pierwszy program w C — i zrozumieć, co dokładnie dzieje się między wpisaniem tekstu a zobaczeniem wyniku na ekranie. To jedyna sesja w tym kursie, w której zakładamy, że nigdy wcześniej nie napisałeś/aś ani jednej linijki kodu."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/01_pierwszy_program.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/01_pierwszy_program.html#teoria-w-pigułce",
+    "title": "Sesja 1 — Pierwszy program",
     "section": "Teoria w pigułce",
-    "text": "Teoria w pigułce\n\nDwa zegary, dwie częstotliwości\nCHIP-8 ma dwa 8-bitowe liczniki czasowe: delay_timer (używany przez gry do odmierzania czasu) i sound_timer (dopóki &gt; 0, powinien brzęczeć głośnik — w naszym terminalowym emulatorze pominiemy dźwięk). Oba dekrementują się 60 razy na sekundę, niezależnie od tego, jak szybko wykonują się instrukcje procesora.\nTo pierwszy moment, gdzie prędkość CPU i częstotliwość timerów muszą być rozdzielone — typowa implementacja wykonuje ok. 500-700 instrukcji/s, ale dekrementuje timery dokładnie 60 razy/s.\n\n\n\n\n\n\nNoteTo nie jest specyfika CHIP-8 — to specyfika prawdziwego sprzętu\n\n\n\nWykład 3 wspominał, że współczesne procesory taktowane są zegarem 3-5 GHz. Ale peryferia (timery, kontrolery I/O) rzadko dzielą ten sam zegar co rdzeń CPU — mają własne, wolniejsze oscylatory, bo np. odświeżanie ekranu i tak nie ma sensu robić szybciej niż ludzkie oko dostrzega (stąd standardowe 60 Hz — te same 60 Hz, które znacie z odświeżania monitora). Oryginalny komputer COSMAC VIP, na którym CHIP-8 faktycznie działał w 1977 roku, miał procesor taktowany dosłownie ~1-3 MHz z osobnym zegarem 60 Hz do timerów — nasza pętla main z usleep odtwarza dokładnie ten podział, tylko w software.\n\n\n\n\nPolling zamiast przerwań\nKlawiatura CHIP-8 ma układ 4×4 (0-F), historycznie mapowany na fizyczną klawiaturę hex. Standardowe mapowanie na współczesną klawiaturę QWERTY:\nCHIP-8:        Klawiatura:\n1 2 3 C        1 2 3 4\n4 5 6 D   -&gt;   Q W E R\n7 8 9 E        A S D F\nA 0 B F        Z X C V\n\n\n\n\n\n\nTipDlaczego sprawdzamy klawiaturę w pętli, a nie czekamy na przerwanie?\n\n\n\nWykład 3 wspominał, że prawdziwe urządzenia I/O komunikują się z CPU często przez przerwania (interrupts) — urządzenie samo “budzi” procesor sygnałem “mam dane, obsłuż mnie!”, zamiast żeby procesor musiał bez przerwy pytać “czy coś się zmieniło?”. To, co zrobimy w tym ćwiczeniu — sprawdzanie stdin w każdej klatce, w pętli — to polling (odpytywanie), prostszy, ale mniej wydajny model: CPU marnuje cykle, pytając nawet wtedy, gdy nic się nie zmieniło. Prawdziwe sterowniki klawiatury w systemach operacyjnych używają przerwań właśnie po to, żeby tego uniknąć. Polling wybieramy tu celowo — jest prostszy do zaimplementowania bez sterowników systemowych, a przy 60 klatkach/s koszt jest pomijalny."
+    "text": "Teoria w pigułce\n\nCzym jest program?\nProgram to lista instrukcji, którą komputer wykonuje krok po kroku, od góry do dołu, dokładnie tak jak jest napisana — bez domyślania się, bez “chyba o to chodziło”. Komputer nie jest inteligentny — jest posłuszny co do przecinka.\n\n\nDlaczego kod trzeba “kompilować”?\nTo, co piszesz (kod źródłowy, plik .c) to tekst czytelny dla człowieka. Procesor rozumie tylko liczby — konkretne rozkazy zakodowane jako bajty (do tego wrócimy przy CHIP-8 pod koniec kursu). Kompilator to program, który tłumaczy Twój tekst na taki plik binarny — coś, co system operacyjny potrafi uruchomić jako proces.\nkod źródłowy (hello.c)  --[kompilator: gcc]--&gt;  plik wykonywalny (hello)\n   tekst dla człowieka                              zera i jedynki dla procesora\n\n\n\n\n\n\nNoteDlaczego C, a nie coś “łatwiejszego” na start?\n\n\n\nZa kilka tygodni będziecie pisać własny emulator procesora (CHIP-8) — program, który sam symuluje pamięć, rejestry i wykonywanie instrukcji. C nie ukrywa przed Wami tego, co komputer naprawdę robi (pamięć, adresy, bajty) — inne języki (Python, JavaScript) celowo to chowają, żeby było wygodniej. Wygoda na starcie oznaczałaby brak fundamentów pod koniec semestru.\n\n\n\n\nCykl edit → compile → run\nZa każdym razem, gdy zmienisz choć jeden znak w pliku .c, musisz go skompilować od nowa — inaczej program użyje starej wersji. To jest inne niż np. edycja strony internetowej, gdzie zmiana widoczna jest “od razu” po odświeżeniu. W C:\n\nEdit — zmieniasz plik .c w edytorze,\nCompile — uruchamiasz kompilator (gcc),\nRun — dopiero teraz uruchamiasz efekt (./hello).\n\nZapomnienie kroku 2. to najczęstsza przyczyna “dlaczego moja zmiana nic nie robi” u początkujących — i to nie tylko dziś, to będzie Was ścigać przez cały semestr."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#zadania",
-    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#zadania",
-    "title": "Ćwiczenie 4 — Timery i klawiatura",
+    "objectID": "podstawy_programowania/sesje/01_pierwszy_program.html#zadania",
+    "href": "podstawy_programowania/sesje/01_pierwszy_program.html#zadania",
+    "title": "Sesja 1 — Pierwszy program",
     "section": "Zadania",
-    "text": "Zadania\n\nZadanie 1 — pola timerów i podstawowe opcode’y\nDodaj delay_timer, sound_timer do struktury. Zaimplementuj:\n\n0xFX07 (LD Vx, DT): V[x] = delay_timer\n0xFX15 (LD DT, Vx): delay_timer = V[x]\n0xFX18 (LD ST, Vx): sound_timer = V[x]\n\n\n\nZadanie 2 — dekrementacja timerów w pętli głównej\nW main rozdziel dwie prędkości: procesor ma wykonywać ok. 540 instrukcji/s (czyli ok. 9 instrukcji na każdą 1/60 s klatkę), a timery dekrementować się dokładnie 60 razy/s. Użyj usleep (z &lt;unistd.h&gt;) do kontroli tempa pętli.\nSzkielet:\nwhile (running) {\n    for (int i = 0; i &lt; 9; i++) chip8_cycle(&chip8); // ~540 Hz\n\n    if (chip8.delay_timer &gt; 0) chip8.delay_timer--;\n    if (chip8.sound_timer &gt; 0) chip8.sound_timer--;\n\n    if (chip8.draw_flag) { chip8_render(&chip8); chip8.draw_flag = 0; }\n\n    usleep(16667); // ~60 Hz (1/60 s = 16667 us)\n}\n\n\nZadanie 3 — klawiatura: tryb raw terminala\nStandardowy read()/getchar() w terminalu jest buforowany liniami — program dostaje znak dopiero po Enterze, co jest bezużyteczne dla gry w czasie rzeczywistym. Musisz przełączyć terminal w tryb raw i non-blocking przez termios.h.\n#include &lt;termios.h&gt;\n#include &lt;unistd.h&gt;\n#include &lt;fcntl.h&gt;\n\nstruct termios orig_termios;\n\nvoid disable_raw_mode(void) {\n    tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios);\n}\n\nvoid enable_raw_mode(void) {\n    tcgetattr(STDIN_FILENO, &orig_termios);\n    atexit(disable_raw_mode); // zawsze przywroc terminal na wyjsciu\n\n    struct termios raw = orig_termios;\n    raw.c_lflag &= ~(ECHO | ICANON); // no echo, no line buffering\n    tcsetattr(STDIN_FILENO, TCSANOW, &raw);\n\n    // non-blocking read\n    fcntl(STDIN_FILENO, F_SETFL, fcntl(STDIN_FILENO, F_GETFL) | O_NONBLOCK);\n}\nWywołaj enable_raw_mode() na początku main. Teraz getchar() zwróci EOF natychmiast, jeśli nic nie zostało wciśnięte, zamiast czekać.\n\n\nZadanie 4 — mapowanie klawiszy i opcode’y klawiatury\nDodaj uint8_t keypad[16] do struktury. Napisz funkcję map_key(char c) zwracającą indeks 0-15 (lub -1 jeśli klawisz nie należy do mapy) wg tabeli z sekcji teorii. W pętli głównej, przed każdą klatką, wyczyść keypad (wszystko na 0), odczytaj wszystkie dostępne znaki z getchar() (pętla aż do EOF, bo non-blocking), zamapuj i ustaw odpowiedni bit w keypad.\nZaimplementuj:\n\n0xEX9E (SKP Vx): jeśli keypad[V[x]] jest wciśnięty, pomiń następną instrukcję\n0xEXA1 (SKNP Vx): jeśli nie jest wciśnięty, pomiń następną instrukcję\n0xFX0A (LD Vx, K): zablokuj procesor (nie inkrementuj pc dalej, wykonuj tę samą instrukcję w kółko) dopóki jakikolwiek klawisz nie zostanie wciśnięty, wtedy zapisz jego indeks do V[x]\n\nWskazówka do FX0A: najprościej cofnąć pc o 2 na końcu cyklu, jeśli żaden klawisz nie jest wciśnięty — instrukcja “czeka” wykonując się wielokrotnie."
+    "text": "Zadania\n\nZadanie 1 — sprawdź, czy masz kompilator\nW terminalu:\ngcc --version\nJeśli polecenie nie istnieje — zgłoś się, zainstalujemy razem (macOS: Xcode Command Line Tools, Linux: pakiet build-essential/gcc).\n\n\nZadanie 2 — pierwszy program\nUtwórz plik hello.c:\n#include &lt;stdio.h&gt;\n\nint main(void) {\n    printf(\"Czesc, swiecie!\\n\");\n    return 0;\n}\nZanim skompilujesz — spróbuj zgadnąć, co robi każda linijka, zanim wyjaśnimy na głos:\n\n#include &lt;stdio.h&gt; — “dołącz zestaw narzędzi do wejścia/wyjścia” (Standard Input/Output) — bez tego printf nie istnieje.\nint main(void) — to jest punkt startowy każdego programu w C; system operacyjny zawsze zaczyna wykonywanie właśnie tutaj.\nprintf(\"...\") — wypisz tekst na ekran. \\n na końcu to znak nowej linii — bez niego kolejne wypisania sklejałyby się w jednym wierszu.\nreturn 0; — zakończ program i zgłoś systemowi “wszystko OK” (0 = sukces — to konwencja, do której wrócimy przy okazji obsługi błędów).\n\n\n\nZadanie 3 — kompilacja i uruchomienie\ngcc -std=c99 -Wall -Wextra hello.c -o hello\n./hello\n\n-std=c99 — którego standardu C używamy (będziemy trzymać się go przez cały kurs).\n-Wall -Wextra — włącz wszystkie ostrzeżenia. Zawsze kompiluj z tymi flagami — ostrzeżenie dziś to błąd, którego unikasz jutro.\n-o hello — nazwa pliku wynikowego (bez tego dostaniesz domyślnie a.out).\n\n\n\nZadanie 4 — zepsuj coś celowo\nUsuń średnik po printf(...) i skompiluj ponownie. Przeczytaj komunikat błędu od kompilatora — nie ignoruj go, nie zgaduj, przeczytaj dokładnie który numer linii. Komunikaty błędów kompilatora będą Twoim głównym narzędziem diagnostycznym przez cały semestr — im szybciej nauczysz się je czytać, tym mniej będziesz czekać na pomoc.\nNapraw błąd, skompiluj ponownie, upewnij się, że znowu działa.\n\n\nZadanie 5 — Twoja zmiana\nZmień treść komunikatu tak, żeby wypisywał Twoje imię, np. \"Czesc, jestem Kasia!\\n\". Pamiętaj o kroku “compile” — sama zmiana pliku nic nie zrobi, dopóki nie skompilujesz ponownie."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#test",
-    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#test",
-    "title": "Ćwiczenie 4 — Timery i klawiatura",
-    "section": "Test",
-    "text": "Test\nNapisz mały ręczny ROM, który czeka na wciśnięcie klawisza 5 (FX0A), a potem rysuje odpowiadającą mu cyfrę na środku ekranu (użyj FX29 + DXYN z ćwiczenia 3). To spina w jeden test wszystkie cztery ćwiczenia naraz."
-  },
-  {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#kryterium-sukcesu",
-    "href": "podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html#kryterium-sukcesu",
-    "title": "Ćwiczenie 4 — Timery i klawiatura",
+    "objectID": "podstawy_programowania/sesje/01_pierwszy_program.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/01_pierwszy_program.html#kryterium-sukcesu",
+    "title": "Sesja 1 — Pierwszy program",
     "section": "Kryterium sukcesu",
-    "text": "Kryterium sukcesu\n\nTimery dekrementują się w tempie ok. 60/s niezależnie od tego, ile instrukcji wykonuje procesor na klatkę.\nTerminal nie wymaga Entera, żeby zarejestrować wciśnięcie klawisza.\nProgram przywraca normalny tryb terminala po zakończeniu (sprawdź: terminal działa normalnie po Ctrl+C albo zwykłym zakończeniu programu)."
+    "text": "Kryterium sukcesu\n\ngcc -std=c99 -Wall -Wextra hello.c -o hello kompiluje się bez żadnych ostrzeżeń.\n./hello wypisuje spersonalizowany komunikat zakończony nową linią.\nPotrafisz wskazać, w którym miejscu kodu i dlaczego pojawił się błąd z zadania 4 (nie tylko “naprawiłem”, ale “wiem czemu się psuło”)."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/index.html",
-    "href": "podstawy_programowania/cwiczenia_chip8/index.html",
-    "title": "CHIP-8: zbuduj własny emulator",
+    "objectID": "podstawy_programowania/sesje/03_warunki_dispatcher.html",
+    "href": "podstawy_programowania/sesje/03_warunki_dispatcher.html",
+    "title": "Sesja 3 — Warunki: kalkulator wybiera działanie",
     "section": "",
-    "text": "CHIP-8 to nie prawdziwy procesor — to wirtualna maszyna zaprojektowana w latach 70. jako prosty, jednolity cel kompilacji dla mikrokomputerów. Ma tylko 35 instrukcji, 4 KB pamięci i 16 jednobajtowych rejestrów. To sprawia, że jest to idealny pierwszy emulator do napisania — wystarczająco prosty, żeby ogarnąć w kilka ćwiczeń, ale realny: gotowy kod uruchomi prawdziwe gry z lat 70./80. (Pong, Tetris, Space Invaders).\nTo bezpośrednia kontynuacja wykładu o architekturze komputera — zamiast czytać o cyklu fetch-decode-execute, studenci go piszą."
+    "text": "Poznać if/else oraz switch i użyć ich do rozbudowania kalkulatora z sesji 2 — tak, żeby to użytkownik wybierał działanie, zamiast mieć wszystkie wypisane na sztywno. Ten wzorzec — “wczytaj kod operacji, zdecyduj co zrobić” — wróci w kursie jeszcze wielokrotnie, aż po switch (opcode & 0xF000) w emulatorze CHIP-8."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/index.html#o-co-chodzi",
-    "href": "podstawy_programowania/cwiczenia_chip8/index.html#o-co-chodzi",
-    "title": "CHIP-8: zbuduj własny emulator",
+    "objectID": "podstawy_programowania/sesje/03_warunki_dispatcher.html#cel",
+    "href": "podstawy_programowania/sesje/03_warunki_dispatcher.html#cel",
+    "title": "Sesja 3 — Warunki: kalkulator wybiera działanie",
     "section": "",
-    "text": "CHIP-8 to nie prawdziwy procesor — to wirtualna maszyna zaprojektowana w latach 70. jako prosty, jednolity cel kompilacji dla mikrokomputerów. Ma tylko 35 instrukcji, 4 KB pamięci i 16 jednobajtowych rejestrów. To sprawia, że jest to idealny pierwszy emulator do napisania — wystarczająco prosty, żeby ogarnąć w kilka ćwiczeń, ale realny: gotowy kod uruchomi prawdziwe gry z lat 70./80. (Pong, Tetris, Space Invaders).\nTo bezpośrednia kontynuacja wykładu o architekturze komputera — zamiast czytać o cyklu fetch-decode-execute, studenci go piszą."
+    "text": "Poznać if/else oraz switch i użyć ich do rozbudowania kalkulatora z sesji 2 — tak, żeby to użytkownik wybierał działanie, zamiast mieć wszystkie wypisane na sztywno. Ten wzorzec — “wczytaj kod operacji, zdecyduj co zrobić” — wróci w kursie jeszcze wielokrotnie, aż po switch (opcode & 0xF000) w emulatorze CHIP-8."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/index.html#struktura-ćwiczeń",
-    "href": "podstawy_programowania/cwiczenia_chip8/index.html#struktura-ćwiczeń",
-    "title": "CHIP-8: zbuduj własny emulator",
-    "section": "Struktura ćwiczeń",
-    "text": "Struktura ćwiczeń\n\n\n\n\n\n\n\n\n#\nTemat\nNawiązanie do wykładu\n\n\n\n\n1\nSzkielet VM — pamięć, rejestry, pętla fetch-decode-execute\nArchitektura komputera\n\n\n2\nArytmetyka, skoki, stos wywołań\nOperatory i instrukcje sterujące\n\n\n3\nWyświetlacz — rysowanie sprite’ów przez XOR\nTablice, wskaźniki\n\n\n4\nTimery i klawiatura\nPreprocessor, funkcje\n\n\n5\nUruchomienie prawdziwej gry (bonus/pokaz)\n—\n\n\n\nKażde ćwiczenie rozbudowuje kod z poprzedniego — jeden plik chip8.c, który rośnie z tygodnia na tydzień. Wersje _rozwiazanie.qmd zawierają pełny, kompilowalny kod na danym etapie."
+    "objectID": "podstawy_programowania/sesje/03_warunki_dispatcher.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/03_warunki_dispatcher.html#teoria-w-pigułce",
+    "title": "Sesja 3 — Warunki: kalkulator wybiera działanie",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nif / else if / else\nif (a &gt; b) {\n    printf(\"a jest wieksze\\n\");\n} else if (a &lt; b) {\n    printf(\"b jest wieksze\\n\");\n} else {\n    printf(\"sa rowne\\n\");\n}\nWarunki sprawdzane są po kolei, od góry — jak tylko jeden się sprawdzi, reszta jest pomijana. Kolejność ma znaczenie.\n\n\nOperatory porównania i logiczne\n\n\n\nOperator\nZnaczenie\n\n\n\n\n==\nrówne (nie mylić z =, które przypisuje wartość!)\n\n\n!=\nróżne\n\n\n&lt;, &gt;, &lt;=, &gt;=\nmniejsze/większe (opcjonalnie równe)\n\n\n&&\ni (oba warunki muszą być prawdziwe)\n\n\n\\|\\|\nlub (przynajmniej jeden musi być prawdziwy)\n\n\n\n\n\n\n\n\n\nImportantNajczęstszy błąd początkujących w C\n\n\n\nif (a = 5) kompiluje się (czasem tylko z ostrzeżeniem, jeśli masz -Wall) i robi coś zupełnie innego niż zamierzone: przypisuje 5 do a, zamiast porównywać. Wynikiem przypisania w C jest przypisana wartość, a każda niezerowa wartość jest “prawdą” — więc warunek zawsze wychodzi prawdziwy, a a po drodze zmienia wartość na 5. Zawsze pisz if (a == 5). To dokładnie dlatego kompilujemy z -Wall od sesji 1 — ten kompilator ostrzeże Cię o tym błędzie, jeśli go popełnisz.\n\n\n\n\nswitch — wybór spośród wielu opcji\nKiedy porównujesz jedną zmienną z wieloma konkretnymi wartościami, switch jest czytelniejszy niż długi łańcuch if-else if:\nchar operacja = '+';\n\nswitch (operacja) {\n    case '+':\n        printf(\"dodawanie\\n\");\n        break;\n    case '-':\n        printf(\"odejmowanie\\n\");\n        break;\n    default:\n        printf(\"nieznana operacja\\n\");\n}\nbreak jest obowiązkowy na końcu każdego case (poza specjalnymi przypadkami, których dziś nie używamy) — bez niego wykonanie “spada” do kolejnego case (tzw. fall-through), nawet jeśli warunek tego casea nie jest spełniony. To jeden z klasycznych błędów w C, wart zapamiętania na zawsze.\n\n\n\n\n\n\nNoteTo jest dokładnie ten sam wzorzec, co “dekodowanie opcode’u”\n\n\n\nZa kilka tygodni w CHIP-8 zobaczycie: switch (opcode & 0xF000) { case 0x1000: ... case 0x6000: ... }. To jest identyczna konstrukcja co powyżej — tylko zamiast znaku '+' porównujecie liczbę reprezentującą typ instrukcji. “Procesor rozpoznaje rozkaz” i “Wasz kalkulator rozpoznaje operację” to ten sam problem programistyczny."
   },
   {
-    "objectID": "podstawy_programowania/cwiczenia_chip8/index.html#wymagania",
-    "href": "podstawy_programowania/cwiczenia_chip8/index.html#wymagania",
-    "title": "CHIP-8: zbuduj własny emulator",
-    "section": "Wymagania",
-    "text": "Wymagania\n\nkompilator C (gcc lub clang)\nsystem POSIX (macOS/Linux; na Windows — WSL) — potrzebny do ćwiczenia 4 (termios.h)\nterminal obsługujący znaki UTF-8 (do renderowania wyświetlacza blokami █)\n\nKompilacja na każdym etapie:\ngcc -std=c99 -Wall -Wextra chip8.c -o chip8\n./chip8 rom.ch8"
+    "objectID": "podstawy_programowania/sesje/03_warunki_dispatcher.html#zadania",
+    "href": "podstawy_programowania/sesje/03_warunki_dispatcher.html#zadania",
+    "title": "Sesja 3 — Warunki: kalkulator wybiera działanie",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — kalkulator z wyborem znaku\nRozbuduj kalkulator z sesji 2: zamiast liczyć od razu sumę/różnicę/iloczyn, wczytaj trzeci input — znak operacji (char):\nchar op;\nprintf(\"Podaj dzialanie (+, -, *, /): \");\nscanf(\" %c\", &op);   // spacja przed %c: pomija biale znaki (Enter) z poprzedniego scanf\nUżyj switch do wybrania odpowiedniego działania i wypisania tylko jednego wyniku — tego, o który poprosił użytkownik.\n\n\nZadanie 2 — walidacja: nieznana operacja\nDodaj default: w switchu, który wypisuje \"Nieznana operacja!\\n\" zamiast nic nie robić albo (gorzej) cicho zwrócić zły wynik. To ten sam mechanizm obronny, który zobaczyliście w ćwiczeniu 1 CHIP-8 przy nieznanym opcodzie — nawet w kalkulatorze warto się bronić przed nieoczekiwanym wejściem.\n\n\nZadanie 3 — dzielenie przez zero, tym razem obsłużone\nW case '/', zanim podzielisz, sprawdź if (b == 0) i wypisz komunikat błędu zamiast dzielić. Teraz, w przeciwieństwie do sesji 2, Ty kontrolujesz, co się stanie — zamiast zdawać się na niezdefiniowane zachowanie."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/03_warunki_dispatcher.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/03_warunki_dispatcher.html#kryterium-sukcesu",
+    "title": "Sesja 3 — Warunki: kalkulator wybiera działanie",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nKalkulator pyta o dwie liczby i znak operacji, wykonuje tylko wybraną operację.\nNieznany znak operacji daje czytelny komunikat, a nie ciszę ani błąd programu.\nDzielenie przez zero jest wykryte i obsłużone, zanim dojdzie do samego dzielenia."
   }
 ]

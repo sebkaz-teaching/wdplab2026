@@ -1,0 +1,108 @@
+---
+title: "Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu"
+format: html
+toc: true
+---
+
+## Cel
+
+Poznać pętle `while` i `for`, i użyć ich, żeby kalkulator z sesji 3 wykonywał wiele
+działań pod rząd, zamiast kończyć się po jednym — aż użytkownik sam zdecyduje, że
+kończy.
+
+## Teoria w pigułce
+
+### `while` — powtarzaj, dopóki warunek jest prawdziwy
+
+```c
+int licznik = 0;
+while (licznik < 5) {
+    printf("%d\n", licznik);
+    licznik++;
+}
+```
+
+Warunek sprawdzany jest **przed** każdym powtórzeniem. Jeśli od razu jest fałszywy,
+ciało pętli nie wykona się ani razu.
+
+::: {.callout-important}
+## Pętla nieskończona — jak ją rozpoznać i jak z niej wyjść
+Jeśli zapomnisz `licznik++`, warunek `licznik < 5` będzie zawsze prawdziwy — program
+"zawiesza się", wypisując `0` w nieskończoność. To jeden z najczęstszych błędów
+początkujących. **Ctrl+C** w terminalu zawsze przerywa działający program — zapamiętaj
+ten skrót, przyda się wielokrotnie w tym kursie.
+:::
+
+### `for` — pętla ze znaną z góry liczbą powtórzeń
+
+```c
+for (int i = 0; i < 5; i++) {
+    printf("%d\n", i);
+}
+```
+
+To dokładnie ten sam efekt co `while` powyżej, tylko trzy elementy sterujące
+(start, warunek, krok) są zebrane w jednym miejscu. Użyj `for`, gdy z góry wiesz, ile
+razy chcesz coś powtórzyć (np. "16 razy" przy inicjalizacji rejestrów CHIP-8 — zobaczycie
+to niedługo); użyj `while`, gdy koniec zależy od czegoś, co dzieje się w trakcie
+(np. "dopóki użytkownik nie wpisze 'koniec'").
+
+### Pętla sterowana wejściem użytkownika — REPL
+
+REPL (*Read-Eval-Print Loop*) to pętla, która w kółko: **czyta** wejście, **wykonuje**
+coś na jego podstawie, **wypisuje** wynik. To dokładnie schemat, według którego działa
+interpreter Pythona, powłoka bash — i, nieprzypadkowo, procesor w trybie
+fetch-decode-execute, który zobaczycie w emulatorze.
+
+```c
+char op;
+int kontynuuj = 1;
+
+while (kontynuuj) {
+    printf("Podaj dzialanie (+, -, *, / albo 'q' aby zakonczyc): ");
+    scanf(" %c", &op);
+
+    if (op == 'q') {
+        kontynuuj = 0;
+    } else {
+        // TODO: reszta logiki z sesji 3
+    }
+}
+```
+
+## Zadania
+
+### Zadanie 1 — kalkulator w pętli
+
+Przerób kalkulator z sesji 3 tak, żeby po wykonaniu jednego działania **pytał
+ponownie**, zamiast kończyć program. Użyj wzorca REPL z sekcji teorii — `'q'` kończy
+program.
+
+### Zadanie 2 — licznik wykonanych działań
+
+Dodaj zmienną `int licznik_dzialan = 0;` przed pętlą, zwiększaj ją po każdym
+wykonanym (nie: każdej próbie) działaniu. Po wpisaniu `'q'`, przed zakończeniem
+programu wypisz: `"Wykonano %d dzialan.\n"`.
+
+### Zadanie 3 — suma wszystkich wyników
+
+Dodaj `float suma_wynikow = 0;`, dodawaj do niej wynik każdego działania (niezależnie
+jaka to była operacja). Wypisz sumę na końcu. To wymaga, żebyś zapamiętał wynik
+działania w zmiennej **przed** wypisaniem go — nie tylko wypisywał go bezpośrednio w
+`printf`, jak dotąd.
+
+### Zadanie 4 (dla chętnych) — pętla `for` w praktyce
+
+Napisz osobny mini-program, który używając `for` wypisuje tabliczkę mnożenia liczby
+wpisanej przez użytkownika (od `1×n` do `10×n`). To ćwiczenie z `for`, gdy liczba
+powtórzeń jest znana z góry (zawsze 10) — w odróżnieniu od kalkulatora, gdzie liczba
+powtórzeń zależy od użytkownika (stąd `while`, nie `for`).
+
+## Kryterium sukcesu
+
+- Kalkulator działa w pętli — można wykonać kilka działań pod rząd bez ponownego
+  uruchamiania programu.
+- `'q'` kończy program czysto (bez błędów, bez pętli nieskończonej).
+- Licznik działań i suma wyników są poprawne po kilku różnych operacjach.
+- Rozumiesz różnicę: `for`, gdy liczba powtórzeń jest znana z góry; `while`, gdy zależy
+  od czegoś, co dzieje się w trakcie.
