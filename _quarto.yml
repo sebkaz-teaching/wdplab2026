@@ -1,6 +1,16 @@
 project:
   type: website
   output-dir: docs
+  # Solution files stay OUT of the public render by default — reveal one
+  # only after that week's session is done, by commenting out its line
+  # here (so it renders again).
+  render:
+    - "*.qmd"
+    - "podstawy_programowania/**/*.qmd"
+    - "!podstawy_programowania/cwiczenia_chip8/01_szkielet_vm_rozwiazanie.qmd"
+    - "!podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki_rozwiazanie.qmd"
+    - "!podstawy_programowania/cwiczenia_chip8/03_wyswietlacz_rozwiazanie.qmd"
+    - "!podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura_rozwiazanie.qmd"
 
 website:
   title: Wprowadzenie do Programowania - Laboratorium
