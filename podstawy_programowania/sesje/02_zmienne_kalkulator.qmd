@@ -4,6 +4,42 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 1
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja02",
+  title: "Sesja 1: Pierwszy program",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Zmieniasz komunikat w hello.c, ale NIE kompilujesz ponownie przed uruchomieniem ./hello. Co się stanie?",
+      options: [
+        {v:"A", t:"Program wypisze nowy, zmieniony komunikat"},
+        {v:"B", t:"Program wypisze stary komunikat — ./hello uruchamia poprzednio skompilowany plik, nie plik źródłowy"},
+        {v:"C", t:"Program nie uruchomi się w ogóle"},
+        {v:"D", t:"System sam wykryje zmianę i przekompiluje"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co zrobi gcc -std=c99 -Wall -Wextra z poniższym kodem?",
+      code: "#include <stdio.h>\n\nint main(void) {\n    printf(\"Hello\")\n    return 0;\n}",
+      options: [
+        {v:"A", t:"Skompiluje się bez żadnych problemów"},
+        {v:"B", t:"Zgłosi błąd kompilacji — brakujący średnik po printf(\"Hello\")"},
+        {v:"C", t:"Da tylko ostrzeżenie, program się skompiluje i uruchomi normalnie"},
+        {v:"D", t:"Skompiluje się, ale program nic nie wypisze"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Nauczyć się przechowywać dane w pamięci pod nazwaną etykietą (zmienna) i wczytywać

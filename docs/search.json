@@ -396,22 +396,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/04_petle_repl.html",
-    "href": "podstawy_programowania/sesje/04_petle_repl.html",
-    "title": "Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu",
-    "section": "",
-    "text": "Poznać pętle while i for, i użyć ich, żeby kalkulator z sesji 3 wykonywał wiele działań pod rząd, zamiast kończyć się po jednym — aż użytkownik sam zdecyduje, że kończy.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/04_petle_repl.html#cel",
     "href": "podstawy_programowania/sesje/04_petle_repl.html#cel",
     "title": "Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu",
-    "section": "",
-    "text": "Poznać pętle while i for, i użyć ich, żeby kalkulator z sesji 3 wykonywał wiele działań pod rząd, zamiast kończyć się po jednym — aż użytkownik sam zdecyduje, że kończy.",
+    "section": "Cel",
+    "text": "Cel\nPoznać pętle while i for, i użyć ich, żeby kalkulator z sesji 3 wykonywał wiele działań pod rząd, zamiast kończyć się po jednym — aż użytkownik sam zdecyduje, że kończy.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu"
@@ -451,22 +440,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/02_zmienne_kalkulator.html",
-    "href": "podstawy_programowania/sesje/02_zmienne_kalkulator.html",
-    "title": "Sesja 2 — Zmienne i pierwszy kalkulator",
-    "section": "",
-    "text": "Nauczyć się przechowywać dane w pamięci pod nazwaną etykietą (zmienna) i wczytywać dane od użytkownika. Napisać program, który dodaje dwie liczby podane przez użytkownika.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 2 — Zmienne i pierwszy kalkulator"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/02_zmienne_kalkulator.html#cel",
     "href": "podstawy_programowania/sesje/02_zmienne_kalkulator.html#cel",
     "title": "Sesja 2 — Zmienne i pierwszy kalkulator",
-    "section": "",
-    "text": "Nauczyć się przechowywać dane w pamięci pod nazwaną etykietą (zmienna) i wczytywać dane od użytkownika. Napisać program, który dodaje dwie liczby podane przez użytkownika.",
+    "section": "Cel",
+    "text": "Cel\nNauczyć się przechowywać dane w pamięci pod nazwaną etykietą (zmienna) i wczytywać dane od użytkownika. Napisać program, który dodaje dwie liczby podane przez użytkownika.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 2 — Zmienne i pierwszy kalkulator"
@@ -987,22 +965,11 @@
     ]
   },
   {
-    "objectID": "podstawy_programowania/sesje/03_warunki_dispatcher.html",
-    "href": "podstawy_programowania/sesje/03_warunki_dispatcher.html",
-    "title": "Sesja 3 — Warunki: kalkulator wybiera działanie",
-    "section": "",
-    "text": "Poznać if/else oraz switch i użyć ich do rozbudowania kalkulatora z sesji 2 — tak, żeby to użytkownik wybierał działanie, zamiast mieć wszystkie wypisane na sztywno. Ten wzorzec — “wczytaj kod operacji, zdecyduj co zrobić” — wróci w kursie jeszcze wielokrotnie, aż po switch (opcode & 0xF000) w emulatorze CHIP-8.",
-    "crumbs": [
-      "Fundamenty C (sesje 1-18)",
-      "Sesja 3 — Warunki: kalkulator wybiera działanie"
-    ]
-  },
-  {
     "objectID": "podstawy_programowania/sesje/03_warunki_dispatcher.html#cel",
     "href": "podstawy_programowania/sesje/03_warunki_dispatcher.html#cel",
     "title": "Sesja 3 — Warunki: kalkulator wybiera działanie",
-    "section": "",
-    "text": "Poznać if/else oraz switch i użyć ich do rozbudowania kalkulatora z sesji 2 — tak, żeby to użytkownik wybierał działanie, zamiast mieć wszystkie wypisane na sztywno. Ten wzorzec — “wczytaj kod operacji, zdecyduj co zrobić” — wróci w kursie jeszcze wielokrotnie, aż po switch (opcode & 0xF000) w emulatorze CHIP-8.",
+    "section": "Cel",
+    "text": "Cel\nPoznać if/else oraz switch i użyć ich do rozbudowania kalkulatora z sesji 2 — tak, żeby to użytkownik wybierał działanie, zamiast mieć wszystkie wypisane na sztywno. Ten wzorzec — “wczytaj kod operacji, zdecyduj co zrobić” — wróci w kursie jeszcze wielokrotnie, aż po switch (opcode & 0xF000) w emulatorze CHIP-8.",
     "crumbs": [
       "Fundamenty C (sesje 1-18)",
       "Sesja 3 — Warunki: kalkulator wybiera działanie"

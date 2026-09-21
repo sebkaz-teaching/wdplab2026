@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-2" id="toc-sprawdź-się-z-sesji-2" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-2">✅ Sprawdź się z sesji 2</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-2" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-2">✅ Sprawdź się z sesji 2</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja03",
+  title: "Sesja 2: Zmienne i pierwszy kalkulator",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze poniższy kod?",
+      code: "int a = 7, b = 2;\nprintf(\"%d\\n\", a / b);",
+      options: [
+        {v:"A", t:"3.5"},
+        {v:"B", t:"3"},
+        {v:"C", t:"4"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co jest nie tak z poniższym kodem?",
+      code: "int x;\nprintf(\"Podaj liczbe: \");\nscanf(\"%d\", x);",
+      options: [
+        {v:"A", t:"scanf powinien mieć %f zamiast %d"},
+        {v:"B", t:"Brakuje & przed x — scanf potrzebuje adresu zmiennej, nie jej wartości; bez tego zapisze dane pod przypadkowy adres"},
+        {v:"C", t:"Nic — kod jest poprawny"},
+        {v:"D", t:"Zmienna x powinna być zainicjalizowana wartością 0"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Poznać <code>if</code>/<code>else</code> oraz <code>switch</code> i użyć ich do rozbudowania kalkulatora z sesji 2 — tak, żeby to <strong>użytkownik</strong> wybierał działanie, zamiast mieć wszystkie wypisane na sztywno. Ten wzorzec — “wczytaj kod operacji, zdecyduj co zrobić” — wróci w kursie jeszcze wielokrotnie, aż po <code>switch (opcode &amp; 0xF000)</code> w emulatorze CHIP-8.</p>

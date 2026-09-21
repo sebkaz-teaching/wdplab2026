@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title"><strong>Sections</strong></h2>
    
   <ul class="collapse">
-  <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#sprawdź-się-z-sesji-3" id="toc-sprawdź-się-z-sesji-3" class="nav-link active" data-scroll-target="#sprawdź-się-z-sesji-3">✅ Sprawdź się z sesji 3</a></li>
+  <li><a href="#cel" id="toc-cel" class="nav-link" data-scroll-target="#cel">Cel</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -357,6 +358,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="sprawdź-się-z-sesji-3" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdź-się-z-sesji-3">✅ Sprawdź się z sesji 3</h2>
+<div id="wdp-quiz">
+
+</div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja04",
+  title: "Sesja 3: Warunki i dispatcher",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze poniższy kod i dlaczego?",
+      code: "int a = 5;\nif (a = 3) {\n    printf(\"tak\\n\");\n} else {\n    printf(\"nie\\n\");\n}",
+      options: [
+        {v:"A", t:"\"nie\" — bo 5 nie jest równe 3"},
+        {v:"B", t:"\"tak\" — bo a = 3 to przypisanie, nie porównanie; wynikiem jest 3, czyli wartość niezerowa (prawda)"},
+        {v:"C", t:"Błąd kompilacji — nie można przypisywać wewnątrz if"},
+        {v:"D", t:"Nic — pusty warunek nic nie robi"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co dokładnie wypisze ten kod?",
+      code: "char op = '-';\nswitch (op) {\n    case '+':\n        printf(\"dodawanie\\n\");\n    case '-':\n        printf(\"odejmowanie\\n\");\n    default:\n        printf(\"nieznana\\n\");\n}",
+      options: [
+        {v:"A", t:"tylko \"odejmowanie\""},
+        {v:"B", t:"\"odejmowanie\" i \"nieznana\" — brak break powoduje fall-through do kolejnych case'ów"},
+        {v:"C", t:"\"dodawanie\", \"odejmowanie\" i \"nieznana\""},
+        {v:"D", t:"Błąd kompilacji — brak break"}
+      ]
+    }
+  ]
+});
+</script>
+</section>
 <section id="cel" class="level2">
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Poznać pętle <code>while</code> i <code>for</code>, i użyć ich, żeby kalkulator z sesji 3 wykonywał wiele działań pod rząd, zamiast kończyć się po jednym — aż użytkownik sam zdecyduje, że kończy.</p>

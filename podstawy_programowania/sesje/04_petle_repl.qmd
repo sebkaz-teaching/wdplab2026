@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 3
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja04",
+  title: "Sesja 3: Warunki i dispatcher",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze poniższy kod i dlaczego?",
+      code: "int a = 5;\nif (a = 3) {\n    printf(\"tak\\n\");\n} else {\n    printf(\"nie\\n\");\n}",
+      options: [
+        {v:"A", t:"\"nie\" — bo 5 nie jest równe 3"},
+        {v:"B", t:"\"tak\" — bo a = 3 to przypisanie, nie porównanie; wynikiem jest 3, czyli wartość niezerowa (prawda)"},
+        {v:"C", t:"Błąd kompilacji — nie można przypisywać wewnątrz if"},
+        {v:"D", t:"Nic — pusty warunek nic nie robi"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co dokładnie wypisze ten kod?",
+      code: "char op = '-';\nswitch (op) {\n    case '+':\n        printf(\"dodawanie\\n\");\n    case '-':\n        printf(\"odejmowanie\\n\");\n    default:\n        printf(\"nieznana\\n\");\n}",
+      options: [
+        {v:"A", t:"tylko \"odejmowanie\""},
+        {v:"B", t:"\"odejmowanie\" i \"nieznana\" — brak break powoduje fall-through do kolejnych case'ów"},
+        {v:"C", t:"\"dodawanie\", \"odejmowanie\" i \"nieznana\""},
+        {v:"D", t:"Błąd kompilacji — brak break"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Poznać pętle `while` i `for`, i użyć ich, żeby kalkulator z sesji 3 wykonywał wiele

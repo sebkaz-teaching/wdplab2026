@@ -4,6 +4,43 @@ format: html
 toc: true
 ---
 
+## ✅ Sprawdź się z sesji 2
+
+<div id="wdp-quiz"></div>
+<script src="../../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById('wdp-quiz'), {
+  course: "wdplab2026",
+  lecture: "sesja03",
+  title: "Sesja 2: Zmienne i pierwszy kalkulator",
+  submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  questions: [
+    {
+      id: "q1", points: 1, diff: "łatwe",
+      text: "Co wypisze poniższy kod?",
+      code: "int a = 7, b = 2;\nprintf(\"%d\\n\", a / b);",
+      options: [
+        {v:"A", t:"3.5"},
+        {v:"B", t:"3"},
+        {v:"C", t:"4"},
+        {v:"D", t:"Błąd kompilacji"}
+      ]
+    },
+    {
+      id: "q2", points: 2, diff: "trudne",
+      text: "Co jest nie tak z poniższym kodem?",
+      code: "int x;\nprintf(\"Podaj liczbe: \");\nscanf(\"%d\", x);",
+      options: [
+        {v:"A", t:"scanf powinien mieć %f zamiast %d"},
+        {v:"B", t:"Brakuje & przed x — scanf potrzebuje adresu zmiennej, nie jej wartości; bez tego zapisze dane pod przypadkowy adres"},
+        {v:"C", t:"Nic — kod jest poprawny"},
+        {v:"D", t:"Zmienna x powinna być zainicjalizowana wartością 0"}
+      ]
+    }
+  ]
+});
+</script>
+
 ## Cel
 
 Poznać `if`/`else` oraz `switch` i użyć ich do rozbudowania kalkulatora z sesji 2 —
