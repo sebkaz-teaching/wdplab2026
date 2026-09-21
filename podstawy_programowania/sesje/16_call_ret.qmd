@@ -1,0 +1,82 @@
+---
+title: "Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji"
+format: html
+toc: true
+---
+
+## Cel
+
+Użyć stosu z sesji 15 do zaimplementowania `CALL`/`RET` — mechanizmu "podprogramów" w
+maszynie wirtualnej. To zdejmuje zasłonę z tego, co C robi automatycznie za każdym
+razem, gdy wywołujecie zwykłą funkcję.
+
+## Teoria w pigułce
+
+### Co się dzieje, gdy wywołujecie funkcję w C?
+
+Piszecie `wynik = dodaj(3, 4);` od sesji 6 — ale nigdy nie zastanawialiście się, **skąd
+program wie, gdzie wrócić** po zakończeniu `dodaj`. Odpowiedź: adres powrotu jest
+**odkładany na stos** (ten sam mechanizm LIFO z sesji 15!) tuż przed skokiem do
+funkcji, i zdejmowany ze stosu, gdy funkcja się kończy (`return`).
+
+### `CALL` — skocz, ale zapamiętaj gdzie wrócić
+
+```c
+case OP_CALL:
+    push(m, pc);          // zapamietaj, gdzie wrocic (pc juz wskazuje NASTEPNA instrukcje)
+    pc = instr.wartosc;    // skocz do "podprogramu"
+    break;
+```
+
+### `RET` — wróć tam, skąd przyszedłeś
+
+```c
+case OP_RET:
+    pc = pop(m);   // zdejmij zapamietany adres powrotu i tam skocz
+    break;
+```
+
+::: {.callout-note}
+## To jest dokładnie CALL/RET z ćwiczenia 2 CHIP-8
+`2NNN` (`CALL addr`) i `00EE` (`RET`) w CHIP-8 robią dosłownie to samo, tylko na
+16-elementowym stosie zamiast Waszego. Dziś napisaliście własnymi rękami mechanizm,
+który w C dzieje się niewidocznie przy każdym wywołaniu funkcji — i który za dwie
+sesje wpiszecie do `chip8_cycle` niemal bez zmian.
+:::
+
+### Dlaczego to ważne: rekurencja "po prostu działa" dzięki stosowi
+
+Skoro każde wywołanie odkłada nowy adres powrotu na stos, funkcja może wywołać **samą
+siebie** (rekurencja) — każde wywołanie dostaje własne miejsce na stosie, nie
+nadpisuje poprzedniego. Zobaczycie to praktycznie w zadaniu 3.
+
+## Zadania
+
+### Zadanie 1 — dodaj `OP_CALL` i `OP_RET`
+
+Dodaj obie instrukcje do maszyny z sesji 15, korzystając z `push`/`pop`, które już
+macie.
+
+### Zadanie 2 — "podprogram" wywoływany dwukrotnie
+
+Napisz "program", w którym główna sekwencja instrukcji **dwukrotnie** wywołuje ten sam
+fragment kodu przez `OP_CALL` (np. "podprogram" ustawiający jeden rejestr na
+konkretną wartość), z różnymi instrukcjami między wywołaniami. Sprawdź, że po każdym
+`OP_RET` wykonanie wraca dokładnie tam, gdzie powinno — **za** instrukcję `OP_CALL`,
+nie do niej ponownie.
+
+### Zadanie 3 (dla chętnych) — zagnieżdżone wywołania
+
+Napisz "program", w którym podprogram A wywołuje przez `OP_CALL` podprogram B, a B po
+zakończeniu wraca do A, a A po swoim zakończeniu wraca do głównego programu. Prześledź
+ręcznie na kartce, co dzieje się ze stosem (`sp`) w każdym momencie — narysuj go jako
+rosnącą/malejącą kolumnę liczb.
+
+## Kryterium sukcesu
+
+- `OP_CALL`/`OP_RET` poprawnie wracają pod właściwy adres — zweryfikowane testem z
+  zadania 2 (dwa wywołania, różne miejsca powrotu).
+- Zagnieżdżone wywołania z zadania 3 wracają w poprawnej kolejności (ostatnie
+  wywołane, pierwsze zakończone — LIFO w praktyce).
+- Rozumiesz, że mechanizm, który dziś zaimplementowaliście ręcznie, to dokładnie to,
+  co C robi za Was przy każdym zwykłym wywołaniu funkcji.

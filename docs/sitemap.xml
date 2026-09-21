@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/18_stringi_parser.html</loc>
+    <lastmod>2026-09-21T15:01:59.453Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/16_call_ret.html</loc>
+    <lastmod>2026-09-21T15:00:54.621Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html</loc>
+    <lastmod>2026-09-21T15:00:05.468Z</lastmod>
+  </url>
+  <url>
     <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/12_pamiec_dynamiczna.html</loc>
     <lastmod>2026-09-21T14:58:44.947Z</lastmod>
   </url>
@@ -75,5 +87,17 @@
   <url>
     <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/11_wskazniki_do_struktur.html</loc>
     <lastmod>2026-09-21T14:58:13.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/13_licznik_instrukcji.html</loc>
+    <lastmod>2026-09-21T14:59:40.941Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/15_stos.html</loc>
+    <lastmod>2026-09-21T15:00:28.682Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/17_pliki.html</loc>
+    <lastmod>2026-09-21T15:01:25.659Z</lastmod>
   </url>
 </urlset>

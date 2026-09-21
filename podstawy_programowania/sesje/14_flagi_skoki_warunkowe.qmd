@@ -1,0 +1,81 @@
+---
+title: "Sesja 14 — Flagi i skoki warunkowe"
+format: html
+toc: true
+---
+
+## Cel
+
+Dodać porównania i **warunkowy** skok — rozwiązać problem zostawiony otwartym w
+sesji 13 (bezwarunkowy `OP_JUMP` nie wystarcza do pętli, która sama się kończy).
+
+## Teoria w pigułce
+
+### Pomysł: flaga jako "pamięć" ostatniego porównania
+
+Zamiast robić skok, który sam sprawdza warunek, rozbijmy to na dwa kroki — dokładnie
+tak, jak robi to CHIP-8 (i większość prawdziwych procesorów):
+
+1. Instrukcja **porównania** (`OP_CMP`) sprawdza dwie wartości i zapisuje wynik w
+   specjalnej zmiennej — **fladze**.
+2. Instrukcja **skoku warunkowego** (`OP_JUMP_IF_ZERO`) sprawdza flagę i skacze **tylko
+   jeśli** jest ustawiona.
+
+```c
+int flaga_zero = 0;   // czy ostatnie porownanie dalo wynik "rowne"?
+
+// ...w petli wykonania:
+case OP_CMP:
+    flaga_zero = (m->rejestry[instr.rejestr_docelowy] == instr.wartosc);
+    break;
+
+case OP_JUMP_IF_ZERO:
+    if (flaga_zero) {
+        pc = instr.wartosc;
+    }
+    break;
+```
+
+Rozdzielenie "porównaj" i "skocz" na dwie osobne instrukcje wydaje się na pierwszy
+rzut oka niewygodne (dwie instrukcje zamiast jednej) — ale to dokładnie schemat pracy
+prawdziwego procesora: ALU liczy wynik i **przy okazji** ustawia bity w rejestrze
+flag, a osobna instrukcja skoku je odczytuje.
+
+::: {.callout-note}
+## To jest dokładnie rodzina "skip" z ćwiczenia 2 CHIP-8
+CHIP-8 robi to nieco inaczej niż klasyczny model flag: `3XKK` (`SE Vx, byte`) łączy
+"porównaj" i "warunkowo pomiń następną instrukcję" w jedną instrukcję, bez osobnej
+flagi. Wasza wersja z dzisiejszej sesji jest bliższa "podręcznikowemu" modelowi
+procesora (osobna flaga) — w ćwiczeniu 2 zobaczycie wariant bardziej zwarty
+(wbudowany warunek), typowy właśnie dla CHIP-8. Warto znać oba, bo różne architektury
+robią to różnie.
+:::
+
+## Zadania
+
+### Zadanie 1 — dodaj `OP_CMP` i `OP_JUMP_IF_ZERO`
+
+Dodaj obie instrukcje do maszyny z sesji 13. Pole `flaga_zero` dodaj do `struct
+Maszyna` (nie jako osobną zmienną w `main` — powinno żyć tam, gdzie reszta stanu
+maszyny).
+
+### Zadanie 2 — pętla licząca w dół (rozwiązanie zagadki z sesji 13)
+
+Napisz "program": ustaw rejestr na 5, w pętli: porównaj z 0, jeśli równe — skocz do
+końca (wypisz coś i zakończ), jeśli nie — zmniejsz rejestr o 1 i skocz na początek
+pętli. To dokładnie ten wzorzec, który nie udał się w zadaniu 3 sesji 13 — teraz
+powinien zadziałać.
+
+### Zadanie 3 — dodaj `OP_JUMP_IF_NOT_ZERO`
+
+Dodaj przeciwną instrukcję (skacz, jeśli flaga **nie** jest ustawiona) i przepisz
+pętlę z zadania 2, żeby użyć jej zamiast odwracania logiki porównania. Porównaj oba
+podejścia — który zapis jest czytelniejszy?
+
+## Kryterium sukcesu
+
+- Pętla licząca w dół z zadania 2 kończy się sama, bez ręcznego przerywania — pierwszy
+  raz w tym kursie warunkowa pętla działa w Waszej własnej maszynie wirtualnej, nie w
+  C bezpośrednio.
+- Rozumiesz, dlaczego rozbicie "porównaj" i "skocz" na dwie instrukcje z osobną flagą
+  to model bliski temu, jak działają prawdziwe procesory.

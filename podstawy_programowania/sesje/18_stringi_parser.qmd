@@ -1,0 +1,105 @@
+---
+title: "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb"
+format: html
+toc: true
+---
+
+## Cel
+
+Poznać operacje na tekstach (`char[]`, `strcmp`, `strtok`) i napisać prosty parser,
+który zamienia czytelny tekst (np. `LOAD R0 10`) na instrukcje maszyny — zamiast
+wymagać od użytkownika pamiętania, że `1` znaczy LOAD. To ostatnia sesja fundamentów
+przed ćwiczeniami CHIP-8.
+
+## Teoria w pigułce
+
+### String w C — to po prostu tablica znaków
+
+```c
+char slowo[20] = "LOAD";
+```
+
+String w C to tablica `char`, zakończona specjalnym, niewidocznym znakiem `'\0'`
+(*null terminator*) — to on mówi funkcjom takim jak `printf("%s", slowo)`, gdzie
+tekst się kończy. `"LOAD"` w cudzysłowie to w pamięci: `L`, `O`, `A`, `D`, `\0` — pięć
+bajtów, nie cztery.
+
+### Porównywanie stringów: NIE `==`
+
+```c
+char *slowo = "LOAD";
+
+if (slowo == "LOAD") { ... }        // BLAD LOGICZNY -- porownuje ADRESY, nie tresc!
+if (strcmp(slowo, "LOAD") == 0) { ... }  // POPRAWNIE -- strcmp zwraca 0, gdy rowne
+```
+
+`==` na stringach porównuje **adresy w pamięci**, nie zawartość — dwa identyczne
+teksty leżące pod różnymi adresami dadzą `==` fałsz, nawet jeśli litera po literze są
+takie same. `strcmp` naprawdę porównuje znak po znaku i zwraca `0`, gdy są identyczne
+(nie `1`! — to zaskakuje prawie każdego pierwszy raz).
+
+### Dzielenie linii tekstu na fragmenty: `strtok`
+
+```c
+#include <string.h>
+
+char linia[100] = "LOAD R0 10";
+char *slowo1 = strtok(linia, " ");   // "LOAD"
+char *slowo2 = strtok(NULL, " ");     // "R0"  -- NULL = "kontynuuj ta sama linie"
+char *slowo3 = strtok(NULL, " ");     // "10"
+```
+
+`strtok` dzieli tekst na fragmenty (*tokeny*) według podanego separatora (tu: spacja).
+Pierwsze wywołanie dostaje sam tekst, kolejne — `NULL`, żeby powiedzieć "kontynuuj
+dzielenie tej samej linii, od miejsca gdzie skończyłeś".
+
+::: {.callout-note}
+## To jest dokładnie "asembler" z ćwiczenia 4 wykładu o CHIP-8 (rozszerzenia)
+Parsowanie `"LOAD R0 10"` na trzy fragmenty i zamiana pierwszego (`"LOAD"`) na
+`OP_LOAD` przez porównanie `strcmp`, to dokładnie mechanizm, którego użylibyście,
+gdybyście chcieli napisać czytelny format tekstowy dla CHIP-8 zamiast gołych liczb
+opcode'ów — dokładnie to proponowane jest jako rozszerzenie "disassembler" w
+ćwiczeniu 5. Dziś budujecie ten mechanizm od podstaw na własnym, prostszym języku.
+:::
+
+## Zadania
+
+### Zadanie 1 — rozpoznaj nazwę operacji
+
+Napisz funkcję `enum OpCode nazwa_na_opcode(char *nazwa)`, która przez ciąg
+`if/strcmp` (albo `else if`) zamienia `"LOAD"` na `OP_LOAD`, `"ADD"` na `OP_ADD`, itd.
+dla wszystkich operacji Waszej maszyny. Dla nieznanej nazwy niech zwraca specjalną
+wartość, np. `OP_UNKNOWN` (dodaj ją do `enum`).
+
+### Zadanie 2 — parser linii tekstu
+
+Napisz `struct Instrukcja parsuj_linie(char *linia)`, która przez `strtok` rozbija
+linię na fragmenty (nazwa operacji, numer rejestru jako `"R0"`, `"R1"`... i wartość) i
+buduje z nich `struct Instrukcja`. Numer rejestru z tekstu `"R0"` — pomiń pierwszy
+znak (`R`) i zamień resztę na liczbę przez `atoi(napis + 1)`.
+
+### Zadanie 3 — pełny asembler tekstowy
+
+Połącz zadania 1-2 z wczytywaniem pliku z sesji 17: zamiast pliku `kod rejestr
+wartosc` (liczby), wczytaj plik z czytelnymi liniami typu `LOAD R0 10`, `ADD R0 5`,
+`PRINT R0 0`, parsując każdą linię funkcją `fgets` + `parsuj_linie`. Przetestuj na
+programie z sesji 17, przepisanym na czytelny format.
+
+## Kryterium sukcesu
+
+- `nazwa_na_opcode` poprawnie rozpoznaje wszystkie operacje Waszej maszyny i zwraca
+  `OP_UNKNOWN` dla literówki (przetestuj to celowo).
+- Maszyna wczytuje i wykonuje program zapisany w czytelnym formacie tekstowym
+  (`LOAD R0 10`), nie tylko w gołych liczbach.
+- Rozumiesz, dlaczego `==` nie działa do porównywania tekstów w C, i kiedy sięgnąć po
+  `strcmp`.
+
+## Podsumowanie sesji 1-18
+
+Zbudowaliście — od pierwszego `printf`, przez zmienne, warunki, pętle, tablice,
+funkcje, struktury, wskaźniki, pamięć dynamiczną, aż po pliki i parsowanie tekstu —
+**własną, działającą maszynę wirtualną** z rejestrami, skokami, warunkami, stosem i
+podprogramami, wczytującą programy z plików w czytelnym formacie tekstowym. To
+dokładnie ten sam zestaw umiejętności (plus operacje bitowe, do których dojdziecie
+przy okazji ćwiczeń CHIP-8), którego potrzeba do napisania emulatora prawdziwego,
+historycznego procesora — od jutra zaczynacie właśnie to, na kodzie, który już znacie.

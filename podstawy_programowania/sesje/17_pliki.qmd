@@ -1,0 +1,110 @@
+---
+title: "Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym"
+format: html
+toc: true
+---
+
+## Cel
+
+Wczytać "program" dla maszyny wirtualnej z pliku na dysku, zamiast wpisywać go na
+sztywno w kodzie C. To dokładnie to, co zrobi `chip8_load_rom` w ćwiczeniu 1 CHIP-8 —
+dziś ćwiczycie tę samą operację na prostszym formacie danych.
+
+## Teoria w pigułce
+
+### `FILE *` i podstawowe operacje
+
+```c
+#include <stdio.h>
+
+FILE *f = fopen("program.txt", "r");   // "r" = do odczytu, tekstowo
+if (f == NULL) {
+    fprintf(stderr, "Nie mozna otworzyc pliku\n");
+    return 1;
+}
+
+// ... odczyt ...
+
+fclose(f);   // ZAWSZE zamykaj plik, gdy skonczysz -- to jak "free" dla malloc
+```
+
+`fopen` zwraca `NULL`, jeśli plik nie istnieje albo nie ma do niego dostępu — **zawsze**
+to sprawdzajcie, dokładnie tak jak sprawdzaliście wynik `malloc` w sesji 12. To ten
+sam wzorzec defensywnego programowania, powtórzony na nowym zasobie systemowym.
+
+### Odczyt liczb z pliku tekstowego: `fscanf`
+
+```c
+int kod, rejestr, wartosc;
+while (fscanf(f, "%d %d %d", &kod, &rejestr, &wartosc) == 3) {
+    // przetworz jedna instrukcje
+}
+```
+
+`fscanf` działa jak `scanf` z sesji 2, tylko czyta z pliku (`f`) zamiast z klawiatury.
+Zwraca **liczbę pomyślnie wczytanych wartości** — sprawdzenie `== 3` to sposób na
+wykrycie końca pliku albo złego formatu danych, zamiast zgadywać.
+
+### Odczyt danych binarnych: `fread`
+
+Pliki `.ch8` w CHIP-8 to dane **binarne** (surowe bajty), nie tekst — do nich używa
+się innej funkcji:
+
+```c
+uint8_t bufor[4096];
+size_t wczytano = fread(bufor, 1, 4096, f);
+// bufor[0..wczytano-1] zawiera zawartosc pliku
+```
+
+`fread(cel, rozmiar_elementu, liczba_elementow, plik)` czyta surowe bajty — nie
+próbuje interpretować ich jako tekst czy liczby w formacie czytelnym dla człowieka, w
+odróżnieniu od `fscanf`. To dokładnie funkcja, której użyjecie w `chip8_load_rom`.
+
+::: {.callout-note}
+## Format tekstowy dziś, format binarny w CHIP-8 — dlaczego różnica?
+Dziś, dla wygody testowania i czytelności, Wasz "program" to zwykły plik tekstowy z
+liczbami oddzielonymi spacjami. Prawdziwe ROM-y CHIP-8 to binarne pliki `.ch8` —
+dokładnie ten format, w jakim gry z lat 70. faktycznie krążyły. Zasada wczytywania
+(otwórz, sprawdź błąd, czytaj, zamknij) jest identyczna — różni się tylko funkcja
+odczytu (`fscanf` dla tekstu, `fread` dla bajtów) i to, czy trzeba osobno "parsować"
+wczytany tekst (do tego wracamy w sesji 18).
+:::
+
+## Zadania
+
+### Zadanie 1 — zapisz testowy program do pliku
+
+Ręcznie (w edytorze tekstu) utwórz plik `program.txt` z kilkoma instrukcjami Waszej
+maszyny w formacie `kod rejestr wartosc`, po jednej na linię, np.:
+
+```
+1 0 10
+2 0 5
+3 0 0
+```
+
+(gdzie `1` = LOAD, `2` = ADD, `3` = PRINT — dopasuj do swoich wartości `enum`).
+
+### Zadanie 2 — wczytywanie z pliku zamiast tablicy w kodzie
+
+Zmień `main` z sesji 16, żeby zamiast tablicy `struct Instrukcja program[] = {...}`
+wpisanej w kodzie, wczytywał instrukcje z pliku podanego jako argument wiersza
+poleceń: `./maszyna program.txt`. Skorzystaj z `argc`/`argv`, tak jak w kodzie
+startowym ćwiczenia 1 CHIP-8 (`int main(int argc, char **argv)`), i z `malloc`/`realloc`
+z sesji 12, bo nie znacie z góry liczby instrukcji w pliku.
+
+### Zadanie 3 — obsługa błędnego pliku
+
+Sprawdź, co się stanie, gdy podasz nieistniejącą nazwę pliku, i upewnij się, że
+program wypisuje czytelny komunikat błędu (nie crashuje bez wyjaśnienia). Sprawdź też
+plik z błędnym formatem (np. tekst zamiast liczb) — czy Wasze sprawdzenie
+`fscanf(...) == 3` poprawnie to wykrywa?
+
+## Kryterium sukcesu
+
+- Maszyna wczytuje program z pliku podanego jako argument wiersza poleceń, nie z
+  kodu źródłowego.
+- Program kończy się czytelnym komunikatem błędu (nie awarią) przy nieistniejącym
+  pliku.
+- Rozumiesz różnicę między `fscanf` (tekst, sparsowany od razu na liczby) a `fread`
+  (surowe bajty) — i wiesz, której użyjecie w ćwiczeniu 1 CHIP-8.

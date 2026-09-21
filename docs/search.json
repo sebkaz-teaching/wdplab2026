@@ -1,5 +1,117 @@
 [
   {
+    "objectID": "podstawy_programowania/sesje/18_stringi_parser.html",
+    "href": "podstawy_programowania/sesje/18_stringi_parser.html",
+    "title": "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb",
+    "section": "",
+    "text": "Poznać operacje na tekstach (char[], strcmp, strtok) i napisać prosty parser, który zamienia czytelny tekst (np. LOAD R0 10) na instrukcje maszyny — zamiast wymagać od użytkownika pamiętania, że 1 znaczy LOAD. To ostatnia sesja fundamentów przed ćwiczeniami CHIP-8."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/18_stringi_parser.html#cel",
+    "href": "podstawy_programowania/sesje/18_stringi_parser.html#cel",
+    "title": "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb",
+    "section": "",
+    "text": "Poznać operacje na tekstach (char[], strcmp, strtok) i napisać prosty parser, który zamienia czytelny tekst (np. LOAD R0 10) na instrukcje maszyny — zamiast wymagać od użytkownika pamiętania, że 1 znaczy LOAD. To ostatnia sesja fundamentów przed ćwiczeniami CHIP-8."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/18_stringi_parser.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/18_stringi_parser.html#teoria-w-pigułce",
+    "title": "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nString w C — to po prostu tablica znaków\nchar slowo[20] = \"LOAD\";\nString w C to tablica char, zakończona specjalnym, niewidocznym znakiem '\\0' (null terminator) — to on mówi funkcjom takim jak printf(\"%s\", slowo), gdzie tekst się kończy. \"LOAD\" w cudzysłowie to w pamięci: L, O, A, D, \\0 — pięć bajtów, nie cztery.\n\n\nPorównywanie stringów: NIE ==\nchar *slowo = \"LOAD\";\n\nif (slowo == \"LOAD\") { ... }        // BLAD LOGICZNY -- porownuje ADRESY, nie tresc!\nif (strcmp(slowo, \"LOAD\") == 0) { ... }  // POPRAWNIE -- strcmp zwraca 0, gdy rowne\n== na stringach porównuje adresy w pamięci, nie zawartość — dwa identyczne teksty leżące pod różnymi adresami dadzą == fałsz, nawet jeśli litera po literze są takie same. strcmp naprawdę porównuje znak po znaku i zwraca 0, gdy są identyczne (nie 1! — to zaskakuje prawie każdego pierwszy raz).\n\n\nDzielenie linii tekstu na fragmenty: strtok\n#include &lt;string.h&gt;\n\nchar linia[100] = \"LOAD R0 10\";\nchar *slowo1 = strtok(linia, \" \");   // \"LOAD\"\nchar *slowo2 = strtok(NULL, \" \");     // \"R0\"  -- NULL = \"kontynuuj ta sama linie\"\nchar *slowo3 = strtok(NULL, \" \");     // \"10\"\nstrtok dzieli tekst na fragmenty (tokeny) według podanego separatora (tu: spacja). Pierwsze wywołanie dostaje sam tekst, kolejne — NULL, żeby powiedzieć “kontynuuj dzielenie tej samej linii, od miejsca gdzie skończyłeś”.\n\n\n\n\n\n\nNoteTo jest dokładnie “asembler” z ćwiczenia 4 wykładu o CHIP-8 (rozszerzenia)\n\n\n\nParsowanie \"LOAD R0 10\" na trzy fragmenty i zamiana pierwszego (\"LOAD\") na OP_LOAD przez porównanie strcmp, to dokładnie mechanizm, którego użylibyście, gdybyście chcieli napisać czytelny format tekstowy dla CHIP-8 zamiast gołych liczb opcode’ów — dokładnie to proponowane jest jako rozszerzenie “disassembler” w ćwiczeniu 5. Dziś budujecie ten mechanizm od podstaw na własnym, prostszym języku."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/18_stringi_parser.html#zadania",
+    "href": "podstawy_programowania/sesje/18_stringi_parser.html#zadania",
+    "title": "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — rozpoznaj nazwę operacji\nNapisz funkcję enum OpCode nazwa_na_opcode(char *nazwa), która przez ciąg if/strcmp (albo else if) zamienia \"LOAD\" na OP_LOAD, \"ADD\" na OP_ADD, itd. dla wszystkich operacji Waszej maszyny. Dla nieznanej nazwy niech zwraca specjalną wartość, np. OP_UNKNOWN (dodaj ją do enum).\n\n\nZadanie 2 — parser linii tekstu\nNapisz struct Instrukcja parsuj_linie(char *linia), która przez strtok rozbija linię na fragmenty (nazwa operacji, numer rejestru jako \"R0\", \"R1\"… i wartość) i buduje z nich struct Instrukcja. Numer rejestru z tekstu \"R0\" — pomiń pierwszy znak (R) i zamień resztę na liczbę przez atoi(napis + 1).\n\n\nZadanie 3 — pełny asembler tekstowy\nPołącz zadania 1-2 z wczytywaniem pliku z sesji 17: zamiast pliku kod rejestr wartosc (liczby), wczytaj plik z czytelnymi liniami typu LOAD R0 10, ADD R0 5, PRINT R0 0, parsując każdą linię funkcją fgets + parsuj_linie. Przetestuj na programie z sesji 17, przepisanym na czytelny format."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/18_stringi_parser.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/18_stringi_parser.html#kryterium-sukcesu",
+    "title": "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nnazwa_na_opcode poprawnie rozpoznaje wszystkie operacje Waszej maszyny i zwraca OP_UNKNOWN dla literówki (przetestuj to celowo).\nMaszyna wczytuje i wykonuje program zapisany w czytelnym formacie tekstowym (LOAD R0 10), nie tylko w gołych liczbach.\nRozumiesz, dlaczego == nie działa do porównywania tekstów w C, i kiedy sięgnąć po strcmp."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/18_stringi_parser.html#podsumowanie-sesji-1-18",
+    "href": "podstawy_programowania/sesje/18_stringi_parser.html#podsumowanie-sesji-1-18",
+    "title": "Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb",
+    "section": "Podsumowanie sesji 1-18",
+    "text": "Podsumowanie sesji 1-18\nZbudowaliście — od pierwszego printf, przez zmienne, warunki, pętle, tablice, funkcje, struktury, wskaźniki, pamięć dynamiczną, aż po pliki i parsowanie tekstu — własną, działającą maszynę wirtualną z rejestrami, skokami, warunkami, stosem i podprogramami, wczytującą programy z plików w czytelnym formacie tekstowym. To dokładnie ten sam zestaw umiejętności (plus operacje bitowe, do których dojdziecie przy okazji ćwiczeń CHIP-8), którego potrzeba do napisania emulatora prawdziwego, historycznego procesora — od jutra zaczynacie właśnie to, na kodzie, który już znacie."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/16_call_ret.html",
+    "href": "podstawy_programowania/sesje/16_call_ret.html",
+    "title": "Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji",
+    "section": "",
+    "text": "Użyć stosu z sesji 15 do zaimplementowania CALL/RET — mechanizmu “podprogramów” w maszynie wirtualnej. To zdejmuje zasłonę z tego, co C robi automatycznie za każdym razem, gdy wywołujecie zwykłą funkcję."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/16_call_ret.html#cel",
+    "href": "podstawy_programowania/sesje/16_call_ret.html#cel",
+    "title": "Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji",
+    "section": "",
+    "text": "Użyć stosu z sesji 15 do zaimplementowania CALL/RET — mechanizmu “podprogramów” w maszynie wirtualnej. To zdejmuje zasłonę z tego, co C robi automatycznie za każdym razem, gdy wywołujecie zwykłą funkcję."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/16_call_ret.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/16_call_ret.html#teoria-w-pigułce",
+    "title": "Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nCo się dzieje, gdy wywołujecie funkcję w C?\nPiszecie wynik = dodaj(3, 4); od sesji 6 — ale nigdy nie zastanawialiście się, skąd program wie, gdzie wrócić po zakończeniu dodaj. Odpowiedź: adres powrotu jest odkładany na stos (ten sam mechanizm LIFO z sesji 15!) tuż przed skokiem do funkcji, i zdejmowany ze stosu, gdy funkcja się kończy (return).\n\n\nCALL — skocz, ale zapamiętaj gdzie wrócić\ncase OP_CALL:\n    push(m, pc);          // zapamietaj, gdzie wrocic (pc juz wskazuje NASTEPNA instrukcje)\n    pc = instr.wartosc;    // skocz do \"podprogramu\"\n    break;\n\n\nRET — wróć tam, skąd przyszedłeś\ncase OP_RET:\n    pc = pop(m);   // zdejmij zapamietany adres powrotu i tam skocz\n    break;\n\n\n\n\n\n\nNoteTo jest dokładnie CALL/RET z ćwiczenia 2 CHIP-8\n\n\n\n2NNN (CALL addr) i 00EE (RET) w CHIP-8 robią dosłownie to samo, tylko na 16-elementowym stosie zamiast Waszego. Dziś napisaliście własnymi rękami mechanizm, który w C dzieje się niewidocznie przy każdym wywołaniu funkcji — i który za dwie sesje wpiszecie do chip8_cycle niemal bez zmian.\n\n\n\n\nDlaczego to ważne: rekurencja “po prostu działa” dzięki stosowi\nSkoro każde wywołanie odkłada nowy adres powrotu na stos, funkcja może wywołać samą siebie (rekurencja) — każde wywołanie dostaje własne miejsce na stosie, nie nadpisuje poprzedniego. Zobaczycie to praktycznie w zadaniu 3."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/16_call_ret.html#zadania",
+    "href": "podstawy_programowania/sesje/16_call_ret.html#zadania",
+    "title": "Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — dodaj OP_CALL i OP_RET\nDodaj obie instrukcje do maszyny z sesji 15, korzystając z push/pop, które już macie.\n\n\nZadanie 2 — “podprogram” wywoływany dwukrotnie\nNapisz “program”, w którym główna sekwencja instrukcji dwukrotnie wywołuje ten sam fragment kodu przez OP_CALL (np. “podprogram” ustawiający jeden rejestr na konkretną wartość), z różnymi instrukcjami między wywołaniami. Sprawdź, że po każdym OP_RET wykonanie wraca dokładnie tam, gdzie powinno — za instrukcję OP_CALL, nie do niej ponownie.\n\n\nZadanie 3 (dla chętnych) — zagnieżdżone wywołania\nNapisz “program”, w którym podprogram A wywołuje przez OP_CALL podprogram B, a B po zakończeniu wraca do A, a A po swoim zakończeniu wraca do głównego programu. Prześledź ręcznie na kartce, co dzieje się ze stosem (sp) w każdym momencie — narysuj go jako rosnącą/malejącą kolumnę liczb."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/16_call_ret.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/16_call_ret.html#kryterium-sukcesu",
+    "title": "Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nOP_CALL/OP_RET poprawnie wracają pod właściwy adres — zweryfikowane testem z zadania 2 (dwa wywołania, różne miejsca powrotu).\nZagnieżdżone wywołania z zadania 3 wracają w poprawnej kolejności (ostatnie wywołane, pierwsze zakończone — LIFO w praktyce).\nRozumiesz, że mechanizm, który dziś zaimplementowaliście ręcznie, to dokładnie to, co C robi za Was przy każdym zwykłym wywołaniu funkcji."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html",
+    "href": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html",
+    "title": "Sesja 14 — Flagi i skoki warunkowe",
+    "section": "",
+    "text": "Dodać porównania i warunkowy skok — rozwiązać problem zostawiony otwartym w sesji 13 (bezwarunkowy OP_JUMP nie wystarcza do pętli, która sama się kończy)."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html#cel",
+    "href": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html#cel",
+    "title": "Sesja 14 — Flagi i skoki warunkowe",
+    "section": "",
+    "text": "Dodać porównania i warunkowy skok — rozwiązać problem zostawiony otwartym w sesji 13 (bezwarunkowy OP_JUMP nie wystarcza do pętli, która sama się kończy)."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html#teoria-w-pigułce",
+    "title": "Sesja 14 — Flagi i skoki warunkowe",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nPomysł: flaga jako “pamięć” ostatniego porównania\nZamiast robić skok, który sam sprawdza warunek, rozbijmy to na dwa kroki — dokładnie tak, jak robi to CHIP-8 (i większość prawdziwych procesorów):\n\nInstrukcja porównania (OP_CMP) sprawdza dwie wartości i zapisuje wynik w specjalnej zmiennej — fladze.\nInstrukcja skoku warunkowego (OP_JUMP_IF_ZERO) sprawdza flagę i skacze tylko jeśli jest ustawiona.\n\nint flaga_zero = 0;   // czy ostatnie porownanie dalo wynik \"rowne\"?\n\n// ...w petli wykonania:\ncase OP_CMP:\n    flaga_zero = (m-&gt;rejestry[instr.rejestr_docelowy] == instr.wartosc);\n    break;\n\ncase OP_JUMP_IF_ZERO:\n    if (flaga_zero) {\n        pc = instr.wartosc;\n    }\n    break;\nRozdzielenie “porównaj” i “skocz” na dwie osobne instrukcje wydaje się na pierwszy rzut oka niewygodne (dwie instrukcje zamiast jednej) — ale to dokładnie schemat pracy prawdziwego procesora: ALU liczy wynik i przy okazji ustawia bity w rejestrze flag, a osobna instrukcja skoku je odczytuje.\n\n\n\n\n\n\nNoteTo jest dokładnie rodzina “skip” z ćwiczenia 2 CHIP-8\n\n\n\nCHIP-8 robi to nieco inaczej niż klasyczny model flag: 3XKK (SE Vx, byte) łączy “porównaj” i “warunkowo pomiń następną instrukcję” w jedną instrukcję, bez osobnej flagi. Wasza wersja z dzisiejszej sesji jest bliższa “podręcznikowemu” modelowi procesora (osobna flaga) — w ćwiczeniu 2 zobaczycie wariant bardziej zwarty (wbudowany warunek), typowy właśnie dla CHIP-8. Warto znać oba, bo różne architektury robią to różnie."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html#zadania",
+    "href": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html#zadania",
+    "title": "Sesja 14 — Flagi i skoki warunkowe",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — dodaj OP_CMP i OP_JUMP_IF_ZERO\nDodaj obie instrukcje do maszyny z sesji 13. Pole flaga_zero dodaj do struct Maszyna (nie jako osobną zmienną w main — powinno żyć tam, gdzie reszta stanu maszyny).\n\n\nZadanie 2 — pętla licząca w dół (rozwiązanie zagadki z sesji 13)\nNapisz “program”: ustaw rejestr na 5, w pętli: porównaj z 0, jeśli równe — skocz do końca (wypisz coś i zakończ), jeśli nie — zmniejsz rejestr o 1 i skocz na początek pętli. To dokładnie ten wzorzec, który nie udał się w zadaniu 3 sesji 13 — teraz powinien zadziałać.\n\n\nZadanie 3 — dodaj OP_JUMP_IF_NOT_ZERO\nDodaj przeciwną instrukcję (skacz, jeśli flaga nie jest ustawiona) i przepisz pętlę z zadania 2, żeby użyć jej zamiast odwracania logiki porównania. Porównaj oba podejścia — który zapis jest czytelniejszy?"
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html#kryterium-sukcesu",
+    "title": "Sesja 14 — Flagi i skoki warunkowe",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nPętla licząca w dół z zadania 2 kończy się sama, bez ręcznego przerywania — pierwszy raz w tym kursie warunkowa pętla działa w Waszej własnej maszynie wirtualnej, nie w C bezpośrednio.\nRozumiesz, dlaczego rozbicie “porównaj” i “skocz” na dwie instrukcje z osobną flagą to model bliski temu, jak działają prawdziwe procesory."
+  },
+  {
     "objectID": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html",
     "href": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html",
     "title": "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry",
@@ -700,5 +812,110 @@
     "title": "Sesja 11 — Wskaźniki do struktur: operator ->",
     "section": "Kryterium sukcesu",
     "text": "Kryterium sukcesu\n\nMaszyna operuje na struct Maszyna *m z użyciem -&gt; we wszystkich funkcjach.\nPotrafisz bez wahania powiedzieć, kiedy używa się ., a kiedy -&gt; (odpowiedź: zależy wyłącznie od tego, czy zmienna po lewej to struktura, czy wskaźnik do niej — nigdy od tego, co “wygląda naturalniej”).\nakumulator_bledow poprawnie liczy nieznane instrukcje w testowym programie."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/13_licznik_instrukcji.html",
+    "href": "podstawy_programowania/sesje/13_licznik_instrukcji.html",
+    "title": "Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’",
+    "section": "",
+    "text": "Zamienić pętlę for (która zawsze idzie po kolei, o jeden do przodu) na jawny licznik instrukcji (pc, program counter) — zmienną, którą sama instrukcja może zmienić, żeby wykonanie “skoczyło” gdzie indziej. To dokładnie mechanizm JP z ćwiczenia 1 CHIP-8."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/13_licznik_instrukcji.html#cel",
+    "href": "podstawy_programowania/sesje/13_licznik_instrukcji.html#cel",
+    "title": "Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’",
+    "section": "",
+    "text": "Zamienić pętlę for (która zawsze idzie po kolei, o jeden do przodu) na jawny licznik instrukcji (pc, program counter) — zmienną, którą sama instrukcja może zmienić, żeby wykonanie “skoczyło” gdzie indziej. To dokładnie mechanizm JP z ćwiczenia 1 CHIP-8."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/13_licznik_instrukcji.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/13_licznik_instrukcji.html#teoria-w-pigułce",
+    "title": "Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nOgraniczenie pętli for\nfor (int i = 0; i &lt; n; i++) zawsze przechodzi przez instrukcje po kolei, co jeden. Nie da się nią wyrazić “wróć do instrukcji 2” ani “przeskocz od razu do instrukcji 8” — a bez tego nie da się napisać pętli w samym wykonywanym programie (w odróżnieniu od pętli w kodzie C, który go wykonuje).\n\n\npc jako zwykła zmienna, while zamiast for\nint pc = 0;   // \"program counter\" -- ktora instrukcja jest teraz wykonywana\n\nwhile (pc &lt; liczba_instrukcji) {\n    struct Instrukcja instr = program[pc];\n    pc++;   // domyslnie: idz do nastepnej\n\n    switch (instr.kod) {\n        case OP_JUMP:\n            pc = instr.wartosc;   // NADPISUJE pc -- to jest skok!\n            break;\n        // ... reszta operacji jak dotad\n    }\n}\nKluczowa różnica względem sesji 9-12: pc++ wykonuje się najpierw, zanim switch zdąży cokolwiek zrobić — dokładnie tak samo, jak w zadaniu 4 ćwiczenia 1 CHIP-8 (“zwiększ pc o 2 zanim wykonasz instrukcję”). Dzięki temu OP_JUMP może po prostu nadpisać pc swoją docelową wartością, bez martwienia się, że zaraz zostanie ona jeszcze raz zmieniona.\n\n\n\n\n\n\nNoteTo jest dokładnie chip8.pc z ćwiczenia 1\n\n\n\nRóżnica jest kosmetyczna: tam pc rośnie o 2 (bo instrukcja zajmuje 2 bajty), tutaj o 1 (bo Wasza tablica trzyma całe struktury, nie bajty). Mechanizm — “zwiększ najpierw, skok może to nadpisać” — jest identyczny."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/13_licznik_instrukcji.html#zadania",
+    "href": "podstawy_programowania/sesje/13_licznik_instrukcji.html#zadania",
+    "title": "Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — dodaj OP_JUMP\nPrzepisz maszynę z sesji 12 na while z jawnym pc, jak w sekcji teorii. Dodaj OP_JUMP do enum OpCode — pole wartosc instrukcji będzie teraz oznaczać “docelowy indeks w tablicy program”, nie literał do wpisania w rejestr.\n\n\nZadanie 2 — pętla nieskończona (celowo!)\nNapisz “program” z instrukcją OP_JUMP wskazującą wstecz, na samą siebie albo wcześniejszą instrukcję — tak, żeby stworzyć celową pętlę nieskończoną. Uruchom (i przerwij Ctrl+C). To pokazuje, że nic w samej maszynie nie chroni przed nieskończonym wykonywaniem — dokładnie tak samo jak w prawdziwym procesorze: jeśli program ma błąd logiczny prowadzący do pętli bez wyjścia, procesor będzie ją wykonywał w nieskończoność, absolutnie posłusznie.\n\n\nZadanie 3 — pętla z warunkiem końca (bez if w maszynie — jeszcze)\nSpróbuj napisać “program”, który liczy w dół od 5 do 0, używając tylko OP_JUMP i rejestrów (bez żadnej instrukcji warunkowej — jeszcze jej nie macie, to temat sesji 14). Zorientujesz się, że nie da się tego zrobić poprawnie — OP_JUMP zawsze skacze, bezwarunkowo, więc pętla nigdy się nie zatrzyma sama. Zanotuj to doświadczenie — następna sesja rozwiąże dokładnie ten problem."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/13_licznik_instrukcji.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/13_licznik_instrukcji.html#kryterium-sukcesu",
+    "title": "Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nMaszyna używa jawnego pc w pętli while, nie for z automatycznym i++.\nOP_JUMP poprawnie przenosi wykonanie do wskazanego indeksu — potrafisz to pokazać zarówno skokiem do przodu, jak i wstecz.\nRozumiesz i potrafisz wytłumaczyć, dlaczego bezwarunkowy skok sam w sobie nie wystarcza do napisania sensownej pętli — i że dokładnie to jest powód, dla którego następna sesja wprowadza warunki."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/15_stos.html",
+    "href": "podstawy_programowania/sesje/15_stos.html",
+    "title": "Sesja 15 — Stos: LIFO w tablicy",
+    "section": "",
+    "text": "Zaimplementować stos (LIFO — Last In, First Out) jako tablicę + wskaźnik szczytu, i dodać PUSH/POP do maszyny wirtualnej. To bezpośredni przygotowanie do CALL/RET w sesji 16 i w ćwiczeniu 2 CHIP-8."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/15_stos.html#cel",
+    "href": "podstawy_programowania/sesje/15_stos.html#cel",
+    "title": "Sesja 15 — Stos: LIFO w tablicy",
+    "section": "",
+    "text": "Zaimplementować stos (LIFO — Last In, First Out) jako tablicę + wskaźnik szczytu, i dodać PUSH/POP do maszyny wirtualnej. To bezpośredni przygotowanie do CALL/RET w sesji 16 i w ćwiczeniu 2 CHIP-8."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/15_stos.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/15_stos.html#teoria-w-pigułce",
+    "title": "Sesja 15 — Stos: LIFO w tablicy",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nLIFO — ostatni wchodzi, pierwszy wychodzi\nWyobraź sobie stos talerzy: kładziesz nowy talerz na wierzchu, i zdejmujesz też z wierzchu — nigdy z środka czy ze spodu. To jest stos jako struktura danych:\n\nPUSH — połóż nową wartość na wierzchu,\nPOP — zdejmij i zwróć wartość z wierzchu.\n\n\n\nImplementacja: tablica + sp (stack pointer)\nint stos[16];\nint sp = 0;   // \"stack pointer\" -- indeks pierwszego WOLNEGO miejsca\n\nvoid push(int stos[], int *sp, int wartosc) {\n    stos[*sp] = wartosc;\n    (*sp)++;\n}\n\nint pop(int stos[], int *sp) {\n    (*sp)--;\n    return stos[*sp];\n}\nZwróć uwagę na int *sp — sp musi być zmieniane wewnątrz funkcji i widoczne na zewnątrz, więc funkcja przyjmuje wskaźnik do niego (sesja 10!). (*sp)++ zwiększa wartość, na którą wskazuje sp — nawiasy są konieczne, bo *sp++ (bez nawiasów) znaczyłoby coś innego (zwiększenie samego wskaźnika, nie wartości pod nim) — subtelna pułapka warta zapamiętania.\n\n\n\n\n\n\nImportantPrzepełnienie i niedomiar stosu\n\n\n\npush na pełny stos (sp już przy końcu tablicy) zapisze poza jej granicami — niezdefiniowane zachowanie, ten sam problem co w sesji 5. pop z pustego stosu (sp == 0) odczyta stos[-1] — też poza tablicą. Prawdziwe systemy operacyjne mają mechanizmy wykrywania przepełnienia stosu; Wasza maszyna na razie nie — zapamiętajcie to jako świadome uproszczenie, do którego wrócicie w sesji o obsłudze błędów."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/15_stos.html#zadania",
+    "href": "podstawy_programowania/sesje/15_stos.html#zadania",
+    "title": "Sesja 15 — Stos: LIFO w tablicy",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — funkcje push/pop\nDodaj int stos[16] i int sp do struct Maszyna z poprzednich sesji. Napisz push/pop jako funkcje przyjmujące struct Maszyna *m (jak w sesji 11), zamiast osobnych parametrów stos[]/sp.\n\n\nZadanie 2 — OP_PUSH_REG i OP_POP_REG\nDodaj do maszyny instrukcje: OP_PUSH_REG (odłóż wartość rejestru na stos), OP_POP_REG (zdejmij ze stosu do rejestru). Napisz “program” testowy: odłóż wartości trzech różnych rejestrów na stos, potem zdejmij je do innych trzech rejestrów — sprawdź, że wychodzą w odwróconej kolejności (to jest właśnie LIFO).\n\n\nZadanie 3 — zamiana dwóch rejestrów przez stos\nBez używania żadnej zmiennej tymczasowej w C (tylko instrukcjami Waszej maszyny: PUSH/POP), zamień wartości dwóch rejestrów miejscami. Podpowiedź: PUSH obu, potem POP w odwrotnej kolejności."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/15_stos.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/15_stos.html#kryterium-sukcesu",
+    "title": "Sesja 15 — Stos: LIFO w tablicy",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\npush/pop poprawnie realizują zachowanie LIFO — potwierdzone testem z zadania 2.\nRozumiesz, dlaczego sp musi być przekazywane przez wskaźnik (albo jako pole struktury przez -&gt;), a nie przez zwykłą wartość.\nZamiana rejestrów przez stos w zadaniu 3 działa poprawnie."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/17_pliki.html",
+    "href": "podstawy_programowania/sesje/17_pliki.html",
+    "title": "Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym",
+    "section": "",
+    "text": "Wczytać “program” dla maszyny wirtualnej z pliku na dysku, zamiast wpisywać go na sztywno w kodzie C. To dokładnie to, co zrobi chip8_load_rom w ćwiczeniu 1 CHIP-8 — dziś ćwiczycie tę samą operację na prostszym formacie danych."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/17_pliki.html#cel",
+    "href": "podstawy_programowania/sesje/17_pliki.html#cel",
+    "title": "Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym",
+    "section": "",
+    "text": "Wczytać “program” dla maszyny wirtualnej z pliku na dysku, zamiast wpisywać go na sztywno w kodzie C. To dokładnie to, co zrobi chip8_load_rom w ćwiczeniu 1 CHIP-8 — dziś ćwiczycie tę samą operację na prostszym formacie danych."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/17_pliki.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/17_pliki.html#teoria-w-pigułce",
+    "title": "Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nFILE * i podstawowe operacje\n#include &lt;stdio.h&gt;\n\nFILE *f = fopen(\"program.txt\", \"r\");   // \"r\" = do odczytu, tekstowo\nif (f == NULL) {\n    fprintf(stderr, \"Nie mozna otworzyc pliku\\n\");\n    return 1;\n}\n\n// ... odczyt ...\n\nfclose(f);   // ZAWSZE zamykaj plik, gdy skonczysz -- to jak \"free\" dla malloc\nfopen zwraca NULL, jeśli plik nie istnieje albo nie ma do niego dostępu — zawsze to sprawdzajcie, dokładnie tak jak sprawdzaliście wynik malloc w sesji 12. To ten sam wzorzec defensywnego programowania, powtórzony na nowym zasobie systemowym.\n\n\nOdczyt liczb z pliku tekstowego: fscanf\nint kod, rejestr, wartosc;\nwhile (fscanf(f, \"%d %d %d\", &kod, &rejestr, &wartosc) == 3) {\n    // przetworz jedna instrukcje\n}\nfscanf działa jak scanf z sesji 2, tylko czyta z pliku (f) zamiast z klawiatury. Zwraca liczbę pomyślnie wczytanych wartości — sprawdzenie == 3 to sposób na wykrycie końca pliku albo złego formatu danych, zamiast zgadywać.\n\n\nOdczyt danych binarnych: fread\nPliki .ch8 w CHIP-8 to dane binarne (surowe bajty), nie tekst — do nich używa się innej funkcji:\nuint8_t bufor[4096];\nsize_t wczytano = fread(bufor, 1, 4096, f);\n// bufor[0..wczytano-1] zawiera zawartosc pliku\nfread(cel, rozmiar_elementu, liczba_elementow, plik) czyta surowe bajty — nie próbuje interpretować ich jako tekst czy liczby w formacie czytelnym dla człowieka, w odróżnieniu od fscanf. To dokładnie funkcja, której użyjecie w chip8_load_rom.\n\n\n\n\n\n\nNoteFormat tekstowy dziś, format binarny w CHIP-8 — dlaczego różnica?\n\n\n\nDziś, dla wygody testowania i czytelności, Wasz “program” to zwykły plik tekstowy z liczbami oddzielonymi spacjami. Prawdziwe ROM-y CHIP-8 to binarne pliki .ch8 — dokładnie ten format, w jakim gry z lat 70. faktycznie krążyły. Zasada wczytywania (otwórz, sprawdź błąd, czytaj, zamknij) jest identyczna — różni się tylko funkcja odczytu (fscanf dla tekstu, fread dla bajtów) i to, czy trzeba osobno “parsować” wczytany tekst (do tego wracamy w sesji 18)."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/17_pliki.html#zadania",
+    "href": "podstawy_programowania/sesje/17_pliki.html#zadania",
+    "title": "Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — zapisz testowy program do pliku\nRęcznie (w edytorze tekstu) utwórz plik program.txt z kilkoma instrukcjami Waszej maszyny w formacie kod rejestr wartosc, po jednej na linię, np.:\n1 0 10\n2 0 5\n3 0 0\n(gdzie 1 = LOAD, 2 = ADD, 3 = PRINT — dopasuj do swoich wartości enum).\n\n\nZadanie 2 — wczytywanie z pliku zamiast tablicy w kodzie\nZmień main z sesji 16, żeby zamiast tablicy struct Instrukcja program[] = {...} wpisanej w kodzie, wczytywał instrukcje z pliku podanego jako argument wiersza poleceń: ./maszyna program.txt. Skorzystaj z argc/argv, tak jak w kodzie startowym ćwiczenia 1 CHIP-8 (int main(int argc, char **argv)), i z malloc/realloc z sesji 12, bo nie znacie z góry liczby instrukcji w pliku.\n\n\nZadanie 3 — obsługa błędnego pliku\nSprawdź, co się stanie, gdy podasz nieistniejącą nazwę pliku, i upewnij się, że program wypisuje czytelny komunikat błędu (nie crashuje bez wyjaśnienia). Sprawdź też plik z błędnym formatem (np. tekst zamiast liczb) — czy Wasze sprawdzenie fscanf(...) == 3 poprawnie to wykrywa?"
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/17_pliki.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/17_pliki.html#kryterium-sukcesu",
+    "title": "Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nMaszyna wczytuje program z pliku podanego jako argument wiersza poleceń, nie z kodu źródłowego.\nProgram kończy się czytelnym komunikatem błędu (nie awarią) przy nieistniejącym pliku.\nRozumiesz różnicę między fscanf (tekst, sparsowany od razu na liczby) a fread (surowe bajty) — i wiesz, której użyjecie w ćwiczeniu 1 CHIP-8."
   }
 ]

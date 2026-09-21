@@ -1,0 +1,86 @@
+---
+title: "Sesja 13 — Licznik instrukcji: skoki zamiast tylko 'do przodu'"
+format: html
+toc: true
+---
+
+## Cel
+
+Zamienić pętlę `for` (która zawsze idzie po kolei, o jeden do przodu) na jawny
+**licznik instrukcji** (`pc`, *program counter*) — zmienną, którą sama instrukcja może
+zmienić, żeby wykonanie "skoczyło" gdzie indziej. To dokładnie mechanizm `JP` z
+ćwiczenia 1 CHIP-8.
+
+## Teoria w pigułce
+
+### Ograniczenie pętli `for`
+
+`for (int i = 0; i < n; i++)` zawsze przechodzi przez instrukcje **po kolei, co
+jeden**. Nie da się nią wyrazić "wróć do instrukcji 2" ani "przeskocz od razu do
+instrukcji 8" — a bez tego nie da się napisać pętli **w samym wykonywanym programie**
+(w odróżnieniu od pętli w kodzie C, który go wykonuje).
+
+### `pc` jako zwykła zmienna, `while` zamiast `for`
+
+```c
+int pc = 0;   // "program counter" -- ktora instrukcja jest teraz wykonywana
+
+while (pc < liczba_instrukcji) {
+    struct Instrukcja instr = program[pc];
+    pc++;   // domyslnie: idz do nastepnej
+
+    switch (instr.kod) {
+        case OP_JUMP:
+            pc = instr.wartosc;   // NADPISUJE pc -- to jest skok!
+            break;
+        // ... reszta operacji jak dotad
+    }
+}
+```
+
+Kluczowa różnica względem sesji 9-12: `pc++` wykonuje się **najpierw**, zanim
+switch zdąży cokolwiek zrobić — dokładnie tak samo, jak w zadaniu 4 ćwiczenia 1
+CHIP-8 ("zwiększ `pc` o 2 zanim wykonasz instrukcję"). Dzięki temu `OP_JUMP` może po
+prostu **nadpisać** `pc` swoją docelową wartością, bez martwienia się, że zaraz
+zostanie ona jeszcze raz zmieniona.
+
+::: {.callout-note}
+## To jest dokładnie `chip8.pc` z ćwiczenia 1
+Różnica jest kosmetyczna: tam `pc` rośnie o 2 (bo instrukcja zajmuje 2 bajty), tutaj o
+1 (bo Wasza tablica trzyma całe struktury, nie bajty). Mechanizm — "zwiększ najpierw,
+skok może to nadpisać" — jest identyczny.
+:::
+
+## Zadania
+
+### Zadanie 1 — dodaj `OP_JUMP`
+
+Przepisz maszynę z sesji 12 na `while` z jawnym `pc`, jak w sekcji teorii. Dodaj
+`OP_JUMP` do `enum OpCode` — pole `wartosc` instrukcji będzie teraz oznaczać "docelowy
+indeks w tablicy `program`", nie literał do wpisania w rejestr.
+
+### Zadanie 2 — pętla nieskończona (celowo!)
+
+Napisz "program" z instrukcją `OP_JUMP` wskazującą **wstecz**, na samą siebie albo
+wcześniejszą instrukcję — tak, żeby stworzyć celową pętlę nieskończoną. Uruchom (i
+przerwij Ctrl+C). To pokazuje, że **nic w samej maszynie nie chroni przed
+nieskończonym wykonywaniem** — dokładnie tak samo jak w prawdziwym procesorze: jeśli
+program ma błąd logiczny prowadzący do pętli bez wyjścia, procesor będzie ją
+wykonywał w nieskończoność, absolutnie posłusznie.
+
+### Zadanie 3 — pętla z warunkiem końca (bez `if` w maszynie — jeszcze)
+
+Spróbuj napisać "program", który liczy w dół od 5 do 0, używając tylko `OP_JUMP` i
+rejestrów (bez żadnej instrukcji warunkowej — jeszcze jej nie macie, to temat sesji
+14). Zorientujesz się, że **nie da się** tego zrobić poprawnie — `OP_JUMP` zawsze
+skacze, bezwarunkowo, więc pętla nigdy się nie zatrzyma sama. Zanotuj to
+doświadczenie — następna sesja rozwiąże dokładnie ten problem.
+
+## Kryterium sukcesu
+
+- Maszyna używa jawnego `pc` w pętli `while`, nie `for` z automatycznym `i++`.
+- `OP_JUMP` poprawnie przenosi wykonanie do wskazanego indeksu — potrafisz to pokazać
+  zarówno skokiem do przodu, jak i wstecz.
+- Rozumiesz i potrafisz wytłumaczyć, dlaczego bezwarunkowy skok sam w sobie nie
+  wystarcza do napisania sensownej pętli — i że dokładnie to jest powód, dla którego
+  następna sesja wprowadza warunki.

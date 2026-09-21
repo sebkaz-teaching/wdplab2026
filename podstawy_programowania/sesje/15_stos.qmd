@@ -1,0 +1,81 @@
+---
+title: "Sesja 15 — Stos: LIFO w tablicy"
+format: html
+toc: true
+---
+
+## Cel
+
+Zaimplementować stos (LIFO — *Last In, First Out*) jako tablicę + wskaźnik szczytu, i
+dodać `PUSH`/`POP` do maszyny wirtualnej. To bezpośredni przygotowanie do `CALL`/`RET`
+w sesji 16 i w ćwiczeniu 2 CHIP-8.
+
+## Teoria w pigułce
+
+### LIFO — ostatni wchodzi, pierwszy wychodzi
+
+Wyobraź sobie stos talerzy: kładziesz nowy talerz **na wierzchu**, i zdejmujesz też
+**z wierzchu** — nigdy z środka czy ze spodu. To jest stos jako struktura danych:
+
+- **PUSH** — połóż nową wartość na wierzchu,
+- **POP** — zdejmij i zwróć wartość z wierzchu.
+
+### Implementacja: tablica + `sp` (stack pointer)
+
+```c
+int stos[16];
+int sp = 0;   // "stack pointer" -- indeks pierwszego WOLNEGO miejsca
+
+void push(int stos[], int *sp, int wartosc) {
+    stos[*sp] = wartosc;
+    (*sp)++;
+}
+
+int pop(int stos[], int *sp) {
+    (*sp)--;
+    return stos[*sp];
+}
+```
+
+Zwróć uwagę na `int *sp` — `sp` musi być zmieniane **wewnątrz** funkcji i widoczne na
+zewnątrz, więc funkcja przyjmuje wskaźnik do niego (sesja 10!). `(*sp)++` zwiększa
+wartość, na którą wskazuje `sp` — nawiasy są konieczne, bo `*sp++` (bez nawiasów)
+znaczyłoby coś innego (zwiększenie samego wskaźnika, nie wartości pod nim) — subtelna
+pułapka warta zapamiętania.
+
+::: {.callout-important}
+## Przepełnienie i niedomiar stosu
+`push` na pełny stos (`sp` już przy końcu tablicy) zapisze poza jej granicami —
+niezdefiniowane zachowanie, ten sam problem co w sesji 5. `pop` z pustego stosu
+(`sp == 0`) odczyta `stos[-1]` — też poza tablicą. Prawdziwe systemy operacyjne mają
+mechanizmy wykrywania przepełnienia stosu; Wasza maszyna na razie nie — zapamiętajcie
+to jako świadome uproszczenie, do którego wrócicie w sesji o obsłudze błędów.
+:::
+
+## Zadania
+
+### Zadanie 1 — funkcje `push`/`pop`
+
+Dodaj `int stos[16]` i `int sp` do `struct Maszyna` z poprzednich sesji. Napisz
+`push`/`pop` jako funkcje przyjmujące `struct Maszyna *m` (jak w sesji 11), zamiast
+osobnych parametrów `stos[]`/`sp`.
+
+### Zadanie 2 — `OP_PUSH_REG` i `OP_POP_REG`
+
+Dodaj do maszyny instrukcje: `OP_PUSH_REG` (odłóż wartość rejestru na stos),
+`OP_POP_REG` (zdejmij ze stosu do rejestru). Napisz "program" testowy: odłóż wartości
+trzech różnych rejestrów na stos, potem zdejmij je do innych trzech rejestrów —
+sprawdź, że wychodzą w **odwróconej** kolejności (to jest właśnie LIFO).
+
+### Zadanie 3 — zamiana dwóch rejestrów przez stos
+
+Bez używania żadnej zmiennej tymczasowej w C (tylko instrukcjami Waszej maszyny:
+`PUSH`/`POP`), zamień wartości dwóch rejestrów miejscami. Podpowiedź: `PUSH` obu,
+potem `POP` w odwrotnej kolejności.
+
+## Kryterium sukcesu
+
+- `push`/`pop` poprawnie realizują zachowanie LIFO — potwierdzone testem z zadania 2.
+- Rozumiesz, dlaczego `sp` musi być przekazywane przez wskaźnik (albo jako pole
+  struktury przez `->`), a nie przez zwykłą wartość.
+- Zamiana rejestrów przez stos w zadaniu 3 działa poprawnie.
