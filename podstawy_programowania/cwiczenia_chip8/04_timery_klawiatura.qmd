@@ -1,0 +1,161 @@
+---
+title: "Ćwiczenie 4 — Timery i klawiatura"
+format: html
+toc: true
+---
+
+## Cel
+
+Dodać dwa niezależne od CPU zegary (`delay timer`, `sound timer`, oba tykające ze stałą
+częstotliwością 60 Hz) oraz obsługę 16-przyciskowej klawiatury. Po tym ćwiczeniu emulator
+jest funkcjonalnie kompletny.
+
+Startujesz od kodu z ćwiczenia 3.
+
+## Teoria w pigułce
+
+### Dwa zegary, dwie częstotliwości
+
+CHIP-8 ma dwa **8-bitowe liczniki czasowe**: `delay_timer` (używany przez gry do
+odmierzania czasu) i `sound_timer` (dopóki > 0, powinien brzęczeć głośnik — w naszym
+terminalowym emulatorze pominiemy dźwięk). Oba **dekrementują się 60 razy na
+sekundę**, niezależnie od tego, jak szybko wykonują się instrukcje procesora.
+
+To pierwszy moment, gdzie **prędkość CPU i częstotliwość timerów muszą być
+rozdzielone** — typowa implementacja wykonuje ok. 500-700 instrukcji/s, ale
+dekrementuje timery dokładnie 60 razy/s.
+
+::: {.callout-note}
+## To nie jest specyfika CHIP-8 — to specyfika prawdziwego sprzętu
+Wykład 3 wspominał, że współczesne procesory taktowane są zegarem 3-5 GHz. Ale
+peryferia (timery, kontrolery I/O) **rzadko dzielą ten sam zegar co rdzeń CPU** — mają
+własne, wolniejsze oscylatory, bo np. odświeżanie ekranu i tak nie ma sensu robić
+szybciej niż ludzkie oko dostrzega (stąd standardowe 60 Hz — te same 60 Hz, które
+znacie z odświeżania monitora). Oryginalny komputer COSMAC VIP, na którym CHIP-8
+faktycznie działał w 1977 roku, miał procesor taktowany dosłownie ~1-3 MHz z osobnym
+zegarem 60 Hz do timerów — nasza pętla `main` z `usleep` odtwarza dokładnie ten
+podział, tylko w software.
+:::
+
+### Polling zamiast przerwań
+
+**Klawiatura** CHIP-8 ma układ 4×4 (`0-F`), historycznie mapowany na fizyczną
+klawiaturę hex. Standardowe mapowanie na współczesną klawiaturę QWERTY:
+
+```
+CHIP-8:        Klawiatura:
+1 2 3 C        1 2 3 4
+4 5 6 D   ->   Q W E R
+7 8 9 E        A S D F
+A 0 B F        Z X C V
+```
+
+::: {.callout-tip}
+## Dlaczego sprawdzamy klawiaturę w pętli, a nie czekamy na przerwanie?
+Wykład 3 wspominał, że prawdziwe urządzenia I/O komunikują się z CPU często przez
+**przerwania** (*interrupts*) — urządzenie samo "budzi" procesor sygnałem "mam dane,
+obsłuż mnie!", zamiast żeby procesor musiał bez przerwy pytać "czy coś się zmieniło?".
+To, co zrobimy w tym ćwiczeniu — sprawdzanie `stdin` w każdej klatce, w pętli — to
+**polling** (odpytywanie), prostszy, ale mniej wydajny model: CPU marnuje cykle,
+pytając nawet wtedy, gdy nic się nie zmieniło. Prawdziwe sterowniki klawiatury w
+systemach operacyjnych używają przerwań właśnie po to, żeby tego uniknąć. Polling
+wybieramy tu celowo — jest prostszy do zaimplementowania bez sterowników systemowych,
+a przy 60 klatkach/s koszt jest pomijalny.
+:::
+
+## Zadania
+
+### Zadanie 1 — pola timerów i podstawowe opcode'y
+
+Dodaj `delay_timer`, `sound_timer` do struktury. Zaimplementuj:
+
+- `0xFX07` (`LD Vx, DT`): `V[x] = delay_timer`
+- `0xFX15` (`LD DT, Vx`): `delay_timer = V[x]`
+- `0xFX18` (`LD ST, Vx`): `sound_timer = V[x]`
+
+### Zadanie 2 — dekrementacja timerów w pętli głównej
+
+W `main` rozdziel dwie prędkości: procesor ma wykonywać ok. 540 instrukcji/s (czyli ok.
+9 instrukcji na każdą 1/60 s klatkę), a timery dekrementować się dokładnie 60 razy/s.
+Użyj `usleep` (z `<unistd.h>`) do kontroli tempa pętli.
+
+Szkielet:
+
+```c
+while (running) {
+    for (int i = 0; i < 9; i++) chip8_cycle(&chip8); // ~540 Hz
+
+    if (chip8.delay_timer > 0) chip8.delay_timer--;
+    if (chip8.sound_timer > 0) chip8.sound_timer--;
+
+    if (chip8.draw_flag) { chip8_render(&chip8); chip8.draw_flag = 0; }
+
+    usleep(16667); // ~60 Hz (1/60 s = 16667 us)
+}
+```
+
+### Zadanie 3 — klawiatura: tryb raw terminala
+
+Standardowy `read()`/`getchar()` w terminalu jest *buforowany liniami* — program dostaje
+znak dopiero po Enterze, co jest bezużyteczne dla gry w czasie rzeczywistym. Musisz
+przełączyć terminal w tryb *raw* i *non-blocking* przez `termios.h`.
+
+```c
+#include <termios.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+struct termios orig_termios;
+
+void disable_raw_mode(void) {
+    tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios);
+}
+
+void enable_raw_mode(void) {
+    tcgetattr(STDIN_FILENO, &orig_termios);
+    atexit(disable_raw_mode); // zawsze przywroc terminal na wyjsciu
+
+    struct termios raw = orig_termios;
+    raw.c_lflag &= ~(ECHO | ICANON); // no echo, no line buffering
+    tcsetattr(STDIN_FILENO, TCSANOW, &raw);
+
+    // non-blocking read
+    fcntl(STDIN_FILENO, F_SETFL, fcntl(STDIN_FILENO, F_GETFL) | O_NONBLOCK);
+}
+```
+
+Wywołaj `enable_raw_mode()` na początku `main`. Teraz `getchar()` zwróci `EOF`
+natychmiast, jeśli nic nie zostało wciśnięte, zamiast czekać.
+
+### Zadanie 4 — mapowanie klawiszy i opcode'y klawiatury
+
+Dodaj `uint8_t keypad[16]` do struktury. Napisz funkcję `map_key(char c)` zwracającą
+indeks 0-15 (lub -1 jeśli klawisz nie należy do mapy) wg tabeli z sekcji teorii.
+W pętli głównej, przed każdą klatką, wyczyść `keypad` (wszystko na 0), odczytaj
+wszystkie dostępne znaki z `getchar()` (pętla aż do `EOF`, bo non-blocking), zamapuj i
+ustaw odpowiedni bit w `keypad`.
+
+Zaimplementuj:
+
+- `0xEX9E` (`SKP Vx`): jeśli `keypad[V[x]]` jest wciśnięty, pomiń następną instrukcję
+- `0xEXA1` (`SKNP Vx`): jeśli **nie** jest wciśnięty, pomiń następną instrukcję
+- `0xFX0A` (`LD Vx, K`): **zablokuj** procesor (nie inkrementuj `pc` dalej, wykonuj tę
+  samą instrukcję w kółko) dopóki jakikolwiek klawisz nie zostanie wciśnięty, wtedy
+  zapisz jego indeks do `V[x]`
+
+Wskazówka do `FX0A`: najprościej cofnąć `pc` o 2 na końcu cyklu, jeśli żaden klawisz nie
+jest wciśnięty — instrukcja "czeka" wykonując się wielokrotnie.
+
+## Test
+
+Napisz mały ręczny ROM, który czeka na wciśnięcie klawisza `5` (`FX0A`), a potem rysuje
+odpowiadającą mu cyfrę na środku ekranu (użyj `FX29` + `DXYN` z ćwiczenia 3). To spina w
+jeden test wszystkie cztery ćwiczenia naraz.
+
+## Kryterium sukcesu
+
+- Timery dekrementują się w tempie ok. 60/s niezależnie od tego, ile instrukcji
+  wykonuje procesor na klatkę.
+- Terminal nie wymaga Entera, żeby zarejestrować wciśnięcie klawisza.
+- Program przywraca normalny tryb terminala po zakończeniu (sprawdź: terminal działa
+  normalnie po `Ctrl+C` albo zwykłym zakończeniu programu).

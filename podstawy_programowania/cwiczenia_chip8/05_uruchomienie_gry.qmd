@@ -1,0 +1,70 @@
+---
+title: "Ćwiczenie 5 — Uruchomienie prawdziwej gry"
+format: html
+toc: true
+---
+
+## Cel
+
+Bez nowego kodu — to moment "wow" na koniec: emulator z ćwiczeń 1-4 uruchamia
+prawdziwe, publicznie dostępne gry CHIP-8 z lat 70./80.
+
+## Skąd wziąć ROM-y
+
+CHIP-8 to platforma z bogatą sceną hobbystyczną — większość klasycznych ROM-ów (Pong,
+Tetris, Space Invaders, Breakout) jest **domeną publiczną albo swobodnie
+udostępniana przez społeczność retro-computingową**. Wyszukaj "chip8 roms public
+domain" albo "chip8-test-suite" (Timendus) — ten ostatni to zestaw ROM-ów testowych,
+które systematycznie sprawdzają poprawność implementacji każdej instrukcji (świetne
+do wykrycia błędów, które przetrwały ćwiczenia 1-4).
+
+Zacznij od małych ROM-ów testowych (IBM logo, test opcode'ów), potem przejdź do
+właściwych gier — plik `.ch8` to zwykły binarny plik, ten sam format co używane w
+ćwiczeniach testowe "ROM-y" ręcznie sklejane w tablicach bajtów.
+
+## Sterowanie
+
+Typowe gry (np. Pong) używają klawiszy `1`, `4`, `7`, `A` (jedna kolumna klawiatury
+CHIP-8) do ruchu — sprawdź dokumentację konkretnej gry, jeśli nie reaguje na
+oczekiwane klawisze.
+
+## Checklist rozwiązywania problemów
+
+Jeśli gra się nie uruchamia albo działa źle:
+
+- **Czarny ekran, brak reakcji** — sprawdź czy `chip8_load_rom` poprawnie odczytuje
+  cały plik (`fread` zwraca liczbę odczytanych elementów — porównaj z oczekiwanym
+  rozmiarem).
+- **"Śmieci" na ekranie zamiast grafiki** — najczęściej błąd w `DXYN` (zła kolejność
+  bitów w bajcie sprite'u, albo brakujące zawijanie `%`).
+- **Gra działa, ale za szybko/wolno** — sprawdź stosunek cykli CPU do klatek w pętli
+  `main` (ćwiczenie 4) — różne gry były pisane z założeniem różnej prędkości procesora,
+  czasem trzeba dostroić liczbę cykli na klatkę.
+- **Program "wisi" na starcie** — prawdopodobnie ROM zaczyna się od `FX0A` (czekaj na
+  klawisz) i emulator nie odczytuje `stdin` w trybie non-blocking poprawnie.
+- **`Unknown opcode` na stderr** — brakująca instrukcja z poprzednich ćwiczeń, albo
+  gra korzysta z rzadziej używanego opcode'u (np. `FX33` BCD, `FX55`/`FX65`
+  zapis/odczyt rejestrów do pamięci) — dobra okazja do rozszerzenia zestawu poza
+  4 podstawowe ćwiczenia.
+
+## Rozszerzenia (dla chętnych / dodatkowe punkty)
+
+- **`FX33` (BCD)**: rozłóż `V[x]` na cyfry dziesiętne i zapisz pod `memory[I..I+2]` —
+  potrzebne w niektórych grach do wyświetlania wyniku.
+- **`FX55`/`FX65`**: zapis/odczyt rejestrów `V0..Vx` do/z pamięci od adresu `I`.
+- **Dźwięk**: `sound_timer > 0` powinno grać dźwięk — najprościej `putchar('\a')`
+  (bell terminala) zamiast prawdziwego audio.
+- **Debugger krokowy**: pauza po każdej instrukcji, podgląd rejestrów i stosu —
+  bezcenne narzędzie dydaktyczne samo w sobie.
+- **Disassembler**: osobny program, który zamiast wykonywać ROM, wypisuje go jako
+  czytelny asembler (`JP 0x204` zamiast `0x1204`) — naturalne uzupełnienie tematu
+  "asembler" z pierwszej rozmowy o pomysłach na ćwiczenia.
+
+## Podsumowanie kursu
+
+Po tych 5 ćwiczeniach studenci przeszli przez: reprezentację danych w pamięci,
+architekturę fetch-decode-execute, arytmetykę i flagi procesora, stos wywołań,
+manipulację bitową, oraz interakcję z urządzeniami wejścia/wyjścia w czasie
+rzeczywistym — cały czas pisząc jeden, rosnący, kompilowalny program w C, który na
+koniec **realnie uruchamia grę**. To rzadka okazja, żeby "podstawy programowania"
+skończyły się czymś namacalnie efektownym zamiast kolejnego kalkulatora.

@@ -1,0 +1,119 @@
+---
+title: "Sesja 1 — Pierwszy program"
+format: html
+toc: true
+---
+
+## Cel
+
+Napisać, skompilować i uruchomić swój pierwszy program w C — i zrozumieć, co dokładnie
+dzieje się między wpisaniem tekstu a zobaczeniem wyniku na ekranie. To jedyna sesja w
+tym kursie, w której zakładamy, że nigdy wcześniej nie napisałeś/aś ani jednej linijki
+kodu.
+
+## Teoria w pigułce
+
+### Czym jest program?
+
+Program to **lista instrukcji**, którą komputer wykonuje krok po kroku, od góry do
+dołu, dokładnie tak jak jest napisana — bez domyślania się, bez "chyba o to chodziło".
+Komputer nie jest inteligentny — jest posłuszny co do przecinka.
+
+### Dlaczego kod trzeba "kompilować"?
+
+To, co piszesz (**kod źródłowy**, plik `.c`) to tekst czytelny dla człowieka. Procesor
+rozumie tylko liczby — konkretne rozkazy zakodowane jako bajty (do tego wrócimy przy
+CHIP-8 pod koniec kursu). **Kompilator** to program, który tłumaczy Twój tekst na taki
+plik binarny — coś, co system operacyjny potrafi uruchomić jako proces.
+
+```
+kod źródłowy (hello.c)  --[kompilator: gcc]-->  plik wykonywalny (hello)
+   tekst dla człowieka                              zera i jedynki dla procesora
+```
+
+::: {.callout-note}
+## Dlaczego C, a nie coś "łatwiejszego" na start?
+Za kilka tygodni będziecie pisać własny emulator procesora (CHIP-8) — program, który
+sam symuluje pamięć, rejestry i wykonywanie instrukcji. C nie ukrywa przed Wami tego,
+co komputer naprawdę robi (pamięć, adresy, bajty) — inne języki (Python, JavaScript)
+celowo to chowają, żeby było wygodniej. Wygoda na starcie oznaczałaby brak fundamentów
+pod koniec semestru.
+:::
+
+### Cykl edit → compile → run
+
+Za każdym razem, gdy zmienisz choć jeden znak w pliku `.c`, musisz go **skompilować od
+nowa** — inaczej program użyje starej wersji. To jest inne niż np. edycja strony
+internetowej, gdzie zmiana widoczna jest "od razu" po odświeżeniu. W C:
+
+1. **Edit** — zmieniasz plik `.c` w edytorze,
+2. **Compile** — uruchamiasz kompilator (`gcc`),
+3. **Run** — dopiero teraz uruchamiasz efekt (`./hello`).
+
+Zapomnienie kroku 2. to najczęstsza przyczyna "dlaczego moja zmiana nic nie robi" u
+początkujących — i to nie tylko dziś, to będzie Was ścigać przez cały semestr.
+
+## Zadania
+
+### Zadanie 1 — sprawdź, czy masz kompilator
+
+W terminalu:
+
+```bash
+gcc --version
+```
+
+Jeśli polecenie nie istnieje — zgłoś się, zainstalujemy razem (macOS: Xcode Command
+Line Tools, Linux: pakiet `build-essential`/`gcc`).
+
+### Zadanie 2 — pierwszy program
+
+Utwórz plik `hello.c`:
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    printf("Czesc, swiecie!\n");
+    return 0;
+}
+```
+
+Zanim skompilujesz — spróbuj zgadnąć, co robi każda linijka, zanim wyjaśnimy na głos:
+
+- `#include <stdio.h>` — "dołącz zestaw narzędzi do wejścia/wyjścia" (Standard Input/Output) — bez tego `printf` nie istnieje.
+- `int main(void)` — to jest **punkt startowy** każdego programu w C; system operacyjny zawsze zaczyna wykonywanie właśnie tutaj.
+- `printf("...")` — wypisz tekst na ekran. `\n` na końcu to znak nowej linii — bez niego kolejne wypisania sklejałyby się w jednym wierszu.
+- `return 0;` — zakończ program i zgłoś systemowi "wszystko OK" (0 = sukces — to konwencja, do której wrócimy przy okazji obsługi błędów).
+
+### Zadanie 3 — kompilacja i uruchomienie
+
+```bash
+gcc -std=c99 -Wall -Wextra hello.c -o hello
+./hello
+```
+
+- `-std=c99` — którego standardu C używamy (będziemy trzymać się go przez cały kurs).
+- `-Wall -Wextra` — włącz wszystkie ostrzeżenia. **Zawsze** kompiluj z tymi flagami — ostrzeżenie dziś to błąd, którego unikasz jutro.
+- `-o hello` — nazwa pliku wynikowego (bez tego dostaniesz domyślnie `a.out`).
+
+### Zadanie 4 — zepsuj coś celowo
+
+Usuń średnik po `printf(...)` i skompiluj ponownie. Przeczytaj komunikat błędu od
+kompilatora — nie ignoruj go, nie zgaduj, **przeczytaj dokładnie który numer linii**.
+Komunikaty błędów kompilatora będą Twoim głównym narzędziem diagnostycznym przez cały
+semestr — im szybciej nauczysz się je czytać, tym mniej będziesz czekać na pomoc.
+
+Napraw błąd, skompiluj ponownie, upewnij się, że znowu działa.
+
+### Zadanie 5 — Twoja zmiana
+
+Zmień treść komunikatu tak, żeby wypisywał Twoje imię, np. `"Czesc, jestem Kasia!\n"`.
+Pamiętaj o kroku "compile" — sama zmiana pliku nic nie zrobi, dopóki nie skompilujesz
+ponownie.
+
+## Kryterium sukcesu
+
+- `gcc -std=c99 -Wall -Wextra hello.c -o hello` kompiluje się **bez żadnych ostrzeżeń**.
+- `./hello` wypisuje spersonalizowany komunikat zakończony nową linią.
+- Potrafisz wskazać, w którym miejscu kodu i dlaczego pojawił się błąd z zadania 4 (nie tylko "naprawiłem", ale "wiem czemu się psuło").

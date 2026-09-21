@@ -1,0 +1,146 @@
+---
+title: "Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań"
+format: html
+toc: true
+---
+
+## Cel
+
+Rozbudować `chip8_cycle` z ćwiczenia 1 o rodzinę instrukcji arytmetycznych, warunkowe
+skoki oraz **stos wywołań** — mechanizm, dzięki któremu CHIP-8 obsługuje coś w rodzaju
+funkcji (`CALL`/`RET`).
+
+Startujesz od pliku z ćwiczenia 1 (swojego albo z `01_szkielet_vm_rozwiazanie.qmd`).
+
+## Teoria w pigułce
+
+### Stos wywołań — software'owy, nie ten z wykładu 3
+
+W wykładzie o architekturze widzieliście stos jako **segment pamięci procesu**, rosnący
+w dół od wysokich adresów, współdzielący przestrzeń adresową z resztą programu — tam
+ląduje przy każdym wywołaniu funkcji w C adres powrotu, argumenty, zmienne lokalne.
+
+CHIP-8 robi to inaczej, i to celowa różnica architektoniczna warta zauważenia: `stack`
+to **osobna tablica 16 elementów**, całkowicie odseparowana od `memory`. `CALL nnn`
+zapisuje bieżący `pc` na tym stosie i skacze do `nnn`. `RET` zdejmuje adres z powrotem
+do `pc`.
+
+::: {.callout-important}
+## Dlaczego to ważna różnica?
+Bo oznacza, że w CHIP-8 **nie ma czegoś takiego jak stack overflow nadpisujący dane
+programu** (nie da się, jak w C, przez zbyt głęboką rekurencję nadpisać zmienną
+globalną) — po prostu po 16 zagnieżdżonych wywołaniach `sp` wyjdzie poza tablicę i
+program się rozsypie w inny sposób (undefined behavior w C, poza zakresem tablicy).
+To pokazuje, że "stos jako mechanizm LIFO do wywołań" i "stos jako konkretny fragment
+pamięci procesu" to **dwa osobne pojęcia** — na wykładzie widzieliście je połączone,
+bo tak zaimplementowano je w x86/Linux, ale nie muszą być.
+:::
+
+### Rodzina "skip" — jedyny mechanizm warunkowy
+
+Instrukcje `3XKK`, `4XKK`, `5XY0`, `9XY0` pomijają następną instrukcję (`pc += 2`
+dodatkowo), jeśli warunek jest spełniony. To jedyny mechanizm warunkowy w CHIP-8 — nie
+ma `if`, jest tylko "pomiń następny skok". W praktyce każdy `if` w CHIP-8 assembly to
+para instrukcji: `SNE` (skip jeśli warunek fałszywy) + `JP` (skok, który zostanie
+pominięty, jeśli warunek prawdziwy) — dokładnie ten wzorzec zobaczycie w teście na
+końcu tego ćwiczenia.
+
+### `VF` jako rejestr flag — uproszczony EFLAGS
+
+Prawdziwe procesory (x86, ARM) mają dedykowany **rejestr flag** (np. `EFLAGS` na x86) z
+osobnymi bitami: `CF` (carry flag), `ZF` (zero flag), `OF` (overflow flag), `SF` (sign
+flag)... ALU ustawia je automatycznie po każdej operacji arytmetycznej, a instrukcje
+skoku warunkowego (`JC`, `JZ`, `JO`...) je odczytują.
+
+CHIP-8 nie ma osobnego rejestru flag — **spłaszcza to wszystko do jednego rejestru
+ogólnego przeznaczenia, `VF`**. Instrukcje `8XY4` (ADD) i `8XY5`/`8XY7` (SUB) ustawiają
+`VF` na 1/0 w zależności od przeniesienia/pożyczki — to dokładnie ten sam bit carry z
+wykładu o reprezentacji liczb, tylko bez dedykowanego miejsca w architekturze: musicie
+pamiętać, że `VF` jest "brudzony" przy każdej operacji ALU i nie nadaje się do
+przechowywania własnych danych między instrukcjami arytmetycznymi.
+
+::: {.callout-tip}
+## Skąd `0xFF` jako `-1`?
+W zadaniu testowym w tym ćwiczeniu zobaczycie `ADD V0, 0xFF` używane jako dekrementacja.
+To nie przypadek notacyjny — to dokładnie kod **U2** (uzupełnienie do dwóch) z wykładu
+3: `0xFF` = `1111 1111` binarnie, czyli $-1$ w reprezentacji U2 na 8 bitach. Ponieważ
+`V[x]` to `uint8_t`, dodawanie modulo 256 w C automatycznie realizuje arytmetykę U2 —
+dokładnie ten sam mechanizm, dzięki któremu (jak było na wykładzie) procesor "nie
+widzi różnicy" między dodawaniem a odejmowaniem.
+:::
+
+## Zadania
+
+### Zadanie 1 — RET i CALL
+
+- `0x00EE` (`RET`): `pc = stack[--sp]`
+- `0x2000` (`2NNN`, `CALL addr`): `stack[sp++] = pc; pc = nnn`
+
+### Zadanie 2 — rodzina "skip"
+
+- `0x3000` (`3XKK`, `SE Vx, byte`): jeśli `V[x] == kk`, pomiń następną instrukcję
+- `0x4000` (`4XKK`, `SNE Vx, byte`): jeśli `V[x] != kk`, pomiń
+- `0x5000` (`5XY0`, `SE Vx, Vy`): jeśli `V[x] == V[y]`, pomiń
+- `0x9000` (`9XY0`, `SNE Vx, Vy`): jeśli `V[x] != V[y]`, pomiń
+
+### Zadanie 3 — ADD bez przeniesienia
+
+- `0x7000` (`7XKK`, `ADD Vx, byte`): `V[x] += kk` (bez wpływu na `VF`)
+
+### Zadanie 4 — rodzina ALU `8XY*`
+
+Rozpoznaj po `opcode & 0x000F`:
+
+| kod | nazwa | operacja |
+|-----|-------|----------|
+| `0` | `LD Vx, Vy`   | `V[x] = V[y]` |
+| `1` | `OR Vx, Vy`   | `V[x] \|= V[y]` |
+| `2` | `AND Vx, Vy`  | `V[x] &= V[y]` |
+| `3` | `XOR Vx, Vy`  | `V[x] ^= V[y]` |
+| `4` | `ADD Vx, Vy`  | `V[x] += V[y]`, `VF = 1` jeśli wynik > 255, inaczej 0 |
+| `5` | `SUB Vx, Vy`  | `V[x] -= V[y]`, `VF = 1` jeśli `V[x] > V[y]` **przed** odejmowaniem (brak pożyczki) |
+| `6` | `SHR Vx`      | `VF = V[x] & 1`; `V[x] >>= 1` |
+| `7` | `SUBN Vx, Vy` | `V[x] = V[y] - V[x]`, `VF = 1` jeśli `V[y] > V[x]` przed odejmowaniem |
+| `E` | `SHL Vx`      | `VF = (V[x] >> 7) & 1`; `V[x] <<= 1` |
+
+**Uwaga na kolejność**: przy `ADD`/`SUB` musisz wyliczyć `VF` **przed** nadpisaniem
+`V[x]`, inaczej porównujesz z już zmienioną wartością.
+
+### Zadanie 5 — `ANNN`, `BNNN`, `CXKK`
+
+- `0xA000` (`ANNN`, `LD I, addr`): `I = nnn`
+- `0xB000` (`BNNN`, `JP V0, addr`): `pc = nnn + V[0]`
+- `0xC000` (`CXKK`, `RND Vx, byte`): `V[x] = (rand() % 256) & kk` — pamiętaj o
+  `srand()` w `main` (np. `srand(time(NULL))`), inaczej za każdym uruchomieniem dostaniesz
+  te same "losowe" wartości.
+
+## Test
+
+Ręcznie złożony program: policz w dół od 5 do 0, używając `SNE` + skoku wstecz
+(pętla), potem wywołaj "funkcję" przez `CALL`, która ustawia `V1 = 0x42`, i wróć przez
+`RET`.
+
+```c
+uint8_t test_rom[] = {
+    0x60, 0x05,       // 0x200: LD V0, 5
+    0x30, 0x00,       // 0x202: SE V0, 0   (loop check: skip next if V0==0)
+    0x12, 0x08,       // 0x204: JP 0x208   (not zero yet -> continue)
+    0x22, 0x0C,       // 0x206: CALL 0x20C (V0==0 -> call "function")
+    0x70, 0xFF,       // 0x208: ADD V0, -1 (0xFF as unsigned = -1 mod 256)
+    0x12, 0x02,       // 0x20A: JP 0x202   (back to loop check)
+    0x61, 0x42,       // 0x20C: LD V1, 0x42  <- "function" body
+    0x00, 0xEE,       // 0x20E: RET
+};
+memcpy(chip8.memory + 0x200, test_rom, sizeof(test_rom));
+```
+
+Dodaj wypisywanie `V[0]` i `V[1]` po każdym cyklu. Oczekiwany wynik: `V0` maleje
+`5,4,3,2,1,0`, a po dojściu do zera program skacze do `0x20C`, ustawia `V1 = 0x42` i
+wraca (`RET`) — sprawdź, że wraca dokładnie za `CALL` (czyli do `0x208`), a nie do
+`0x206`.
+
+## Kryterium sukcesu
+
+- Wszystkie 9 wariantów `8XY*` zaimplementowane i dają poprawny `VF`.
+- Test powyżej: `V1` zmienia się na `0x42` dokładnie raz, `RET` wraca pod właściwy adres.
+- `rand()` daje różne wartości między uruchomieniami programu.

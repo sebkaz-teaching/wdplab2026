@@ -1,0 +1,115 @@
+---
+title: "Ćwiczenie 1 — Rozwiązanie"
+format: html
+toc: true
+---
+
+## Pełny kod
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+
+typedef struct {
+    uint8_t  memory[4096];
+    uint8_t  V[16];
+    uint16_t I;
+    uint16_t pc;
+    uint16_t stack[16];
+    uint8_t  sp;
+} Chip8;
+
+void chip8_init(Chip8 *c) {
+    memset(c, 0, sizeof(Chip8));
+    c->pc = 0x200; // programs start at 0x200
+}
+
+int chip8_load_rom(Chip8 *c, const char *path) {
+    FILE *f = fopen(path, "rb");
+    if (!f) {
+        fprintf(stderr, "Cannot open ROM: %s\n", path);
+        return 0;
+    }
+
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    rewind(f);
+
+    if (size > (long)(sizeof(c->memory) - 0x200)) {
+        fprintf(stderr, "ROM too large: %ld bytes\n", size);
+        fclose(f);
+        return 0;
+    }
+
+    fread(c->memory + 0x200, 1, (size_t)size, f);
+    fclose(f);
+    return 1;
+}
+
+void chip8_cycle(Chip8 *c) {
+    // FETCH: big-endian, two bytes per instruction
+    uint16_t opcode = (c->memory[c->pc] << 8) | c->memory[c->pc + 1];
+    c->pc += 2; // advance before execute, so jumps can just overwrite pc
+
+    uint16_t nnn = opcode & 0x0FFF;
+    uint8_t  x   = (opcode & 0x0F00) >> 8;
+    uint8_t  kk  = opcode & 0x00FF;
+
+    switch (opcode & 0xF000) {
+        case 0x0000:
+            if (opcode == 0x00E0) {
+                printf("[CLS] (display cleared -- implemented in exercise 3)\n");
+            } else {
+                fprintf(stderr, "Unknown opcode: 0x%04X\n", opcode);
+            }
+            break;
+
+        case 0x1000: // 1NNN: JP addr
+            c->pc = nnn;
+            break;
+
+        case 0x6000: // 6XKK: LD Vx, byte
+            c->V[x] = kk;
+            break;
+
+        default:
+            fprintf(stderr, "Unknown opcode: 0x%04X\n", opcode);
+    }
+}
+
+int main(int argc, char **argv) {
+    Chip8 chip8;
+    chip8_init(&chip8);
+
+    if (argc >= 2) {
+        if (!chip8_load_rom(&chip8, argv[1])) return 1;
+    } else {
+        // fallback: hand-assembled test ROM when no file is given
+        uint8_t test_rom[] = { 0x12, 0x04, 0x00, 0x00, 0x60, 0x0A };
+        memcpy(chip8.memory + 0x200, test_rom, sizeof(test_rom));
+    }
+
+    for (int i = 0; i < 20; i++) {
+        printf("PC = 0x%03X\n", chip8.pc);
+        chip8_cycle(&chip8);
+    }
+
+    return 0;
+}
+```
+
+## Omówienie kluczowych decyzji
+
+- **`pc += 2` zaraz po fetchu, przed execute.** Dzięki temu instrukcje skoku (`JP`,
+  `CALL`) po prostu nadpisują `pc`, a instrukcje warunkowe (ćwiczenie 2) dopisują
+  dodatkowe `+= 2` zamiast liczyć od nowa. To standardowy idiom w emulatorach — warto
+  go nazwać wprost studentom, bo inaczej "magiczne" `+2` w kolejnych ćwiczeniach będzie
+  niejasne.
+- **`x` i `kk` wyciągnięte przed switchem.** Prawie każda instrukcja CHIP-8 używa
+  jakiegoś podzbioru pól `X`, `Y`, `N`, `NN`, `NNN` zakodowanych w opcode. Dekodowanie
+  ich raz na początku (zamiast w każdym `case`) upraszcza kod w miarę jak przybywa
+  instrukcji w ćwiczeniu 2.
+- **`stack`/`sp` w strukturze już teraz**, mimo że nieużywane — zmiana układu struktury
+  w połowie projektu jest bardziej mylącą lekcją niż dodanie dwóch pól z wyprzedzeniem.

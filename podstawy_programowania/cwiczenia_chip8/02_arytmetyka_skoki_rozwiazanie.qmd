@@ -1,0 +1,168 @@
+---
+title: "Ćwiczenie 2 — Rozwiązanie"
+format: html
+toc: true
+---
+
+## Pełny kod (fragment `chip8_cycle`, reszta jak w ćwiczeniu 1)
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include <time.h>
+
+typedef struct {
+    uint8_t  memory[4096];
+    uint8_t  V[16];
+    uint16_t I;
+    uint16_t pc;
+    uint16_t stack[16];
+    uint8_t  sp;
+} Chip8;
+
+void chip8_init(Chip8 *c) {
+    memset(c, 0, sizeof(Chip8));
+    c->pc = 0x200;
+}
+
+int chip8_load_rom(Chip8 *c, const char *path) {
+    FILE *f = fopen(path, "rb");
+    if (!f) { fprintf(stderr, "Cannot open ROM: %s\n", path); return 0; }
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    rewind(f);
+    fread(c->memory + 0x200, 1, (size_t)size, f);
+    fclose(f);
+    return 1;
+}
+
+void chip8_cycle(Chip8 *c) {
+    uint16_t opcode = (c->memory[c->pc] << 8) | c->memory[c->pc + 1];
+    c->pc += 2;
+
+    uint16_t nnn = opcode & 0x0FFF;
+    uint8_t  n   = opcode & 0x000F;
+    uint8_t  x   = (opcode & 0x0F00) >> 8;
+    uint8_t  y   = (opcode & 0x00F0) >> 4;
+    uint8_t  kk  = opcode & 0x00FF;
+
+    switch (opcode & 0xF000) {
+        case 0x0000:
+            if (opcode == 0x00E0) {
+                printf("[CLS]\n");
+            } else if (opcode == 0x00EE) { // RET
+                c->pc = c->stack[--c->sp];
+            } else {
+                fprintf(stderr, "Unknown opcode: 0x%04X\n", opcode);
+            }
+            break;
+
+        case 0x1000: c->pc = nnn; break; // JP addr
+
+        case 0x2000: // CALL addr
+            c->stack[c->sp++] = c->pc;
+            c->pc = nnn;
+            break;
+
+        case 0x3000: if (c->V[x] == kk)      c->pc += 2; break; // SE Vx, byte
+        case 0x4000: if (c->V[x] != kk)      c->pc += 2; break; // SNE Vx, byte
+        case 0x5000: if (c->V[x] == c->V[y]) c->pc += 2; break; // SE Vx, Vy
+        case 0x9000: if (c->V[x] != c->V[y]) c->pc += 2; break; // SNE Vx, Vy
+
+        case 0x6000: c->V[x] = kk; break;        // LD Vx, byte
+        case 0x7000: c->V[x] += kk; break;       // ADD Vx, byte (no carry)
+
+        case 0x8000: {
+            switch (n) {
+                case 0x0: c->V[x] = c->V[y]; break;
+                case 0x1: c->V[x] |= c->V[y]; break;
+                case 0x2: c->V[x] &= c->V[y]; break;
+                case 0x3: c->V[x] ^= c->V[y]; break;
+                case 0x4: {
+                    uint16_t sum = c->V[x] + c->V[y];
+                    c->V[0xF] = sum > 0xFF;
+                    c->V[x] = (uint8_t)sum;
+                    break;
+                }
+                case 0x5: {
+                    uint8_t borrow = c->V[x] > c->V[y];
+                    c->V[x] -= c->V[y];
+                    c->V[0xF] = borrow;
+                    break;
+                }
+                case 0x6: {
+                    uint8_t lsb = c->V[x] & 0x1;
+                    c->V[x] >>= 1;
+                    c->V[0xF] = lsb;
+                    break;
+                }
+                case 0x7: {
+                    uint8_t borrow = c->V[y] > c->V[x];
+                    c->V[x] = c->V[y] - c->V[x];
+                    c->V[0xF] = borrow;
+                    break;
+                }
+                case 0xE: {
+                    uint8_t msb = (c->V[x] >> 7) & 0x1;
+                    c->V[x] <<= 1;
+                    c->V[0xF] = msb;
+                    break;
+                }
+                default:
+                    fprintf(stderr, "Unknown opcode: 0x%04X\n", opcode);
+            }
+            break;
+        }
+
+        case 0xA000: c->I = nnn; break;              // LD I, addr
+        case 0xB000: c->pc = nnn + c->V[0]; break;    // JP V0, addr
+        case 0xC000: c->V[x] = (rand() % 256) & kk; break; // RND Vx, byte
+
+        default:
+            fprintf(stderr, "Unknown opcode: 0x%04X\n", opcode);
+    }
+}
+
+int main(int argc, char **argv) {
+    srand((unsigned)time(NULL));
+
+    Chip8 chip8;
+    chip8_init(&chip8);
+
+    if (argc >= 2) {
+        if (!chip8_load_rom(&chip8, argv[1])) return 1;
+    } else {
+        uint8_t test_rom[] = {
+            0x60, 0x05,
+            0x30, 0x00,
+            0x12, 0x08,
+            0x22, 0x0C,
+            0x70, 0xFF,
+            0x12, 0x02,
+            0x61, 0x42,
+            0x00, 0xEE,
+        };
+        memcpy(chip8.memory + 0x200, test_rom, sizeof(test_rom));
+    }
+
+    for (int i = 0; i < 20; i++) {
+        printf("PC=0x%03X V0=%d V1=%d\n", chip8.pc, chip8.V[0], chip8.V[1]);
+        chip8_cycle(&chip8);
+    }
+    return 0;
+}
+```
+
+## Omówienie kluczowych decyzji
+
+- **`VF` liczony przed nadpisaniem `V[x]`.** W `8XY4`/`8XY5`/`8XY7` warunek carry/borrow
+  zależy od *starej* wartości `V[x]` — to klasyczny błąd off-by-order, warto zapytać
+  studentów wprost, dlaczego kolejność ma znaczenie, zanim zobaczą rozwiązanie.
+- **`0xFF` jako `-1` w `ADD Vx, byte`.** Test ROM używa `ADD V0, 0xFF` żeby zdekrementować
+  `V0` — dobra okazja przypomnieć arytmetykę modulo 256 na `uint8_t` (dokładnie to, co
+  było na wykładzie o reprezentacji liczb).
+- **`RET` wraca za `CALL`, nie do niego.** Bo `pc` na stosie to już wartość *po*
+  `pc += 2` z fetchu instrukcji `CALL` — częsty punkt konfuzji, warto to podkreślić w
+  omówieniu testu.

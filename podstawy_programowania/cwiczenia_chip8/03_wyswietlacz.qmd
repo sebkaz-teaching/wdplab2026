@@ -1,0 +1,140 @@
+---
+title: "Ćwiczenie 3 — Wyświetlacz i sprite'y"
+format: html
+toc: true
+---
+
+## Cel
+
+Dodać ekran: bufor pikseli, poprawną obsługę `CLS`, rysowanie sprite'ów przez `DXYN`
+(z wykrywaniem kolizji) i renderowanie do terminala.
+
+Startujesz od kodu z ćwiczenia 2.
+
+## Teoria w pigułce
+
+### Framebuffer: obraz jako tablica liczb
+
+Ekran CHIP-8 to **64×32 pikseli monochromatycznych** — piksel jest zapalony albo nie,
+bez odcieni szarości. `display[64*32]` to **framebuffer** — pojęcie, które dotyczy
+każdego wyświetlacza, jaki kiedykolwiek obsługiwaliście: karta graficzna w Waszym
+komputerze też trzyma obraz jako tablicę liczb (tylko z 3-4 bajtami koloru na piksel
+zamiast jednego bitu), a monitor po prostu regularnie ją odczytuje i wyświetla.
+
+::: {.callout-note}
+## Memory-mapped I/O — dlaczego CHIP-8 tego NIE robi
+W wykładzie 3 wspominaliśmy magistralę i urządzenia I/O. Wiele prawdziwych
+komputerów domowych z epoki CHIP-8 (Commodore 64, Apple II) implementowało ekran przez
+**memory-mapped I/O** — pamięć wideo była po prostu fragmentem tej samej przestrzeni
+adresowej co reszta RAM-u; zapis pod konkretny adres *natychmiast* zmieniał to, co
+widać na ekranie, bez żadnej specjalnej instrukcji. CHIP-8 tego nie robi — `display`
+to osobna tablica w C, oddzielona od `memory`, a jedyny sposób na zmianę ekranu to
+wywołanie instrukcji `DXYN`. To uproszczenie ułatwia implementację (nie trzeba pilnować
+kolizji adresów), ale warto wiedzieć, że prawdziwy sprzęt tamtej epoki często robił to
+inaczej.
+:::
+
+### XOR jako operacja rysowania
+
+Sprite'y są rysowane **przez XOR**: każdy bit sprite'u jest XOR-owany z aktualnym
+stanem piksela (`display[idx] ^= 1`). To ta sama bitowa operacja XOR, którą ALU
+wykonuje w instrukcji `8XY3` z poprzedniego ćwiczenia — tu stosowana piksel po pikselu
+do całego obrazu.
+
+Dlaczego akurat XOR, a nie np. "ustaw piksel na 1"? Bo XOR jest **swoją własną
+odwrotnością**: narysowanie tego samego sprite'u w tym samym miejscu **drugi raz**
+usuwa go z ekranu (`a ^ b ^ b = a`). To pozwala grom animować obiekty bez osobnego
+bufora "co było wcześniej" — żeby przesunąć sprite, gra rysuje go (znika), zmienia
+współrzędne, rysuje ponownie (pojawia się w nowym miejscu).
+
+Efektem ubocznym tej sztuczki jest **wykrywanie kolizji za darmo**: jeśli jakikolwiek
+piksel przez XOR *zgasł* (był 1, jest 0), `VF` jest ustawiane na 1 — to podstawowy
+mechanizm sprawdzania, czy np. pocisk trafił przeciwnika, bez żadnej dodatkowej
+geometrii czy porównywania współrzędnych.
+
+### Format sprite'u i zestaw czcionek
+
+Sprite ma szerokość zawsze **8 pikseli** (1 bajt = 1 wiersz, każdy bit = jeden piksel)
+i wysokość `N` (1-15 wierszy), dane sprite'u leżą w pamięci pod adresem `I` — kolejny
+przykład tego, że w CHIP-8 kod i dane (tu: dane graficzne) żyją w tej samej, wspólnej
+pamięci, zgodnie z modelem Von Neumanna z wykładu 3.
+
+CHIP-8 ma wbudowany **zestaw czcionek** dla cyfr `0-F` — każda cyfra to sprite 4×5
+pikseli, standardowo ładowany pod adres `0x050`.
+
+## Zadania
+
+### Zadanie 1 — bufor ekranu i CLS
+
+Dodaj do struktury `Chip8` pole `uint8_t display[64 * 32]` (1 bajt na piksel, wartość 0
+lub 1 — trochę marnotrawne pamięciowo, ale prostsze niż bitpacking). Zaimplementuj
+`0x00E0` (`CLS`) tak, żeby faktycznie zerował `display` i ustawiał flagę do przerysowania.
+
+### Zadanie 2 — zestaw czcionek
+
+Dodaj tablicę `fontset[80]` (16 cyfr × 5 bajtów, standardowy zestaw CHIP-8 — podany
+niżej, przepisz go 1:1). W `chip8_init` skopiuj go do `memory` pod adres `0x050`.
+
+```c
+uint8_t fontset[80] = {
+    0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
+    0x20, 0x60, 0x20, 0x20, 0x70, // 1
+    0xF0, 0x10, 0xF0, 0x80, 0xF0, // 2
+    0xF0, 0x10, 0xF0, 0x10, 0xF0, // 3
+    0x90, 0x90, 0xF0, 0x10, 0x10, // 4
+    0xF0, 0x80, 0xF0, 0x10, 0xF0, // 5
+    0xF0, 0x80, 0xF0, 0x90, 0xF0, // 6
+    0xF0, 0x10, 0x20, 0x40, 0x40, // 7
+    0xF0, 0x90, 0xF0, 0x90, 0xF0, // 8
+    0xF0, 0x90, 0xF0, 0x10, 0xF0, // 9
+    0xF0, 0x90, 0xF0, 0x90, 0x90, // A
+    0xE0, 0x90, 0xE0, 0x90, 0xE0, // B
+    0xF0, 0x80, 0x80, 0x80, 0xF0, // C
+    0xE0, 0x90, 0x90, 0x90, 0xE0, // D
+    0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
+    0xF0, 0x80, 0xF0, 0x80, 0x80, // F
+};
+```
+
+### Zadanie 3 — `FX29`: lokalizacja sprite'u cyfry
+
+`0xF029` (`LD F, Vx`): `I = 0x050 + (V[x] * 5)` — każda cyfra zajmuje 5 bajtów, więc
+to prosty indeks w tablicy fontów.
+
+### Zadanie 4 — `DXYN`: rysowanie sprite'u
+
+Najważniejsza instrukcja tego ćwiczenia. Dla `y_line` od `0` do `N-1`:
+
+1. Odczytaj bajt `sprite_byte = memory[I + y_line]`.
+2. Dla każdego bitu `x_bit` od `0` do `7` (od najstarszego):
+   - jeśli bit jest ustawiony, wylicz docelowy piksel `(V[x] + x_bit) % 64,
+     (V[y] + y_line) % 32` (zawijanie na krawędziach ekranu!)
+   - jeśli piksel pod tym adresem już był zapalony, ustaw `VF = 1` (kolizja)
+   - zrób XOR: `display[pos] ^= 1`
+3. Ustaw flagę przerysowania ekranu.
+
+**Pamiętaj wyzerować `VF` na początku instrukcji**, zanim zaczniesz sprawdzać kolizje.
+
+### Zadanie 5 — renderowanie do terminala
+
+Napisz `chip8_render(Chip8 *c)`: wyczyść terminal (`printf("\x1b[H\x1b[2J")` — ANSI
+escape, przenosi kursor do (0,0) i czyści ekran), potem dla każdego z 32 wierszy i 64
+kolumn wypisz `█` jeśli piksel zapalony, spację w przeciwnym razie.
+
+Wywołuj `chip8_render` w pętli `main` tylko gdy flaga przerysowania jest ustawiona (nie
+ma sensu czyścić i przerysowywać terminala 500 razy na sekundę, jeśli obraz się nie
+zmienił).
+
+## Test
+
+IBM Logo to klasyczny, publicznie dostępny mini-ROM testowy dla emulatorów CHIP-8 —
+tylko rysuje statyczne logo, świetny test rysowania bez konieczności obsługi klawiatury
+czy timerów. Znajdziesz go łatwo wyszukując "IBM logo.ch8 chip8 test rom" — plik ma
+132 bajty. Uruchom go: powinieneś zobaczyć logo "IBM" narysowane blokami w terminalu.
+
+## Kryterium sukcesu
+
+- `CLS` faktycznie czyści ekran (widoczne przy kolejnych klatkach).
+- ROM IBM logo renderuje się poprawnie i czytelnie.
+- Kolizja (`VF`) działa — możesz to sprawdzić rysując ten sam sprite dwa razy w tym
+  samym miejscu: drugi raz `VF` powinno wyjść `1`.

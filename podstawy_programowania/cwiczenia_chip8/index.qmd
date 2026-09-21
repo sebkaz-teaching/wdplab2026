@@ -1,0 +1,43 @@
+---
+title: "CHIP-8: zbuduj własny emulator"
+format: html
+toc: true
+---
+
+## O co chodzi
+
+CHIP-8 to nie prawdziwy procesor — to wirtualna maszyna zaprojektowana w latach 70. jako
+prosty, jednolity cel kompilacji dla mikrokomputerów. Ma tylko 35 instrukcji, 4 KB pamięci
+i 16 jednobajtowych rejestrów. To sprawia, że jest to **idealny pierwszy emulator do
+napisania** — wystarczająco prosty, żeby ogarnąć w kilka ćwiczeń, ale realny: gotowy kod
+uruchomi prawdziwe gry z lat 70./80. (Pong, Tetris, Space Invaders).
+
+To bezpośrednia kontynuacja wykładu o architekturze komputera — zamiast czytać o cyklu
+*fetch-decode-execute*, studenci go piszą.
+
+## Struktura ćwiczeń
+
+| # | Temat | Nawiązanie do wykładu |
+|---|-------|------------------------|
+| 1 | Szkielet VM — pamięć, rejestry, pętla fetch-decode-execute | Architektura komputera |
+| 2 | Arytmetyka, skoki, stos wywołań | Operatory i instrukcje sterujące |
+| 3 | Wyświetlacz — rysowanie sprite'ów przez XOR | Tablice, wskaźniki |
+| 4 | Timery i klawiatura | Preprocessor, funkcje |
+| 5 | Uruchomienie prawdziwej gry (bonus/pokaz) | — |
+
+Każde ćwiczenie rozbudowuje kod z poprzedniego — jeden plik `chip8.c`, który rośnie z
+tygodnia na tydzień. Wersje `_rozwiazanie.qmd` zawierają pełny, kompilowalny kod na danym
+etapie.
+
+## Wymagania
+
+- kompilator C (`gcc` lub `clang`)
+- system POSIX (macOS/Linux; na Windows — WSL) — potrzebny do ćwiczenia 4 (`termios.h`)
+- terminal obsługujący znaki UTF-8 (do renderowania wyświetlacza blokami `█`)
+
+Kompilacja na każdym etapie:
+
+```bash
+gcc -std=c99 -Wall -Wextra chip8.c -o chip8
+./chip8 rom.ch8
+```

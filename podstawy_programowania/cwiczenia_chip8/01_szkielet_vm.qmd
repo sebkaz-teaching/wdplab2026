@@ -1,0 +1,200 @@
+---
+title: "Ćwiczenie 1 — Szkielet maszyny wirtualnej"
+format: html
+toc: true
+---
+
+## Cel
+
+Zbudować szkielet emulatora CHIP-8: strukturę reprezentującą stan maszyny, wczytywanie
+programu (ROM-u) do pamięci i pętlę **fetch-decode-execute** — serce każdego procesora.
+
+## Teoria w pigułce
+
+### CHIP-8 jako software'owy Von Neumann
+
+Na wykładzie o architekturze poznaliście model Von Neumanna: CPU (CU + ALU + rejestry),
+pamięć RAM przechowującą **razem** kod i dane, oraz magistralę je łączącą. CHIP-8 to ten
+sam model, tylko że zamiast tranzystorów i magistrali mamy tablicę bajtów w C i wskaźnik
+do niej. Ta odpowiedniość jest dosłowna:
+
+| Von Neumann (wykład 3) | CHIP-8 (ten kod) |
+|---|---|
+| CPU / jednostka sterująca (CU) | funkcja `chip8_cycle` |
+| Rejestr PC (Program Counter) | pole `pc` w strukturze `Chip8` |
+| Rejestr IR (Instruction Register) | lokalna zmienna `opcode` |
+| Rejestry ogólnego przeznaczenia | tablica `V[16]` |
+| RAM (kod + dane w jednej przestrzeni) | tablica `memory[4096]` |
+| magistrala adresowa/danych | zwykłe indeksowanie tablicy w C |
+
+Innymi słowy: piszecie w C **symulację** tego, co w prawdziwym procesorze robią obwody
+elektroniczne. `switch (opcode & 0xF000)` w `chip8_cycle` pełni dokładnie tę samą rolę,
+co jednostka sterująca (CU) z wykładu — rozpoznaje instrukcję i deleguje jej wykonanie.
+
+::: {.callout-note}
+## Dlaczego pamięć jest "flat" (płaska)?
+W wykładzie 3 widzieliście podział pamięci procesu na segmenty: `Text`, `Data`, `BSS`,
+`Heap`, `Stack`. CHIP-8 nie ma nic z tego — to jedna, płaska tablica 4096 bajtów, bez
+systemu operacyjnego, bez ochrony pamięci, bez segmentów. Program **mógłby** nadpisać
+sam siebie albo własny stos, gdyby ktoś tego chciał — nic go przed tym nie broni. To
+model bliższy mikrokontrolerowi (albo komputerowi domowemu z lat 70.) niż współczesnemu
+procesowi pod Linuksem/Windowsem.
+:::
+
+### Big-endian: kolejność bajtów w pamięci
+
+Instrukcja CHIP-8 zajmuje **2 bajty**. Skoro `memory` to tablica `uint8_t`, a nie
+`uint16_t`, musicie sami złożyć te dwa bajty w jedną 16-bitową liczbę:
+
+```c
+uint16_t opcode = (memory[pc] << 8) | memory[pc + 1];
+```
+
+CHIP-8 zapisuje instrukcje **big-endian** — starszy bajt (bardziej znaczący) leży pod
+niższym adresem. To dokładnie odwrotność tego, jak x86 (procesor w Waszym laptopie)
+zapisuje liczby wielobajtowe w pamięci (tam jest little-endian).
+
+::: {.callout-tip}
+## Endianness — coś, czego nie było jeszcze na wykładzie
+Weźmy liczbę `0x1234` zapisaną pod adresem `0x200`:
+
+- **big-endian** (CHIP-8, sieci — protokół TCP/IP): `memory[0x200] = 0x12`,
+  `memory[0x201] = 0x34` — czytasz tak, jak piszesz liczbę na kartce, od lewej.
+- **little-endian** (x86/x86-64, ARM w trybie domyślnym): `memory[0x200] = 0x34`,
+  `memory[0x201] = 0x12` — bajt najmniej znaczący leży pierwszy.
+
+Żadna konwencja nie jest "bardziej poprawna" — to decyzja projektantów konkretnej
+architektury. Fakt, że musicie ręcznie złożyć opcode z dwóch bajtów w konkretnej
+kolejności, to pierwszy realny kontakt z tym, co normalnie kompilator ukrywa przed Wami
+w C.
+:::
+
+Cykl procesora to w skrócie ten sam Fetch-Decode-Execute z wykładu 3, tylko wykonywany
+przez Wasz kod zamiast przez krzem:
+
+```
+1. FETCH:   odczytaj 2 bajty spod memory[PC], memory[PC+1] -> opcode
+2. DECODE:  rozpoznaj typ instrukcji po najstarszym "nibble" (4 bity) opcode'u
+3. EXECUTE: wykonaj odpowiednią operację
+4. powtórz
+```
+
+## Zadania
+
+### Zadanie 1 — struktura stanu maszyny
+
+W pliku `chip8.c` uzupełnij strukturę `Chip8`. Potrzebujesz: pamięci, rejestrów `V`,
+rejestru indeksowego `I`, licznika `pc`, oraz miejsca na stos (przyda się w ćwiczeniu 2) —
+zdefiniuj go już teraz, żeby nie przebudowywać struktury później.
+
+### Zadanie 2 — inicjalizacja
+
+Uzupełnij `chip8_init`: wyzeruj pamięć i rejestry, ustaw `pc = 0x200` (tam zacznie się
+program).
+
+### Zadanie 3 — wczytanie ROM-u
+
+Uzupełnij `chip8_load_rom`: otwórz plik binarny, wczytaj jego zawartość do
+`memory` zaczynając od offsetu `0x200`.
+
+### Zadanie 4 — fetch
+
+W funkcji `chip8_cycle` złóż opcode z dwóch bajtów: `memory[pc]` to starszy bajt,
+`memory[pc+1]` to młodszy. Zaraz po odczycie zwiększ `pc` o 2 — **zanim** wykonasz
+instrukcję (tak instrukcje skoku mogą po prostu nadpisać `pc`, a instrukcje warunkowe
+dodać kolejne 2).
+
+### Zadanie 5 — decode/execute (na razie 3 instrukcje)
+
+Zaimplementuj rozpoznawanie po `opcode & 0xF000`:
+
+- `0x1000` — `1NNN`: `JP addr` — skok bezwarunkowy, `pc = NNN` (dolne 12 bitów opcode'u).
+- `0x6000` — `6XKK`: `LD Vx, byte` — `V[X] = KK`.
+- `0x0000` — jeśli cały opcode to `0x00E0` (`CLS`) — na razie tylko wypisz, że go
+  rozpoznałeś (ekran zrobimy w ćwiczeniu 3).
+- każdy inny opcode: wypisz na `stderr` "nieznany opcode" wraz z jego wartością hex —
+  to Twój najlepszy przyjaciel przy debugowaniu w kolejnych ćwiczeniach.
+
+## Kod startowy
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+
+typedef struct {
+    // TODO(1): memory[4096], V[16], I, pc
+    // TODO(1): stack[16], sp (stack pointer) -- na potrzeby cwiczenia 2
+} Chip8;
+
+void chip8_init(Chip8 *c) {
+    // TODO(2): wyzeruj wszystko, ustaw pc na adres startowy programu (0x200)
+}
+
+int chip8_load_rom(Chip8 *c, const char *path) {
+    FILE *f = fopen(path, "rb");
+    if (!f) {
+        fprintf(stderr, "Cannot open ROM: %s\n", path);
+        return 0;
+    }
+    // TODO(3): wczytaj zawartosc pliku do c->memory poczawszy od adresu 0x200
+    fclose(f);
+    return 1;
+}
+
+void chip8_cycle(Chip8 *c) {
+    // TODO(4): fetch -- zloz opcode z dwoch bajtow, zwieksz pc o 2
+
+    uint16_t opcode = 0; // TODO(4): usun te linie, to tylko placeholder
+
+    // TODO(5): decode/execute na podstawie (opcode & 0xF000)
+    switch (opcode & 0xF000) {
+        // case 0x1000: ...
+        // case 0x6000: ...
+        // case 0x0000: ...
+        default:
+            fprintf(stderr, "Unknown opcode: 0x%04X\n", opcode);
+    }
+}
+
+int main(int argc, char **argv) {
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s rom.ch8\n", argv[0]);
+        return 1;
+    }
+
+    Chip8 chip8;
+    chip8_init(&chip8);
+    if (!chip8_load_rom(&chip8, argv[1])) return 1;
+
+    // debug loop: wykonaj 20 cykli i wypisuj PC po kazdym
+    for (int i = 0; i < 20; i++) {
+        printf("PC = 0x%03X\n", chip8.pc);
+        chip8_cycle(&chip8);
+    }
+
+    return 0;
+}
+```
+
+## Test bez prawdziwego ROM-u
+
+Zanim będziesz mieć prawdziwy plik `.ch8` (ćwiczenie 5), przetestuj na ręcznie złożonym
+mini-programie. Dopisz w `main` przed pętlą (zamiast wczytywania z pliku):
+
+```c
+// Rêczny "ROM": JP 0x204; LD V0, 0x0A -> sprawdza skok i ladowanie rejestru
+uint8_t test_rom[] = { 0x12, 0x04, 0x00, 0x00, 0x60, 0x0A };
+memcpy(chip8.memory + 0x200, test_rom, sizeof(test_rom));
+```
+
+Oczekiwany wynik: `PC` przeskakuje z `0x200` od razu na `0x204` (instrukcja `1204`),
+potem wykonuje `600A` (`V0 = 0x0A`) i trafia na nieznany opcode `0x0000` w kolejnym
+kroku (bo tam nic więcej nie ma) — to poprawne zachowanie na tym etapie.
+
+## Kryterium sukcesu
+
+- Program się kompiluje bez warningów (`-Wall -Wextra`).
+- Testowy "ROM" powyżej pokazuje poprawną sekwencję `PC`: `0x200 -> 0x204 -> 0x206`.
+- Nieznane opcode'y są zgłaszane, a nie ignorowane po cichu.
