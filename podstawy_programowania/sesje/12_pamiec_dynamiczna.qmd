@@ -1,0 +1,107 @@
+---
+title: "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry"
+format: html
+toc: true
+---
+
+## Cel
+
+Poznać dynamiczną alokację pamięci (`malloc`/`free`) i użyć jej tam, gdzie tablice o
+stałym rozmiarze przestają wystarczać — gdy rozmiar "programu" nie jest znany w
+momencie pisania kodu.
+
+## Teoria w pigułce
+
+### Problem: tablice mają rozmiar ustalony na sztywno
+
+```c
+struct Instrukcja program[10];   // co, jesli program ma 11 instrukcji? albo 3?
+```
+
+Do tej pory zawsze wiedzieliście z góry, ile instrukcji ma "program" — bo sami go
+pisaliście w kodzie C. Za dwie sesje zaczniecie wczytywać programy **z plików** —
+liczba instrukcji będzie zależeć od tego, co jest w pliku, nieznana w momencie
+kompilacji.
+
+### `malloc` — poproś system o pamięć w trakcie działania programu
+
+```c
+#include <stdlib.h>
+
+int n = 7;   // np. wczytane od uzytkownika albo z pliku
+struct Instrukcja *program = malloc(n * sizeof(struct Instrukcja));
+
+if (program == NULL) {
+    fprintf(stderr, "Brak pamieci!\n");
+    return 1;
+}
+
+program[0].kod = OP_LOAD;   // uzywa sie identycznie jak zwyklej tablicy
+```
+
+`malloc` przyjmuje **liczbę bajtów** do zarezerwowania i zwraca wskaźnik do tego
+miejsca w pamięci (albo `NULL`, jeśli się nie udało — **zawsze** to sprawdzaj).
+`sizeof(struct Instrukcja)` mówi, ile bajtów zajmuje jedna instrukcja — mnożąc przez
+`n`, dostajecie dokładnie tyle miejsca, ile trzeba na `n` instrukcji.
+
+### `free` — oddaj pamięć z powrotem
+
+```c
+free(program);
+program = NULL;   // dobra praktyka: nie zostawiac "wiszacego" wskaznika
+```
+
+Pamięć zarezerwowana przez `malloc` **nie znika sama** po wyjściu z funkcji (w
+odróżnieniu od zwykłych zmiennych lokalnych) — jeśli jej nie zwolnicie przez `free`,
+zostaje zajęta aż do końca działania programu. To nazywa się **wyciek pamięci**
+(*memory leak*) — nieszkodliwy w małym programie działającym sekundę, katastrofalny w
+programie działającym godzinami (np. serwerze).
+
+::: {.callout-important}
+## Złota zasada: każdy `malloc` ma swój `free`
+Za każdym razem, gdy piszesz `malloc`, od razu zastanów się i zaznacz w głowie (albo
+komentarzem), gdzie będzie odpowiadający `free`. Odkładanie tego "na później" to
+najpewniejszy sposób, żeby o nim zapomnieć.
+:::
+
+## Zadania
+
+### Zadanie 1 — dynamiczna tablica instrukcji
+
+Zmień maszynę z sesji 11 tak, żeby `program` był tworzony przez `malloc` z rozmiarem
+podanym przez użytkownika (`scanf("%d", &n)` — "ile instrukcji chcesz wpisać?"), zamiast
+tablicy o stałym rozmiarze. Wypełnij go w pętli, wczytując każdą instrukcję od
+użytkownika (kod operacji jako liczba, numer rejestru, wartość). Nie zapomnij o
+`free` na końcu `main`.
+
+### Zadanie 2 — sprawdzenie błędu alokacji
+
+Dodaj sprawdzenie `if (program == NULL)` po `malloc` — w praktyce trudno to
+sprawdzić naprawdę (współczesne systemy rzadko odmawiają małej alokacji), ale
+**zawsze** pisz to sprawdzenie. To nawyk, nie opcja — pojawi się dokładnie w tej
+samej formie w `chip8_load_rom` w ćwiczeniu 1 CHIP-8 (tam sprawdzacie, czy `fopen` się
+udał, ten sam wzorzec defensywnego programowania).
+
+### Zadanie 3 — `realloc`: zmiana rozmiaru w locie
+
+Napisz wersję, w której użytkownik wpisuje instrukcje **dopóki nie wpisze `-1` jako
+kod operacji** (nie wiecie z góry, ile ich będzie). Zacznijcie od `malloc` na 4
+instrukcje, a gdy zabraknie miejsca, użyjcie:
+
+```c
+pojemnosc *= 2;
+program = realloc(program, pojemnosc * sizeof(struct Instrukcja));
+```
+
+`realloc` próbuje powiększyć istniejący blok pamięci (a jeśli się nie da w miejscu —
+przenosi całą zawartość w nowe miejsce automatycznie) i zwraca nowy wskaźnik.
+**Zawsze** przypisuj wynik do zmiennej — pod starym wskaźnikiem może już nie być
+poprawnych danych.
+
+## Kryterium sukcesu
+
+- Maszyna działa z liczbą instrukcji nieznaną w momencie kompilacji.
+- Program nie ma wycieków pamięci — każdy `malloc`/`realloc` ma odpowiadający `free`
+  na końcu.
+- Rozumiesz różnicę: tablica o stałym rozmiarze (`int x[10]`) istnieje "sama z siebie"
+  i znika automatycznie; pamięć z `malloc` trzeba jawnie zwolnić.

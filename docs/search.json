@@ -1,5 +1,75 @@
 [
   {
+    "objectID": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html",
+    "href": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html",
+    "title": "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry",
+    "section": "",
+    "text": "Poznać dynamiczną alokację pamięci (malloc/free) i użyć jej tam, gdzie tablice o stałym rozmiarze przestają wystarczać — gdy rozmiar “programu” nie jest znany w momencie pisania kodu."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html#cel",
+    "href": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html#cel",
+    "title": "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry",
+    "section": "",
+    "text": "Poznać dynamiczną alokację pamięci (malloc/free) i użyć jej tam, gdzie tablice o stałym rozmiarze przestają wystarczać — gdy rozmiar “programu” nie jest znany w momencie pisania kodu."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html#teoria-w-pigułce",
+    "title": "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nProblem: tablice mają rozmiar ustalony na sztywno\nstruct Instrukcja program[10];   // co, jesli program ma 11 instrukcji? albo 3?\nDo tej pory zawsze wiedzieliście z góry, ile instrukcji ma “program” — bo sami go pisaliście w kodzie C. Za dwie sesje zaczniecie wczytywać programy z plików — liczba instrukcji będzie zależeć od tego, co jest w pliku, nieznana w momencie kompilacji.\n\n\nmalloc — poproś system o pamięć w trakcie działania programu\n#include &lt;stdlib.h&gt;\n\nint n = 7;   // np. wczytane od uzytkownika albo z pliku\nstruct Instrukcja *program = malloc(n * sizeof(struct Instrukcja));\n\nif (program == NULL) {\n    fprintf(stderr, \"Brak pamieci!\\n\");\n    return 1;\n}\n\nprogram[0].kod = OP_LOAD;   // uzywa sie identycznie jak zwyklej tablicy\nmalloc przyjmuje liczbę bajtów do zarezerwowania i zwraca wskaźnik do tego miejsca w pamięci (albo NULL, jeśli się nie udało — zawsze to sprawdzaj). sizeof(struct Instrukcja) mówi, ile bajtów zajmuje jedna instrukcja — mnożąc przez n, dostajecie dokładnie tyle miejsca, ile trzeba na n instrukcji.\n\n\nfree — oddaj pamięć z powrotem\nfree(program);\nprogram = NULL;   // dobra praktyka: nie zostawiac \"wiszacego\" wskaznika\nPamięć zarezerwowana przez malloc nie znika sama po wyjściu z funkcji (w odróżnieniu od zwykłych zmiennych lokalnych) — jeśli jej nie zwolnicie przez free, zostaje zajęta aż do końca działania programu. To nazywa się wyciek pamięci (memory leak) — nieszkodliwy w małym programie działającym sekundę, katastrofalny w programie działającym godzinami (np. serwerze).\n\n\n\n\n\n\nImportantZłota zasada: każdy malloc ma swój free\n\n\n\nZa każdym razem, gdy piszesz malloc, od razu zastanów się i zaznacz w głowie (albo komentarzem), gdzie będzie odpowiadający free. Odkładanie tego “na później” to najpewniejszy sposób, żeby o nim zapomnieć."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html#zadania",
+    "href": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html#zadania",
+    "title": "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — dynamiczna tablica instrukcji\nZmień maszynę z sesji 11 tak, żeby program był tworzony przez malloc z rozmiarem podanym przez użytkownika (scanf(\"%d\", &n) — “ile instrukcji chcesz wpisać?”), zamiast tablicy o stałym rozmiarze. Wypełnij go w pętli, wczytując każdą instrukcję od użytkownika (kod operacji jako liczba, numer rejestru, wartość). Nie zapomnij o free na końcu main.\n\n\nZadanie 2 — sprawdzenie błędu alokacji\nDodaj sprawdzenie if (program == NULL) po malloc — w praktyce trudno to sprawdzić naprawdę (współczesne systemy rzadko odmawiają małej alokacji), ale zawsze pisz to sprawdzenie. To nawyk, nie opcja — pojawi się dokładnie w tej samej formie w chip8_load_rom w ćwiczeniu 1 CHIP-8 (tam sprawdzacie, czy fopen się udał, ten sam wzorzec defensywnego programowania).\n\n\nZadanie 3 — realloc: zmiana rozmiaru w locie\nNapisz wersję, w której użytkownik wpisuje instrukcje dopóki nie wpisze -1 jako kod operacji (nie wiecie z góry, ile ich będzie). Zacznijcie od malloc na 4 instrukcje, a gdy zabraknie miejsca, użyjcie:\npojemnosc *= 2;\nprogram = realloc(program, pojemnosc * sizeof(struct Instrukcja));\nrealloc próbuje powiększyć istniejący blok pamięci (a jeśli się nie da w miejscu — przenosi całą zawartość w nowe miejsce automatycznie) i zwraca nowy wskaźnik. Zawsze przypisuj wynik do zmiennej — pod starym wskaźnikiem może już nie być poprawnych danych."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/12_pamiec_dynamiczna.html#kryterium-sukcesu",
+    "title": "Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nMaszyna działa z liczbą instrukcji nieznaną w momencie kompilacji.\nProgram nie ma wycieków pamięci — każdy malloc/realloc ma odpowiadający free na końcu.\nRozumiesz różnicę: tablica o stałym rozmiarze (int x[10]) istnieje “sama z siebie” i znika automatycznie; pamięć z malloc trzeba jawnie zwolnić."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/10_wskazniki_podstawy.html",
+    "href": "podstawy_programowania/sesje/10_wskazniki_podstawy.html",
+    "title": "Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’",
+    "section": "",
+    "text": "Zrozumieć, czym jest adres w pamięci i wskaźnik — i wyjaśnić zagadkę z sesji 9: dlaczego zmiana tablicy wewnątrz funkcji jest widoczna na zewnątrz, skoro w sesji 6 zmiana zwykłej zmiennej (int x) wewnątrz funkcji nie była."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/10_wskazniki_podstawy.html#cel",
+    "href": "podstawy_programowania/sesje/10_wskazniki_podstawy.html#cel",
+    "title": "Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’",
+    "section": "",
+    "text": "Zrozumieć, czym jest adres w pamięci i wskaźnik — i wyjaśnić zagadkę z sesji 9: dlaczego zmiana tablicy wewnątrz funkcji jest widoczna na zewnątrz, skoro w sesji 6 zmiana zwykłej zmiennej (int x) wewnątrz funkcji nie była."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/10_wskazniki_podstawy.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/10_wskazniki_podstawy.html#teoria-w-pigułce",
+    "title": "Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nAdres zmiennej\nKażda zmienna w programie leży pod jakimś adresem w pamięci — konkretnym numerem “komórki”. Operator & (poznany przy scanf w sesji 2!) pobiera ten adres:\nint a = 5;\nprintf(\"Wartosc: %d\\n\", a);      // 5\nprintf(\"Adres: %p\\n\", &a);        // np. 0x7ffee3a1c9ac -- bedzie inny za kazdym razem\n\n\nWskaźnik — zmienna przechowująca adres\nint a = 5;\nint *wskaznik_na_a = &a;    // wskaznik_na_a przechowuje adres zmiennej a\n\nprintf(\"%d\\n\", *wskaznik_na_a);   // 5 -- \"*\" odczytuje wartosc spod adresu (dereferencja)\n*wskaznik_na_a = 10;               // zmienia a, bo to ten sam adres!\nprintf(\"%d\\n\", a);                 // 10\nDwa różne znaczenia *, zależnie od kontekstu — to częste źródło zamieszania na starcie:\n\n\n\n\n\n\n\nKontekst\nZnaczenie *\n\n\n\n\nint *p; (deklaracja)\n“p jest wskaźnikiem na int”\n\n\n*p = 10; (użycie)\n“zapisz 10 pod adresem, na który wskazuje p” (dereferencja)\n\n\n\n\n\nDlaczego zwieksz(int x) z sesji 6 nie działało\nvoid zwieksz(int x) { x = x + 1; }     // dostaje KOPIE wartosci -- zmiana ginie\nvoid zwieksz2(int *x) { *x = *x + 1; }  // dostaje ADRES -- zmiana widoczna na zewnatrz\n\nint main(void) {\n    int a = 5;\n    zwieksz(a);       // a dalej 5\n    zwieksz2(&a);     // a teraz 6 -- przekazujemy adres, nie wartosc\n}\n\n\nDlaczego tablice “po prostu działały” w sesji 9\nNazwa tablicy w C, użyta jako argument funkcji, rozpada się na wskaźnik do jej pierwszego elementu — to nie magia, to reguła języka. Dlatego void execute_instruction(int rejestry[], ...) z sesji 9 mogło modyfikować oryginalną tablicę: dostało (w praktyce) adres, dokładnie tak jak zwieksz2 powyżej, tylko że składnia rejestry[] ukrywa to podobieństwo. int rejestry[] w liście parametrów funkcji i int *rejestry znaczą to samo.\n\n\n\n\n\n\nNoteZapowiedź: dlaczego chip8_cycle(Chip8 *c) bierze wskaźnik\n\n\n\nW ćwiczeniach CHIP-8 funkcje operujące na stanie maszyny zawsze przyjmują Chip8 *c, nie Chip8 c. Gdyby przyjmowały kopię całej struktury (setki bajtów pamięci, rejestry, stos), każda zmiana pc czy V[x] byłaby niewidoczna poza funkcją — dokładnie ten sam problem co zwieksz(int x). Wskaźnik to jedyny sposób, żeby chip8_cycle mogła naprawdę zmieniać stan maszyny."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/10_wskazniki_podstawy.html#zadania",
+    "href": "podstawy_programowania/sesje/10_wskazniki_podstawy.html#zadania",
+    "title": "Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — napraw zwieksz\nNapisz obie wersje funkcji z sekcji teorii (zwieksz i zwieksz2) i wywołaj obie w main, wypisując wartość a po każdym wywołaniu. Zobacz na własne oczy różnicę.\n\n\nZadanie 2 — funkcja zamieniająca dwie wartości\nNapisz void zamien(int *a, int *b), która zamienia miejscami wartości, na które wskazują a i b. To klasyczne ćwiczenie na wskaźniki — niemożliwe do zrobienia bez nich (spróbuj najpierw bez wskaźników, żeby zobaczyć, dlaczego się nie da).\nint x = 1, y = 2;\nzamien(&x, &y);\nprintf(\"x=%d y=%d\\n\", x, y);   // x=2 y=1\n\n\nZadanie 3 — wskaźnik do elementu tablicy\nint rejestry[4] = {10, 20, 30, 40};\nint *p = &rejestry[1];\nprintf(\"%d\\n\", *p);        // 20\n*p = 99;\nprintf(\"%d\\n\", rejestry[1]);  // 99\nPrzepisz i uruchom powyższe, potem napisz funkcję void podwoj(int *liczba), podwajającą wartość pod wskazanym adresem, i użyj jej do podwojenia rejestry[2] przez podwoj(&rejestry[2]);."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/10_wskazniki_podstawy.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/10_wskazniki_podstawy.html#kryterium-sukcesu",
+    "title": "Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nRozumiesz różnicę między &zmienna (adres) a *wskaznik (wartość pod adresem) — potrafisz to wytłumaczyć bez patrzenia w notatki.\nzamien poprawnie zamienia wartości dwóch zmiennych w main.\nPotrafisz wyjaśnić własnymi słowami, dlaczego tablice przekazane do funkcji “zachowują się jak wskaźniki”."
+  },
+  {
     "objectID": "podstawy_programowania/sesje/08_enumy.html",
     "href": "podstawy_programowania/sesje/08_enumy.html",
     "title": "Sesja 8 — Enumy: nazwane liczby zamiast magicznych stałych",
@@ -560,5 +630,75 @@
     "title": "Sesja 7 — Struktury: instrukcja jako jedna rzecz",
     "section": "Kryterium sukcesu",
     "text": "Kryterium sukcesu\n\nMaszyna wirtualna działa identycznie jak w sesji 6, ale operuje na struct Instrukcja zamiast na parach liczb w tablicy.\nRozumiesz różnicę między dostępem przez . (do pola struktury) a przez [] (do elementu tablicy) — i że można ich używać razem (program[i].kod)."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/09_rejestry.html",
+    "href": "podstawy_programowania/sesje/09_rejestry.html",
+    "title": "Sesja 9 — Rejestry: więcej niż jeden akumulator",
+    "section": "",
+    "text": "Zastąpić pojedynczy akumulator z poprzednich sesji tablicą kilku “rejestrów” — dokładnie tak, jak robi to prawdziwy procesor (i CHIP-8, z jego 16 rejestrami V)."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/09_rejestry.html#cel",
+    "href": "podstawy_programowania/sesje/09_rejestry.html#cel",
+    "title": "Sesja 9 — Rejestry: więcej niż jeden akumulator",
+    "section": "",
+    "text": "Zastąpić pojedynczy akumulator z poprzednich sesji tablicą kilku “rejestrów” — dokładnie tak, jak robi to prawdziwy procesor (i CHIP-8, z jego 16 rejestrami V)."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/09_rejestry.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/09_rejestry.html#teoria-w-pigułce",
+    "title": "Sesja 9 — Rejestry: więcej niż jeden akumulator",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nOgraniczenie jednego akumulatora\nMaszyna z sesji 5-8 ma tylko jedno miejsce na wynik — akumulator. Nie da się nią policzyć np. (a + b) * (c - d) bez zgubienia jednej z wartości pośrednich. Prawdziwe procesory mają wiele rejestrów właśnie po to, żeby trzymać kilka wartości naraz.\n\n\nTablica jako zestaw rejestrów\nint rejestry[4] = {0, 0, 0, 0};   // R0, R1, R2, R3\n\nrejestry[0] = 10;\nrejestry[1] = 5;\nrejestry[2] = rejestry[0] + rejestry[1];   // R2 = R0 + R1\nZauważ: to nie jest nowa koncepcja C — to ta sama tablica, którą znacie od sesji 5, tylko interpretowana inaczej: każdy indeks to teraz osobne miejsce na wynik, a nie kolejna instrukcja programu.\n\n\nInstrukcja z dwoma operandami: numer rejestru\nŻeby instrukcja mogła powiedzieć “dodaj do rejestru R2”, sama instrukcja musi przechowywać numer rejestru docelowego, nie tylko wartość:\nstruct Instrukcja {\n    enum OpCode kod;\n    int rejestr_docelowy;   // ktory rejestr modyfikujemy\n    int wartosc;             // literal, albo numer innego rejestru -- zalezy od operacji\n};\n\n\n\n\n\n\nNoteTo jest dosłownie V[x] z CHIP-8\n\n\n\n6XKK (LD Vx, byte) w CHIP-8 to dokładnie ten wzorzec: “X” mówi, KTÓRY z 16 rejestrów V ma dostać wartość “KK”. Struktura, którą dziś zbudujecie, ma trzy pola z dokładnie tego samego powodu, dla którego opcode CHIP-8 koduje w sobie zarówno typ operacji, jak i numer rejestru."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/09_rejestry.html#zadania",
+    "href": "podstawy_programowania/sesje/09_rejestry.html#zadania",
+    "title": "Sesja 9 — Rejestry: więcej niż jeden akumulator",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — rozbuduj maszynę o rejestry\nZmień struct Instrukcja, dodając pole int rejestr_docelowy. Zmień execute_instruction, żeby przyjmowała int rejestry[] (całą tablicę) zamiast pojedynczego int akumulator, i modyfikowała rejestry[instr.rejestr_docelowy] zamiast zwracać nową wartość akumulatora:\nvoid execute_instruction(int rejestry[], struct Instrukcja instr) {\n    switch (instr.kod) {\n        case OP_LOAD:\n            rejestry[instr.rejestr_docelowy] = instr.wartosc;\n            break;\n        case OP_ADD:\n            rejestry[instr.rejestr_docelowy] += instr.wartosc;\n            break;\n        // ...\n    }\n}\nZwróć uwagę: funkcja jest teraz void, nie int — nie zwraca wartości, tylko modyfikuje tablicę, która została jej przekazana. To działa (w odróżnieniu od przykładu z zwieksz(int x) z sesji 6!), bo tablice w C zachowują się inaczej niż pojedyncze zmienne przy przekazywaniu do funkcji — do tego wrócimy dokładnie w sesji 11.\n\n\nZadanie 2 — operacja między dwoma rejestrami\nDodaj OP_ADD_REG — dodaje wartość jednego rejestru do drugiego (nie literał). Potrzebujesz nowego pola w strukturze, np. int rejestr_zrodlowy, używanego tylko przez tę operację.\ncase OP_ADD_REG:\n    rejestry[instr.rejestr_docelowy] += rejestry[instr.rejestr_zrodlowy];\n    break;\n\n\nZadanie 3 — policz coś, co wymaga kilku rejestrów\nNapisz “program” (tablicę struct Instrukcja), który liczy (3 + 4) * 2, korzystając z co najmniej dwóch rejestrów — coś, czego nie dałoby się policzyć jednym akumulatorem bez utraty jednej z wartości pośrednich. Wypisz zawartość wszystkich rejestrów na końcu (przez OP_PRINT albo osobną funkcję wypisz_rejestry)."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/09_rejestry.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/09_rejestry.html#kryterium-sukcesu",
+    "title": "Sesja 9 — Rejestry: więcej niż jeden akumulator",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nMaszyna operuje na tablicy kilku rejestrów zamiast jednego akumulatora.\nOP_ADD_REG poprawnie dodaje wartość jednego rejestru do drugiego.\nProgram testowy z zadania 3 daje poprawny wynik (14), korzystając z więcej niż jednego rejestru po drodze."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html",
+    "href": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html",
+    "title": "Sesja 11 — Wskaźniki do struktur: operator ->",
+    "section": "",
+    "text": "Połączyć struktury (sesja 7) ze wskaźnikami (sesja 10) — dokładnie tak, jak wyglądają funkcje w emulatorze CHIP-8 (void chip8_init(Chip8 *c)), które zaczniecie pisać za dwie sesje."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html#cel",
+    "href": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html#cel",
+    "title": "Sesja 11 — Wskaźniki do struktur: operator ->",
+    "section": "",
+    "text": "Połączyć struktury (sesja 7) ze wskaźnikami (sesja 10) — dokładnie tak, jak wyglądają funkcje w emulatorze CHIP-8 (void chip8_init(Chip8 *c)), które zaczniecie pisać za dwie sesje."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html#teoria-w-pigułce",
+    "href": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html#teoria-w-pigułce",
+    "title": "Sesja 11 — Wskaźniki do struktur: operator ->",
+    "section": "Teoria w pigułce",
+    "text": "Teoria w pigułce\n\nProblem: struktura jako parametr funkcji\nstruct Rejestry { int r[4]; };\n\nvoid wyzeruj(struct Rejestry rej) {\n    for (int i = 0; i &lt; 4; i++) rej.r[i] = 0;\n}\nTak jak int x w sesji 6, struct Rejestry rej jako parametr to kopia — cała struktura (mogąca być bardzo duża, jak Chip8 z 4 KB pamięci) jest kopiowana przy każdym wywołaniu, a zmiany wewnątrz funkcji nie są widoczne na zewnątrz. Dla małej struktury to marnotrawstwo pamięci i czasu; dla dużej (jak stan całego emulatora) — poważny problem wydajnościowy i (przede wszystkim) błąd logiczny: wyzeruj powyżej nic nie zeruje poza własną kopią.\n\n\nRozwiązanie: wskaźnik do struktury + operator -&gt;\nvoid wyzeruj(struct Rejestry *rej) {\n    for (int i = 0; i &lt; 4; i++) {\n        (*rej).r[i] = 0;   // dziala, ale niewygodne w zapisie\n    }\n}\n(*rej).r[i] znaczy “odczytaj strukturę spod wskaźnika rej, potem weź jej pole r” — działa, ale jest niewygodne. C oferuje skrót:\nvoid wyzeruj(struct Rejestry *rej) {\n    for (int i = 0; i &lt; 4; i++) {\n        rej-&gt;r[i] = 0;   // dokladnie to samo co (*rej).r[i], czytelniej\n    }\n}\nrej-&gt;r[i] i (*rej).r[i] są dokładnie równoważne — -&gt; to po prostu wygodniejszy zapis “dereferencja wskaźnika, potem dostęp do pola”. Zawsze używa się -&gt;, gdy masz wskaźnik do struktury (nie samą strukturę) — (*rej).pole istnieje głównie po to, żebyście rozumieli, co -&gt; naprawdę robi “pod spodem”.\n\n\n\n\n\n\nNoteDokładnie to zobaczycie w chip8.c\n\n\n\nvoid chip8_init(Chip8 *c) {\n    c-&gt;pc = 0x200;      // rownowazne (*c).pc = 0x200\n    for (int i = 0; i &lt; 16; i++) c-&gt;V[i] = 0;\n}\nKażda funkcja operująca na stanie emulatora bierze Chip8 *c i używa c-&gt;cokolwiek. Dziś ćwiczycie dokładnie tę składnię na mniejszym przykładzie, żeby za dwie sesje była już oswojona, zamiast być nowym problemem w tym samym momencie co cała reszta ćwiczenia 1."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html#zadania",
+    "href": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html#zadania",
+    "title": "Sesja 11 — Wskaźniki do struktur: operator ->",
+    "section": "Zadania",
+    "text": "Zadania\n\nZadanie 1 — przepisz maszynę na wskaźnik do struktury\nZbierz stan maszyny z sesji 9 (rejestry[4]) w strukturę:\nstruct Maszyna {\n    int rejestry[4];\n    int akumulator_bledow;   // policz ile razy trafiono na nieznana instrukcje\n};\nZmień execute_instruction, żeby przyjmowała struct Maszyna *m zamiast int rejestry[], i używała m-&gt;rejestry[...] wszędzie tam, gdzie wcześniej było rejestry[...]. W default: zwiększaj m-&gt;akumulator_bledow.\n\n\nZadanie 2 — funkcja inicjalizująca\nNapisz void maszyna_init(struct Maszyna *m), zerującą wszystkie rejestry i akumulator_bledow. Wywołaj ją w main na początku, zamiast inicjalizować strukturę przy deklaracji.\n\n\nZadanie 3 — porównanie . i -&gt;\nNapisz krótki fragment kodu pokazujący oba warianty na tej samej strukturze:\nstruct Maszyna m;\nmaszyna_init(&m);          // przekazujemy adres -- funkcja dostaje wskaznik\n\nm.rejestry[0] = 5;          // \".\" bo m to struktura (nie wskaznik)\n\nstruct Maszyna *wsk = &m;\nwsk-&gt;rejestry[0] = 10;      // \"-&gt;\" bo wsk to WSKAZNIK do struktury\nUpewnij się, że rozumiesz, dlaczego w jednym miejscu jest ., a w drugim -&gt;, mimo że chodzi o “tę samą” strukturę m."
+  },
+  {
+    "objectID": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html#kryterium-sukcesu",
+    "href": "podstawy_programowania/sesje/11_wskazniki_do_struktur.html#kryterium-sukcesu",
+    "title": "Sesja 11 — Wskaźniki do struktur: operator ->",
+    "section": "Kryterium sukcesu",
+    "text": "Kryterium sukcesu\n\nMaszyna operuje na struct Maszyna *m z użyciem -&gt; we wszystkich funkcjach.\nPotrafisz bez wahania powiedzieć, kiedy używa się ., a kiedy -&gt; (odpowiedź: zależy wyłącznie od tego, czy zmienna po lewej to struktura, czy wskaźnik do niej — nigdy od tego, co “wygląda naturalniej”).\nakumulator_bledow poprawnie liczy nieznane instrukcje w testowym programie."
   }
 ]

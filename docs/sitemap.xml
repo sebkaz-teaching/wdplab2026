@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/12_pamiec_dynamiczna.html</loc>
+    <lastmod>2026-09-21T14:58:44.947Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/10_wskazniki_podstawy.html</loc>
+    <lastmod>2026-09-21T14:57:41.605Z</lastmod>
+  </url>
+  <url>
     <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/08_enumy.html</loc>
     <lastmod>2026-09-21T14:55:35.960Z</lastmod>
   </url>
@@ -59,5 +67,13 @@
   <url>
     <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/07_struktury.html</loc>
     <lastmod>2026-09-21T14:55:04.704Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/09_rejestry.html</loc>
+    <lastmod>2026-09-21T14:57:10.941Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/sesje/11_wskazniki_do_struktur.html</loc>
+    <lastmod>2026-09-21T14:58:13.112Z</lastmod>
   </url>
 </urlset>

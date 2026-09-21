@@ -1,0 +1,118 @@
+---
+title: "Sesja 11 — Wskaźniki do struktur: operator ->"
+format: html
+toc: true
+---
+
+## Cel
+
+Połączyć struktury (sesja 7) ze wskaźnikami (sesja 10) — dokładnie tak, jak wyglądają
+funkcje w emulatorze CHIP-8 (`void chip8_init(Chip8 *c)`), które zaczniecie pisać za
+dwie sesje.
+
+## Teoria w pigułce
+
+### Problem: struktura jako parametr funkcji
+
+```c
+struct Rejestry { int r[4]; };
+
+void wyzeruj(struct Rejestry rej) {
+    for (int i = 0; i < 4; i++) rej.r[i] = 0;
+}
+```
+
+Tak jak `int x` w sesji 6, `struct Rejestry rej` jako parametr to **kopia** — cała
+struktura (mogąca być bardzo duża, jak `Chip8` z 4 KB pamięci) jest kopiowana przy
+każdym wywołaniu, a zmiany wewnątrz funkcji nie są widoczne na zewnątrz. Dla małej
+struktury to marnotrawstwo pamięci i czasu; dla dużej (jak stan całego emulatora) —
+poważny problem wydajnościowy i (przede wszystkim) błąd logiczny: `wyzeruj` powyżej
+**nic nie zeruje** poza własną kopią.
+
+### Rozwiązanie: wskaźnik do struktury + operator `->`
+
+```c
+void wyzeruj(struct Rejestry *rej) {
+    for (int i = 0; i < 4; i++) {
+        (*rej).r[i] = 0;   // dziala, ale niewygodne w zapisie
+    }
+}
+```
+
+`(*rej).r[i]` znaczy "odczytaj strukturę spod wskaźnika `rej`, potem weź jej pole
+`r`" — działa, ale jest niewygodne. C oferuje skrót:
+
+```c
+void wyzeruj(struct Rejestry *rej) {
+    for (int i = 0; i < 4; i++) {
+        rej->r[i] = 0;   // dokladnie to samo co (*rej).r[i], czytelniej
+    }
+}
+```
+
+`rej->r[i]` i `(*rej).r[i]` są **dokładnie równoważne** — `->` to po prostu wygodniejszy
+zapis "dereferencja wskaźnika, potem dostęp do pola". Zawsze używa się `->`, gdy masz
+wskaźnik do struktury (nie samą strukturę) — `(*rej).pole` istnieje głównie po to,
+żebyście rozumieli, co `->` naprawdę robi "pod spodem".
+
+::: {.callout-note}
+## Dokładnie to zobaczycie w `chip8.c`
+```c
+void chip8_init(Chip8 *c) {
+    c->pc = 0x200;      // rownowazne (*c).pc = 0x200
+    for (int i = 0; i < 16; i++) c->V[i] = 0;
+}
+```
+Każda funkcja operująca na stanie emulatora bierze `Chip8 *c` i używa `c->cokolwiek`.
+Dziś ćwiczycie dokładnie tę składnię na mniejszym przykładzie, żeby za dwie sesje była
+już oswojona, zamiast być nowym problemem w tym samym momencie co cała reszta
+ćwiczenia 1.
+:::
+
+## Zadania
+
+### Zadanie 1 — przepisz maszynę na wskaźnik do struktury
+
+Zbierz stan maszyny z sesji 9 (`rejestry[4]`) w strukturę:
+
+```c
+struct Maszyna {
+    int rejestry[4];
+    int akumulator_bledow;   // policz ile razy trafiono na nieznana instrukcje
+};
+```
+
+Zmień `execute_instruction`, żeby przyjmowała `struct Maszyna *m` zamiast `int
+rejestry[]`, i używała `m->rejestry[...]` wszędzie tam, gdzie wcześniej było
+`rejestry[...]`. W `default:` zwiększaj `m->akumulator_bledow`.
+
+### Zadanie 2 — funkcja inicjalizująca
+
+Napisz `void maszyna_init(struct Maszyna *m)`, zerującą wszystkie rejestry i
+`akumulator_bledow`. Wywołaj ją w `main` na początku, zamiast inicjalizować strukturę
+przy deklaracji.
+
+### Zadanie 3 — porównanie `.` i `->`
+
+Napisz krótki fragment kodu pokazujący oba warianty na tej samej strukturze:
+
+```c
+struct Maszyna m;
+maszyna_init(&m);          // przekazujemy adres -- funkcja dostaje wskaznik
+
+m.rejestry[0] = 5;          // "." bo m to struktura (nie wskaznik)
+
+struct Maszyna *wsk = &m;
+wsk->rejestry[0] = 10;      // "->" bo wsk to WSKAZNIK do struktury
+```
+
+Upewnij się, że rozumiesz, dlaczego w jednym miejscu jest `.`, a w drugim `->`, mimo
+że chodzi o "tę samą" strukturę `m`.
+
+## Kryterium sukcesu
+
+- Maszyna operuje na `struct Maszyna *m` z użyciem `->` we wszystkich funkcjach.
+- Potrafisz bez wahania powiedzieć, kiedy używa się `.`, a kiedy `->` (odpowiedź:
+  zależy wyłącznie od tego, czy zmienna po lewej to struktura, czy wskaźnik do niej —
+  nigdy od tego, co "wygląda naturalniej").
+- `akumulator_bledow` poprawnie liczy nieznane instrukcje w testowym programie.

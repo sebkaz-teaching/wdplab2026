@@ -1,0 +1,108 @@
+---
+title: "Sesja 9 — Rejestry: więcej niż jeden akumulator"
+format: html
+toc: true
+---
+
+## Cel
+
+Zastąpić pojedynczy `akumulator` z poprzednich sesji tablicą kilku "rejestrów" —
+dokładnie tak, jak robi to prawdziwy procesor (i CHIP-8, z jego 16 rejestrami `V`).
+
+## Teoria w pigułce
+
+### Ograniczenie jednego akumulatora
+
+Maszyna z sesji 5-8 ma tylko jedno miejsce na wynik — `akumulator`. Nie da się nią
+policzyć np. `(a + b) * (c - d)` bez zgubienia jednej z wartości pośrednich. Prawdziwe
+procesory mają **wiele rejestrów** właśnie po to, żeby trzymać kilka wartości naraz.
+
+### Tablica jako zestaw rejestrów
+
+```c
+int rejestry[4] = {0, 0, 0, 0};   // R0, R1, R2, R3
+
+rejestry[0] = 10;
+rejestry[1] = 5;
+rejestry[2] = rejestry[0] + rejestry[1];   // R2 = R0 + R1
+```
+
+Zauważ: to nie jest nowa koncepcja C — to ta sama tablica, którą znacie od sesji 5,
+tylko interpretowana inaczej: każdy indeks to teraz **osobne miejsce na wynik**, a nie
+kolejna instrukcja programu.
+
+### Instrukcja z dwoma operandami: numer rejestru
+
+Żeby instrukcja mogła powiedzieć "dodaj do rejestru R2", sama instrukcja musi
+przechowywać **numer rejestru docelowego**, nie tylko wartość:
+
+```c
+struct Instrukcja {
+    enum OpCode kod;
+    int rejestr_docelowy;   // ktory rejestr modyfikujemy
+    int wartosc;             // literal, albo numer innego rejestru -- zalezy od operacji
+};
+```
+
+::: {.callout-note}
+## To jest dosłownie `V[x]` z CHIP-8
+`6XKK` (`LD Vx, byte`) w CHIP-8 to dokładnie ten wzorzec: "X" mówi, KTÓRY z 16
+rejestrów `V` ma dostać wartość "KK". Struktura, którą dziś zbudujecie, ma trzy pola z
+dokładnie tego samego powodu, dla którego opcode CHIP-8 koduje w sobie zarówno typ
+operacji, jak i numer rejestru.
+:::
+
+## Zadania
+
+### Zadanie 1 — rozbuduj maszynę o rejestry
+
+Zmień `struct Instrukcja`, dodając pole `int rejestr_docelowy`. Zmień
+`execute_instruction`, żeby przyjmowała `int rejestry[]` (całą tablicę) zamiast
+pojedynczego `int akumulator`, i modyfikowała `rejestry[instr.rejestr_docelowy]`
+zamiast zwracać nową wartość akumulatora:
+
+```c
+void execute_instruction(int rejestry[], struct Instrukcja instr) {
+    switch (instr.kod) {
+        case OP_LOAD:
+            rejestry[instr.rejestr_docelowy] = instr.wartosc;
+            break;
+        case OP_ADD:
+            rejestry[instr.rejestr_docelowy] += instr.wartosc;
+            break;
+        // ...
+    }
+}
+```
+
+Zwróć uwagę: funkcja jest teraz `void`, nie `int` — nie **zwraca** wartości, tylko
+**modyfikuje** tablicę, która została jej przekazana. To działa (w odróżnieniu od
+przykładu z `zwieksz(int x)` z sesji 6!), bo tablice w C zachowują się inaczej niż
+pojedyncze zmienne przy przekazywaniu do funkcji — do tego wrócimy dokładnie w sesji
+11.
+
+### Zadanie 2 — operacja między dwoma rejestrami
+
+Dodaj `OP_ADD_REG` — dodaje wartość jednego rejestru do drugiego (nie literał).
+Potrzebujesz nowego pola w strukturze, np. `int rejestr_zrodlowy`, używanego tylko
+przez tę operację.
+
+```c
+case OP_ADD_REG:
+    rejestry[instr.rejestr_docelowy] += rejestry[instr.rejestr_zrodlowy];
+    break;
+```
+
+### Zadanie 3 — policz coś, co wymaga kilku rejestrów
+
+Napisz "program" (tablicę `struct Instrukcja`), który liczy `(3 + 4) * 2`, korzystając
+z co najmniej dwóch rejestrów — coś, czego nie dałoby się policzyć jednym
+akumulatorem bez utraty jednej z wartości pośrednich. Wypisz zawartość wszystkich
+rejestrów na końcu (przez `OP_PRINT` albo osobną funkcję `wypisz_rejestry`).
+
+## Kryterium sukcesu
+
+- Maszyna operuje na tablicy kilku rejestrów zamiast jednego akumulatora.
+- `OP_ADD_REG` poprawnie dodaje wartość jednego rejestru do drugiego.
+- Program testowy z zadania 3 daje poprawny wynik (`14`), korzystając z więcej niż
+  jednego rejestru po drodze.

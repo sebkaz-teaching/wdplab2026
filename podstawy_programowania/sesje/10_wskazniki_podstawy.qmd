@@ -1,0 +1,115 @@
+---
+title: "Sesja 10 — Wskaźniki: dlaczego tablice 'po prostu działały'"
+format: html
+toc: true
+---
+
+## Cel
+
+Zrozumieć, czym jest adres w pamięci i wskaźnik — i wyjaśnić zagadkę z sesji 9:
+dlaczego zmiana tablicy wewnątrz funkcji **jest** widoczna na zewnątrz, skoro w sesji
+6 zmiana zwykłej zmiennej (`int x`) wewnątrz funkcji **nie była**.
+
+## Teoria w pigułce
+
+### Adres zmiennej
+
+Każda zmienna w programie leży pod jakimś **adresem** w pamięci — konkretnym numerem
+"komórki". Operator `&` (poznany przy `scanf` w sesji 2!) pobiera ten adres:
+
+```c
+int a = 5;
+printf("Wartosc: %d\n", a);      // 5
+printf("Adres: %p\n", &a);        // np. 0x7ffee3a1c9ac -- bedzie inny za kazdym razem
+```
+
+### Wskaźnik — zmienna przechowująca adres
+
+```c
+int a = 5;
+int *wskaznik_na_a = &a;    // wskaznik_na_a przechowuje adres zmiennej a
+
+printf("%d\n", *wskaznik_na_a);   // 5 -- "*" odczytuje wartosc spod adresu (dereferencja)
+*wskaznik_na_a = 10;               // zmienia a, bo to ten sam adres!
+printf("%d\n", a);                 // 10
+```
+
+Dwa różne znaczenia `*`, zależnie od kontekstu — to częste źródło zamieszania na
+starcie:
+
+| Kontekst | Znaczenie `*` |
+|----------|-----------------|
+| `int *p;` (deklaracja) | "`p` jest wskaźnikiem na `int`" |
+| `*p = 10;` (użycie) | "zapisz `10` pod adresem, na który wskazuje `p`" (dereferencja) |
+
+### Dlaczego `zwieksz(int x)` z sesji 6 nie działało
+
+```c
+void zwieksz(int x) { x = x + 1; }     // dostaje KOPIE wartosci -- zmiana ginie
+void zwieksz2(int *x) { *x = *x + 1; }  // dostaje ADRES -- zmiana widoczna na zewnatrz
+
+int main(void) {
+    int a = 5;
+    zwieksz(a);       // a dalej 5
+    zwieksz2(&a);     // a teraz 6 -- przekazujemy adres, nie wartosc
+}
+```
+
+### Dlaczego tablice "po prostu działały" w sesji 9
+
+Nazwa tablicy w C, użyta jako argument funkcji, **rozpada się na wskaźnik do jej
+pierwszego elementu** — to nie magia, to reguła języka. Dlatego `void
+execute_instruction(int rejestry[], ...)` z sesji 9 mogło modyfikować oryginalną
+tablicę: dostało (w praktyce) adres, dokładnie tak jak `zwieksz2` powyżej, tylko że
+składnia `rejestry[]` ukrywa to podobieństwo. `int rejestry[]` w liście parametrów
+funkcji i `int *rejestry` znaczą **to samo**.
+
+::: {.callout-note}
+## Zapowiedź: dlaczego `chip8_cycle(Chip8 *c)` bierze wskaźnik
+W ćwiczeniach CHIP-8 funkcje operujące na stanie maszyny zawsze przyjmują `Chip8 *c`,
+nie `Chip8 c`. Gdyby przyjmowały kopię całej struktury (setki bajtów pamięci,
+rejestry, stos), każda zmiana `pc` czy `V[x]` byłaby niewidoczna poza funkcją —
+dokładnie ten sam problem co `zwieksz(int x)`. Wskaźnik to jedyny sposób, żeby
+`chip8_cycle` mogła naprawdę zmieniać stan maszyny.
+:::
+
+## Zadania
+
+### Zadanie 1 — napraw `zwieksz`
+
+Napisz obie wersje funkcji z sekcji teorii (`zwieksz` i `zwieksz2`) i wywołaj obie w
+`main`, wypisując wartość `a` po każdym wywołaniu. Zobacz na własne oczy różnicę.
+
+### Zadanie 2 — funkcja zamieniająca dwie wartości
+
+Napisz `void zamien(int *a, int *b)`, która zamienia miejscami wartości, na które
+wskazują `a` i `b`. To klasyczne ćwiczenie na wskaźniki — niemożliwe do zrobienia bez
+nich (spróbuj najpierw bez wskaźników, żeby zobaczyć, dlaczego się nie da).
+
+```c
+int x = 1, y = 2;
+zamien(&x, &y);
+printf("x=%d y=%d\n", x, y);   // x=2 y=1
+```
+
+### Zadanie 3 — wskaźnik do elementu tablicy
+
+```c
+int rejestry[4] = {10, 20, 30, 40};
+int *p = &rejestry[1];
+printf("%d\n", *p);        // 20
+*p = 99;
+printf("%d\n", rejestry[1]);  // 99
+```
+
+Przepisz i uruchom powyższe, potem napisz funkcję `void podwoj(int *liczba)`,
+podwajającą wartość pod wskazanym adresem, i użyj jej do podwojenia `rejestry[2]`
+przez `podwoj(&rejestry[2]);`.
+
+## Kryterium sukcesu
+
+- Rozumiesz różnicę między `&zmienna` (adres) a `*wskaznik` (wartość pod adresem) —
+  potrafisz to wytłumaczyć bez patrzenia w notatki.
+- `zamien` poprawnie zamienia wartości dwóch zmiennych w `main`.
+- Potrafisz wyjaśnić własnymi słowami, dlaczego tablice przekazane do funkcji
+  "zachowują się jak wskaźniki".
