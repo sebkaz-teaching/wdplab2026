@@ -1,0 +1,120 @@
+---
+title: "Sesja 6 — Funkcje: porządkowanie maszyny wirtualnej"
+format: html
+toc: true
+---
+
+## Cel
+
+Nauczyć się pisać własne funkcje i użyć ich, żeby uporządkować "maszynę" z sesji 5 —
+wydzielić wykonywanie pojedynczej instrukcji do osobnej funkcji zamiast trzymać
+wszystko w `main`.
+
+## Teoria w pigułce
+
+### Po co dzielić kod na funkcje?
+
+`main()` z sesji 5, gdy dodacie więcej operacji, robi się długi i trudny do czytania.
+Funkcja pozwala **nazwać** kawałek logiki i używać go wielokrotnie, nie kopiując kodu.
+
+```c
+int dodaj(int a, int b) {
+    return a + b;
+}
+
+int main(void) {
+    int wynik = dodaj(3, 4);
+    printf("%d\n", wynik);   // 7
+    return 0;
+}
+```
+
+Anatomia funkcji: `int dodaj(int a, int b)` — `int` na początku to **typ zwracanej
+wartości**, `dodaj` to nazwa, `(int a, int b)` to **parametry** (dane, które funkcja
+przyjmuje). `return a + b;` kończy działanie funkcji i przekazuje wynik z powrotem do
+miejsca, które ją wywołało.
+
+### Funkcje bez zwracanej wartości: `void`
+
+```c
+void przywitaj(char *imie) {
+    printf("Czesc, %s!\n", imie);
+}
+```
+
+`void` oznacza "ta funkcja niczego nie zwraca" — robi coś (tu: wypisuje na ekran), ale
+nie oddaje wyniku, którego można by użyć w wyrażeniu.
+
+### Parametry przekazywane przez wartość — ważna pułapka
+
+```c
+void zwieksz(int x) {
+    x = x + 1;
+}
+
+int main(void) {
+    int a = 5;
+    zwieksz(a);
+    printf("%d\n", a);   // WCIAZ 5, nie 6!
+}
+```
+
+Funkcja `zwieksz` dostaje **kopię** wartości `a`, nie samą zmienną `a`. Zmiana `x`
+wewnątrz funkcji nie wpływa na oryginał. To zaskakuje niemal każdego na starcie — i
+jest bezpośrednim powodem, dla którego istnieją wskaźniki (sesja 11): to jedyny sposób,
+żeby funkcja mogła zmienić coś w miejscu, skąd została wywołana.
+
+## Zadania
+
+### Zadanie 1 — wydziel `execute_instruction`
+
+Weź kod z sesji 5 (zadanie 3) i wydziel ciało `switch`a do osobnej funkcji:
+
+```c
+int execute_instruction(int akumulator, int kod, int wartosc) {
+    switch (kod) {
+        case 1: return wartosc;
+        case 2: return akumulator + wartosc;
+        case 3: printf("Wynik: %d\n", akumulator); return akumulator;
+        case 4: return akumulator - wartosc;
+        case 5: return akumulator * wartosc;
+        default:
+            printf("Nieznana instrukcja: %d\n", kod);
+            return akumulator;
+    }
+}
+```
+
+W `main`, pętla `for` powinna teraz wyglądać tak:
+
+```c
+for (int i = 0; i < liczba_instrukcji * 2; i += 2) {
+    akumulator = execute_instruction(akumulator, program[i], program[i + 1]);
+}
+```
+
+Zwróć uwagę: `main` jest teraz krótszy i czytelniejszy — mówi **co** się dzieje (dla
+każdej instrukcji, wykonaj ją), a szczegóły **jak** są schowane w funkcji.
+
+### Zadanie 2 — funkcja pomocnicza do wypisywania
+
+Napisz `void wypisz_program(int program[], int liczba_instrukcji)`, która przed
+wykonaniem wypisuje cały "program" w czytelnej formie (`kod: X, wartosc: Y` dla
+każdej instrukcji). Wywołaj ją w `main` przed pętlą wykonującą.
+
+Zwróć uwagę na parametr `int program[]` — tablice, w odróżnieniu od zwykłych zmiennych
+z zadania o `zwieksz`, **nie są kopiowane** przy przekazaniu do funkcji (do tego
+wrócimy dokładniej w sesji o wskaźnikach) — funkcja operuje na tej samej tablicy, którą
+ma `main`.
+
+### Zadanie 3 — funkcja z wieloma wywołaniami
+
+Napisz `int silnia(int n)`, liczącą silnię (`n!`) przez pętlę `for` wewnątrz funkcji
+(bez rekurencji — to temat na później). Przetestuj dla kilku wartości `n`, w tym `0`
+(wynik powinien być `1`).
+
+## Kryterium sukcesu
+
+- `execute_instruction` działa identycznie jak `switch` bezpośrednio w `main` z sesji 5 — ten sam wynik, inna organizacja kodu.
+- Potrafisz wytłumaczyć, dlaczego zmiana parametru `int x` wewnątrz funkcji nie zmienia zmiennej w `main`, z której go wywołano.
+- `silnia(0)` zwraca `1`, `silnia(5)` zwraca `120`.

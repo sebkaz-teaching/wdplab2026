@@ -1,0 +1,111 @@
+---
+title: "Sesja 8 — Enumy: nazwane liczby zamiast magicznych stałych"
+format: html
+toc: true
+---
+
+## Cel
+
+Poznać `enum` i użyć go, żeby zastąpić kody operacji (`1`, `2`, `3`...) w maszynie
+wirtualnej czytelnymi nazwami.
+
+## Teoria w pigułce
+
+### Problem z "magicznymi liczbami"
+
+`case 1:`, `case 2:` w kodzie z poprzednich sesji działa, ale nikt czytający ten kod
+(łącznie z Wami za miesiąc) nie widzi od razu, co `1` znaczy bez zaglądania do
+komentarza albo dokumentacji. Takie nieopisane stałe liczbowe nazywa się **magicznymi
+liczbami** — to określenie ma lekko negatywny wydźwięk, bo "magia" = "nikt nie wie
+dlaczego to działa".
+
+### `enum` — nazwany zbiór stałych całkowitych
+
+```c
+enum OpCode {
+    OP_LOAD = 1,
+    OP_ADD = 2,
+    OP_PRINT = 3,
+    OP_SUB = 4,
+    OP_MUL = 5,
+};
+```
+
+Teraz `OP_LOAD` to po prostu inna nazwa dla liczby `1` — dla kompilatora to wciąż
+liczba całkowita, ale dla **człowieka czytającego kod** to coś czytelnego. Jeśli nie
+podacie wartości jawnie, `enum` sam ponumeruje kolejno od zera:
+
+```c
+enum Kolor { CZERWONY, ZIELONY, NIEBIESKI };
+// CZERWONY = 0, ZIELONY = 1, NIEBIESKI = 2 -- automatycznie
+```
+
+### Użycie w `switch`
+
+```c
+switch (instr.kod) {
+    case OP_LOAD:
+        akumulator = instr.wartosc;
+        break;
+    case OP_ADD:
+        akumulator += instr.wartosc;
+        break;
+    // ...
+}
+```
+
+Czytelność `case OP_ADD:` kontra `case 2:` to nie kosmetyka — to różnica między kodem,
+który można zrozumieć za pół roku, a kodem, do którego trzeba dorabiać sobie ściągawkę
+"co która liczba znaczy".
+
+::: {.callout-note}
+## Zapowiedź: to jest dosłownie to, co zrobicie z opcode'ami CHIP-8
+W ćwiczeniach CHIP-8 opcode'y są cały czas liczbami hex (`0x1000`, `0x6000`...) — nikt
+Was nie zmusi do użycia tu `enum`, ale gdybyście chcieli (rozszerzenie dla chętnych po
+ćwiczeniu 2), moglibyście zdefiniować `enum Chip8Op { OP_JP = 0x1, OP_LD_BYTE = 0x6,
+... }` i mieć dokładnie tę samą korzyść czytelności. Dokumentacja/materiały do CHIP-8
+używają liczb hex wprost, bo tak zwyczajowo opisuje się opcode'y procesorów — ale
+mechanizm, który dziś poznajecie, stosuje się identycznie.
+:::
+
+## Zadania
+
+### Zadanie 1 — nazwij opkody swojej maszyny
+
+Zdefiniuj `enum OpCode` z nazwami dla wszystkich pięciu operacji z sesji 5-7 (`OP_LOAD`,
+`OP_ADD`, `OP_PRINT`, `OP_SUB`, `OP_MUL`). Zamień wszystkie `case 1:` itd. w
+`execute_instruction` na `case OP_LOAD:` itd. Program powinien działać identycznie jak
+przed zmianą — to jest refaktoryzacja (zmiana formy kodu bez zmiany zachowania), nie
+nowa funkcjonalność.
+
+### Zadanie 2 — pole `enum` w strukturze
+
+Zmień pole `int kod` w `struct Instrukcja` na `enum OpCode kod`. Zaktualizuj
+inicjalizację tablicy programu, żeby używała nazw zamiast liczb:
+
+```c
+struct Instrukcja program[] = {
+    {OP_LOAD, 10},
+    {OP_ADD, 5},
+    {OP_PRINT, 0},
+};
+```
+
+Porównaj czytelność z wersją z sesji 7 (`{1, 10}`) — to ten sam efekt co zamiana
+`case`ów w zadaniu 1, tylko po stronie danych zamiast logiki.
+
+### Zadanie 3 — nowa operacja przez `enum`
+
+Dodaj `OP_HALT` (zatrzymaj wykonywanie programu, nawet jeśli zostały jeszcze
+instrukcje). W pętli `for` w `main` sprawdź warunek zatrzymania i przerwij pętlę
+instrukcją `break;` (poza `switch`em, na poziomie samej pętli — `break` w C zawsze
+przerywa **najbliższą otaczającą pętlę lub switch**, nie oba naraz).
+
+## Kryterium sukcesu
+
+- Cały kod używa nazw z `enum OpCode` zamiast gołych liczb — zarówno w `switch`u, jak
+  i w inicjalizacji tablicy programu.
+- `OP_HALT` faktycznie przerywa wykonywanie, zostawiając nieistniejące instrukcje po
+  nim niewykonane.
+- Potrafisz wytłumaczyć, czym różni się `break` w `switch`u od `break` w pętli — i że
+  to dwa osobne użycia tego samego słowa kluczowego.

@@ -1,0 +1,110 @@
+---
+title: "Sesja 7 — Struktury: instrukcja jako jedna rzecz"
+format: html
+toc: true
+---
+
+## Cel
+
+Poznać `struct` i użyć go, żeby zamienić "parę liczb w tablicy" (kod operacji +
+wartość, osobno) na jeden, spójny typ danych reprezentujący instrukcję.
+
+## Teoria w pigułce
+
+### Problem z podejściem z sesji 5-6
+
+`program[i]` i `program[i+1]` "wiedzą", że są ze sobą powiązane, tylko dzięki temu, że
+pamiętacie o tym Wy, patrząc na kod. Nic w samym języku C tego nie wymusza — łatwo
+pomylić się o jeden indeks i sczytać wartość jako kod operacji.
+
+### `struct` — grupowanie powiązanych danych
+
+```c
+struct Instrukcja {
+    int kod;
+    int wartosc;
+};
+```
+
+Teraz `kod` i `wartosc` są **jedną rzeczą** — instrukcją — a nie dwiema osobnymi
+liczbami, które trzeba pamiętać trzymać razem.
+
+```c
+struct Instrukcja instr;
+instr.kod = 1;
+instr.wartosc = 10;
+
+printf("%d\n", instr.kod);   // dostep do pola przez kropke
+```
+
+### Tablica struktur
+
+```c
+struct Instrukcja program[] = {
+    {1, 10},
+    {2, 5},
+    {3, 0},
+};
+int liczba_instrukcji = sizeof(program) / sizeof(program[0]);
+```
+
+Zwróć uwagę, jak bardzo to czytelniejsze niż tablica `{1, 10, 2, 5, 3, 0}` z sesji 5 —
+i jak `sizeof` teraz dzieli tylko raz (bez `/2`), bo każdy element tablicy to już cała
+instrukcja, nie pojedyncza liczba.
+
+::: {.callout-note}
+## To jest dokładnie `Chip8` ze szkieletu VM
+Struktura `Chip8` w ćwiczeniu 1 CHIP-8 (`memory`, `V`, `pc`, `stack`...) to ten sam
+pomysł na dużo większą skalę: zamiast trzymać stan maszyny jako kilka osobnych
+zmiennych porozrzucanych po `main`, grupujecie je w jedną rzecz, którą przekazujecie
+między funkcjami jednym argumentem.
+:::
+
+## Zadania
+
+### Zadanie 1 — przepisz maszynę na `struct`
+
+Weź kod z sesji 6 i zamień tablicę `int program[]` na `struct Instrukcja program[]`.
+Dostosuj `execute_instruction`, żeby przyjmowała `struct Instrukcja` zamiast dwóch
+osobnych liczb:
+
+```c
+int execute_instruction(int akumulator, struct Instrukcja instr) {
+    switch (instr.kod) {
+        case 1: return instr.wartosc;
+        // ...
+    }
+}
+```
+
+Pętla w `main` upraszcza się do:
+
+```c
+for (int i = 0; i < liczba_instrukcji; i++) {
+    akumulator = execute_instruction(akumulator, program[i]);
+}
+```
+
+Zwróć uwagę: żadnego `i += 2`, żadnego ryzyka pomylenia która liczba to kod, a która
+wartość — struktura wymusza porządek za Was.
+
+### Zadanie 2 — struktura z trzema polami
+
+Rozbuduj `struct Instrukcja` o pole `char nazwa[10]` (krótki tekstowy opis operacji,
+np. `"LOAD"`, `"ADD"`) i wypisuj go razem z resztą w funkcji `wypisz_program` z sesji
+6. Zwróć uwagę, że tablica `char[10]` jako pole struktury działa tak samo jak każda
+inna tablica, którą już znacie.
+
+### Zadanie 3 — struktura zagnieżdżona (dla chętnych)
+
+Zdefiniuj `struct Wynik { int wartosc; int bledny; };` i zmień `execute_instruction`
+tak, żeby zwracała `struct Wynik` zamiast samego `int` — `bledny` ustawiane na `1`,
+gdy `instr.kod` jest nieznany, w przeciwnym razie `0`. To pierwszy krok w stronę
+"pełnoprawnej" obsługi błędów, do której wrócimy w dalszych sesjach.
+
+## Kryterium sukcesu
+
+- Maszyna wirtualna działa identycznie jak w sesji 6, ale operuje na `struct
+  Instrukcja` zamiast na parach liczb w tablicy.
+- Rozumiesz różnicę między dostępem przez `.` (do pola struktury) a przez `[]` (do
+  elementu tablicy) — i że można ich używać razem (`program[i].kod`).

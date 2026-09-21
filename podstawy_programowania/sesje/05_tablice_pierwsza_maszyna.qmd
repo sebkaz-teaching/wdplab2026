@@ -1,0 +1,134 @@
+---
+title: "Sesja 5 — Tablice: Twoja pierwsza maszyna wirtualna"
+format: html
+toc: true
+---
+
+## Cel
+
+Poznać tablice i użyć ich, żeby napisać **pierwszą, bardzo prostą wersję maszyny
+wirtualnej** — programu, który wykonuje sekwencję instrukcji zapisaną jako dane, a nie
+jako kod źródłowy C. To moment, w którym kurs zaczyna wyraźnie zmierzać w stronę
+CHIP-8.
+
+## Teoria w pigułce
+
+### Tablica — wiele wartości pod jedną nazwą
+
+```c
+int liczby[5] = {10, 20, 30, 40, 50};
+printf("%d\n", liczby[0]);   // 10 -- indeksowanie od zera!
+printf("%d\n", liczby[4]);   // 50 -- ostatni element to N-1, nie N
+```
+
+Tablica to **ciągły blok pamięci** mieszczący `N` elementów tego samego typu.
+`liczby[2]` znaczy dosłownie "przesuń się od początku tablicy o 2 elementy" — C nie
+sprawdza, czy indeks mieści się w zakresie (w odróżnieniu od wielu innych języków).
+`liczby[5]` (poza zakresem dla tablicy o rozmiarze 5) **nie da błędu kompilacji ani
+zwykle w trakcie działania** — po prostu odczyta/nadpisze pamięć, która do tej
+tablicy nie należy. To **niezdefiniowane zachowanie** — zapamiętaj to zdanie, bo
+usłyszycie je jeszcze wielokrotnie w tym kursie.
+
+### Pętla `for` po tablicy
+
+```c
+for (int i = 0; i < 5; i++) {
+    printf("%d\n", liczby[i]);
+}
+```
+
+To najczęstszy wzorzec użycia tablic: `for` z licznikiem od `0` do `rozmiar - 1`.
+
+### Program jako dane — kluczowa idea tej sesji
+
+Do tej pory Wasze programy miały logikę **wpisaną na sztywno w kod C** — chcieliście
+inne zachowanie, zmienialiście `main.c` i kompilowaliście od nowa. Co, gdyby program,
+który ma się wykonać, sam był **danymi w tablicy**, a Wasz kod C tylko je odczytywał i
+wykonywał?
+
+```c
+// "Program" jako para liczb: (kod_operacji, wartosc)
+int program[] = {
+    1, 10,   // instrukcja 0: "wczytaj 10"
+    2, 5,    // instrukcja 1: "dodaj 5"
+    3, 0,    // instrukcja 2: "wypisz wynik"
+};
+int liczba_instrukcji = 3;
+```
+
+::: {.callout-note}
+## To jest dokładnie ten sam pomysł co ROM w CHIP-8
+`memory[]` w emulatorze, który napiszecie za kilka tygodni, to jest **dokładnie ta
+sama idea**, tylko że tam dane wczytacie z pliku zamiast wpisywać ręcznie w kodzie, a
+"kod operacji" nazywa się opcode. Dziś budujecie miniaturową, uproszczoną wersję tego
+samego mechanizmu — bez pliku, bez rejestrów, tylko żeby oswoić się z ideą "dane, które
+są programem".
+:::
+
+## Zadania
+
+### Zadanie 1 — wykonaj zakodowaną sekwencję
+
+Napisz program, który przechodzi przez tablicę `program[]` z sekcji teorii, parami
+(indeks `i` i `i+1`), i dla każdej pary:
+
+- jeśli kod operacji to `1` — zapamiętaj drugą liczbę jako "akumulator",
+- jeśli `2` — dodaj drugą liczbę do akumulatora,
+- jeśli `3` — wypisz akumulator.
+
+Użyj `switch` (z sesji 3!) wewnątrz pętli `for` (z sesji 4!) przechodzącej po tablicy
+co 2 elementy (`i += 2`).
+
+```c
+int akumulator = 0;
+
+for (int i = 0; i < liczba_instrukcji * 2; i += 2) {
+    int kod = program[i];
+    int wartosc = program[i + 1];
+
+    switch (kod) {
+        case 1:
+            akumulator = wartosc;
+            break;
+        case 2:
+            akumulator += wartosc;
+            break;
+        case 3:
+            printf("Wynik: %d\n", akumulator);
+            break;
+        default:
+            printf("Nieznana instrukcja: %d\n", kod);
+    }
+}
+```
+
+Uruchom, sprawdź czy wypisuje `15` (10 + 5).
+
+### Zadanie 2 — dopisz własne instrukcje
+
+Dodaj do `switch`a dwie nowe operacje: `4` (odejmij drugą liczbę od akumulatora) i `5`
+(pomnóż akumulator przez drugą liczbę). Zmień tablicę `program[]` tak, żeby użyć
+wszystkich pięciu operacji po kolei, i ręcznie policz na kartce, jaki wynik powinien
+wyjść, zanim uruchomisz program — potem porównaj.
+
+### Zadanie 3 — dłuższy "program"
+
+Rozbuduj `program[]` do co najmniej 8 instrukcji (możesz powtarzać operacje). Policz
+`liczba_instrukcji` automatycznie zamiast wpisywać ręcznie:
+
+```c
+int liczba_instrukcji = sizeof(program) / sizeof(program[0]) / 2;
+```
+
+`sizeof(program)` to rozmiar całej tablicy w bajtach, `sizeof(program[0])` to rozmiar
+jednego elementu — iloraz daje liczbę elementów, dzielimy jeszcze przez 2, bo elementy
+są parami. To standardowy idiom w C do liczenia rozmiaru tablicy — zapamiętaj go,
+przyda się w wielu miejscach.
+
+## Kryterium sukcesu
+
+- Program poprawnie wykonuje zakodowaną sekwencję instrukcji z tablicy.
+- Dodałeś/aś co najmniej dwie własne operacje do `switch`a.
+- Rozumiesz zdanie: "program to nie musi być kod C — to może być dowolna sekwencja
+  danych, którą Twój kod C interpretuje" — to jest najważniejsza idea całego kursu,
+  wypowiedziana wprost pierwszy raz w tej sesji.
