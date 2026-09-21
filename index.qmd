@@ -1,0 +1,17 @@
+---
+title: "Informacje ogólne"
+---
+
+## Wprowadzenie do Programowania - Laboratorium
+
+Kod:
+
+Semestr: zimowy
+
+## Kalendarz
+
+<!-- TODO: uzupełnić na podstawie https://wel.wat.edu.pl/planyzajec/zima/dr__Zajac_Sebastian.htm -->
+
+### Laboratorium dla grup:
+
+1. TODO: dzień tygodnia, godzina, sala
