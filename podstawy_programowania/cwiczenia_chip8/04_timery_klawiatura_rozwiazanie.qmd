@@ -85,6 +85,11 @@ int chip8_load_rom(Chip8 *c, const char *path) {
     fseek(f, 0, SEEK_END);
     long size = ftell(f);
     rewind(f);
+    if (size > (long)(sizeof(c->memory) - 0x200)) {
+        fprintf(stderr, "ROM too large: %ld bytes\n", size);
+        fclose(f);
+        return 0;
+    }
     fread(c->memory + 0x200, 1, (size_t)size, f);
     fclose(f);
     return 1;

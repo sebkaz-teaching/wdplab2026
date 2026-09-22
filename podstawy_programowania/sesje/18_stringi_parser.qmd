@@ -17,7 +17,7 @@ CourseQuiz.mount(document.getElementById('wdp-quiz'), {
   questions: [
     {
       id: "q1", points: 1, diff: "łatwe",
-      text: "Co zwraca fopen(), jeśli podany plik nie istnieje?",
+      text: "Co zwraca fopen(\"dane.txt\", \"r\"), jeśli plik dane.txt nie istnieje? (tryb \"r\" — tylko odczyt)",
       options: [
         {v:"A", t:"Rzuca wyjątek i przerywa program"},
         {v:"B", t:"NULL"},

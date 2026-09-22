@@ -405,7 +405,7 @@ CourseQuiz.mount(document.getElementById('wdp-quiz'), {
 <h2 class="anchored" data-anchor-id="teoria-w-pigułce">Teoria w pigułce</h2>
 <section id="pomysł-flaga-jako-pamięć-ostatniego-porównania" class="level3">
 <h3 class="anchored" data-anchor-id="pomysł-flaga-jako-pamięć-ostatniego-porównania">Pomysł: flaga jako “pamięć” ostatniego porównania</h3>
-<p>Zamiast robić skok, który sam sprawdza warunek, rozbijmy to na dwa kroki — dokładnie tak, jak robi to CHIP-8 (i większość prawdziwych procesorów):</p>
+<p>Zamiast robić skok, który sam sprawdza warunek, rozbijmy to na dwa kroki — dokładnie tak, jak robi to <strong>klasyczny model procesora</strong> (x86, ARM: osobny rejestr flag, np. <code>EFLAGS</code>, ustawiany przez ALU, odczytywany przez osobną instrukcję skoku). CHIP-8, zobaczycie za chwilę, robi to inaczej — ale ten “podręcznikowy” wariant warto poznać najpierw, bo jest bardziej rozpowszechniony wśród prawdziwych procesorów:</p>
 <ol type="1">
 <li>Instrukcja <strong>porównania</strong> (<code>OP_CMP</code>) sprawdza dwie wartości i zapisuje wynik w specjalnej zmiennej — <strong>fladze</strong>.</li>
 <li>Instrukcja <strong>skoku warunkowego</strong> (<code>OP_JUMP_IF_ZERO</code>) sprawdza flagę i skacze <strong>tylko jeśli</strong> jest ustawiona.</li>

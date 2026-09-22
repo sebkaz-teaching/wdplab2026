@@ -464,9 +464,10 @@ CourseQuiz.mount(document.getElementById('wdp-quiz'), {
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    rejestry<span class="op">[</span>instr<span class="op">.</span>rejestr_docelowy<span class="op">]</span> <span class="op">+=</span> rejestry<span class="op">[</span>instr<span class="op">.</span>rejestr_zrodlowy<span class="op">];</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="zadanie-3-policz-coś-co-wymaga-kilku-rejestrów" class="level3">
-<h3 class="anchored" data-anchor-id="zadanie-3-policz-coś-co-wymaga-kilku-rejestrów">Zadanie 3 — policz coś, co wymaga kilku rejestrów</h3>
-<p>Napisz “program” (tablicę <code>struct Instrukcja</code>), który liczy <code>(3 + 4) * 2</code>, korzystając z co najmniej dwóch rejestrów — coś, czego nie dałoby się policzyć jednym akumulatorem bez utraty jednej z wartości pośrednich. Wypisz zawartość wszystkich rejestrów na końcu (przez <code>OP_PRINT</code> albo osobną funkcję <code>wypisz_rejestry</code>).</p>
+<section id="zadanie-3-policz-coś-co-naprawdę-wymaga-kilku-rejestrów" class="level3">
+<h3 class="anchored" data-anchor-id="zadanie-3-policz-coś-co-naprawdę-wymaga-kilku-rejestrów">Zadanie 3 — policz coś, co NAPRAWDĘ wymaga kilku rejestrów</h3>
+<p>Uwaga: nie każde wyrażenie z nawiasami tego wymaga — <code>(3 + 4) * 2</code> policzycie jednym akumulatorem bez problemu (<code>LOAD 3</code>, <code>ADD 4</code>, <code>MUL 2</code> — żadna wartość pośrednia nie ginie, bo liczymy liniowo, krok po kroku). Rejestrów potrzeba dopiero, gdy musicie <strong>jednocześnie pamiętać dwie niezależnie policzone wartości</strong>, zanim je złączycie — np. <code>(3 + 4) + (10 + 20)</code>: żeby dodać do siebie wynik <code>3+4</code> i wynik <code>10+20</code>, musicie mieć <strong>oba</strong> w pamięci naraz (jeden akumulator nadpisałby pierwszy wynik, licząc drugi).</p>
+<p>Napisz “program” (tablicę <code>struct Instrukcja</code>) liczący <code>(3 + 4) + (10 + 20)</code>: policz pierwszą sumę w <code>R0</code>, drugą w <code>R1</code>, potem <code>OP_ADD_REG</code> złącz je w jednym z rejestrów. Wypisz zawartość rejestrów na końcu (przez <code>OP_PRINT</code> albo <code>wypisz_rejestry</code>).</p>
 </section>
 </section>
 <section id="kryterium-sukcesu" class="level2">
@@ -474,7 +475,7 @@ CourseQuiz.mount(document.getElementById('wdp-quiz'), {
 <ul>
 <li>Maszyna operuje na tablicy kilku rejestrów zamiast jednego akumulatora.</li>
 <li><code>OP_ADD_REG</code> poprawnie dodaje wartość jednego rejestru do drugiego.</li>
-<li>Program testowy z zadania 3 daje poprawny wynik (<code>14</code>), korzystając z więcej niż jednego rejestru po drodze.</li>
+<li>Program testowy z zadania 3 daje poprawny wynik (<code>37</code>), korzystając z więcej niż jednego rejestru po drodze.</li>
 </ul>
 
 

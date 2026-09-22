@@ -51,7 +51,11 @@ sesji 13 (bezwarunkowy `OP_JUMP` nie wystarcza do pętli, która sama się końc
 ### Pomysł: flaga jako "pamięć" ostatniego porównania
 
 Zamiast robić skok, który sam sprawdza warunek, rozbijmy to na dwa kroki — dokładnie
-tak, jak robi to CHIP-8 (i większość prawdziwych procesorów):
+tak, jak robi to **klasyczny model procesora** (x86, ARM: osobny rejestr flag,
+np. `EFLAGS`, ustawiany przez ALU, odczytywany przez osobną instrukcję skoku).
+CHIP-8, zobaczycie za chwilę, robi to inaczej — ale ten "podręcznikowy" wariant
+warto poznać najpierw, bo jest bardziej rozpowszechniony wśród prawdziwych
+procesorów:
 
 1. Instrukcja **porównania** (`OP_CMP`) sprawdza dwie wartości i zapisuje wynik w
    specjalnej zmiennej — **fladze**.

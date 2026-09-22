@@ -130,16 +130,23 @@ case OP_ADD_REG:
     break;
 ```
 
-### Zadanie 3 — policz coś, co wymaga kilku rejestrów
+### Zadanie 3 — policz coś, co NAPRAWDĘ wymaga kilku rejestrów
 
-Napisz "program" (tablicę `struct Instrukcja`), który liczy `(3 + 4) * 2`, korzystając
-z co najmniej dwóch rejestrów — coś, czego nie dałoby się policzyć jednym
-akumulatorem bez utraty jednej z wartości pośrednich. Wypisz zawartość wszystkich
-rejestrów na końcu (przez `OP_PRINT` albo osobną funkcję `wypisz_rejestry`).
+Uwaga: nie każde wyrażenie z nawiasami tego wymaga — `(3 + 4) * 2` policzycie jednym
+akumulatorem bez problemu (`LOAD 3`, `ADD 4`, `MUL 2` — żadna wartość pośrednia nie
+ginie, bo liczymy liniowo, krok po kroku). Rejestrów potrzeba dopiero, gdy musicie
+**jednocześnie pamiętać dwie niezależnie policzone wartości**, zanim je złączycie —
+np. `(3 + 4) + (10 + 20)`: żeby dodać do siebie wynik `3+4` i wynik `10+20`, musicie
+mieć **oba** w pamięci naraz (jeden akumulator nadpisałby pierwszy wynik, licząc
+drugi).
+
+Napisz "program" (tablicę `struct Instrukcja`) liczący `(3 + 4) + (10 + 20)`: policz
+pierwszą sumę w `R0`, drugą w `R1`, potem `OP_ADD_REG` złącz je w jednym z rejestrów.
+Wypisz zawartość rejestrów na końcu (przez `OP_PRINT` albo `wypisz_rejestry`).
 
 ## Kryterium sukcesu
 
 - Maszyna operuje na tablicy kilku rejestrów zamiast jednego akumulatora.
 - `OP_ADD_REG` poprawnie dodaje wartość jednego rejestru do drugiego.
-- Program testowy z zadania 3 daje poprawny wynik (`14`), korzystając z więcej niż
+- Program testowy z zadania 3 daje poprawny wynik (`37`), korzystając z więcej niż
   jednego rejestru po drodze.
