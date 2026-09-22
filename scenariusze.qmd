@@ -1,0 +1,177 @@
+---
+title: "Terminal dyżurnego i własna maszyna — zadania"
+toc: true
+---
+
+## Wasze zadanie
+
+Tworzycie program pomocniczy dla dyżurnego fikcyjnej bazy szkoleniowej. Zacznie się od prostych obliczeń, a zakończy wykonywaniem programu z pliku. Następnie wykorzystacie poznane mechanizmy C do osobnego projektu CHIP-8.
+
+Nie potrzebujecie innych kursów, bazy danych ani elektroniki. Prowadzący udostępnia środowisko i kod startowy danego etapu. Pracujcie w parach, zamieniając role przy drugim zadaniu. Przed uruchomieniem zapiszcie przewidywany wynik, a następnie porównajcie go z wynikiem programu.
+
+Ćwiczenia dotyczą symulacji i syntetycznych danych. Nie sterujemy prawdziwym sprzętem. Zakres finału CHIP-8 i obsługiwany wariant ustala prowadzący.
+
+## Jak pracujemy
+
+Każda para oddaje rozwiązanie, opis próby i krótkie uzasadnienie. Każda osoba powinna umieć wyjaśnić wynik. Dane i zadania są niezależne od pozostałych przedmiotów.
+
+## Sesja 1 — Terminal po raz pierwszy odpowiada
+
+[Materiał do zajęć](podstawy_programowania/sesje/01_pierwszy_program.qmd)
+
+1. Skompiluj program wypisujący nazwę stanowiska i komunikat gotowości.
+2. Zmień tekst, porównaj uruchomienie starego programu z ponowną kompilacją. Następnie sprawdź komunikat przy brakującym średniku.
+
+## Sesja 2 — Ile kompletów można przygotować?
+
+[Materiał do zajęć](podstawy_programowania/sesje/02_zmienne_kalkulator.qmd)
+
+1. Oblicz liczbę pełnych kompletów i resztę dla 23 baterii oraz 4 baterii na komplet.
+2. Porównaj dzielenie całkowite i rzeczywiste. Powtórz obliczenia dla 24 baterii.
+
+## Sesja 3 — Nierozpoznane polecenie
+
+[Materiał do zajęć](podstawy_programowania/sesje/03_warunki_dispatcher.qmd)
+
+1. Rozpoznaj dodawanie i odejmowanie za pomocą switch.
+2. Dodaj dzielenie, obsługę zerowego dzielnika i nierozpoznanego polecenia.
+
+## Sesja 4 — Cała zmiana dyżurna
+
+[Materiał do zajęć](podstawy_programowania/sesje/04_petle_repl.qmd)
+
+1. Wykonuj kolejne polecenia do wpisania q.
+2. Policz poprawne działania dla sekwencji: dodawanie, ?, odejmowanie, q. Wyjaśnij, co powinno zwiększać licznik.
+
+## Sesja 5 — Lista poleceń zamiast ręcznego klikania
+
+[Materiał do zajęć](podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.qmd)
+
+1. Zapisz w tablicy program odpowiadający LOAD 12, SUB 3, PRINT.
+2. Zmień dane, aby obliczyć 20−6. Jak wykryć brak argumentu ostatniej instrukcji?
+
+## Sesja 6 — Jedno miejsce wykonywania instrukcji
+
+[Materiał do zajęć](podstawy_programowania/sesje/06_funkcje.qmd)
+
+1. Wydziel wykonanie instrukcji do funkcji zwracającej nowy stan akumulatora.
+2. Porównaj wyniki przed i po zmianie. Przewidź zachowanie po pominięciu przypisania wyniku funkcji.
+
+## Sesja 7 — Polecenie ma własną strukturę
+
+[Materiał do zajęć](podstawy_programowania/sesje/07_struktury.qmd)
+
+1. Zastąp pary liczb strukturami instrukcji.
+2. Wypisz instrukcje przed wykonaniem i oblicz długość tablicy struktur. Sprawdź zachowanie dotychczasowego programu.
+
+## Sesja 8 — Co oznacza liczba 4?
+
+[Materiał do zajęć](podstawy_programowania/sesje/08_enumy.qmd)
+
+1. Nadaj kodom operacji nazwy przez enum.
+2. Dodaj jedną operację i sprawdź reakcję na kod, którego interpreter nie obsługuje.
+
+## Sesja 9 — Dwie wartości trzeba zachować
+
+[Materiał do zajęć](podstawy_programowania/sesje/09_rejestry.qmd)
+
+1. W dwóch rejestrach oblicz osobno 12−3 i 20−6.
+2. Dodaj drugi rejestr do pierwszego, zachowując drugi. Sprawdź odrzucanie indeksów spoza zakresu.
+
+## Sesja 10 — Funkcja naprawdę zmienia stan
+
+[Materiał do zajęć](podstawy_programowania/sesje/10_wskazniki_podstawy.qmd)
+
+1. Porównaj modyfikowanie argumentu przekazanego przez wartość i przez wskaźnik.
+2. Zamień dwie wartości przez wskaźniki. Sprawdź przypadek, gdy oba argumenty wskazują tę samą zmienną.
+
+## Sesja 11 — Dwie niezależne maszyny
+
+[Materiał do zajęć](podstawy_programowania/sesje/11_wskazniki_do_struktur.qmd)
+
+1. Umieść rejestry w strukturze stanu i zmieniaj ją przez wskaźnik.
+2. Utwórz dwa niezależne stany. Wykonaj polecenie na jednym, a drugi wyzeruj. Porównaj wyniki.
+
+## Sesja 12 — Program większy niż przygotowana tablica
+
+[Materiał do zajęć](podstawy_programowania/sesje/12_pamiec_dynamiczna.qmd)
+
+1. Przydziel pamięć na dodatnią liczbę instrukcji, sprawdź wynik i zwolnij pamięć po pracy.
+2. Powiększ bufor przez realloc. Wyjaśnij, co pozostaje dostępne, jeśli powiększenie się nie powiedzie.
+
+## Sesja 13 — Nie zawsze następna instrukcja
+
+[Materiał do zajęć](podstawy_programowania/sesje/13_licznik_instrukcji.qmd)
+
+1. Dodaj licznik instrukcji oraz skok do istniejącego indeksu.
+2. Zapisz ślad wykonania pięciu instrukcji ze skokiem. Sprawdź limit kroków i niedozwolony adres skoku.
+
+## Sesja 14 — Reakcja na wynik porównania
+
+[Materiał do zajęć](podstawy_programowania/sesje/14_flagi_skoki_warunkowe.qmd)
+
+1. Dodaj porównanie rejestru z zerem i skok zależny od wyniku.
+2. Zbuduj odliczanie od 3, a następnie sprawdź start od 0. Wyjaśnij kolejność sprawdzenia i odejmowania.
+
+## Sesja 15 — Ostatnio odłożone, najpierw odzyskane
+
+[Materiał do zajęć](podstawy_programowania/sesje/15_stos.qmd)
+
+1. Odłóż na stos 9 i 14, a następnie pobierz dwie wartości. Najpierw przewidź ich kolejność.
+2. Obsłuż próby dodania na pełny stos i pobrania z pustego stosu.
+
+## Sesja 16 — Wspólny fragment programu
+
+[Materiał do zajęć](podstawy_programowania/sesje/16_call_ret.qmd)
+
+1. Dodaj CALL i RET z zapamiętaniem adresu powrotu.
+2. Prześledź wywołanie A, z niego B i oba powroty. Sprawdź RET bez wcześniejszego CALL.
+
+## Sesja 17 — Ta sama maszyna, inny plik
+
+[Materiał do zajęć](podstawy_programowania/sesje/17_pliki.qmd)
+
+1. Wczytaj program w formacie trzech liczb opisanym w materiale sesji.
+2. Uruchom dwa różne pliki tym samym interpreterem. Sprawdź brak pliku, błędny format i niepełną instrukcję.
+
+## Sesja 18 — Czytelne polecenia
+
+[Materiał do zajęć](podstawy_programowania/sesje/18_stringi_parser.qmd)
+
+1. Zamień tekstowe polecenia na instrukcje zgodne z modelem z sesji 17.
+2. Obsłuż brak argumentu, nieznaną operację i błędny rejestr. Porównaj wykonanie programu tekstowego z liczbowym.
+
+## Ćwiczenie 1 — Odczytaj dwubajtową instrukcję
+
+[Materiał do zajęć](podstawy_programowania/cwiczenia_chip8/01_szkielet_vm.qmd)
+
+1. Odtwórz instrukcję z bajtów 0x60 i 0x0A i sprawdź jej wykonanie.
+2. Wypisz ślad pc oraz sprawdź ochronę przed zbyt dużym ROM-em i odczytem poza pamięcią.
+
+## Ćwiczenie 2 — Arytmetyka ma granice
+
+[Materiał do zajęć](podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.qmd)
+
+1. Sprawdź wynik i flagę dodawania 250+10 instrukcją ustawiającą przeniesienie.
+2. Prześledź CALL/RET i warunkowe pominięcie. Sprawdź flagę przy odejmowaniu równych liczb.
+
+## Ćwiczenie 3 — Pierwszy własny obraz
+
+[Materiał do zajęć](podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.qmd)
+
+1. Narysuj dostarczony sprite na pustym tle.
+2. Narysuj go drugi raz i sprawdź ekran oraz flagę kolizji. Powtórz próbę z częściowym przecięciem obrazów.
+
+## Ćwiczenie 4 — Program czeka, czas nadal płynie
+
+[Materiał do zajęć](podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.qmd)
+
+1. Sprawdź timer przy różnych prędkościach wykonywania instrukcji.
+2. Dodaj wejście klawiatury na przygotowanym szkielecie. Opisz ograniczenia użytego modelu wejścia.
+
+## Ćwiczenie 5 — Odbiór emulatora
+
+[Materiał do zajęć](podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.qmd)
+
+1. Uruchom ROM testowy wybrany przez prowadzącego dla obsługiwanego zestawu instrukcji.
+2. Sprawdź demonstrację lub grę oraz komunikat dla nieobsługiwanej instrukcji. Zapisz ograniczenia swojego emulatora.
