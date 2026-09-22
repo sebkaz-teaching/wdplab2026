@@ -453,6 +453,7 @@ CourseQuiz.mount(document.getElementById('wdp-quiz'), {
 <section id="zadanie-3-pełny-asembler-tekstowy" class="level3">
 <h3 class="anchored" data-anchor-id="zadanie-3-pełny-asembler-tekstowy">Zadanie 3 — pełny asembler tekstowy</h3>
 <p>Połącz zadania 1-2 z wczytywaniem pliku z sesji 17: zamiast pliku <code>kod rejestr wartosc</code> (liczby), wczytaj plik z czytelnymi liniami typu <code>LOAD R0 10</code>, <code>ADD R0 5</code>, <code>PRINT R0 0</code>, parsując każdą linię funkcją <code>fgets</code> + <code>parsuj_linie</code>. Przetestuj na programie z sesji 17, przepisanym na czytelny format.</p>
+<p>Zachowaj ten sam model trzech pól. <code>ADD_REG R0 R1</code> zapisuje indeks R1 w polu <code>wartosc</code>; <code>ADD R0 1</code> zapisuje tam literał 1. To różne instrukcje. W tej wersji każda linia ma trzy tokeny: np. <code>JUMP 0 4</code>, <code>CALL 0 6</code>, <code>RET 0 0</code>. Dla PRINT/PUSH_REG/POP_REG trzeci token to 0. Dla skoków/CALL drugi token to 0. Sprawdź liczbę tokenów, pełną poprawność konwersji i zakres argumentów przed wykonaniem; samo <code>atoi</code> nie odróżnia błędnego tekstu od poprawnego zera. Próba <code>LOAD R0 9</code>, <code>LOAD R1 14</code>, <code>ADD_REG R0 R1</code>, <code>PRINT R0 0</code>, <code>PRINT R1 0</code> musi dać 23 i 14, tak samo jak plik liczbowy z sesji 17.</p>
 </section>
 </section>
 <section id="kryterium-sukcesu" class="level2">

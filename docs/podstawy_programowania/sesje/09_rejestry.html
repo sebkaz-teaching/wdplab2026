@@ -459,9 +459,9 @@ CourseQuiz.mount(document.getElementById('wdp-quiz'), {
 </section>
 <section id="zadanie-2-operacja-między-dwoma-rejestrami" class="level3">
 <h3 class="anchored" data-anchor-id="zadanie-2-operacja-między-dwoma-rejestrami">Zadanie 2 — operacja między dwoma rejestrami</h3>
-<p>Dodaj <code>OP_ADD_REG</code> — dodaje wartość jednego rejestru do drugiego (nie literał). Potrzebujesz nowego pola w strukturze, np. <code>int rejestr_zrodlowy</code>, używanego tylko przez tę operację.</p>
+<p>Dodaj <code>OP_ADD_REG</code> — dodaje wartość jednego rejestru do drugiego (nie literał). Dla tej operacji pole <code>wartosc</code> przechowuje indeks rejestru źródłowego. Nie dodajemy czwartego pola: znaczenie argumentu zależy od kodu operacji. Przed dostępem sprawdź zakres obu indeksów.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> OP_ADD_REG<span class="op">:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    rejestry<span class="op">[</span>instr<span class="op">.</span>rejestr_docelowy<span class="op">]</span> <span class="op">+=</span> rejestry<span class="op">[</span>instr<span class="op">.</span>rejestr_zrodlowy<span class="op">];</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    rejestry<span class="op">[</span>instr<span class="op">.</span>rejestr_docelowy<span class="op">]</span> <span class="op">+=</span> rejestry<span class="op">[</span>instr<span class="op">.</span>wartosc<span class="op">];</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="zadanie-3-policz-coś-co-naprawdę-wymaga-kilku-rejestrów" class="level3">

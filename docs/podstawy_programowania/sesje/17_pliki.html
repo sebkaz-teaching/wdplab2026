@@ -457,6 +457,108 @@ CourseQuiz.mount(document.getElementById('wdp-quiz'), {
 3 0 0</code></pre>
 <p>(gdzie <code>1</code> = LOAD, <code>2</code> = ADD, <code>3</code> = PRINT — dopasuj do swoich wartości <code>enum</code>).</p>
 </section>
+<section id="kontrakt-formatu-trzy-liczby-na-instrukcję" class="level3">
+<h3 class="anchored" data-anchor-id="kontrakt-formatu-trzy-liczby-na-instrukcję">Kontrakt formatu: trzy liczby na instrukcję</h3>
+<p>Każda instrukcja ma pola <code>kod rejestr wartosc</code>. Nie zapisujemy surowej pamięci struktury. Przypisz jawne wartości w <code>enum</code> zgodnie z tabelą; zachowaj te same wartości w interpreterze i plikach danych.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Kod</th>
+<th>Operacja</th>
+<th><code>rejestr</code></th>
+<th><code>wartosc</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>OP_LOAD</code></td>
+<td>docelowy</td>
+<td>literał</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>OP_ADD</code></td>
+<td>docelowy</td>
+<td>literał</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>OP_PRINT</code></td>
+<td>odczytywany</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><code>OP_SUB</code></td>
+<td>docelowy</td>
+<td>literał</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><code>OP_MUL</code></td>
+<td>docelowy</td>
+<td>literał</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><code>OP_ADD_REG</code></td>
+<td>docelowy</td>
+<td>indeks rejestru źródłowego</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><code>OP_JUMP</code></td>
+<td>0</td>
+<td>docelowy indeks instrukcji</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td><code>OP_CMP</code></td>
+<td>porównywany</td>
+<td>literał</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td><code>OP_JUMP_IF_ZERO</code></td>
+<td>0</td>
+<td>docelowy indeks instrukcji</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><code>OP_PUSH_REG</code></td>
+<td>odczytywany</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td><code>OP_POP_REG</code></td>
+<td>docelowy</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td><code>OP_CALL</code></td>
+<td>0</td>
+<td>docelowy indeks instrukcji</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td><code>OP_RET</code></td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Jeśli wcześniej dodano inne operacje, nadaj im osobne kody od 14 i opisz ich argumenty. Nie zmieniaj znaczenia istniejących kodów. Nieobsługiwany kod jest błędem.</p>
+<p>Próba operacji między rejestrami:</p>
+<pre class="text"><code>1 0 9
+1 1 14
+6 0 1
+3 0 0
+3 1 0</code></pre>
+<p>Oczekiwane wyniki: 23 i 14. W trzecim wierszu <code>1</code> oznacza R1, nie literał odejmowany ani dodawany bezpośrednio. Dla tej operacji trzeba sprawdzić zakres obu indeksów. Dla skoków i CALL sprawdź adres po wczytaniu całego programu; CALL musi wskazywać istniejącą instrukcję. Zwykły skok do indeksu równego liczbie instrukcji oznacza zakończenie. Nieużywane argumenty muszą być zerami.</p>
+</section>
 <section id="zadanie-2-wczytywanie-z-pliku-zamiast-tablicy-w-kodzie" class="level3">
 <h3 class="anchored" data-anchor-id="zadanie-2-wczytywanie-z-pliku-zamiast-tablicy-w-kodzie">Zadanie 2 — wczytywanie z pliku zamiast tablicy w kodzie</h3>
 <p>Zmień <code>main</code> z sesji 16, żeby zamiast tablicy <code>struct Instrukcja program[] = {...}</code> wpisanej w kodzie, wczytywał instrukcje z pliku podanego jako argument wiersza poleceń: <code>./maszyna program.txt</code>. Skorzystaj z <code>argc</code>/<code>argv</code>, tak jak w kodzie startowym ćwiczenia 1 CHIP-8 (<code>int main(int argc, char **argv)</code>), i z <code>malloc</code>/<code>realloc</code> z sesji 12, bo nie znacie z góry liczby instrukcji w pliku.</p>
