@@ -121,12 +121,13 @@ pojedyncze zmienne przy przekazywaniu do funkcji — do tego wrócimy dokładnie
 ### Zadanie 2 — operacja między dwoma rejestrami
 
 Dodaj `OP_ADD_REG` — dodaje wartość jednego rejestru do drugiego (nie literał).
-Potrzebujesz nowego pola w strukturze, np. `int rejestr_zrodlowy`, używanego tylko
-przez tę operację.
+Dla tej operacji pole `wartosc` przechowuje indeks rejestru źródłowego.
+Nie dodajemy czwartego pola: znaczenie argumentu zależy od kodu operacji.
+Przed dostępem sprawdź zakres obu indeksów.
 
 ```c
 case OP_ADD_REG:
-    rejestry[instr.rejestr_docelowy] += rejestry[instr.rejestr_zrodlowy];
+    rejestry[instr.rejestr_docelowy] += rejestry[instr.wartosc];
     break;
 ```
 

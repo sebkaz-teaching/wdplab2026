@@ -121,6 +121,15 @@ wartosc` (liczby), wczytaj plik z czytelnymi liniami typu `LOAD R0 10`, `ADD R0 
 `PRINT R0 0`, parsując każdą linię funkcją `fgets` + `parsuj_linie`. Przetestuj na
 programie z sesji 17, przepisanym na czytelny format.
 
+Zachowaj ten sam model trzech pól. `ADD_REG R0 R1` zapisuje indeks R1 w polu
+`wartosc`; `ADD R0 1` zapisuje tam literał 1. To różne instrukcje. W tej wersji
+każda linia ma trzy tokeny: np. `JUMP 0 4`, `CALL 0 6`, `RET 0 0`.
+Dla PRINT/PUSH_REG/POP_REG trzeci token to 0. Dla skoków/CALL drugi token to 0.
+Sprawdź liczbę tokenów, pełną poprawność konwersji i zakres argumentów przed
+wykonaniem; samo `atoi` nie odróżnia błędnego tekstu od poprawnego zera.
+Próba `LOAD R0 9`, `LOAD R1 14`, `ADD_REG R0 R1`, `PRINT R0 0`,
+`PRINT R1 0` musi dać 23 i 14, tak samo jak plik liczbowy z sesji 17.
+
 ## Kryterium sukcesu
 
 - `nazwa_na_opcode` poprawnie rozpoznaje wszystkie operacje Waszej maszyny i zwraca

@@ -121,6 +121,47 @@ maszyny w formacie `kod rejestr wartosc`, po jednej na linię, np.:
 
 (gdzie `1` = LOAD, `2` = ADD, `3` = PRINT — dopasuj do swoich wartości `enum`).
 
+### Kontrakt formatu: trzy liczby na instrukcję
+
+Każda instrukcja ma pola `kod rejestr wartosc`. Nie zapisujemy surowej pamięci
+struktury. Przypisz jawne wartości w `enum` zgodnie z tabelą; zachowaj te same
+wartości w interpreterze i plikach danych.
+
+| Kod | Operacja | `rejestr` | `wartosc` |
+|---|---|---|---|
+| 1 | `OP_LOAD` | docelowy | literał |
+| 2 | `OP_ADD` | docelowy | literał |
+| 3 | `OP_PRINT` | odczytywany | 0 |
+| 4 | `OP_SUB` | docelowy | literał |
+| 5 | `OP_MUL` | docelowy | literał |
+| 6 | `OP_ADD_REG` | docelowy | indeks rejestru źródłowego |
+| 7 | `OP_JUMP` | 0 | docelowy indeks instrukcji |
+| 8 | `OP_CMP` | porównywany | literał |
+| 9 | `OP_JUMP_IF_ZERO` | 0 | docelowy indeks instrukcji |
+| 10 | `OP_PUSH_REG` | odczytywany | 0 |
+| 11 | `OP_POP_REG` | docelowy | 0 |
+| 12 | `OP_CALL` | 0 | docelowy indeks instrukcji |
+| 13 | `OP_RET` | 0 | 0 |
+
+Jeśli wcześniej dodano inne operacje, nadaj im osobne kody od 14 i opisz ich
+argumenty. Nie zmieniaj znaczenia istniejących kodów. Nieobsługiwany kod jest błędem.
+
+Próba operacji między rejestrami:
+
+```text
+1 0 9
+1 1 14
+6 0 1
+3 0 0
+3 1 0
+```
+
+Oczekiwane wyniki: 23 i 14. W trzecim wierszu `1` oznacza R1, nie literał
+odejmowany ani dodawany bezpośrednio. Dla tej operacji trzeba sprawdzić zakres obu
+indeksów. Dla skoków i CALL sprawdź adres po wczytaniu całego programu; CALL musi
+wskazywać istniejącą instrukcję. Zwykły skok do indeksu równego liczbie instrukcji
+oznacza zakończenie. Nieużywane argumenty muszą być zerami.
+
 ### Zadanie 2 — wczytywanie z pliku zamiast tablicy w kodzie
 
 Zmień `main` z sesji 16, żeby zamiast tablicy `struct Instrukcja program[] = {...}`
