@@ -15,6 +15,13 @@ Nie potrzebujecie innych kursów, bazy danych ani elektroniki. Prowadzący udost
 
 Każda para oddaje rozwiązanie, opis próby i krótkie uzasadnienie. Każda osoba powinna umieć wyjaśnić wynik. Dane i zadania są niezależne od pozostałych przedmiotów.
 
+## Przed sesją 1 — środowisko Visual Studio
+
+[Instrukcja środowiska](podstawy_programowania/visual-studio-community.qmd).
+Każda osoba przygotowuje projekt konsolowy w C. W parze najpierw jedna osoba
+uruchamia program i odnajduje błąd średnika, a druga wyjaśnia różnicę między
+zapisaniem pliku a budowaniem. Następnie zamieniacie role przy pokazie debuggera.
+
 ## Sesja 1 — Terminal po raz pierwszy odpowiada
 
 [Materiał do zajęć](podstawy_programowania/sesje/01_pierwszy_program.qmd)

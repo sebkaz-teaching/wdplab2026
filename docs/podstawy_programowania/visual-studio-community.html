@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Start: Visual Studio Community i program konsolowy w C – Wprowadzenie do Programowania - Laboratorium</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-94ae530b1fc9924793afbc3bb7de9d3b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../podstawy_programowania/visual-studio-community.html">Start: Visual Studio Community i program konsolowy w C</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Wprowadzenie do Programowania - Laboratorium</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Informacje ogólne</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/visual-studio-community.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Start: Visual Studio Community i program konsolowy w C</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fundamenty C (sesje 1-18)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/01_pierwszy_program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 1 — Pierwszy program</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/02_zmienne_kalkulator.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 2 — Zmienne i pierwszy kalkulator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/03_warunki_dispatcher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 3 — Warunki: kalkulator wybiera działanie</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/04_petle_repl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 5 — Tablice: Twoja pierwsza maszyna wirtualna</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/06_funkcje.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 6 — Funkcje: porządkowanie maszyny wirtualnej</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/07_struktury.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 7 — Struktury: instrukcja jako jedna rzecz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/08_enumy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 8 — Enumy: nazwane liczby zamiast magicznych stałych</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/09_rejestry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 9 — Rejestry: więcej niż jeden akumulator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/10_wskazniki_podstawy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/11_wskazniki_do_struktur.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 11 — Wskaźniki do struktur: operator -&gt;</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/12_pamiec_dynamiczna.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/13_licznik_instrukcji.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 14 — Flagi i skoki warunkowe</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/15_stos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 15 — Stos: LIFO w tablicy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/16_call_ret.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/17_pliki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/sesje/18_stringi_parser.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt końcowy: CHIP-8</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/cwiczenia_chip8/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CHIP-8: zbuduj własny emulator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/cwiczenia_chip8/01_szkielet_vm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ćwiczenie 1 — Szkielet maszyny wirtualnej</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ćwiczenie 3 — Wyświetlacz i sprite’y</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ćwiczenie 4 — Timery i klawiatura</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ćwiczenie 5 — Uruchomienie prawdziwej gry</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title"><strong>Sections</strong></h2>
+   
+  <ul class="collapse">
+  <li><a href="#co-przygotowujemy" id="toc-co-przygotowujemy" class="nav-link active" data-scroll-target="#co-przygotowujemy">Co przygotowujemy?</a></li>
+  <li><a href="#instalacja-na-windows" id="toc-instalacja-na-windows" class="nav-link" data-scroll-target="#instalacja-na-windows">1. Instalacja na Windows</a></li>
+  <li><a href="#rozwiązanie-projekt-i-plik-trzy-różne-rzeczy" id="toc-rozwiązanie-projekt-i-plik-trzy-różne-rzeczy" class="nav-link" data-scroll-target="#rozwiązanie-projekt-i-plik-trzy-różne-rzeczy">2. Rozwiązanie, projekt i plik: trzy różne rzeczy</a></li>
+  <li><a href="#utwórz-pusty-projekt" id="toc-utwórz-pusty-projekt" class="nav-link" data-scroll-target="#utwórz-pusty-projekt">3. Utwórz pusty projekt</a></li>
+  <li><a href="#ustaw-projekt-do-pracy-w-c" id="toc-ustaw-projekt-do-pracy-w-c" class="nav-link" data-scroll-target="#ustaw-projekt-do-pracy-w-c">4. Ustaw projekt do pracy w C</a></li>
+  <li><a href="#pierwszy-program-zapis-budowanie-uruchomienie" id="toc-pierwszy-program-zapis-budowanie-uruchomienie" class="nav-link" data-scroll-target="#pierwszy-program-zapis-budowanie-uruchomienie">5. Pierwszy program: zapis, budowanie, uruchomienie</a></li>
+  <li><a href="#dwa-miejsca-na-komunikaty" id="toc-dwa-miejsca-na-komunikaty" class="nav-link" data-scroll-target="#dwa-miejsca-na-komunikaty">6. Dwa miejsca na komunikaty</a></li>
+  <li><a href="#pierwszy-debugger-dlaczego-wynik-jest-nieprawidłowy" id="toc-pierwszy-debugger-dlaczego-wynik-jest-nieprawidłowy" class="nav-link" data-scroll-target="#pierwszy-debugger-dlaczego-wynik-jest-nieprawidłowy">7. Pierwszy debugger: dlaczego wynik jest nieprawidłowy?</a></li>
+  <li><a href="#jak-wykonywać-kolejne-zadania-z-kursu" id="toc-jak-wykonywać-kolejne-zadania-z-kursu" class="nav-link" data-scroll-target="#jak-wykonywać-kolejne-zadania-z-kursu">8. Jak wykonywać kolejne zadania z kursu?</a></li>
+  <li><a href="#najczęstsze-przeszkody" id="toc-najczęstsze-przeszkody" class="nav-link" data-scroll-target="#najczęstsze-przeszkody">9. Najczęstsze przeszkody</a></li>
+  <li><a href="#sprawdzenie-gotowości" id="toc-sprawdzenie-gotowości" class="nav-link" data-scroll-target="#sprawdzenie-gotowości">Sprawdzenie gotowości</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Start: Visual Studio Community i program konsolowy w C</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="co-przygotowujemy" class="level2">
+<h2 class="anchored" data-anchor-id="co-przygotowujemy">Co przygotowujemy?</h2>
+<p>Na laboratoriach piszemy <strong>programy konsolowe w języku C</strong>. Tekst nadal pojawia się w konsoli, a kod tworzymy, budujemy i sprawdzamy w <strong>Visual Studio Community na Windows</strong>. Środowisko IDE — <em>Integrated Development Environment</em>, zintegrowane środowisko programistyczne — łączy edytor, narzędzia budowania programu i debugger, który pozwala zatrzymać program oraz obejrzeć jego stan.</p>
+<p>Ta instrukcja poprzedza sesję 1 i nie zmienia numeracji sesji 1–18. Instalację wykonujemy przed zajęciami. Na pierwszym spotkaniu przechodzimy od utworzenia projektu do uruchomienia programu. Pokaz zmiennych w debuggerze można dokończyć na początku sesji 2.</p>
+</section>
+<section id="instalacja-na-windows" class="level2">
+<h2 class="anchored" data-anchor-id="instalacja-na-windows">1. Instalacja na Windows</h2>
+<ol type="1">
+<li>Otwórz <a href="https://visualstudio.microsoft.com/downloads/">oficjalną stronę pobierania Visual Studio</a>. Wybierz <strong>Visual Studio Community</strong>, stabilne wydanie dla Windows. Instrukcja jest przygotowana dla obecnego Visual Studio 2026; w pracowni z Visual Studio 2022 kroki są podobne.</li>
+<li>Uruchom instalator. Instalacja składników może wymagać uprawnień administratora; na komputerze pracowni zajmuje się tym administrator.</li>
+<li>W <strong>Workloads / Obciążenia</strong> zaznacz <strong>Desktop development with C++</strong> (programowanie aplikacji klasycznych w C++).</li>
+<li>Pozostaw zalecany kompilator <strong>MSVC</strong> (<em>Microsoft Visual C++</em>) dla x64/x86 oraz aktualny <strong>Windows SDK</strong> (<em>Software Development Kit</em>, zestaw narzędzi programistycznych). Ten zestaw obsługuje także C.</li>
+<li>Zakończ instalację i uruchom Visual Studio. Jeśli pojawi się prośba o zalogowanie lub aktywację, wykonaj wskazane przez program kroki.</li>
+</ol>
+<p>W tym kursie używamy pełnego <strong>Visual Studio Community</strong>, a nie edytora <strong>Visual Studio Code</strong>. Samo obciążenie .NET/C# nie instaluje potrzebnego kompilatora C. Jeśli Visual Studio już jest zainstalowane, brakujące składniki można dodać przez <strong>Visual Studio Installer → Modify / Modyfikuj</strong>.</p>
+<p>Źródło: <a href="https://learn.microsoft.com/cpp/build/vscpp-step-0-installation">Microsoft — instalacja obsługi C i C++</a>.</p>
+</section>
+<section id="rozwiązanie-projekt-i-plik-trzy-różne-rzeczy" class="level2">
+<h2 class="anchored" data-anchor-id="rozwiązanie-projekt-i-plik-trzy-różne-rzeczy">2. Rozwiązanie, projekt i plik: trzy różne rzeczy</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Co oznacza w naszych zajęciach</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Solution / Rozwiązanie</td>
+<td>Zestaw projektów i ustawień; plik <code>.sln</code> lub <code>.slnx</code> zależnie od wersji</td>
+</tr>
+<tr class="even">
+<td>Project / Projekt</td>
+<td>Ustawienia budowania konkretnego programu; dla tego typu projektu plik <code>.vcxproj</code></td>
+</tr>
+<tr class="odd">
+<td>Source file / Plik źródłowy</td>
+<td>Kod C, np. <code>main.c</code></td>
+</tr>
+<tr class="even">
+<td>Executable / Plik wykonywalny</td>
+<td>Wynik budowania, np. <code>WDP_Sesja01.exe</code></td>
+</tr>
+</tbody>
+</table>
+<p>Na początek: <strong>jeden projekt, jeden plik <code>.c</code>, jedna funkcja <code>main</code></strong>. Do następnego niezależnego programu twórz nowy projekt, zamiast dodawać drugą funkcję <code>main</code> do tego samego programu.</p>
+</section>
+<section id="utwórz-pusty-projekt" class="level2">
+<h2 class="anchored" data-anchor-id="utwórz-pusty-projekt">3. Utwórz pusty projekt</h2>
+<ol type="1">
+<li>W oknie startowym kliknij <strong>Create a new project / Utwórz nowy projekt</strong>.</li>
+<li>Wyszukaj <strong>Empty Project / Pusty projekt</strong>. Wybierz szablon oznaczony <strong>C++ / Windows</strong>. Nie wybieraj „Blank Solution / Puste rozwiązanie”.</li>
+<li>Podaj nazwę <code>WDP_Sesja01</code> i wybierz własny katalog, np. <code>Dokumenty\WDP</code>.</li>
+<li>Kliknij <strong>Create / Utwórz</strong>. Na pasku wybierz <strong>Debug</strong> oraz <strong>x64</strong>.</li>
+<li>Odszukaj <strong>Solution Explorer / Eksplorator rozwiązań</strong>. Jeśli panel jest zamknięty, otwórz go z menu <strong>View / Widok</strong>.</li>
+<li>Kliknij prawym przyciskiem <strong>Source Files / Pliki źródłowe → Add → New Item</strong>. Wybierz pozycję <strong>C++ File (.cpp)</strong>, ale w polu nazwy wpisz <strong><code>main.c</code></strong>. Sprawdź po dodaniu, że nazwa faktycznie kończy się na <code>.c</code>.</li>
+</ol>
+<p>Szablon ma kategorię C++, ponieważ Visual Studio grupuje te narzędzia razem. Plik <code>.c</code> jest domyślnie kompilowany jako C, a <code>.cpp</code> jako C++.</p>
+</section>
+<section id="ustaw-projekt-do-pracy-w-c" class="level2">
+<h2 class="anchored" data-anchor-id="ustaw-projekt-do-pracy-w-c">4. Ustaw projekt do pracy w C</h2>
+<p>Po dodaniu <code>main.c</code> kliknij prawym przyciskiem <strong>nazwę projektu</strong> (nie rozwiązania) i wybierz <strong>Properties / Właściwości</strong>. U góry ustaw <strong>All Configurations</strong> oraz <strong>All Platforms</strong>, żeby ustawienia nie zniknęły po zmianie Debug/Release.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Miejsce we właściwościach projektu</th>
+<th>Ustawienie</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C/C++ → Language → C Language Standard</td>
+<td><strong>ISO C17 (<code>/std:c17</code>)</strong></td>
+</tr>
+<tr class="even">
+<td>C/C++ → Advanced → Compile As</td>
+<td><strong>Compile as C Code (<code>/TC</code>)</strong></td>
+</tr>
+<tr class="odd">
+<td>C/C++ → General → Warning Level</td>
+<td><strong>Level 4 (<code>/W4</code>)</strong></td>
+</tr>
+<tr class="even">
+<td>C/C++ → Precompiled Headers</td>
+<td><strong>Not Using Precompiled Headers</strong></td>
+</tr>
+<tr class="odd">
+<td>Linker → System → SubSystem</td>
+<td><strong>Console (<code>/SUBSYSTEM:CONSOLE</code>)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Kliknij <strong>Apply</strong>, następnie <strong>OK</strong>. Na pasku głównym wróć do <strong>Debug / x64</strong>. Nie wybieraj „C++ Language Standard” zamiast „C Language Standard”.</p>
+<p>C17 określa wersję języka, a <code>/W4</code> poziom ostrzeżeń. Nie są to elementy kodu C, lecz ustawienia kompilatora. Starsze polecenia GCC w materiałach mogą zawierać <code>-std=c99</code>; MSVC nie ma identycznego przełącznika C99. Na zajęciach w Visual Studio ustawiamy C17. Nie oznacza to pełnej zgodności wszystkich rozszerzeń GCC i bibliotek systemowych z Windows.</p>
+<p>Źródło: <a href="https://learn.microsoft.com/en-us/cpp/build/walkthrough-compile-a-c-program-on-the-command-line?view=msvc-160">Microsoft — pliki C, opcja /TC i standardy C11/C17</a>.</p>
+</section>
+<section id="pierwszy-program-zapis-budowanie-uruchomienie" class="level2">
+<h2 class="anchored" data-anchor-id="pierwszy-program-zapis-budowanie-uruchomienie">5. Pierwszy program: zapis, budowanie, uruchomienie</h2>
+<p>W <code>main.c</code> wpisz:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Stanowisko dyzurnego gotowe.</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li><strong>Ctrl+S</strong> — zapisz plik.</li>
+<li><strong>Build → Build Solution / Kompiluj rozwiązanie</strong>, zwykle <strong>Ctrl+Shift+B</strong> — zbuduj program. Sprawdź, czy kompilacja zakończyła się powodzeniem.</li>
+<li><strong>Debug → Start Without Debugging / Uruchom bez debugowania</strong>, zwykle <strong>Ctrl+F5</strong> — uruchom program w konsoli.</li>
+<li>Oczekiwany tekst: <code>Stanowisko dyzurnego gotowe.</code>. Po zakończeniu programu środowisko może dopisać własny komunikat o zakończeniu procesu.</li>
+<li>Zmień komunikat, zapisz, zbuduj i uruchom ponownie. Konsola ma pokazać nową treść.</li>
+</ol>
+<p>Podczas budowania kompilator tłumaczy kod, a linker łączy potrzebne elementy w program wykonywalny. Sam <strong>Ctrl+S</strong> nie przebudowuje pliku <code>.exe</code>.</p>
+</section>
+<section id="dwa-miejsca-na-komunikaty" class="level2">
+<h2 class="anchored" data-anchor-id="dwa-miejsca-na-komunikaty">6. Dwa miejsca na komunikaty</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Okno</th>
+<th>Co w nim sprawdzamy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Konsola programu</td>
+<td>Tekst z <code>printf</code> i dane wpisywane przez użytkownika</td>
+</tr>
+<tr class="even">
+<td>Output / Dane wyjściowe</td>
+<td>Przebieg budowania; wybierz źródło <strong>Build</strong></td>
+</tr>
+<tr class="odd">
+<td>Error List / Lista błędów</td>
+<td>Komunikaty z plikiem i numerem wiersza; przy diagnozie wybierz źródło <strong>Build</strong>, aby oddzielić je od podpowiedzi IntelliSense</td>
+</tr>
+</tbody>
+</table>
+<p>Usuń średnik po <code>printf</code> i ponownie zbuduj program. Otwórz pierwszy błąd kompilatora dwuklikiem. Wskazana linia może znajdować się po miejscu rzeczywistego błędu — sprawdź również poprzednią instrukcję. Przywróć średnik i zbuduj ponownie.</p>
+<p><strong>Jeśli po błędzie Visual Studio proponuje uruchomienie ostatniej poprawnej wersji, wybierz „Nie”.</strong> Stary plik <code>.exe</code> nie jest dowodem, że bieżący kod działa.</p>
+</section>
+<section id="pierwszy-debugger-dlaczego-wynik-jest-nieprawidłowy" class="level2">
+<h2 class="anchored" data-anchor-id="pierwszy-debugger-dlaczego-wynik-jest-nieprawidłowy">7. Pierwszy debugger: dlaczego wynik jest nieprawidłowy?</h2>
+<p>Ten przykład zawiera <strong>zamierzony błąd obliczenia</strong>. W tym samym <code>main.c</code> zastąp cały poprzedni program poniższym kodem:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> stock <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> issued <span class="op">=</span> <span class="dv">7</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> remaining <span class="op">=</span> stock <span class="op">+</span> issued<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Pozostalo: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> remaining<span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Magazyn miał 20 kompletów i wydał 7, więc powinno pozostać 13. Kod kompiluje się, ale wypisuje 27. Poprawność składni nie zapewnia poprawności obliczenia.</p>
+<ol type="1">
+<li>Zbuduj program w konfiguracji <strong>Debug</strong>.</li>
+<li>Ustaw kursor w wierszu <code>int remaining = stock + issued;</code> i naciśnij <strong>F9</strong>. Czerwona kropka oznacza <strong>breakpoint</strong>, punkt przerwania.</li>
+<li>Naciśnij <strong>F5 — Start Debugging</strong>. Program zatrzyma się <strong>przed wykonaniem</strong> tej instrukcji. Żółta strzałka wskazuje instrukcję, która ma się wykonać.</li>
+<li>Najedź na <code>stock</code> i <code>issued</code>: wartości powinny wynosić 20 i 7. Otwórz także <strong>Debug → Windows → Locals / Zmienne lokalne</strong>.</li>
+<li>Naciśnij <strong>F10 — Step Over / Krok z pominięciem</strong>. Teraz <code>remaining</code> ma 27. Przed tym krokiem zmienna nie miała jeszcze zainicjalizowanej wartości; nie interpretuj wcześniejszego wskazania debuggera jako wyniku obliczenia.</li>
+<li>Zatrzymaj debugowanie przez <strong>Shift+F5</strong>. Popraw działanie, zbuduj i ponów pokaz. Oczekiwany wynik po wykonaniu instrukcji to 13.</li>
+</ol>
+<p><code>F10</code> wykonuje następną instrukcję bez wchodzenia w szczegóły wywoływanej funkcji; nie pomija jej działania. <code>F11</code> służy do wejścia do funkcji — przyda się w sesji 6. Na początku nie wchodzimy przez F11 do biblioteki realizującej <code>printf</code>.</p>
+<p>Źródło: <a href="https://learn.microsoft.com/en-us/visualstudio/debugger/quickstart-debug-with-cplusplus?view=visualstudio">Microsoft — punkty przerwania, F5, F10 i podgląd zmiennych</a>.</p>
+</section>
+<section id="jak-wykonywać-kolejne-zadania-z-kursu" class="level2">
+<h2 class="anchored" data-anchor-id="jak-wykonywać-kolejne-zadania-z-kursu">8. Jak wykonywać kolejne zadania z kursu?</h2>
+<ol type="1">
+<li>Utwórz nowy projekt, np. <code>WDP_Sesja02</code>, i ustaw go tak jak powyżej.</li>
+<li>Dodaj <strong>jeden aktywny program z funkcją <code>main</code></strong>. Możesz go stopniowo rozwijać.</li>
+<li>Jeśli rozwiązanie zawiera kilka projektów, kliknij właściwy prawym przyciskiem i wybierz <strong>Set as Startup Project / Ustaw jako projekt startowy</strong>.</li>
+<li>Kod C z materiałów wklejaj do pliku <code>.c</code>. Poleceń <code>gcc …</code> i <code>./program</code> nie wklejaj do edytora kodu: w Visual Studio ich rolę pełnią Build i uruchomienie.</li>
+<li>Przed oddaniem zadania zapisz pliki, zbuduj program i sprawdź oczekiwany wynik. Do przeniesienia projektu zachowaj źródła i pliki projektu/rozwiązania; sam <code>.exe</code> nie zastępuje kodu źródłowego.</li>
+</ol>
+<section id="gdy-w-sesji-2-pojawi-się-scanf-i-komunikat-c4996" class="level3">
+<h3 class="anchored" data-anchor-id="gdy-w-sesji-2-pojawi-się-scanf-i-komunikat-c4996">Gdy w sesji 2 pojawi się scanf i komunikat C4996</h3>
+<p>Przykłady kursu korzystają ze standardowych funkcji C, m.in. <code>scanf</code> i <code>fopen</code>. Microsoft oznacza część tych funkcji komunikatem C4996 i proponuje warianty <code>_s</code>. Dla zgodności kodu kursu ustaw w projekcie:</p>
+<p><strong>Properties → C/C++ → Preprocessor → Preprocessor Definitions → Edit</strong></p>
+<p>Dodaj <strong><code>_CRT_SECURE_NO_WARNINGS</code></strong>, zachowując istniejące i dziedziczone definicje. Ustawienie powinno dotyczyć wszystkich konfiguracji. Następnie przebuduj projekt. Nie wyłączaj wszystkich ostrzeżeń ani dodatkowych kontroli bezpieczeństwa.</p>
+<p>Ta definicja usuwa konkretną kategorię komunikatów biblioteki CRT (<em>C Runtime Library</em>). Nie poprawia kodu: nadal trzeba sprawdzać wynik odczytu, poprawność danych i rozmiary buforów. Nie zastępuj automatycznie każdego <code>scanf</code> przez <code>scanf_s</code>: dla niektórych formatów różnią się wymagane argumenty.</p>
+<p>Źródło: <a href="https://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4996?view=msvc-170">Microsoft — C4996 i definicje preprocesora</a>.</p>
+</section>
+<section id="pliki-danych-w-późniejszych-sesjach" class="level3">
+<h3 class="anchored" data-anchor-id="pliki-danych-w-późniejszych-sesjach">Pliki danych w późniejszych sesjach</h3>
+<p>W przykładzie <code>fopen("dane.txt", "r")</code> plik jest szukany względem <strong>katalogu roboczego procesu</strong>, a nie zawsze obok <code>.c</code> lub <code>.exe</code>. Dla przewidywalnego pokazu ustaw w <strong>Properties → Debugging → Working Directory</strong> wartość <code>$(ProjectDir)</code> i umieść <code>dane.txt</code> w katalogu projektu. Argumenty programu ustawisz w <strong>Debugging → Command Arguments</strong>.</p>
+</section>
+</section>
+<section id="najczęstsze-przeszkody" class="level2">
+<h2 class="anchored" data-anchor-id="najczęstsze-przeszkody">9. Najczęstsze przeszkody</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Objaw</th>
+<th>Co sprawdzić</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nie ma szablonu Empty Project z C++</td>
+<td>Doinstaluj obciążenie Desktop development with C++</td>
+</tr>
+<tr class="even">
+<td>Nie ma sekcji C/C++ we właściwościach</td>
+<td>Dodaj plik <code>.c</code> i otwórz właściwości projektu, nie rozwiązania</td>
+</tr>
+<tr class="odd">
+<td>Błąd związany z <code>pch.h</code></td>
+<td>Ustaw Not Using Precompiled Headers; projekt tworzymy z Empty Project</td>
+</tr>
+<tr class="even">
+<td>Linker zgłasza kilka definicji <code>main</code></td>
+<td>Kilka plików z osobnymi programami trafiło do jednego projektu</td>
+</tr>
+<tr class="odd">
+<td>Linker szuka <code>WinMain</code></td>
+<td>Sprawdź SubSystem = Console i obecność funkcji <code>main</code></td>
+</tr>
+<tr class="even">
+<td>Uruchamia się inny program</td>
+<td>Sprawdź projekt startowy i wynik ostatniego budowania</td>
+</tr>
+<tr class="odd">
+<td>Nie można nadpisać <code>.exe</code></td>
+<td>Zakończ poprzedni proces i debugowanie, potem buduj ponownie</td>
+</tr>
+<tr class="even">
+<td>Punkt przerwania jest pusty lub nieaktywny</td>
+<td>Wybierz Debug, zbuduj aktualny kod i sprawdź projekt startowy</td>
+</tr>
+<tr class="odd">
+<td>Skrót klawiaturowy działa inaczej</td>
+<td>Użyj nazwanej operacji z menu; na laptopie może być potrzebny Fn</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sprawdzenie-gotowości" class="level2">
+<h2 class="anchored" data-anchor-id="sprawdzenie-gotowości">Sprawdzenie gotowości</h2>
+<ul>
+<li>Otwierasz właściwy projekt i wskazujesz plik <code>.c</code>.</li>
+<li>Budujesz program i uruchamiasz go w konsoli.</li>
+<li>Rozróżniasz zapis pliku, budowanie i uruchamianie.</li>
+<li>Odnajdujesz błąd kompilacji i nie uruchamiasz starej wersji jako nowej.</li>
+<li>Zatrzymujesz program na punkcie przerwania i obserwujesz wartości po F10.</li>
+</ul>
+<p>Następnie przejdź do <a href="../podstawy_programowania/sesje/01_pierwszy_program.html">sesji 1 — pierwszy program</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/sebkaz-teaching\.github\.io\/wdplab2026");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2026, Sebastian Zając</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

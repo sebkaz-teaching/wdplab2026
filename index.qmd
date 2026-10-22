@@ -8,6 +8,13 @@ Kod:
 
 Semestr: zimowy
 
+## Przygotowanie do pierwszych zajęć
+
+[Visual Studio Community na Windows — instalacja, projekt C i debugger](podstawy_programowania/visual-studio-community.qmd).
+
+Instalację wykonaj przed zajęciami. Programy pozostają konsolowe; kod piszemy
+w języku C, w plikach `.c`.
+
 ## Kalendarz
 
 <!-- TODO: uzupełnić na podstawie https://wel.wat.edu.pl/planyzajec/zima/dr__Zajac_Sebastian.htm -->

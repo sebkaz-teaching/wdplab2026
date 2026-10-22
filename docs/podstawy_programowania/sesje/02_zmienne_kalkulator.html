@@ -152,6 +152,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Informacje ogólne</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../podstawy_programowania/visual-studio-community.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Start: Visual Studio Community i program konsolowy w C</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -453,6 +459,19 @@ CourseQuiz.mount(document.getElementById('wdp-quiz'), {
 </section>
 <section id="wejście-i-wyjście-printf-i-scanf" class="level3">
 <h3 class="anchored" data-anchor-id="wejście-i-wyjście-printf-i-scanf">Wejście i wyjście: <code>printf</code> i <code>scanf</code></h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>W Visual Studio pracuj w pliku <code>.c</code> z ustawieniem C17. Jeśli pojawi się C4996 przy <code>scanf</code>, zastosuj <a href="../../podstawy_programowania/visual-studio-community.html#gdy-w-sesji-2-pojawi-się-scanf-i-komunikat-c4996">ustawienie projektu opisane we wprowadzeniu</a>. Gotowy debugger z sesji wprowadzającej pozwoli sprawdzić wartości zmiennych przed i po odczycie.</p>
+</div>
+</div>
 <p><code>printf</code> już znacie z sesji 1 — wypisuje na ekran. <code>scanf</code> robi coś przeciwnego: czyta to, co użytkownik wpisze, i zapisuje do zmiennej.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"Podaj liczbe: "</span><span class="op">);</span></span>

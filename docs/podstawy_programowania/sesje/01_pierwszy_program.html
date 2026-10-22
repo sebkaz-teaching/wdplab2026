@@ -152,6 +152,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Informacje ogólne</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../podstawy_programowania/visual-studio-community.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Start: Visual Studio Community i program konsolowy w C</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -329,6 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#cel" id="toc-cel" class="nav-link active" data-scroll-target="#cel">Cel</a></li>
+  <li><a href="#środowisko-na-zajęciach" id="toc-środowisko-na-zajęciach" class="nav-link" data-scroll-target="#środowisko-na-zajęciach">Środowisko na zajęciach</a></li>
   <li><a href="#teoria-w-pigułce" id="toc-teoria-w-pigułce" class="nav-link" data-scroll-target="#teoria-w-pigułce">Teoria w pigułce</a></li>
   <li><a href="#zadania" id="toc-zadania" class="nav-link" data-scroll-target="#zadania">Zadania</a></li>
   <li><a href="#kryterium-sukcesu" id="toc-kryterium-sukcesu" class="nav-link" data-scroll-target="#kryterium-sukcesu">Kryterium sukcesu</a></li>
@@ -361,6 +368,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="cel">Cel</h2>
 <p>Napisać, skompilować i uruchomić swój pierwszy program w C — i zrozumieć, co dokładnie dzieje się między wpisaniem tekstu a zobaczeniem wyniku na ekranie. To jedyna sesja w tym kursie, w której zakładamy, że nigdy wcześniej nie napisałeś/aś ani jednej linijki kodu.</p>
 </section>
+<section id="środowisko-na-zajęciach" class="level2">
+<h2 class="anchored" data-anchor-id="środowisko-na-zajęciach">Środowisko na zajęciach</h2>
+<p>Korzystamy z <strong>Visual Studio Community na Windows</strong>. Przed rozpoczęciem wykonaj <a href="../../podstawy_programowania/visual-studio-community.html">instrukcję przygotowania środowiska</a>. Tworzymy aplikację konsolową w C, z plikiem <code>main.c</code>. Wariant GCC/Clang opisany niżej pozostaje alternatywą dla pracy w terminalu na macOS/Linux.</p>
+</section>
 <section id="teoria-w-pigułce" class="level2">
 <h2 class="anchored" data-anchor-id="teoria-w-pigułce">Teoria w pigułce</h2>
 <section id="czym-jest-program" class="level3">
@@ -370,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dlaczego-kod-trzeba-kompilować" class="level3">
 <h3 class="anchored" data-anchor-id="dlaczego-kod-trzeba-kompilować">Dlaczego kod trzeba “kompilować”?</h3>
 <p>To, co piszesz (<strong>kod źródłowy</strong>, plik <code>.c</code>) to tekst czytelny dla człowieka. Procesor rozumie tylko liczby — konkretne rozkazy zakodowane jako bajty (do tego wrócimy przy CHIP-8 pod koniec kursu). <strong>Kompilator</strong> to program, który tłumaczy Twój tekst na taki plik binarny — coś, co system operacyjny potrafi uruchomić jako proces.</p>
-<pre><code>kod źródłowy (hello.c)  --[kompilator: gcc]--&gt;  plik wykonywalny (hello)
+<pre><code>kod źródłowy (.c)  --[kompilator i linker]--&gt;  plik wykonywalny (.exe na Windows)
    tekst dla człowieka                              zera i jedynki dla procesora</code></pre>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -391,29 +402,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Za każdym razem, gdy zmienisz choć jeden znak w pliku <code>.c</code>, musisz go <strong>skompilować od nowa</strong> — inaczej program użyje starej wersji. To jest inne niż np. edycja strony internetowej, gdzie zmiana widoczna jest “od razu” po odświeżeniu. W C:</p>
 <ol type="1">
 <li><strong>Edit</strong> — zmieniasz plik <code>.c</code> w edytorze,</li>
-<li><strong>Compile</strong> — uruchamiasz kompilator (<code>gcc</code>),</li>
-<li><strong>Run</strong> — dopiero teraz uruchamiasz efekt (<code>./hello</code>).</li>
+<li><strong>Build</strong> — budujesz program (w Visual Studio: Ctrl+Shift+B),</li>
+<li><strong>Run</strong> — uruchamiasz efekt (w Visual Studio: Ctrl+F5).</li>
 </ol>
 <p>Zapomnienie kroku 2. to najczęstsza przyczyna “dlaczego moja zmiana nic nie robi” u początkujących — i to nie tylko dziś, to będzie Was ścigać przez cały semestr.</p>
 </section>
 </section>
 <section id="zadania" class="level2">
 <h2 class="anchored" data-anchor-id="zadania">Zadania</h2>
-<section id="zadanie-1-sprawdź-czy-masz-kompilator" class="level3">
-<h3 class="anchored" data-anchor-id="zadanie-1-sprawdź-czy-masz-kompilator">Zadanie 1 — sprawdź, czy masz kompilator</h3>
-<p>W terminalu:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Jeśli polecenie nie istnieje — zgłoś się, zainstalujemy razem (macOS: Xcode Command Line Tools, Linux: pakiet <code>build-essential</code>/<code>gcc</code>).</p>
+<section id="zadanie-1-przygotuj-projekt" class="level3">
+<h3 class="anchored" data-anchor-id="zadanie-1-przygotuj-projekt">Zadanie 1 — przygotuj projekt</h3>
+<p>W Visual Studio utwórz <strong>Empty Project</strong> o nazwie <code>WDP_Sesja01</code>, dodaj <code>main.c</code> i ustaw C17 oraz poziom ostrzeżeń <code>/W4</code>, zgodnie z instrukcją środowiska. Wybierz konfigurację <strong>Debug / x64</strong>. Jeśli projektu nie można utworzyć, sprawdź instalację obciążenia Desktop development with C++.</p>
+<p>W wariancie terminalowym sprawdź <code>gcc --version</code> albo <code>clang --version</code>.</p>
 </section>
 <section id="zadanie-2-pierwszy-program" class="level3">
 <h3 class="anchored" data-anchor-id="zadanie-2-pierwszy-program">Zadanie 2 — pierwszy program</h3>
-<p>Utwórz plik <code>hello.c</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Czesc, swiecie!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>W pliku <code>main.c</code> wpisz (w wariancie terminalowym możesz użyć nazwy <code>hello.c</code>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Czesc, swiecie!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Zanim skompilujesz — spróbuj zgadnąć, co robi każda linijka, zanim wyjaśnimy na głos:</p>
 <ul>
 <li><code>#include &lt;stdio.h&gt;</code> — “dołącz zestaw narzędzi do wejścia/wyjścia” (Standard Input/Output) — bez tego <code>printf</code> nie istnieje.</li>
@@ -424,18 +434,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="zadanie-3-kompilacja-i-uruchomienie" class="level3">
 <h3 class="anchored" data-anchor-id="zadanie-3-kompilacja-i-uruchomienie">Zadanie 3 — kompilacja i uruchomienie</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-std</span><span class="op">=</span>c99 <span class="at">-Wall</span> <span class="at">-Wextra</span> hello.c <span class="at">-o</span> hello</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./hello</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Visual Studio:</strong> zapisz plik (Ctrl+S), zbuduj rozwiązanie (Ctrl+Shift+B), sprawdź wynik w Output / Build i uruchom bez debugowania (Ctrl+F5). Powinien pojawić się komunikat <code>Czesc, swiecie!</code>.</p>
+<p><strong>Alternatywa w terminalu:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-std</span><span class="op">=</span>c17 <span class="at">-Wall</span> <span class="at">-Wextra</span> hello.c <span class="at">-o</span> hello</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./hello</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li><code>-std=c99</code> — którego standardu C używamy (będziemy trzymać się go przez cały kurs).</li>
-<li><code>-Wall -Wextra</code> — włącz wszystkie ostrzeżenia. <strong>Zawsze</strong> kompiluj z tymi flagami — ostrzeżenie dziś to błąd, którego unikasz jutro.</li>
-<li><code>-o hello</code> — nazwa pliku wynikowego (bez tego dostaniesz domyślnie <code>a.out</code>).</li>
+<li><code>-std=c17</code> wybiera standard C17; w Visual Studio odpowiada mu <code>/std:c17</code>.</li>
+<li><code>-Wall -Wextra</code> włącza zestawy ostrzeżeń GCC/Clang, nie wszystkie możliwe ostrzeżenia. W Visual Studio używamy poziomu <code>/W4</code>.</li>
+<li><code>-o hello</code> określa nazwę programu wynikowego.</li>
 </ul>
 </section>
 <section id="zadanie-4-zepsuj-coś-celowo" class="level3">
 <h3 class="anchored" data-anchor-id="zadanie-4-zepsuj-coś-celowo">Zadanie 4 — zepsuj coś celowo</h3>
 <p>Usuń średnik po <code>printf(...)</code> i skompiluj ponownie. Przeczytaj komunikat błędu od kompilatora — nie ignoruj go, nie zgaduj, <strong>przeczytaj dokładnie który numer linii</strong>. Komunikaty błędów kompilatora będą Twoim głównym narzędziem diagnostycznym przez cały semestr — im szybciej nauczysz się je czytać, tym mniej będziesz czekać na pomoc.</p>
-<p>Napraw błąd, skompiluj ponownie, upewnij się, że znowu działa.</p>
+<p>Jeśli Visual Studio proponuje uruchomienie ostatniej poprawnej kompilacji, wybierz „Nie”. Obejrzyj pierwszy błąd w Error List / Build. Napraw go, zbuduj ponownie i upewnij się, że program znowu działa.</p>
 </section>
 <section id="zadanie-5-twoja-zmiana" class="level3">
 <h3 class="anchored" data-anchor-id="zadanie-5-twoja-zmiana">Zadanie 5 — Twoja zmiana</h3>
@@ -445,8 +457,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="kryterium-sukcesu" class="level2">
 <h2 class="anchored" data-anchor-id="kryterium-sukcesu">Kryterium sukcesu</h2>
 <ul>
-<li><code>gcc -std=c99 -Wall -Wextra hello.c -o hello</code> kompiluje się <strong>bez żadnych ostrzeżeń</strong>.</li>
-<li><code>./hello</code> wypisuje spersonalizowany komunikat zakończony nową linią.</li>
+<li>Program buduje się bez błędów i ostrzeżeń: Visual Studio z <code>/W4</code> lub GCC/Clang z <code>-Wall -Wextra</code>.</li>
+<li>Uruchomienie wypisuje spersonalizowany komunikat zakończony nową linią.</li>
 <li>Potrafisz wskazać, w którym miejscu kodu i dlaczego pojawił się błąd z zadania 4 (nie tylko “naprawiłem”, ale “wiem czemu się psuło”).</li>
 </ul>
 

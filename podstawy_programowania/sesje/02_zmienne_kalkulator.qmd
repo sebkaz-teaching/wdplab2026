@@ -83,6 +83,14 @@ przypadek, to bezpośrednia konsekwencja tego, że pamięć jest zorganizowana w
 
 ### Wejście i wyjście: `printf` i `scanf`
 
+::: {.callout-note}
+W Visual Studio pracuj w pliku `.c` z ustawieniem C17. Jeśli pojawi się C4996
+przy `scanf`, zastosuj [ustawienie projektu opisane we wprowadzeniu](../visual-studio-community.qmd#gdy-w-sesji-2-pojawi-się-scanf-i-komunikat-c4996).
+Gotowy debugger z sesji wprowadzającej pozwoli sprawdzić wartości zmiennych
+przed i po odczycie.
+:::
+
+
 `printf` już znacie z sesji 1 — wypisuje na ekran. `scanf` robi coś przeciwnego: czyta
 to, co użytkownik wpisze, i zapisuje do zmiennej.
 
