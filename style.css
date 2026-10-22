@@ -1,5 +1,40 @@
-.center{
-    margin: 0!important;
-    max-width: 80%;
-    max-height: 60%;
-  }
+.center {
+  margin: 0 !important;
+  max-width: 80%;
+  max-height: 60%;
+}
+.lab-handout main { color: #25313b; line-height: 1.75; }
+.lab-handout #title-block-header { border-bottom: 3px solid #235c85; padding-bottom: 1.2rem; margin-bottom: 1.8rem; }
+.lab-handout #title-block-header .title { color: #163c5b; font-size: clamp(2rem, 5vw, 2.8rem); }
+.lab-handout #title-block-header .subtitle { color: #415b70; font-size: 1.3rem; }
+.lab-meta { border: 1px solid #d4dfe8; background: #f5f8fb; padding: 1.15rem 1.4rem; margin: 0 0 2rem; border-radius: 4px; }
+.lab-meta p:last-child { margin-bottom: 0; }
+.lab-handout main h2 { color: #183e5b; font-family: Georgia, serif; font-size: 1.65rem; margin-top: 2.5rem; padding-bottom: .5rem; border-bottom: 1px solid #bdcbd8; }
+.lab-handout main h3 { color: #235c85; font-size: 1.18rem; margin: 1.6rem 0 .7rem; }
+.lab-handout main p, .lab-handout main li { overflow-wrap: break-word; }
+.lab-handout main table { font-size: .93rem; line-height: 1.5; width: 100%; }
+.lab-handout main th { background: #edf3f8; color: #183e5b; }
+.lab-handout main td, .lab-handout main th { padding: .65rem; vertical-align: top; }
+.lab-handout div.sourceCode { border: 1px solid #d5dfe8; border-left: 3px solid #7096b6; border-radius: 4px; background: #f7f9fc; margin: 1.2rem 0; }
+.lab-handout pre.sourceCode { padding: .9rem 1rem; font-size: .88rem; line-height: 1.55; }
+.lab-handout .lab-task { padding: .2rem 0 .9rem 1.25rem; border-left: 3px solid #d2e1ed; margin: 1.5rem 0; }
+.lab-handout .lab-task h3 { margin-top: .3rem; }
+.lab-handout .lab-task p:last-child { margin-bottom: 0; }
+.lab-handout #przygotowanie-do-następnej-wejściówki { border-top: 3px solid #235c85; padding-top: 1rem; }
+@media (max-width: 600px) {
+  .lab-meta { padding: 1rem; }
+  .lab-handout .lab-task { padding-left: .8rem; }
+  .lab-handout main table { font-size: .85rem; }
+  .lab-handout main td, .lab-handout main th { padding: .4rem; }
+}
+@media print {
+  #quarto-sidebar, #quarto-margin-sidebar, .quarto-navigation-tool, .code-copy-button, #quarto-search, .quarto-title-meta { display: none !important; }
+  #quarto-content, .page-columns, main { display: block !important; width: auto !important; max-width: none !important; margin: 0 !important; }
+  body { font-size: 10.5pt; background: white !important; }
+  .lab-handout main { color: black; line-height: 1.45; }
+  h2, h3 { break-after: avoid; }
+  tr, .lab-meta { break-inside: avoid; }
+  .sourceCode, pre, pre code { white-space: pre-wrap !important; overflow: visible !important; }
+  #rsod-quiz { display: none !important; }
+  a { color: inherit; text-decoration: none; }
+}

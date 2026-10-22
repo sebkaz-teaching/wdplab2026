@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Informacje ogólne – Wprowadzenie do Programowania - Laboratorium</title>
+<title>Wprowadzenie do programowania – Wprowadzenie do programowania — C++</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -42,9 +42,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-94ae530b1fc9924793afbc3bb7de9d3b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ef504fb0e4a2795be7a3e78b702520b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -59,17 +60,17 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź",
+    "search-label": "Szukaj"
   }
 }</script>
 
@@ -83,13 +84,13 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Informacje ogólne</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Wprowadzenie do programowania</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Szukaj" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -101,12 +102,12 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Wprowadzenie do Programowania - Laboratorium</a> 
+      <a href="./">Wprowadzenie do programowania — C++</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Szukaj"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
@@ -114,177 +115,70 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Informacje ogólne</span></a>
+ <span class="menu-text">Wprowadzenie do programowania</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./podstawy_programowania/visual-studio-community.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Start: Visual Studio Community i program konsolowy w C</span></a>
+ <span class="menu-text">Visual Studio — projekt konsolowy C++</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scenariusze.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Organizacja pracy laboratoryjnej</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Fundamenty C (sesje 1-18)</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+ <span class="menu-text">Instrukcje laboratoryjne</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/01_pierwszy_program.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 1 — Pierwszy program</span></a>
+  <a href="./laboratoria/01_projekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/02_zmienne_kalkulator.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 2 — Zmienne i pierwszy kalkulator</span></a>
+  <a href="./laboratoria/02_warunki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/03_warunki_dispatcher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 3 — Warunki: kalkulator wybiera działanie</span></a>
+  <a href="./laboratoria/03_petle_tablice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/04_petle_repl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu</span></a>
+  <a href="./laboratoria/04_funkcje.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 5 — Tablice: Twoja pierwsza maszyna wirtualna</span></a>
+  <a href="./laboratoria/05_wektor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/06_funkcje.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 6 — Funkcje: porządkowanie maszyny wirtualnej</span></a>
+  <a href="./laboratoria/06_klasa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/07_struktury.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 7 — Struktury: instrukcja jako jedna rzecz</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/08_enumy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 8 — Enumy: nazwane liczby zamiast magicznych stałych</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/09_rejestry.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 9 — Rejestry: więcej niż jeden akumulator</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/10_wskazniki_podstawy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/11_wskazniki_do_struktur.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 11 — Wskaźniki do struktur: operator -&gt;</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/12_pamiec_dynamiczna.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/13_licznik_instrukcji.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 14 — Flagi i skoki warunkowe</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/15_stos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 15 — Stos: LIFO w tablicy</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/16_call_ret.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/17_pliki.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/18_stringi_parser.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Projekt końcowy: CHIP-8</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CHIP-8: zbuduj własny emulator</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/01_szkielet_vm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 1 — Szkielet maszyny wirtualnej</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 3 — Wyświetlacz i sprite’y</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 4 — Timery i klawiatura</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 5 — Uruchomienie prawdziwej gry</span></a>
+  <a href="./laboratoria/07_rejestr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 7</span></a>
   </div>
 </li>
       </ul>
@@ -296,13 +190,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title"><strong>Sections</strong></h2>
+    <h2 id="toc-title">Na tej stronie</h2>
    
   <ul class="collapse">
-  <li><a href="#wprowadzenie-do-programowania---laboratorium" id="toc-wprowadzenie-do-programowania---laboratorium" class="nav-link active" data-scroll-target="#wprowadzenie-do-programowania---laboratorium">Wprowadzenie do Programowania - Laboratorium</a></li>
-  <li><a href="#przygotowanie-do-pierwszych-zajęć" id="toc-przygotowanie-do-pierwszych-zajęć" class="nav-link" data-scroll-target="#przygotowanie-do-pierwszych-zajęć">Przygotowanie do pierwszych zajęć</a></li>
-  <li><a href="#kalendarz" id="toc-kalendarz" class="nav-link" data-scroll-target="#kalendarz">Kalendarz</a></li>
-  <li><a href="#scenariusze-zajęć" id="toc-scenariusze-zajęć" class="nav-link" data-scroll-target="#scenariusze-zajęć">Scenariusze zajęć</a></li>
+  <li><a href="#program-laboratoriów" id="toc-program-laboratoriów" class="nav-link active" data-scroll-target="#program-laboratoriów">Program laboratoriów</a></li>
+  <li><a href="#przed-pierwszym-laboratorium" id="toc-przed-pierwszym-laboratorium" class="nav-link" data-scroll-target="#przed-pierwszym-laboratorium">Przed pierwszym laboratorium</a></li>
+  <li><a href="#wejściówki-i-przygotowanie" id="toc-wejściówki-i-przygotowanie" class="nav-link" data-scroll-target="#wejściówki-i-przygotowanie">Wejściówki i przygotowanie</a></li>
   </ul>
 </nav>
     </div>
@@ -311,7 +204,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Informacje ogólne</h1>
+<h1 class="title">Wprowadzenie do programowania</h1>
+<p class="subtitle lead">Instrukcje laboratoryjne · C++ · 2026/2027</p>
 </div>
 
 
@@ -328,29 +222,64 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="wprowadzenie-do-programowania---laboratorium" class="level2">
-<h2 class="anchored" data-anchor-id="wprowadzenie-do-programowania---laboratorium">Wprowadzenie do Programowania - Laboratorium</h2>
-<p>Kod:</p>
-<p>Semestr: zimowy</p>
+<p>Każda instrukcja zawiera cel ćwiczenia, wprowadzenie teoretyczne z przykładami, zadania do realizacji oraz przygotowanie do kolejnej wejściówki. Pracujemy w <strong>Visual Studio Community</strong>, w projektach <strong>Console App</strong> i plikach <code>.cpp</code>.</p>
+<section id="program-laboratoriów" class="level2">
+<h2 class="anchored" data-anchor-id="program-laboratoriów">Program laboratoriów</h2>
+<p>Pierwsze pięć tematów odpowiada zakresowi karty <strong>Wprowadzenie do programowania (WELTXWSJ-WDP)</strong>. Dwa kolejne rozwijają tworzenie i używanie prostych klas.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Instrukcja</th>
+<th>Główne zagadnienia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./laboratoria/01_projekt.html">1. Algorytmy i programy w C++</a></td>
+<td>Utworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.</td>
+</tr>
+<tr class="even">
+<td><a href="./laboratoria/02_warunki.html">2. Operacje warunkowe</a></td>
+<td>Zapisanie reguł wyboru oraz sprawdzenie danych przed wykonaniem działania.</td>
+</tr>
+<tr class="odd">
+<td><a href="./laboratoria/03_petle_tablice.html">3. Instrukcje cykliczne i tablice</a></td>
+<td>Przetwarzanie serii danych z wykorzystaniem pętli i tablic.</td>
+</tr>
+<tr class="even">
+<td><a href="./laboratoria/04_funkcje.html">4. Funkcje w języku C++</a></td>
+<td>Podział obliczeń na funkcje i świadomy wybór sposobu przekazywania argumentów.</td>
+</tr>
+<tr class="odd">
+<td><a href="./laboratoria/05_wektor.html">5. Klasy biblioteczne i kontener vector</a></td>
+<td>Używanie metod bibliotecznych oraz przechowywanie zmiennej liczby pomiarów.</td>
+</tr>
+<tr class="even">
+<td><a href="./laboratoria/06_klasa.html">6. Własna klasa i jej obiekty</a></td>
+<td>Zdefiniowanie własnego typu, stanu obiektu i dozwolonych operacji.</td>
+</tr>
+<tr class="odd">
+<td><a href="./laboratoria/07_rejestr.html">7. Program wykorzystujący kolekcję obiektów</a></td>
+<td>Połączenie klas, funkcji, wektora i menu w działający rejestr urządzeń.</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="przygotowanie-do-pierwszych-zajęć" class="level2">
-<h2 class="anchored" data-anchor-id="przygotowanie-do-pierwszych-zajęć">Przygotowanie do pierwszych zajęć</h2>
-<p><a href="./podstawy_programowania/visual-studio-community.html">Visual Studio Community na Windows — instalacja, projekt C i debugger</a>.</p>
-<p>Instalację wykonaj przed zajęciami. Programy pozostają konsolowe; kod piszemy w języku C, w plikach <code>.c</code>.</p>
-</section>
-<section id="kalendarz" class="level2">
-<h2 class="anchored" data-anchor-id="kalendarz">Kalendarz</h2>
-<!-- TODO: uzupełnić na podstawie https://wel.wat.edu.pl/planyzajec/zima/dr__Zajac_Sebastian.htm -->
-<section id="laboratorium-dla-grup" class="level3">
-<h3 class="anchored" data-anchor-id="laboratorium-dla-grup">Laboratorium dla grup:</h3>
+<section id="przed-pierwszym-laboratorium" class="level2">
+<h2 class="anchored" data-anchor-id="przed-pierwszym-laboratorium">Przed pierwszym laboratorium</h2>
 <ol type="1">
-<li>TODO: dzień tygodnia, godzina, sala</li>
+<li><a href="./podstawy_programowania/visual-studio-community.html">Przygotuj Visual Studio i uruchom projekt konsolowy</a>.</li>
+<li>Otwórz <a href="./laboratoria/01_projekt.html">instrukcję laboratorium 1</a>.</li>
+<li>Utwórz katalog na źródła i wyniki prób z kolejnych ćwiczeń.</li>
 </ol>
+<p><a href="assets/cpp/pokazy-cpp.zip">Programy pokazowe C++ — pobierz ZIP</a>.</p>
 </section>
-</section>
-<section id="scenariusze-zajęć" class="level2">
-<h2 class="anchored" data-anchor-id="scenariusze-zajęć">Scenariusze zajęć</h2>
-<p><a href="./scenariusze.html">Otwórz zadania i opis projektu</a>.</p>
+<section id="wejściówki-i-przygotowanie" class="level2">
+<h2 class="anchored" data-anchor-id="wejściówki-i-przygotowanie">Wejściówki i przygotowanie</h2>
+<p>Od laboratorium 2 na początku instrukcji znajduje się test: <strong>3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego nowego materiału</strong>. Każde pytanie jest warte 1 punkt. Pytanie wyprzedzające sprawdza podstawowe przygotowanie, a nie wykonanie nowych zadań przed zajęciami.</p>
+<p>Na końcu każdej instrukcji wskazano, co powtórzyć i co przeczytać przed następną wejściówką. Wynik testu pojawia się po potwierdzeniu zapisu przez serwer. Zadania programistyczne są rozliczane osobno.</p>
+<p><a href="./scenariusze.html">Organizacja pracy i dokumentowanie wyników</a>.</p>
+<p>Terminy, wymiar poszczególnych spotkań oraz formę i termin zaliczenia podaje prowadzący dla danej grupy.</p>
 
 
 </section>
@@ -381,12 +310,12 @@ ul.task-list li input[type="checkbox"] {
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Skopiowano!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Skopiowano!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",

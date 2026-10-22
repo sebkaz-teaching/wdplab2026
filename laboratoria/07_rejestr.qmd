@@ -1,0 +1,289 @@
+---
+title: "Laboratorium 7"
+subtitle: "Program wykorzystujący kolekcję obiektów"
+format:
+  html:
+    body-classes: lab-handout
+---
+
+::: {.lab-meta}
+**Wprowadzenie do programowania** · C++ · instrukcja laboratoryjna
+
+**Cel ćwiczenia:** Połączenie klas, funkcji, wektora i menu w działający rejestr urządzeń.
+
+**Środowisko:** Visual Studio Community, projekt Console App, standard C++17.
+:::
+
+## Wejściówka
+
+**3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego przygotowania.** Każde jest warte 1 punkt. Test rozwiązuje się indywidualnie; wynik pojawi się po potwierdzeniu zapisu.
+
+<div id="rsod-quiz"></div>
+<script src="../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById("rsod-quiz"), {
+  "course": "wdplab2026",
+  "lecture": "cpp07",
+  "title": "Wejściówka przed laboratorium 7",
+  "submitUrl": "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  "questions": [
+    {
+      "id": "q1",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Czym jest konstruktor?",
+      "options": [
+        {
+          "v": "A",
+          "t": "Pętlą nad obiektami"
+        },
+        {
+          "v": "B",
+          "t": "Operacją inicjalizującą obiekt podczas jego tworzenia"
+        },
+        {
+          "v": "C",
+          "t": "Plikiem projektu"
+        },
+        {
+          "v": "D",
+          "t": "Metodą do wypisywania każdego pola"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "W klasie Device z laboratorium 6 bateria wynosi 40. Co daje odrzucone setCharge(150)?",
+      "options": [
+        {
+          "v": "A",
+          "t": "Bateria 150"
+        },
+        {
+          "v": "B",
+          "t": "Bateria nadal 40; wynik metody false"
+        },
+        {
+          "v": "C",
+          "t": "Bateria 0"
+        },
+        {
+          "v": "D",
+          "t": "Usunięcie obiektu"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Co oznacza const na końcu deklaracji getCharge() const?",
+      "options": [
+        {
+          "v": "A",
+          "t": "Nie wolno odczytać wyniku"
+        },
+        {
+          "v": "B",
+          "t": "Metoda nie zmienia zwykłych pól obiektu"
+        },
+        {
+          "v": "C",
+          "t": "Bateria zawsze wynosi zero"
+        },
+        {
+          "v": "D",
+          "t": "Metodę można wywołać tylko raz"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "points": 1,
+      "diff": "przygotowanie",
+      "text": "Przygotowanie: co przechowuje std::vector<Device>?",
+      "options": [
+        {
+          "v": "A",
+          "t": "Wyłącznie nazwy plików"
+        },
+        {
+          "v": "B",
+          "t": "Kolekcję obiektów Device"
+        },
+        {
+          "v": "C",
+          "t": "Tylko jedno urządzenie"
+        },
+        {
+          "v": "D",
+          "t": "Kod źródłowy klasy jako tekst"
+        }
+      ]
+    }
+  ]
+});
+</script>
+
+## Wprowadzenie teoretyczne
+
+### Wektor obiektów
+
+`std::vector<Device>` jest kolekcją obiektów klasy Device. Tak jak wektor liczb udostępnia push_back, size i empty, ale jego elementami są teraz urządzenia. Dostęp `devices[0]` wskazuje pierwsze urządzenie; `devices[0].getCharge()` odczytuje jego baterię.
+
+Każdy obiekt nadal pilnuje własnych reguł. Wektor zarządza kolekcją, a klasa Device poprawnością jednego elementu. Main odpowiada za komunikację z użytkownikiem i wybór operacji.
+
+### Kopia a obiekt w kolekcji
+
+Po `devices.push_back(radio)` do wektora trafia kopia radia. Późniejsza zmiana lokalnej zmiennej radio nie zmienia już elementu wektora. Jeżeli zmiana ma dotyczyć rejestru, wykonujemy ją na obiekcie znajdującym się w rejestrze.
+
+| Zapis pętli | Znaczenie |
+|---|---|
+| `for (Device device : devices)` | Praca na kopii każdego obiektu |
+| `for (const Device& device : devices)` | Odczyt obiektów bez kopiowania |
+| `for (Device& device : devices)` | Możliwość zmiany obiektów w kolekcji |
+
+To ta sama różnica między wartością i referencją, którą poznaliśmy przy funkcjach. Podczas przechodzenia pętlą zakresową nie dopisujemy nowych urządzeń do tego samego wektora.
+
+### Pełny program startowy
+
+Przykład zawiera podstawową wersję Device z laboratorium 6, aby dało się rozpocząć niezależnie od wykonania rozszerzeń. Gotowość oznacza tu baterię co najmniej 30%. W zadaniach można dodatkowo zastosować przegląd, ale wtedy należy jawnie zmienić regułę i oczekiwane wyniki.
+
+Program wypisze dwa urządzenia: radio z baterią 40 i gotowością 1 oraz czujnik z baterią 0 i gotowością 0.
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+class Device
+{
+private:
+    std::string name;
+    int charge = 0;
+
+public:
+    Device(const std::string& initialName)
+        : name(initialName)
+    {
+    }
+
+    std::string getName() const
+    {
+        return name;
+    }
+
+    int getCharge() const
+    {
+        return charge;
+    }
+
+    bool setCharge(int value)
+    {
+        if (value < 0 || value > 100) {
+            return false;
+        }
+        charge = value;
+        return true;
+    }
+
+    bool isReady() const
+    {
+        return charge >= 30;
+    }
+};
+
+int main()
+{
+    std::vector<Device> devices;
+    Device radio("Radio A");
+    radio.setCharge(40);
+    devices.push_back(radio);
+    devices.push_back(Device("Sensor B"));
+
+    for (const Device& device : devices) {
+        std::cout << device.getName() << ": " << device.getCharge()
+                  << ", ready: " << device.isReady() << '\n';
+    }
+    return 0;
+}
+```
+
+### Wybór elementu przez użytkownika
+
+W menu użytkownik może widzieć numery od 1 do liczby urządzeń. Wektor używa indeksów od 0. Najpierw sprawdzamy, czy wpisany numer znajduje się w przedziale, a dopiero potem odejmujemy 1 i odczytujemy element. Numer 0 i numer większy od liczby elementów są błędne.
+
+W poniższym fragmencie size_t jest typem używanym do rozmiarów kolekcji. Rzutowanie wykonujemy dopiero po sprawdzeniu dodatniości numeru. Dzięki temu nie porównujemy ujemnej liczby z rozmiarem bez znaku.
+
+```cpp
+int number = 0;
+if (!(std::cin >> number)) {
+    std::cout << "Invalid input\n";
+} else if (number < 1 || static_cast<std::size_t>(number) > devices.size()) {
+    std::cout << "Unknown device\n";
+} else {
+    std::size_t index = static_cast<std::size_t>(number - 1);
+    std::cout << devices[index].getName() << '\n';
+}
+```
+
+To fragment do main po utworzeniu wektora; wymaga także nagłówka `<cstddef>`. Nie przechowujemy indeksu ani referencji do elementu na później, jeśli w międzyczasie zmieniamy kolekcję.
+
+### Podział odpowiedzialności
+
+Funkcja `void printReport(const std::vector<Device>& devices)` odczytuje kolekcję i wypisuje raport. Funkcja `int countReady(const std::vector<Device>& devices)` zwraca liczbę gotowych urządzeń. Metoda setCharge sprawdza poziom baterii, a menu sprawdza, czy wybrany numer urządzenia istnieje. Dzięki takiemu podziałowi reguła baterii nie jest kopiowana do kilku gałęzi menu.
+
+### Próby całego programu
+
+Należy sprawdzić więcej niż poprawne dodanie jednego urządzenia. Ważne są: pusty rejestr, dwa różne obiekty, nieistniejący numer, niepoprawny poziom baterii oraz raport po zmianie danych. Dla każdej próby zapisz stan przed operacją i stan po niej.
+
+[Pełny program pokazowy — pobierz plik .cpp](../assets/cpp/07_pokaz.cpp). Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.
+
+## Zadania do realizacji
+
+Przed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.
+
+::: {.lab-task}
+### Zadanie 1. Rejestr i raport
+
+Uruchom program startowy. Dodaj trzecie urządzenie z baterią 80. Wydziel funkcję printReport i wypisz numer od 1, nazwę, baterię oraz gotowość. Sprawdź również raport z pustego wektora: ma pojawić się czytelny komunikat.
+:::
+
+::: {.lab-task}
+### Zadanie 2. Zliczanie gotowych urządzeń
+
+Napisz countReady przyjmującą wektor przez stałą referencję. Korzystaj z metody isReady każdego urządzenia. Dla baterii 40, 0, 80 wynik ma wynosić 2, dla pustego rejestru 0. Nie zapisuj na nowo progu baterii w funkcji zliczającej.
+:::
+
+::: {.lab-task}
+### Zadanie 3. Zmiana wskazanego urządzenia
+
+Wczytaj numer od 1 i nowy poziom baterii. Sprawdź numer przed dostępem do wektora, a nową wartość przekaż do setCharge. Wypisz, czy zmiana została przyjęta. Sprawdź numer 0, numer poza kolekcją oraz baterię 150. Po błędzie istniejące dane mają pozostać bez zmian.
+:::
+
+::: {.lab-task}
+### Zadanie 4. Dodawanie urządzenia
+
+Wczytaj niepustą nazwę (może zawierać spacje) i poziom baterii. Nazwa nie musi być unikalna — wybór urządzenia odbywa się przez numer. Utwórz obiekt i dopisz go dopiero po udanym setCharge. Dla baterii -5 rozmiar rejestru nie może wzrosnąć.
+:::
+
+::: {.lab-task}
+### Zadanie 5. Połączenie w program z menu
+
+Przygotuj menu: 1 — dodaj urządzenie, 2 — raport, 3 — zmień baterię, 4 — liczba gotowych, 0 — koniec. Wykorzystaj funkcje z wcześniejszych zadań. Nie dodawaj plików, bazy danych ani dziedziczenia. Przeprowadź sekwencję: raport pusty → dodanie dwóch → zmiana jednego → raport → liczba gotowych. Wyjaśnij wybrany fragment kodu bez uruchamiania.
+:::
+
+## Dokumentacja i sprawdzenie pracy
+
+- Zachowaj źródła `.cpp` oznaczone numerem zadania.
+- Dla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.
+- Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.
+- Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.
+
+Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów `.vs` i `Debug` ani plików `.exe`.
+
+## Przygotowanie do następnej wejściówki
+
+To ostatni z siedmiu tematów; nie zapowiadamy wejściówki numer 8. Do utrwalenia pozostają: zmiana stanu przez metodę, kopia a referencja, wektor obiektów, sprawdzanie numeru przed dostępem i podział programu na funkcje. Termin oraz formę zaliczenia prowadzący podaje osobno.

@@ -1,0 +1,229 @@
+---
+title: "Laboratorium 1"
+subtitle: "Algorytmy i programy w C++"
+format:
+  html:
+    body-classes: lab-handout
+---
+
+::: {.lab-meta}
+**Wprowadzenie do programowania** · C++ · instrukcja laboratoryjna
+
+**Cel ćwiczenia:** Utworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.
+
+**Środowisko:** Visual Studio Community, projekt Console App, standard C++17.
+:::
+
+## Informacje wprowadzające
+
+Ćwiczenie wprowadza do pracy w **Visual Studio Community**, w projekcie **Console App / Aplikacja konsolowa (C++)**.
+Każdy niezależny program należy umieścić w osobnym projekcie. Nazwy zmiennych i komunikaty w przykładach są po angielsku; opisy zadań są po polsku.
+
+Przed rozpoczęciem pracy należy sprawdzić możliwość zapisania projektu. Problemy ze sprzętem należy zgłosić prowadzącemu; przy stanowisku nie należy spożywać napojów ani zmieniać konfiguracji pracowni bez zgody.
+
+Na pierwszym laboratorium nie ma wejściówki. Zasady rozliczania zadań są opisane [na stronie organizacyjnej](../scenariusze.qmd).
+
+## Wprowadzenie teoretyczne
+
+### Środowisko IDE i projekt
+
+**IDE** (*Integrated Development Environment*, zintegrowane środowisko programistyczne) łączy edytor kodu, narzędzia budowania i debugger. Projekt określa, które pliki tworzą wspólny program. Rozwiązanie (*solution*) może zawierać kilka projektów.
+
+1. Utwórz **Console App** dla języka C++ i otwórz wygenerowany plik `.cpp`.
+2. W tym pliku umieszczaj kod programu. Jeśli plik zawiera już `main`, zastąp przykład zamiast dopisywać drugą funkcję `main`.
+3. Zapisz zmiany: **Ctrl+S**.
+4. Zbuduj całe rozwiązanie: **Ctrl+Shift+B**. Odczytaj komunikaty w oknie **Output / Dane wyjściowe**.
+5. Uruchom: **Ctrl+F5**. Samo zbudowanie programu nie oznacza jego uruchomienia.
+
+Pełna instrukcja środowiska: [Visual Studio krok po kroku](../podstawy_programowania/visual-studio-community.qmd).
+
+### Od pliku źródłowego do programu
+
+Kod `.cpp` jest tekstem. Preprocesor przygotowuje go do kompilacji, m.in. obsługując `#include`. Kompilator sprawdza składnię i znaczenie instrukcji oraz przetwarza kod; etap asemblacji prowadzi do kodu maszynowego w pliku obiektowym. **Linker**, czyli konsolidator, łączy pliki obiektowe z potrzebnymi bibliotekami w program wykonywalny.
+
+```text
+main.cpp → przygotowanie i kompilacja → main.obj → konsolidacja → nazwa_projektu.exe
+```
+
+W Visual Studio plik wynikowy zwykle ma nazwę projektu, a nie pojedynczego pliku źródłowego. Błąd składni może zatrzymać budowanie. Błąd obliczeń może pozostać w programie, który buduje się bez błędów.
+
+### Struktura programu, nagłówki i main
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    std::cout << "Hello, world!\n";
+    return 0;
+}
+```
+
+| Element | Znaczenie |
+|---|---|
+| `#include <iostream>` | Udostępnia deklaracje potrzebne do standardowego wejścia i wyjścia |
+| `int main()` | Główna funkcja naszego programu konsolowego |
+| `{ ... }` | Blok instrukcji |
+| `std::cout << ...` | Wypisanie danych na standardowe wyjście |
+| `;` | Zakończenie instrukcji, np. przypisania lub wypisania |
+| `\n` | Znak nowej linii wewnątrz napisu |
+| `return 0;` | Zakończenie funkcji main z kodem powodzenia |
+
+**Przestrzeń nazw** (*namespace*) grupuje nazwy. Przedrostek `std::` wskazuje element biblioteki standardowej. Nagłówki standardowe, takie jak `<iostream>`, `<string>` i `<iomanip>`, zapisujemy w nawiasach ostrych; własne, np. `"calculations.hpp"`, zwykle w cudzysłowie.
+
+### Zmienne, stałe i typy danych
+
+Deklaracja wprowadza nazwę i typ zmiennej. Inicjalizacja nadaje jej wartość początkową. Zmienna `int count = 5;` przechowuje liczbę całkowitą, którą można zmieniać. Zapis `const int groupSize = 4;` opisuje stałą, której nie można później przypisać innej wartości.
+
+| Typ | Zastosowanie | Przykład |
+|---|---|---|
+| `int` | Liczba całkowita | `int count = 5;` |
+| `float` | Liczba zmiennoprzecinkowa | `float voltage = 3.3f;` |
+| `double` | Obliczenia z częścią ułamkową, zwykle dokładniejsze niż float | `double length = 2.5;` |
+| `char` | Jeden znak | `char group = 'A';` |
+| `bool` | Wartość logiczna | `bool active = true;` |
+| `std::string` | Napis, wymaga nagłówka string | `std::string name = "Sensor";` |
+
+Nazwy nie mogą zaczynać się od cyfry ani być słowami kluczowymi. Wielkość liter ma znaczenie: `count` i `Count` to różne nazwy. Pojedyncze apostrofy oznaczają znak, a cudzysłowy napis.
+
+Rozmiar typu można sprawdzić przez `sizeof`, np. `std::cout << sizeof(int);`. Nie należy zakładać identycznego rozmiaru wszystkich typów na każdej platformie. Dokładność liczb zmiennoprzecinkowych dotyczy **cyfr znaczących**, a nie stałej liczby miejsc po przecinku. Ustawienie formatu wyświetlania nie zwiększa dokładności przechowywanej liczby.
+
+### Operacje matematyczne i przypisanie
+
+| Operator | Znaczenie | Wynik dla int a = 10, b = 3 |
+|---|---|---|
+| `+`, `-`, `*` | Dodawanie, odejmowanie, mnożenie | 13, 7, 30 |
+| `/` | Dzielenie | 3 |
+| `%` | Reszta z dzielenia całkowitego | 1 |
+| `=` | Przypisanie wartości | `a = 5;` zmienia a na 5 |
+| `+=`, `-=` | Zmiana o podaną wartość | `a += 2;` odpowiada `a = a + 2;` |
+| `*=`, `/=`, `%=` | Działanie i zapis wyniku w tej samej zmiennej | `a *= 2;` odpowiada `a = a * 2;` |
+
+Dzielenie dwóch `int` daje wynik całkowity: `10 / 4` to `2`. Zapis `10.0 / 4` daje `2.5`. Przypisanie wyniku `10 / 4` do `double` nie odzyska odrzuconej części ułamkowej. Nawiasy pozwalają ustalić kolejność obliczeń, np. `2 * (length + width)`.
+
+### Wejście, wyjście i formatowanie
+
+**I/O** (*Input/Output*) oznacza wejście i wyjście. `std::cin >> value` wczytuje wartość do zmiennej; `std::cout << value` ją wyświetla. Odczyt z klawiatury kończymy klawiszem Enter. W tych ćwiczeniach stosujemy strumienie C++, bez równoległego wprowadzania `scanf` i `printf`.
+
+W poniższym pełnym programie `<iomanip>` udostępnia manipulatory formatu. Połączenie `std::fixed` i `std::setprecision(2)` ustawia dwa miejsca po przecinku. Dla wejścia `2.5` program wyświetla `Measurement: 2.75`.
+
+```cpp
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+int main()
+{
+    std::string label = "Measurement";
+    double value = 0.0;
+    const double correction = 0.25;
+    std::cout << "Enter a value: ";
+    std::cin >> value;
+    value += correction;
+    std::cout << label << ": " << std::fixed << std::setprecision(2)
+              << value << '\n';
+    return 0;
+}
+```
+
+### Śledzenie wykonania
+
+Punkt zatrzymania (*breakpoint*, **F9**) pozwala zatrzymać program przed wybraną instrukcją. **F5** uruchamia debugger, a **F10** wykonuje kolejny krok. W oknie **Locals / Zmienne lokalne** można porównać wartość przed przypisaniem i po nim. Żółta strzałka wskazuje instrukcję, która dopiero zostanie wykonana.
+
+[Pełny program pokazowy — pobierz plik .cpp](../assets/cpp/01_pokaz.cpp). Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.
+
+## Zadania do realizacji
+
+Przed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.
+
+::: {.lab-task}
+### Zadanie 1. Pierwszy projekt
+
+Utwórz projekt Console App. W pliku `main.cpp` wyświetl w osobnych liniach: „Wprowadzenie do programowania”, „Laboratorium 1”, „Algorytmy i programy w C++”. Zbuduj cały projekt i uruchom program. Zapisz nazwę powstałego pliku `.exe`.
+:::
+
+::: {.lab-task}
+### Zadanie 2. Deklaracje i wyświetlanie danych
+
+Zadeklaruj i zainicjalizuj: nazwę ćwiczenia jako `std::string`, liczbę pomiarów jako `int`, napięcie jako `float`, oznaczenie grupy jako `char` oraz informację o gotowości jako `bool`. Wypisz wartości wraz z opisami. Sprawdź, jak domyślnie wyświetlają się `true` i `false`. Użyj drugiej zmiennej `std::string` do nazwy urządzenia.
+:::
+
+::: {.lab-task}
+### Zadanie 3. Odczyt błędów kompilacji
+
+Poniższy program **celowo zawiera błędy**. Zbuduj go, przeczytaj pierwszy komunikat i popraw kod. Powtarzaj do uzyskania działającego programu. Zapisz, czego brakowało; nie usuwaj instrukcji wypisującej wynik.
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    int number = 10
+    cout << "Value: " << number << '\n';
+    return 0
+}
+```
+
+Wynik po poprawieniu: `Value: 10`.
+:::
+
+::: {.lab-task}
+### Zadanie 4. Działania na liczbach double
+
+Wczytaj dwie liczby typu `double`. Wyświetl sumę, różnicę, iloczyn i iloraz z opisami. **Załóż poprawne dane i drugi argument różny od zera**. Sprawdź pary `10, 4` i `2.5, 0.5`. Dla pierwszej pary iloraz wynosi `2.5`.
+:::
+
+::: {.lab-task}
+### Zadanie 5. Dzielenie całkowite i reszta
+
+Wczytaj dwie dodatnie liczby typu `int`. Wyświetl iloraz całkowity oraz resztę. Dla `23, 4` oczekiwane wartości to `5` i `3`; dla `24, 4` — `6` i `0`. Wyjaśnij, dlaczego ten program daje inny iloraz niż zadanie 4. Dzielnik musi być różny od zera.
+:::
+
+::: {.lab-task}
+### Zadanie 6. Pole i obwód prostokąta
+
+Wczytaj dodatnie długości boków w metrach jako `double`. Oblicz pole `length * width` oraz obwód `2 * (length + width)`. Wypisz wyniki z jednostkami `m2` i `m`. Dla boków `2.5` i `4` oczekiwane wyniki to `10 m2` i `13 m`.
+:::
+
+::: {.lab-task}
+### Zadanie 7. Przeliczanie temperatury
+
+Wczytaj temperaturę w stopniach Celsjusza. Oblicz Fahrenheita według `F = C * 9.0 / 5.0 + 32.0` oraz kelwiny według `K = C + 273.15`. Sprawdź `0` i `100`. Dla `0` wyniki to `32` i `273.15`. Wyjaśnij, dlaczego podano `9.0 / 5.0`, a nie `(9 / 5)`.
+:::
+
+::: {.lab-task}
+### Zadanie 8. Aktualizacja pomiaru
+
+Zacznij od `double value = 10.0;`. Kolejno dodaj `2.0` przez `+=`, odejmij `1.0` przez `-=`, pomnóż przez `3.0` i podziel przez `2.0`, używając `*=` i `/=`. Po każdej operacji wypisz wartość. Oczekiwany przebieg: `12`, `11`, `33`, `16.5`. Następnie wczytaj poprawki i współczynniki z klawiatury; współczynnik dzielenia ma być niezerowy.
+:::
+
+::: {.lab-task}
+### Zadanie 9. Formatowanie wyników
+
+Dla `double value = 3.14159265359;` wypisz wartość najpierw z domyślnymi ustawieniami, a następnie z `std::fixed` i precyzją `0`, `2` oraz `4`. Trzy ostatnie wyniki: `3`, `3.14`, `3.1416`. Sprawdź w debuggerze, czy samo formatowanie zmieniło zawartość zmiennej.
+:::
+
+## Dokumentacja i sprawdzenie pracy
+
+- Zachowaj źródła `.cpp` oznaczone numerem zadania.
+- Dla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.
+- Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.
+- Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.
+
+Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów `.vs` i `Debug` ani plików `.exe`.
+
+## Przygotowanie do następnej wejściówki
+
+### Powtórz materiał bieżącego laboratorium
+
+- Deklaracja i inicjalizacja; zastosowanie int, double, char, bool i string.
+- Wyniki `/` i `%` dla liczb całkowitych oraz dzielenie zmiennoprzecinkowe.
+- Wejście i wyjście, średnik, std::, fixed i setprecision.
+
+### Przeczytaj przed laboratorium 2
+
+W [instrukcji 2](02_warunki.qmd#wprowadzenie-teoretyczne) przeczytaj sekcje o warunku oraz if/else. Poznaj `==`, `!=`, `<`, `<=`, `>`, `>=`, `&&`, `||` i `!`. Zapoznaj się również z przeznaczeniem switch; jego samodzielne stosowanie będzie ćwiczone na zajęciach.
+
+**Minimalne przygotowanie do pytania wyprzedzającego:** umieć wskazać gałąź prostego if/else. Przeanalizuj fragment: `if (temperature > 25) ... else ...` dla temperatur 25 i 26. Dla 25 wykona się else, dla 26 pierwszy blok. Nie jest wymagane napisanie całego kalkulatora przed zajęciami.
+
+Następna wejściówka: **3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu**, po 1 punkcie.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Terminal dyżurnego i własna maszyna — zadania – Wprowadzenie do Programowania - Laboratorium</title>
+<title>Organizacja pracy laboratoryjnej – Wprowadzenie do programowania — C++</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -42,9 +42,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-94ae530b1fc9924793afbc3bb7de9d3b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ef504fb0e4a2795be7a3e78b702520b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -59,17 +60,17 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź",
+    "search-label": "Szukaj"
   }
 }</script>
 
@@ -83,15 +84,13 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Wprowadzenie do Programowania - Laboratorium
-      </li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./scenariusze.html">Organizacja pracy laboratoryjnej</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Szukaj" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -103,12 +102,12 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Wprowadzenie do Programowania - Laboratorium</a> 
+      <a href="./">Wprowadzenie do programowania — C++</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Szukaj"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
@@ -116,177 +115,70 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Informacje ogólne</span></a>
+ <span class="menu-text">Wprowadzenie do programowania</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./podstawy_programowania/visual-studio-community.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Start: Visual Studio Community i program konsolowy w C</span></a>
+ <span class="menu-text">Visual Studio — projekt konsolowy C++</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scenariusze.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Organizacja pracy laboratoryjnej</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Fundamenty C (sesje 1-18)</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+ <span class="menu-text">Instrukcje laboratoryjne</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/01_pierwszy_program.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 1 — Pierwszy program</span></a>
+  <a href="./laboratoria/01_projekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/02_zmienne_kalkulator.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 2 — Zmienne i pierwszy kalkulator</span></a>
+  <a href="./laboratoria/02_warunki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/03_warunki_dispatcher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 3 — Warunki: kalkulator wybiera działanie</span></a>
+  <a href="./laboratoria/03_petle_tablice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/04_petle_repl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu</span></a>
+  <a href="./laboratoria/04_funkcje.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 5 — Tablice: Twoja pierwsza maszyna wirtualna</span></a>
+  <a href="./laboratoria/05_wektor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/06_funkcje.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 6 — Funkcje: porządkowanie maszyny wirtualnej</span></a>
+  <a href="./laboratoria/06_klasa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/07_struktury.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 7 — Struktury: instrukcja jako jedna rzecz</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/08_enumy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 8 — Enumy: nazwane liczby zamiast magicznych stałych</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/09_rejestry.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 9 — Rejestry: więcej niż jeden akumulator</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/10_wskazniki_podstawy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/11_wskazniki_do_struktur.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 11 — Wskaźniki do struktur: operator -&gt;</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/12_pamiec_dynamiczna.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/13_licznik_instrukcji.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 14 — Flagi i skoki warunkowe</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/15_stos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 15 — Stos: LIFO w tablicy</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/16_call_ret.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/17_pliki.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/sesje/18_stringi_parser.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Projekt końcowy: CHIP-8</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CHIP-8: zbuduj własny emulator</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/01_szkielet_vm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 1 — Szkielet maszyny wirtualnej</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 3 — Wyświetlacz i sprite’y</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 4 — Timery i klawiatura</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 5 — Uruchomienie prawdziwej gry</span></a>
+  <a href="./laboratoria/07_rejestr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 7</span></a>
   </div>
 </li>
       </ul>
@@ -298,35 +190,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title"><strong>Sections</strong></h2>
+    <h2 id="toc-title">Na tej stronie</h2>
    
   <ul class="collapse">
-  <li><a href="#wasze-zadanie" id="toc-wasze-zadanie" class="nav-link active" data-scroll-target="#wasze-zadanie">Wasze zadanie</a></li>
-  <li><a href="#jak-pracujemy" id="toc-jak-pracujemy" class="nav-link" data-scroll-target="#jak-pracujemy">Jak pracujemy</a></li>
-  <li><a href="#przed-sesją-1-środowisko-visual-studio" id="toc-przed-sesją-1-środowisko-visual-studio" class="nav-link" data-scroll-target="#przed-sesją-1-środowisko-visual-studio">Przed sesją 1 — środowisko Visual Studio</a></li>
-  <li><a href="#sesja-1-terminal-po-raz-pierwszy-odpowiada" id="toc-sesja-1-terminal-po-raz-pierwszy-odpowiada" class="nav-link" data-scroll-target="#sesja-1-terminal-po-raz-pierwszy-odpowiada">Sesja 1 — Terminal po raz pierwszy odpowiada</a></li>
-  <li><a href="#sesja-2-ile-kompletów-można-przygotować" id="toc-sesja-2-ile-kompletów-można-przygotować" class="nav-link" data-scroll-target="#sesja-2-ile-kompletów-można-przygotować">Sesja 2 — Ile kompletów można przygotować?</a></li>
-  <li><a href="#sesja-3-nierozpoznane-polecenie" id="toc-sesja-3-nierozpoznane-polecenie" class="nav-link" data-scroll-target="#sesja-3-nierozpoznane-polecenie">Sesja 3 — Nierozpoznane polecenie</a></li>
-  <li><a href="#sesja-4-cała-zmiana-dyżurna" id="toc-sesja-4-cała-zmiana-dyżurna" class="nav-link" data-scroll-target="#sesja-4-cała-zmiana-dyżurna">Sesja 4 — Cała zmiana dyżurna</a></li>
-  <li><a href="#sesja-5-lista-poleceń-zamiast-ręcznego-klikania" id="toc-sesja-5-lista-poleceń-zamiast-ręcznego-klikania" class="nav-link" data-scroll-target="#sesja-5-lista-poleceń-zamiast-ręcznego-klikania">Sesja 5 — Lista poleceń zamiast ręcznego klikania</a></li>
-  <li><a href="#sesja-6-jedno-miejsce-wykonywania-instrukcji" id="toc-sesja-6-jedno-miejsce-wykonywania-instrukcji" class="nav-link" data-scroll-target="#sesja-6-jedno-miejsce-wykonywania-instrukcji">Sesja 6 — Jedno miejsce wykonywania instrukcji</a></li>
-  <li><a href="#sesja-7-polecenie-ma-własną-strukturę" id="toc-sesja-7-polecenie-ma-własną-strukturę" class="nav-link" data-scroll-target="#sesja-7-polecenie-ma-własną-strukturę">Sesja 7 — Polecenie ma własną strukturę</a></li>
-  <li><a href="#sesja-8-co-oznacza-liczba-4" id="toc-sesja-8-co-oznacza-liczba-4" class="nav-link" data-scroll-target="#sesja-8-co-oznacza-liczba-4">Sesja 8 — Co oznacza liczba 4?</a></li>
-  <li><a href="#sesja-9-dwie-wartości-trzeba-zachować" id="toc-sesja-9-dwie-wartości-trzeba-zachować" class="nav-link" data-scroll-target="#sesja-9-dwie-wartości-trzeba-zachować">Sesja 9 — Dwie wartości trzeba zachować</a></li>
-  <li><a href="#sesja-10-funkcja-naprawdę-zmienia-stan" id="toc-sesja-10-funkcja-naprawdę-zmienia-stan" class="nav-link" data-scroll-target="#sesja-10-funkcja-naprawdę-zmienia-stan">Sesja 10 — Funkcja naprawdę zmienia stan</a></li>
-  <li><a href="#sesja-11-dwie-niezależne-maszyny" id="toc-sesja-11-dwie-niezależne-maszyny" class="nav-link" data-scroll-target="#sesja-11-dwie-niezależne-maszyny">Sesja 11 — Dwie niezależne maszyny</a></li>
-  <li><a href="#sesja-12-program-większy-niż-przygotowana-tablica" id="toc-sesja-12-program-większy-niż-przygotowana-tablica" class="nav-link" data-scroll-target="#sesja-12-program-większy-niż-przygotowana-tablica">Sesja 12 — Program większy niż przygotowana tablica</a></li>
-  <li><a href="#sesja-13-nie-zawsze-następna-instrukcja" id="toc-sesja-13-nie-zawsze-następna-instrukcja" class="nav-link" data-scroll-target="#sesja-13-nie-zawsze-następna-instrukcja">Sesja 13 — Nie zawsze następna instrukcja</a></li>
-  <li><a href="#sesja-14-reakcja-na-wynik-porównania" id="toc-sesja-14-reakcja-na-wynik-porównania" class="nav-link" data-scroll-target="#sesja-14-reakcja-na-wynik-porównania">Sesja 14 — Reakcja na wynik porównania</a></li>
-  <li><a href="#sesja-15-ostatnio-odłożone-najpierw-odzyskane" id="toc-sesja-15-ostatnio-odłożone-najpierw-odzyskane" class="nav-link" data-scroll-target="#sesja-15-ostatnio-odłożone-najpierw-odzyskane">Sesja 15 — Ostatnio odłożone, najpierw odzyskane</a></li>
-  <li><a href="#sesja-16-wspólny-fragment-programu" id="toc-sesja-16-wspólny-fragment-programu" class="nav-link" data-scroll-target="#sesja-16-wspólny-fragment-programu">Sesja 16 — Wspólny fragment programu</a></li>
-  <li><a href="#sesja-17-ta-sama-maszyna-inny-plik" id="toc-sesja-17-ta-sama-maszyna-inny-plik" class="nav-link" data-scroll-target="#sesja-17-ta-sama-maszyna-inny-plik">Sesja 17 — Ta sama maszyna, inny plik</a></li>
-  <li><a href="#sesja-18-czytelne-polecenia" id="toc-sesja-18-czytelne-polecenia" class="nav-link" data-scroll-target="#sesja-18-czytelne-polecenia">Sesja 18 — Czytelne polecenia</a></li>
-  <li><a href="#ćwiczenie-1-odczytaj-dwubajtową-instrukcję" id="toc-ćwiczenie-1-odczytaj-dwubajtową-instrukcję" class="nav-link" data-scroll-target="#ćwiczenie-1-odczytaj-dwubajtową-instrukcję">Ćwiczenie 1 — Odczytaj dwubajtową instrukcję</a></li>
-  <li><a href="#ćwiczenie-2-arytmetyka-ma-granice" id="toc-ćwiczenie-2-arytmetyka-ma-granice" class="nav-link" data-scroll-target="#ćwiczenie-2-arytmetyka-ma-granice">Ćwiczenie 2 — Arytmetyka ma granice</a></li>
-  <li><a href="#ćwiczenie-3-pierwszy-własny-obraz" id="toc-ćwiczenie-3-pierwszy-własny-obraz" class="nav-link" data-scroll-target="#ćwiczenie-3-pierwszy-własny-obraz">Ćwiczenie 3 — Pierwszy własny obraz</a></li>
-  <li><a href="#ćwiczenie-4-program-czeka-czas-nadal-płynie" id="toc-ćwiczenie-4-program-czeka-czas-nadal-płynie" class="nav-link" data-scroll-target="#ćwiczenie-4-program-czeka-czas-nadal-płynie">Ćwiczenie 4 — Program czeka, czas nadal płynie</a></li>
-  <li><a href="#ćwiczenie-5-odbiór-emulatora" id="toc-ćwiczenie-5-odbiór-emulatora" class="nav-link" data-scroll-target="#ćwiczenie-5-odbiór-emulatora">Ćwiczenie 5 — Odbiór emulatora</a></li>
+  <li><a href="#jak-korzystać-z-instrukcji" id="toc-jak-korzystać-z-instrukcji" class="nav-link active" data-scroll-target="#jak-korzystać-z-instrukcji">Jak korzystać z instrukcji</a></li>
+  <li><a href="#praca-nad-zadaniami" id="toc-praca-nad-zadaniami" class="nav-link" data-scroll-target="#praca-nad-zadaniami">Praca nad zadaniami</a></li>
+  <li><a href="#co-zachować-do-rozliczenia" id="toc-co-zachować-do-rozliczenia" class="nav-link" data-scroll-target="#co-zachować-do-rozliczenia">Co zachować do rozliczenia</a></li>
   </ul>
 </nav>
     </div>
@@ -335,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Terminal dyżurnego i własna maszyna — zadania</h1>
+<h1 class="title">Organizacja pracy laboratoryjnej</h1>
 </div>
 
 
@@ -352,203 +221,30 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="wasze-zadanie" class="level2">
-<h2 class="anchored" data-anchor-id="wasze-zadanie">Wasze zadanie</h2>
-<p>Tworzycie program pomocniczy dla dyżurnego fikcyjnej bazy szkoleniowej. Zacznie się od prostych obliczeń, a zakończy wykonywaniem programu z pliku. Następnie wykorzystacie poznane mechanizmy C do osobnego projektu CHIP-8.</p>
-<p>Nie potrzebujecie innych kursów, bazy danych ani elektroniki. Prowadzący udostępnia środowisko i kod startowy danego etapu. Pracujcie w parach, zamieniając role przy drugim zadaniu. Przed uruchomieniem zapiszcie przewidywany wynik, a następnie porównajcie go z wynikiem programu.</p>
-<p>Ćwiczenia dotyczą symulacji i syntetycznych danych. Nie sterujemy prawdziwym sprzętem. Zakres finału CHIP-8 i obsługiwany wariant ustala prowadzący.</p>
-</section>
-<section id="jak-pracujemy" class="level2">
-<h2 class="anchored" data-anchor-id="jak-pracujemy">Jak pracujemy</h2>
-<p>Każda para oddaje rozwiązanie, opis próby i krótkie uzasadnienie. Każda osoba powinna umieć wyjaśnić wynik. Dane i zadania są niezależne od pozostałych przedmiotów.</p>
-</section>
-<section id="przed-sesją-1-środowisko-visual-studio" class="level2">
-<h2 class="anchored" data-anchor-id="przed-sesją-1-środowisko-visual-studio">Przed sesją 1 — środowisko Visual Studio</h2>
-<p><a href="./podstawy_programowania/visual-studio-community.html">Instrukcja środowiska</a>. Każda osoba przygotowuje projekt konsolowy w C. W parze najpierw jedna osoba uruchamia program i odnajduje błąd średnika, a druga wyjaśnia różnicę między zapisaniem pliku a budowaniem. Następnie zamieniacie role przy pokazie debuggera.</p>
-</section>
-<section id="sesja-1-terminal-po-raz-pierwszy-odpowiada" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-1-terminal-po-raz-pierwszy-odpowiada">Sesja 1 — Terminal po raz pierwszy odpowiada</h2>
-<p><a href="./podstawy_programowania/sesje/01_pierwszy_program.html">Materiał do zajęć</a></p>
+<section id="jak-korzystać-z-instrukcji" class="level2">
+<h2 class="anchored" data-anchor-id="jak-korzystać-z-instrukcji">Jak korzystać z instrukcji</h2>
 <ol type="1">
-<li>Skompiluj program wypisujący nazwę stanowiska i komunikat gotowości.</li>
-<li>Zmień tekst, porównaj uruchomienie starego programu z ponowną kompilacją. Następnie sprawdź komunikat przy brakującym średniku.</li>
+<li>Przed zajęciami przeczytaj wskazany zakres przygotowania na końcu poprzedniej instrukcji.</li>
+<li>Od laboratorium 2 rozwiąż wejściówkę samodzielnie: trzy pytania powtórkowe i jedno z nowego materiału, po jednym punkcie.</li>
+<li>Przeczytaj objaśnienia i uruchom pełny program pokazowy w osobnym projekcie.</li>
+<li>Wykonuj numerowane zadania, zapisując źródła oraz próby.</li>
+<li>Na końcu sprawdź przygotowanie wymagane do kolejnego laboratorium.</li>
 </ol>
 </section>
-<section id="sesja-2-ile-kompletów-można-przygotować" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-2-ile-kompletów-można-przygotować">Sesja 2 — Ile kompletów można przygotować?</h2>
-<p><a href="./podstawy_programowania/sesje/02_zmienne_kalkulator.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Oblicz liczbę pełnych kompletów i resztę dla 23 baterii oraz 4 baterii na komplet.</li>
-<li>Porównaj dzielenie całkowite i rzeczywiste. Powtórz obliczenia dla 24 baterii.</li>
-</ol>
+<section id="praca-nad-zadaniami" class="level2">
+<h2 class="anchored" data-anchor-id="praca-nad-zadaniami">Praca nad zadaniami</h2>
+<p>Zadania można wykonywać w parach ze zmianą osoby przy klawiaturze. Każda osoba powinna umieć samodzielnie wyjaśnić kod i przewidzieć jego wynik. Wejściówka jest indywidualna.</p>
+<p>Pierwsza instrukcja obejmuje dziewięć ćwiczeń: środowisko, zmienne, naprawę błędów, obliczenia i formatowanie. Kolejne instrukcje rozwijają warunki, pętle, funkcje, wektor oraz własne klasy. Przykłady pomiarów i urządzeń korzystają z danych ćwiczeniowych.</p>
+<p>Każdy niezależny program zawierający main wymaga osobnego projektu. Nie należy dodawać wszystkich plików pokazowych do jednej aplikacji. Rozwinięcia tego samego programu można zapisywać jako kolejne wersje.</p>
 </section>
-<section id="sesja-3-nierozpoznane-polecenie" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-3-nierozpoznane-polecenie">Sesja 3 — Nierozpoznane polecenie</h2>
-<p><a href="./podstawy_programowania/sesje/03_warunki_dispatcher.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Rozpoznaj dodawanie i odejmowanie za pomocą switch.</li>
-<li>Dodaj dzielenie, obsługę zerowego dzielnika i nierozpoznanego polecenia.</li>
-</ol>
-</section>
-<section id="sesja-4-cała-zmiana-dyżurna" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-4-cała-zmiana-dyżurna">Sesja 4 — Cała zmiana dyżurna</h2>
-<p><a href="./podstawy_programowania/sesje/04_petle_repl.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Wykonuj kolejne polecenia do wpisania q.</li>
-<li>Policz poprawne działania dla sekwencji: dodawanie, ?, odejmowanie, q. Wyjaśnij, co powinno zwiększać licznik.</li>
-</ol>
-</section>
-<section id="sesja-5-lista-poleceń-zamiast-ręcznego-klikania" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-5-lista-poleceń-zamiast-ręcznego-klikania">Sesja 5 — Lista poleceń zamiast ręcznego klikania</h2>
-<p><a href="./podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Zapisz w tablicy program odpowiadający LOAD 12, SUB 3, PRINT.</li>
-<li>Zmień dane, aby obliczyć 20−6. Jak wykryć brak argumentu ostatniej instrukcji?</li>
-</ol>
-</section>
-<section id="sesja-6-jedno-miejsce-wykonywania-instrukcji" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-6-jedno-miejsce-wykonywania-instrukcji">Sesja 6 — Jedno miejsce wykonywania instrukcji</h2>
-<p><a href="./podstawy_programowania/sesje/06_funkcje.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Wydziel wykonanie instrukcji do funkcji zwracającej nowy stan akumulatora.</li>
-<li>Porównaj wyniki przed i po zmianie. Przewidź zachowanie po pominięciu przypisania wyniku funkcji.</li>
-</ol>
-</section>
-<section id="sesja-7-polecenie-ma-własną-strukturę" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-7-polecenie-ma-własną-strukturę">Sesja 7 — Polecenie ma własną strukturę</h2>
-<p><a href="./podstawy_programowania/sesje/07_struktury.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Zastąp pary liczb strukturami instrukcji.</li>
-<li>Wypisz instrukcje przed wykonaniem i oblicz długość tablicy struktur. Sprawdź zachowanie dotychczasowego programu.</li>
-</ol>
-</section>
-<section id="sesja-8-co-oznacza-liczba-4" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-8-co-oznacza-liczba-4">Sesja 8 — Co oznacza liczba 4?</h2>
-<p><a href="./podstawy_programowania/sesje/08_enumy.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Nadaj kodom operacji nazwy przez enum.</li>
-<li>Dodaj jedną operację i sprawdź reakcję na kod, którego interpreter nie obsługuje.</li>
-</ol>
-</section>
-<section id="sesja-9-dwie-wartości-trzeba-zachować" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-9-dwie-wartości-trzeba-zachować">Sesja 9 — Dwie wartości trzeba zachować</h2>
-<p><a href="./podstawy_programowania/sesje/09_rejestry.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>W dwóch rejestrach oblicz osobno 12−3 i 20−6.</li>
-<li>Dodaj drugi rejestr do pierwszego, zachowując drugi. Sprawdź odrzucanie indeksów spoza zakresu.</li>
-</ol>
-</section>
-<section id="sesja-10-funkcja-naprawdę-zmienia-stan" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-10-funkcja-naprawdę-zmienia-stan">Sesja 10 — Funkcja naprawdę zmienia stan</h2>
-<p><a href="./podstawy_programowania/sesje/10_wskazniki_podstawy.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Porównaj modyfikowanie argumentu przekazanego przez wartość i przez wskaźnik.</li>
-<li>Zamień dwie wartości przez wskaźniki. Sprawdź przypadek, gdy oba argumenty wskazują tę samą zmienną.</li>
-</ol>
-</section>
-<section id="sesja-11-dwie-niezależne-maszyny" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-11-dwie-niezależne-maszyny">Sesja 11 — Dwie niezależne maszyny</h2>
-<p><a href="./podstawy_programowania/sesje/11_wskazniki_do_struktur.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Umieść rejestry w strukturze stanu i zmieniaj ją przez wskaźnik.</li>
-<li>Utwórz dwa niezależne stany. Wykonaj polecenie na jednym, a drugi wyzeruj. Porównaj wyniki.</li>
-</ol>
-</section>
-<section id="sesja-12-program-większy-niż-przygotowana-tablica" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-12-program-większy-niż-przygotowana-tablica">Sesja 12 — Program większy niż przygotowana tablica</h2>
-<p><a href="./podstawy_programowania/sesje/12_pamiec_dynamiczna.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Przydziel pamięć na dodatnią liczbę instrukcji, sprawdź wynik i zwolnij pamięć po pracy.</li>
-<li>Powiększ bufor przez realloc. Wyjaśnij, co pozostaje dostępne, jeśli powiększenie się nie powiedzie.</li>
-</ol>
-</section>
-<section id="sesja-13-nie-zawsze-następna-instrukcja" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-13-nie-zawsze-następna-instrukcja">Sesja 13 — Nie zawsze następna instrukcja</h2>
-<p><a href="./podstawy_programowania/sesje/13_licznik_instrukcji.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Dodaj licznik instrukcji oraz skok do istniejącego indeksu.</li>
-<li>Zapisz ślad wykonania pięciu instrukcji ze skokiem. Sprawdź limit kroków i niedozwolony adres skoku.</li>
-</ol>
-</section>
-<section id="sesja-14-reakcja-na-wynik-porównania" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-14-reakcja-na-wynik-porównania">Sesja 14 — Reakcja na wynik porównania</h2>
-<p><a href="./podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Dodaj porównanie rejestru z zerem i skok zależny od wyniku.</li>
-<li>Zbuduj odliczanie od 3, a następnie sprawdź start od 0. Wyjaśnij kolejność sprawdzenia i odejmowania.</li>
-</ol>
-</section>
-<section id="sesja-15-ostatnio-odłożone-najpierw-odzyskane" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-15-ostatnio-odłożone-najpierw-odzyskane">Sesja 15 — Ostatnio odłożone, najpierw odzyskane</h2>
-<p><a href="./podstawy_programowania/sesje/15_stos.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Odłóż na stos 9 i 14, a następnie pobierz dwie wartości. Najpierw przewidź ich kolejność.</li>
-<li>Obsłuż próby dodania na pełny stos i pobrania z pustego stosu.</li>
-</ol>
-</section>
-<section id="sesja-16-wspólny-fragment-programu" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-16-wspólny-fragment-programu">Sesja 16 — Wspólny fragment programu</h2>
-<p><a href="./podstawy_programowania/sesje/16_call_ret.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Dodaj CALL i RET z zapamiętaniem adresu powrotu.</li>
-<li>Prześledź wywołanie A, z niego B i oba powroty. Sprawdź RET bez wcześniejszego CALL.</li>
-</ol>
-</section>
-<section id="sesja-17-ta-sama-maszyna-inny-plik" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-17-ta-sama-maszyna-inny-plik">Sesja 17 — Ta sama maszyna, inny plik</h2>
-<p><a href="./podstawy_programowania/sesje/17_pliki.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Wczytaj program w formacie trzech liczb opisanym w materiale sesji.</li>
-<li>Uruchom dwa różne pliki tym samym interpreterem. Sprawdź brak pliku, błędny format i niepełną instrukcję.</li>
-</ol>
-</section>
-<section id="sesja-18-czytelne-polecenia" class="level2">
-<h2 class="anchored" data-anchor-id="sesja-18-czytelne-polecenia">Sesja 18 — Czytelne polecenia</h2>
-<p><a href="./podstawy_programowania/sesje/18_stringi_parser.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Zamień tekstowe polecenia na instrukcje zgodne z modelem z sesji 17.</li>
-<li>Obsłuż brak argumentu, nieznaną operację i błędny rejestr. Porównaj wykonanie programu tekstowego z liczbowym.</li>
-</ol>
-</section>
-<section id="ćwiczenie-1-odczytaj-dwubajtową-instrukcję" class="level2">
-<h2 class="anchored" data-anchor-id="ćwiczenie-1-odczytaj-dwubajtową-instrukcję">Ćwiczenie 1 — Odczytaj dwubajtową instrukcję</h2>
-<p><a href="./podstawy_programowania/cwiczenia_chip8/01_szkielet_vm.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Odtwórz instrukcję z bajtów 0x60 i 0x0A i sprawdź jej wykonanie.</li>
-<li>Wypisz ślad pc oraz sprawdź ochronę przed zbyt dużym ROM-em i odczytem poza pamięcią.</li>
-</ol>
-</section>
-<section id="ćwiczenie-2-arytmetyka-ma-granice" class="level2">
-<h2 class="anchored" data-anchor-id="ćwiczenie-2-arytmetyka-ma-granice">Ćwiczenie 2 — Arytmetyka ma granice</h2>
-<p><a href="./podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Sprawdź wynik i flagę dodawania 250+10 instrukcją ustawiającą przeniesienie.</li>
-<li>Prześledź CALL/RET i warunkowe pominięcie. Sprawdź flagę przy odejmowaniu równych liczb.</li>
-</ol>
-</section>
-<section id="ćwiczenie-3-pierwszy-własny-obraz" class="level2">
-<h2 class="anchored" data-anchor-id="ćwiczenie-3-pierwszy-własny-obraz">Ćwiczenie 3 — Pierwszy własny obraz</h2>
-<p><a href="./podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Narysuj dostarczony sprite na pustym tle.</li>
-<li>Narysuj go drugi raz i sprawdź ekran oraz flagę kolizji. Powtórz próbę z częściowym przecięciem obrazów.</li>
-</ol>
-</section>
-<section id="ćwiczenie-4-program-czeka-czas-nadal-płynie" class="level2">
-<h2 class="anchored" data-anchor-id="ćwiczenie-4-program-czeka-czas-nadal-płynie">Ćwiczenie 4 — Program czeka, czas nadal płynie</h2>
-<p><a href="./podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Sprawdź timer przy różnych prędkościach wykonywania instrukcji.</li>
-<li>Dodaj wejście klawiatury na przygotowanym szkielecie. Opisz ograniczenia użytego modelu wejścia.</li>
-</ol>
-</section>
-<section id="ćwiczenie-5-odbiór-emulatora" class="level2">
-<h2 class="anchored" data-anchor-id="ćwiczenie-5-odbiór-emulatora">Ćwiczenie 5 — Odbiór emulatora</h2>
-<p><a href="./podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html">Materiał do zajęć</a></p>
-<ol type="1">
-<li>Uruchom ROM testowy wybrany przez prowadzącego dla obsługiwanego zestawu instrukcji.</li>
-<li>Sprawdź demonstrację lub grę oraz komunikat dla nieobsługiwanej instrukcji. Zapisz ograniczenia swojego emulatora.</li>
-</ol>
+<section id="co-zachować-do-rozliczenia" class="level2">
+<h2 class="anchored" data-anchor-id="co-zachować-do-rozliczenia">Co zachować do rozliczenia</h2>
+<ul>
+<li>Pliki źródłowe <code>.cpp</code> z numerem zadania.</li>
+<li>Dane wejściowe i wyniki przynajmniej wymaganych prób.</li>
+<li>Krótkie wyjaśnienie wykrytego błędu lub sprawdzonego przypadku granicznego.</li>
+</ul>
+<p>Formę przekazania pracy i zasady zaliczenia podaje prowadzący. Formularz wejściówki zapisuje wynik odpowiedzi, a nie pliki z rozwiązaniami.</p>
 
 
 </section>
@@ -579,12 +275,12 @@ ul.task-list li input[type="checkbox"] {
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Skopiowano!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Skopiowano!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",

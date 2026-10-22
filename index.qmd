@@ -1,28 +1,38 @@
 ---
-title: "Informacje ogólne"
+title: "Wprowadzenie do programowania"
+subtitle: "Instrukcje laboratoryjne · C++ · 2026/2027"
 ---
 
-## Wprowadzenie do Programowania - Laboratorium
+Każda instrukcja zawiera cel ćwiczenia, wprowadzenie teoretyczne z przykładami, zadania do realizacji oraz przygotowanie do kolejnej wejściówki. Pracujemy w **Visual Studio Community**, w projektach **Console App** i plikach `.cpp`.
 
-Kod:
+## Program laboratoriów
 
-Semestr: zimowy
+Pierwsze pięć tematów odpowiada zakresowi karty **Wprowadzenie do programowania (WELTXWSJ-WDP)**. Dwa kolejne rozwijają tworzenie i używanie prostych klas.
 
-## Przygotowanie do pierwszych zajęć
+| Instrukcja | Główne zagadnienia |
+|---|---|
+| [1. Algorytmy i programy w C++](laboratoria/01_projekt.qmd) | Utworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń. |
+| [2. Operacje warunkowe](laboratoria/02_warunki.qmd) | Zapisanie reguł wyboru oraz sprawdzenie danych przed wykonaniem działania. |
+| [3. Instrukcje cykliczne i tablice](laboratoria/03_petle_tablice.qmd) | Przetwarzanie serii danych z wykorzystaniem pętli i tablic. |
+| [4. Funkcje w języku C++](laboratoria/04_funkcje.qmd) | Podział obliczeń na funkcje i świadomy wybór sposobu przekazywania argumentów. |
+| [5. Klasy biblioteczne i kontener vector](laboratoria/05_wektor.qmd) | Używanie metod bibliotecznych oraz przechowywanie zmiennej liczby pomiarów. |
+| [6. Własna klasa i jej obiekty](laboratoria/06_klasa.qmd) | Zdefiniowanie własnego typu, stanu obiektu i dozwolonych operacji. |
+| [7. Program wykorzystujący kolekcję obiektów](laboratoria/07_rejestr.qmd) | Połączenie klas, funkcji, wektora i menu w działający rejestr urządzeń. |
 
-[Visual Studio Community na Windows — instalacja, projekt C i debugger](podstawy_programowania/visual-studio-community.qmd).
+## Przed pierwszym laboratorium
 
-Instalację wykonaj przed zajęciami. Programy pozostają konsolowe; kod piszemy
-w języku C, w plikach `.c`.
+1. [Przygotuj Visual Studio i uruchom projekt konsolowy](podstawy_programowania/visual-studio-community.qmd).
+2. Otwórz [instrukcję laboratorium 1](laboratoria/01_projekt.qmd).
+3. Utwórz katalog na źródła i wyniki prób z kolejnych ćwiczeń.
 
-## Kalendarz
+[Programy pokazowe C++ — pobierz ZIP](assets/cpp/pokazy-cpp.zip).
 
-<!-- TODO: uzupełnić na podstawie https://wel.wat.edu.pl/planyzajec/zima/dr__Zajac_Sebastian.htm -->
+## Wejściówki i przygotowanie
 
-### Laboratorium dla grup:
+Od laboratorium 2 na początku instrukcji znajduje się test: **3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego nowego materiału**. Każde pytanie jest warte 1 punkt. Pytanie wyprzedzające sprawdza podstawowe przygotowanie, a nie wykonanie nowych zadań przed zajęciami.
 
-1. TODO: dzień tygodnia, godzina, sala
+Na końcu każdej instrukcji wskazano, co powtórzyć i co przeczytać przed następną wejściówką. Wynik testu pojawia się po potwierdzeniu zapisu przez serwer. Zadania programistyczne są rozliczane osobno.
 
-## Scenariusze zajęć
+[Organizacja pracy i dokumentowanie wyników](scenariusze.qmd).
 
-[Otwórz zadania i opis projektu](scenariusze.qmd).
+Terminy, wymiar poszczególnych spotkań oraz formę i termin zaliczenia podaje prowadzący dla danej grupy.

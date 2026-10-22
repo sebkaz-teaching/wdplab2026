@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Start: Visual Studio Community i program konsolowy w C – Wprowadzenie do Programowania - Laboratorium</title>
+<title>Visual Studio — projekt konsolowy C++ – Wprowadzenie do programowania — C++</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -77,9 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-94ae530b1fc9924793afbc3bb7de9d3b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ef504fb0e4a2795be7a3e78b702520b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -94,17 +95,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź",
+    "search-label": "Szukaj"
   }
 }</script>
 
@@ -118,13 +119,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../podstawy_programowania/visual-studio-community.html">Start: Visual Studio Community i program konsolowy w C</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../podstawy_programowania/visual-studio-community.html">Visual Studio — projekt konsolowy C++</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Szukaj" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -136,12 +137,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Wprowadzenie do Programowania - Laboratorium</a> 
+      <a href="../">Wprowadzenie do programowania — C++</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Szukaj"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
@@ -149,177 +150,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Informacje ogólne</span></a>
+ <span class="menu-text">Wprowadzenie do programowania</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../podstawy_programowania/visual-studio-community.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Start: Visual Studio Community i program konsolowy w C</span></a>
+ <span class="menu-text">Visual Studio — projekt konsolowy C++</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../scenariusze.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Organizacja pracy laboratoryjnej</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Fundamenty C (sesje 1-18)</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+ <span class="menu-text">Instrukcje laboratoryjne</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/01_pierwszy_program.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 1 — Pierwszy program</span></a>
+  <a href="../laboratoria/01_projekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/02_zmienne_kalkulator.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 2 — Zmienne i pierwszy kalkulator</span></a>
+  <a href="../laboratoria/02_warunki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/03_warunki_dispatcher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 3 — Warunki: kalkulator wybiera działanie</span></a>
+  <a href="../laboratoria/03_petle_tablice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/04_petle_repl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 4 — Pętle: kalkulator, który nie kończy się po jednym działaniu</span></a>
+  <a href="../laboratoria/04_funkcje.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/05_tablice_pierwsza_maszyna.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 5 — Tablice: Twoja pierwsza maszyna wirtualna</span></a>
+  <a href="../laboratoria/05_wektor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/06_funkcje.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 6 — Funkcje: porządkowanie maszyny wirtualnej</span></a>
+  <a href="../laboratoria/06_klasa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/07_struktury.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 7 — Struktury: instrukcja jako jedna rzecz</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/08_enumy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 8 — Enumy: nazwane liczby zamiast magicznych stałych</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/09_rejestry.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 9 — Rejestry: więcej niż jeden akumulator</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/10_wskazniki_podstawy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 10 — Wskaźniki: dlaczego tablice ‘po prostu działały’</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/11_wskazniki_do_struktur.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 11 — Wskaźniki do struktur: operator -&gt;</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/12_pamiec_dynamiczna.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 12 — malloc/free: gdy nie znasz rozmiaru z góry</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/13_licznik_instrukcji.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 13 — Licznik instrukcji: skoki zamiast tylko ‘do przodu’</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/14_flagi_skoki_warunkowe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 14 — Flagi i skoki warunkowe</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/15_stos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 15 — Stos: LIFO w tablicy</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/16_call_ret.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 16 — CALL/RET: jak naprawdę działa wywołanie funkcji</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/17_pliki.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 17 — Pliki: program przestaje żyć tylko w kodzie źródłowym</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/sesje/18_stringi_parser.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sesja 18 — Stringi: czytelny asembler zamiast gołych liczb</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Projekt końcowy: CHIP-8</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/cwiczenia_chip8/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CHIP-8: zbuduj własny emulator</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/cwiczenia_chip8/01_szkielet_vm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 1 — Szkielet maszyny wirtualnej</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/cwiczenia_chip8/02_arytmetyka_skoki.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 2 — Arytmetyka, skoki, stos wywołań</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/cwiczenia_chip8/03_wyswietlacz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 3 — Wyświetlacz i sprite’y</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/cwiczenia_chip8/04_timery_klawiatura.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 4 — Timery i klawiatura</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../podstawy_programowania/cwiczenia_chip8/05_uruchomienie_gry.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ćwiczenie 5 — Uruchomienie prawdziwej gry</span></a>
+  <a href="../laboratoria/07_rejestr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 7</span></a>
   </div>
 </li>
       </ul>
@@ -331,20 +225,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title"><strong>Sections</strong></h2>
+    <h2 id="toc-title">Na tej stronie</h2>
    
   <ul class="collapse">
-  <li><a href="#co-przygotowujemy" id="toc-co-przygotowujemy" class="nav-link active" data-scroll-target="#co-przygotowujemy">Co przygotowujemy?</a></li>
-  <li><a href="#instalacja-na-windows" id="toc-instalacja-na-windows" class="nav-link" data-scroll-target="#instalacja-na-windows">1. Instalacja na Windows</a></li>
-  <li><a href="#rozwiązanie-projekt-i-plik-trzy-różne-rzeczy" id="toc-rozwiązanie-projekt-i-plik-trzy-różne-rzeczy" class="nav-link" data-scroll-target="#rozwiązanie-projekt-i-plik-trzy-różne-rzeczy">2. Rozwiązanie, projekt i plik: trzy różne rzeczy</a></li>
-  <li><a href="#utwórz-pusty-projekt" id="toc-utwórz-pusty-projekt" class="nav-link" data-scroll-target="#utwórz-pusty-projekt">3. Utwórz pusty projekt</a></li>
-  <li><a href="#ustaw-projekt-do-pracy-w-c" id="toc-ustaw-projekt-do-pracy-w-c" class="nav-link" data-scroll-target="#ustaw-projekt-do-pracy-w-c">4. Ustaw projekt do pracy w C</a></li>
-  <li><a href="#pierwszy-program-zapis-budowanie-uruchomienie" id="toc-pierwszy-program-zapis-budowanie-uruchomienie" class="nav-link" data-scroll-target="#pierwszy-program-zapis-budowanie-uruchomienie">5. Pierwszy program: zapis, budowanie, uruchomienie</a></li>
-  <li><a href="#dwa-miejsca-na-komunikaty" id="toc-dwa-miejsca-na-komunikaty" class="nav-link" data-scroll-target="#dwa-miejsca-na-komunikaty">6. Dwa miejsca na komunikaty</a></li>
-  <li><a href="#pierwszy-debugger-dlaczego-wynik-jest-nieprawidłowy" id="toc-pierwszy-debugger-dlaczego-wynik-jest-nieprawidłowy" class="nav-link" data-scroll-target="#pierwszy-debugger-dlaczego-wynik-jest-nieprawidłowy">7. Pierwszy debugger: dlaczego wynik jest nieprawidłowy?</a></li>
-  <li><a href="#jak-wykonywać-kolejne-zadania-z-kursu" id="toc-jak-wykonywać-kolejne-zadania-z-kursu" class="nav-link" data-scroll-target="#jak-wykonywać-kolejne-zadania-z-kursu">8. Jak wykonywać kolejne zadania z kursu?</a></li>
-  <li><a href="#najczęstsze-przeszkody" id="toc-najczęstsze-przeszkody" class="nav-link" data-scroll-target="#najczęstsze-przeszkody">9. Najczęstsze przeszkody</a></li>
-  <li><a href="#sprawdzenie-gotowości" id="toc-sprawdzenie-gotowości" class="nav-link" data-scroll-target="#sprawdzenie-gotowości">Sprawdzenie gotowości</a></li>
+  <li><a href="#co-przygotować" id="toc-co-przygotować" class="nav-link active" data-scroll-target="#co-przygotować">Co przygotować</a></li>
+  <li><a href="#instalacja" id="toc-instalacja" class="nav-link" data-scroll-target="#instalacja">1. Instalacja</a></li>
+  <li><a href="#utworzenie-aplikacji-konsolowej" id="toc-utworzenie-aplikacji-konsolowej" class="nav-link" data-scroll-target="#utworzenie-aplikacji-konsolowej">2. Utworzenie aplikacji konsolowej</a></li>
+  <li><a href="#ustawienia-języka" id="toc-ustawienia-języka" class="nav-link" data-scroll-target="#ustawienia-języka">3. Ustawienia języka</a></li>
+  <li><a href="#zapis-budowanie-i-uruchomienie" id="toc-zapis-budowanie-i-uruchomienie" class="nav-link" data-scroll-target="#zapis-budowanie-i-uruchomienie">4. Zapis, budowanie i uruchomienie</a></li>
+  <li><a href="#krótki-pokaz-debuggera" id="toc-krótki-pokaz-debuggera" class="nav-link" data-scroll-target="#krótki-pokaz-debuggera">5. Krótki pokaz debuggera</a></li>
+  <li><a href="#organizacja-plików" id="toc-organizacja-plików" class="nav-link" data-scroll-target="#organizacja-plików">6. Organizacja plików</a></li>
+  <li><a href="#dokumentacja-środowiska" id="toc-dokumentacja-środowiska" class="nav-link" data-scroll-target="#dokumentacja-środowiska">Dokumentacja środowiska</a></li>
   </ul>
 </nav>
     </div>
@@ -353,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Start: Visual Studio Community i program konsolowy w C</h1>
+<h1 class="title">Visual Studio — projekt konsolowy C++</h1>
 </div>
 
 
@@ -370,25 +261,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="co-przygotowujemy" class="level2">
-<h2 class="anchored" data-anchor-id="co-przygotowujemy">Co przygotowujemy?</h2>
-<p>Na laboratoriach piszemy <strong>programy konsolowe w języku C</strong>. Tekst nadal pojawia się w konsoli, a kod tworzymy, budujemy i sprawdzamy w <strong>Visual Studio Community na Windows</strong>. Środowisko IDE — <em>Integrated Development Environment</em>, zintegrowane środowisko programistyczne — łączy edytor, narzędzia budowania programu i debugger, który pozwala zatrzymać program oraz obejrzeć jego stan.</p>
-<p>Ta instrukcja poprzedza sesję 1 i nie zmienia numeracji sesji 1–18. Instalację wykonujemy przed zajęciami. Na pierwszym spotkaniu przechodzimy od utworzenia projektu do uruchomienia programu. Pokaz zmiennych w debuggerze można dokończyć na początku sesji 2.</p>
+<section id="co-przygotować" class="level2">
+<h2 class="anchored" data-anchor-id="co-przygotować">Co przygotować</h2>
+<p>Używamy <strong>Visual Studio Community na Windows</strong>, projektu <strong>Console App / Aplikacja konsolowa (C++)</strong> i plików <strong><code>.cpp</code></strong>. IDE (<em>Integrated Development Environment</em>, zintegrowane środowisko programistyczne) łączy edytor, narzędzia budowania i debugger. Instalację warto wykonać przed pierwszym spotkaniem.</p>
 </section>
-<section id="instalacja-na-windows" class="level2">
-<h2 class="anchored" data-anchor-id="instalacja-na-windows">1. Instalacja na Windows</h2>
+<section id="instalacja" class="level2">
+<h2 class="anchored" data-anchor-id="instalacja">1. Instalacja</h2>
 <ol type="1">
-<li>Otwórz <a href="https://visualstudio.microsoft.com/downloads/">oficjalną stronę pobierania Visual Studio</a>. Wybierz <strong>Visual Studio Community</strong>, stabilne wydanie dla Windows. Instrukcja jest przygotowana dla obecnego Visual Studio 2026; w pracowni z Visual Studio 2022 kroki są podobne.</li>
-<li>Uruchom instalator. Instalacja składników może wymagać uprawnień administratora; na komputerze pracowni zajmuje się tym administrator.</li>
-<li>W <strong>Workloads / Obciążenia</strong> zaznacz <strong>Desktop development with C++</strong> (programowanie aplikacji klasycznych w C++).</li>
-<li>Pozostaw zalecany kompilator <strong>MSVC</strong> (<em>Microsoft Visual C++</em>) dla x64/x86 oraz aktualny <strong>Windows SDK</strong> (<em>Software Development Kit</em>, zestaw narzędzi programistycznych). Ten zestaw obsługuje także C.</li>
-<li>Zakończ instalację i uruchom Visual Studio. Jeśli pojawi się prośba o zalogowanie lub aktywację, wykonaj wskazane przez program kroki.</li>
+<li>Pobierz Visual Studio Community z <a href="https://visualstudio.microsoft.com/downloads/">oficjalnej strony Microsoft</a>.</li>
+<li>W instalatorze zaznacz <strong>Desktop development with C++ / Programowanie aplikacji klasycznych w C++</strong>.</li>
+<li>Pozostaw zalecane składniki kompilatora MSVC oraz Windows SDK.</li>
+<li>Uruchom Visual Studio. Przy istniejącej instalacji składniki można dodać przez Visual Studio Installer → Modify / Modyfikuj.</li>
 </ol>
-<p>W tym kursie używamy pełnego <strong>Visual Studio Community</strong>, a nie edytora <strong>Visual Studio Code</strong>. Samo obciążenie .NET/C# nie instaluje potrzebnego kompilatora C. Jeśli Visual Studio już jest zainstalowane, brakujące składniki można dodać przez <strong>Visual Studio Installer → Modify / Modyfikuj</strong>.</p>
-<p>Źródło: <a href="https://learn.microsoft.com/cpp/build/vscpp-step-0-installation">Microsoft — instalacja obsługi C i C++</a>.</p>
+<p>Visual Studio Code jest innym programem; ta instrukcja dotyczy pełnego Visual Studio Community. Nie trzeba instalować dodatkowych bibliotek ani narzędzi konsolowych. Na komputerach pracowni instalację składników wymagających uprawnień wykonuje administrator.</p>
 </section>
-<section id="rozwiązanie-projekt-i-plik-trzy-różne-rzeczy" class="level2">
-<h2 class="anchored" data-anchor-id="rozwiązanie-projekt-i-plik-trzy-różne-rzeczy">2. Rozwiązanie, projekt i plik: trzy różne rzeczy</h2>
+<section id="utworzenie-aplikacji-konsolowej" class="level2">
+<h2 class="anchored" data-anchor-id="utworzenie-aplikacji-konsolowej">2. Utworzenie aplikacji konsolowej</h2>
+<ol type="1">
+<li><strong>Create a new project / Utwórz nowy projekt</strong>.</li>
+<li>Wyszukaj <strong>Console App / Aplikacja konsolowa</strong>. Wybierz wariant <strong>C++</strong>, Windows, Console — nie C#.</li>
+<li>Nadaj projektowi nazwę, np. <code>WDP_Lab01</code>, i wybierz katalog, w którym możesz zapisywać pliki.</li>
+<li>Otwórz wygenerowany plik <code>.cpp</code>. Zastąp jego zawartość przykładem poniżej; nie dopisuj drugiej funkcji <code>main</code>.</li>
+<li>Pozostaw konfigurację <strong>Debug</strong> i platformę <strong>x64</strong>.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Hello, world!</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Pusty projekt C++ też jest poprawny</strong>, ale nie tworzy automatycznie kodu startowego. W takim projekcie wybierz prawym przyciskiem projekt → Add / Dodaj → New Item / Nowy element → C++ File i dodaj <code>main.cpp</code>. Sam plik otwarty w edytorze musi należeć do projektu.</p>
+</section>
+<section id="ustawienia-języka" class="level2">
+<h2 class="anchored" data-anchor-id="ustawienia-języka">3. Ustawienia języka</h2>
+<p>Kliknij prawym przyciskiem <strong>projekt</strong> w Solution Explorer / Eksploratorze rozwiązań → Properties / Właściwości. Wybierz <strong>All Configurations / Wszystkie konfiguracje</strong>, aby ustawienie nie dotyczyło tylko jednej wersji.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -396,178 +303,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </colgroup>
 <thead>
 <tr class="header">
-<th>Element</th>
-<th>Co oznacza w naszych zajęciach</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Solution / Rozwiązanie</td>
-<td>Zestaw projektów i ustawień; plik <code>.sln</code> lub <code>.slnx</code> zależnie od wersji</td>
-</tr>
-<tr class="even">
-<td>Project / Projekt</td>
-<td>Ustawienia budowania konkretnego programu; dla tego typu projektu plik <code>.vcxproj</code></td>
-</tr>
-<tr class="odd">
-<td>Source file / Plik źródłowy</td>
-<td>Kod C, np. <code>main.c</code></td>
-</tr>
-<tr class="even">
-<td>Executable / Plik wykonywalny</td>
-<td>Wynik budowania, np. <code>WDP_Sesja01.exe</code></td>
-</tr>
-</tbody>
-</table>
-<p>Na początek: <strong>jeden projekt, jeden plik <code>.c</code>, jedna funkcja <code>main</code></strong>. Do następnego niezależnego programu twórz nowy projekt, zamiast dodawać drugą funkcję <code>main</code> do tego samego programu.</p>
-</section>
-<section id="utwórz-pusty-projekt" class="level2">
-<h2 class="anchored" data-anchor-id="utwórz-pusty-projekt">3. Utwórz pusty projekt</h2>
-<ol type="1">
-<li>W oknie startowym kliknij <strong>Create a new project / Utwórz nowy projekt</strong>.</li>
-<li>Wyszukaj <strong>Empty Project / Pusty projekt</strong>. Wybierz szablon oznaczony <strong>C++ / Windows</strong>. Nie wybieraj „Blank Solution / Puste rozwiązanie”.</li>
-<li>Podaj nazwę <code>WDP_Sesja01</code> i wybierz własny katalog, np. <code>Dokumenty\WDP</code>.</li>
-<li>Kliknij <strong>Create / Utwórz</strong>. Na pasku wybierz <strong>Debug</strong> oraz <strong>x64</strong>.</li>
-<li>Odszukaj <strong>Solution Explorer / Eksplorator rozwiązań</strong>. Jeśli panel jest zamknięty, otwórz go z menu <strong>View / Widok</strong>.</li>
-<li>Kliknij prawym przyciskiem <strong>Source Files / Pliki źródłowe → Add → New Item</strong>. Wybierz pozycję <strong>C++ File (.cpp)</strong>, ale w polu nazwy wpisz <strong><code>main.c</code></strong>. Sprawdź po dodaniu, że nazwa faktycznie kończy się na <code>.c</code>.</li>
-</ol>
-<p>Szablon ma kategorię C++, ponieważ Visual Studio grupuje te narzędzia razem. Plik <code>.c</code> jest domyślnie kompilowany jako C, a <code>.cpp</code> jako C++.</p>
-</section>
-<section id="ustaw-projekt-do-pracy-w-c" class="level2">
-<h2 class="anchored" data-anchor-id="ustaw-projekt-do-pracy-w-c">4. Ustaw projekt do pracy w C</h2>
-<p>Po dodaniu <code>main.c</code> kliknij prawym przyciskiem <strong>nazwę projektu</strong> (nie rozwiązania) i wybierz <strong>Properties / Właściwości</strong>. U góry ustaw <strong>All Configurations</strong> oraz <strong>All Platforms</strong>, żeby ustawienia nie zniknęły po zmianie Debug/Release.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Miejsce we właściwościach projektu</th>
 <th>Ustawienie</th>
+<th>Wartość</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>C/C++ → Language → C Language Standard</td>
-<td><strong>ISO C17 (<code>/std:c17</code>)</strong></td>
+<td>C/C++ → Language → C++ Language Standard</td>
+<td>ISO C++17 (<code>/std:c++17</code>)</td>
 </tr>
 <tr class="even">
 <td>C/C++ → Advanced → Compile As</td>
-<td><strong>Compile as C Code (<code>/TC</code>)</strong></td>
+<td>Default; dla <code>.cpp</code> oznacza C++, albo Compile as C++ (<code>/TP</code>)</td>
 </tr>
 <tr class="odd">
-<td>C/C++ → General → Warning Level</td>
-<td><strong>Level 4 (<code>/W4</code>)</strong></td>
+<td>Configuration Properties → General → Configuration Type</td>
+<td>Application (<code>.exe</code>)</td>
 </tr>
 <tr class="even">
-<td>C/C++ → Precompiled Headers</td>
-<td><strong>Not Using Precompiled Headers</strong></td>
-</tr>
-<tr class="odd">
 <td>Linker → System → SubSystem</td>
-<td><strong>Console (<code>/SUBSYSTEM:CONSOLE</code>)</strong></td>
+<td>Console (<code>/SUBSYSTEM:CONSOLE</code>)</td>
 </tr>
 </tbody>
 </table>
-<p>Kliknij <strong>Apply</strong>, następnie <strong>OK</strong>. Na pasku głównym wróć do <strong>Debug / x64</strong>. Nie wybieraj „C++ Language Standard” zamiast „C Language Standard”.</p>
-<p>C17 określa wersję języka, a <code>/W4</code> poziom ostrzeżeń. Nie są to elementy kodu C, lecz ustawienia kompilatora. Starsze polecenia GCC w materiałach mogą zawierać <code>-std=c99</code>; MSVC nie ma identycznego przełącznika C99. Na zajęciach w Visual Studio ustawiamy C17. Nie oznacza to pełnej zgodności wszystkich rozszerzeń GCC i bibliotek systemowych z Windows.</p>
-<p>Źródło: <a href="https://learn.microsoft.com/en-us/cpp/build/walkthrough-compile-a-c-program-on-the-command-line?view=msvc-160">Microsoft — pliki C, opcja /TC i standardy C11/C17</a>.</p>
+<p>Jeśli wcześniej ustawiono <strong>Compile as C (<code>/TC</code>)</strong>, zmień je: nowa wersja kursu używa C++. Nie ustawiaj C17 — to standard innego języka. Dla tych zajęć nie potrzebujemy ręcznej konfiguracji prekompilowanych nagłówków. W razie komunikatu o <code>pch.h</code> wybierz C/C++ → Precompiled Headers → Not Using Precompiled Headers.</p>
 </section>
-<section id="pierwszy-program-zapis-budowanie-uruchomienie" class="level2">
-<h2 class="anchored" data-anchor-id="pierwszy-program-zapis-budowanie-uruchomienie">5. Pierwszy program: zapis, budowanie, uruchomienie</h2>
-<p>W <code>main.c</code> wpisz:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Stanowisko dyzurnego gotowe.</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="zapis-budowanie-i-uruchomienie" class="level2">
+<h2 class="anchored" data-anchor-id="zapis-budowanie-i-uruchomienie">4. Zapis, budowanie i uruchomienie</h2>
 <ol type="1">
-<li><strong>Ctrl+S</strong> — zapisz plik.</li>
-<li><strong>Build → Build Solution / Kompiluj rozwiązanie</strong>, zwykle <strong>Ctrl+Shift+B</strong> — zbuduj program. Sprawdź, czy kompilacja zakończyła się powodzeniem.</li>
-<li><strong>Debug → Start Without Debugging / Uruchom bez debugowania</strong>, zwykle <strong>Ctrl+F5</strong> — uruchom program w konsoli.</li>
-<li>Oczekiwany tekst: <code>Stanowisko dyzurnego gotowe.</code>. Po zakończeniu programu środowisko może dopisać własny komunikat o zakończeniu procesu.</li>
-<li>Zmień komunikat, zapisz, zbuduj i uruchom ponownie. Konsola ma pokazać nową treść.</li>
+<li><strong>Ctrl+S</strong> zapisuje plik źródłowy.</li>
+<li><strong>Build → Build Solution / Kompiluj → Kompiluj rozwiązanie</strong>, zwykle <strong>Ctrl+Shift+B</strong>, buduje program.</li>
+<li>W <strong>View → Output / Widok → Dane wyjściowe</strong>, źródło <strong>Build / Kompilacja</strong>, sprawdź wynik.</li>
+<li>Oczekiwane jest zero niepowodzeń oraz ścieżka zakończona nazwą projektu i <code>.exe</code>.</li>
+<li><strong>Debug → Start Without Debugging / Uruchom bez debugowania</strong>, zwykle <strong>Ctrl+F5</strong>, uruchamia program.</li>
 </ol>
-<p>Podczas budowania kompilator tłumaczy kod, a linker łączy potrzebne elementy w program wykonywalny. Sam <strong>Ctrl+S</strong> nie przebudowuje pliku <code>.exe</code>.</p>
-</section>
-<section id="dwa-miejsca-na-komunikaty" class="level2">
-<h2 class="anchored" data-anchor-id="dwa-miejsca-na-komunikaty">6. Dwa miejsca na komunikaty</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Okno</th>
-<th>Co w nim sprawdzamy</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Konsola programu</td>
-<td>Tekst z <code>printf</code> i dane wpisywane przez użytkownika</td>
-</tr>
-<tr class="even">
-<td>Output / Dane wyjściowe</td>
-<td>Przebieg budowania; wybierz źródło <strong>Build</strong></td>
-</tr>
-<tr class="odd">
-<td>Error List / Lista błędów</td>
-<td>Komunikaty z plikiem i numerem wiersza; przy diagnozie wybierz źródło <strong>Build</strong>, aby oddzielić je od podpowiedzi IntelliSense</td>
-</tr>
-</tbody>
-</table>
-<p>Usuń średnik po <code>printf</code> i ponownie zbuduj program. Otwórz pierwszy błąd kompilatora dwuklikiem. Wskazana linia może znajdować się po miejscu rzeczywistego błędu — sprawdź również poprzednią instrukcję. Przywróć średnik i zbuduj ponownie.</p>
-<p><strong>Jeśli po błędzie Visual Studio proponuje uruchomienie ostatniej poprawnej wersji, wybierz „Nie”.</strong> Stary plik <code>.exe</code> nie jest dowodem, że bieżący kod działa.</p>
-</section>
-<section id="pierwszy-debugger-dlaczego-wynik-jest-nieprawidłowy" class="level2">
-<h2 class="anchored" data-anchor-id="pierwszy-debugger-dlaczego-wynik-jest-nieprawidłowy">7. Pierwszy debugger: dlaczego wynik jest nieprawidłowy?</h2>
-<p>Ten przykład zawiera <strong>zamierzony błąd obliczenia</strong>. W tym samym <code>main.c</code> zastąp cały poprzedni program poniższym kodem:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> stock <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> issued <span class="op">=</span> <span class="dv">7</span><span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> remaining <span class="op">=</span> stock <span class="op">+</span> issued<span class="op">;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Pozostalo: </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> remaining<span class="op">);</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Magazyn miał 20 kompletów i wydał 7, więc powinno pozostać 13. Kod kompiluje się, ale wypisuje 27. Poprawność składni nie zapewnia poprawności obliczenia.</p>
-<ol type="1">
-<li>Zbuduj program w konfiguracji <strong>Debug</strong>.</li>
-<li>Ustaw kursor w wierszu <code>int remaining = stock + issued;</code> i naciśnij <strong>F9</strong>. Czerwona kropka oznacza <strong>breakpoint</strong>, punkt przerwania.</li>
-<li>Naciśnij <strong>F5 — Start Debugging</strong>. Program zatrzyma się <strong>przed wykonaniem</strong> tej instrukcji. Żółta strzałka wskazuje instrukcję, która ma się wykonać.</li>
-<li>Najedź na <code>stock</code> i <code>issued</code>: wartości powinny wynosić 20 i 7. Otwórz także <strong>Debug → Windows → Locals / Zmienne lokalne</strong>.</li>
-<li>Naciśnij <strong>F10 — Step Over / Krok z pominięciem</strong>. Teraz <code>remaining</code> ma 27. Przed tym krokiem zmienna nie miała jeszcze zainicjalizowanej wartości; nie interpretuj wcześniejszego wskazania debuggera jako wyniku obliczenia.</li>
-<li>Zatrzymaj debugowanie przez <strong>Shift+F5</strong>. Popraw działanie, zbuduj i ponów pokaz. Oczekiwany wynik po wykonaniu instrukcji to 13.</li>
-</ol>
-<p><code>F10</code> wykonuje następną instrukcję bez wchodzenia w szczegóły wywoływanej funkcji; nie pomija jej działania. <code>F11</code> służy do wejścia do funkcji — przyda się w sesji 6. Na początku nie wchodzimy przez F11 do biblioteki realizującej <code>printf</code>.</p>
-<p>Źródło: <a href="https://learn.microsoft.com/en-us/visualstudio/debugger/quickstart-debug-with-cplusplus?view=visualstudio">Microsoft — punkty przerwania, F5, F10 i podgląd zmiennych</a>.</p>
-</section>
-<section id="jak-wykonywać-kolejne-zadania-z-kursu" class="level2">
-<h2 class="anchored" data-anchor-id="jak-wykonywać-kolejne-zadania-z-kursu">8. Jak wykonywać kolejne zadania z kursu?</h2>
-<ol type="1">
-<li>Utwórz nowy projekt, np. <code>WDP_Sesja02</code>, i ustaw go tak jak powyżej.</li>
-<li>Dodaj <strong>jeden aktywny program z funkcją <code>main</code></strong>. Możesz go stopniowo rozwijać.</li>
-<li>Jeśli rozwiązanie zawiera kilka projektów, kliknij właściwy prawym przyciskiem i wybierz <strong>Set as Startup Project / Ustaw jako projekt startowy</strong>.</li>
-<li>Kod C z materiałów wklejaj do pliku <code>.c</code>. Poleceń <code>gcc …</code> i <code>./program</code> nie wklejaj do edytora kodu: w Visual Studio ich rolę pełnią Build i uruchomienie.</li>
-<li>Przed oddaniem zadania zapisz pliki, zbuduj program i sprawdź oczekiwany wynik. Do przeniesienia projektu zachowaj źródła i pliki projektu/rozwiązania; sam <code>.exe</code> nie zastępuje kodu źródłowego.</li>
-</ol>
-<section id="gdy-w-sesji-2-pojawi-się-scanf-i-komunikat-c4996" class="level3">
-<h3 class="anchored" data-anchor-id="gdy-w-sesji-2-pojawi-się-scanf-i-komunikat-c4996">Gdy w sesji 2 pojawi się scanf i komunikat C4996</h3>
-<p>Przykłady kursu korzystają ze standardowych funkcji C, m.in. <code>scanf</code> i <code>fopen</code>. Microsoft oznacza część tych funkcji komunikatem C4996 i proponuje warianty <code>_s</code>. Dla zgodności kodu kursu ustaw w projekcie:</p>
-<p><strong>Properties → C/C++ → Preprocessor → Preprocessor Definitions → Edit</strong></p>
-<p>Dodaj <strong><code>_CRT_SECURE_NO_WARNINGS</code></strong>, zachowując istniejące i dziedziczone definicje. Ustawienie powinno dotyczyć wszystkich konfiguracji. Następnie przebuduj projekt. Nie wyłączaj wszystkich ostrzeżeń ani dodatkowych kontroli bezpieczeństwa.</p>
-<p>Ta definicja usuwa konkretną kategorię komunikatów biblioteki CRT (<em>C Runtime Library</em>). Nie poprawia kodu: nadal trzeba sprawdzać wynik odczytu, poprawność danych i rozmiary buforów. Nie zastępuj automatycznie każdego <code>scanf</code> przez <code>scanf_s</code>: dla niektórych formatów różnią się wymagane argumenty.</p>
-<p>Źródło: <a href="https://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4996?view=msvc-170">Microsoft — C4996 i definicje preprocesora</a>.</p>
-</section>
-<section id="pliki-danych-w-późniejszych-sesjach" class="level3">
-<h3 class="anchored" data-anchor-id="pliki-danych-w-późniejszych-sesjach">Pliki danych w późniejszych sesjach</h3>
-<p>W przykładzie <code>fopen("dane.txt", "r")</code> plik jest szukany względem <strong>katalogu roboczego procesu</strong>, a nie zawsze obok <code>.c</code> lub <code>.exe</code>. Dla przewidywalnego pokazu ustaw w <strong>Properties → Debugging → Working Directory</strong> wartość <code>$(ProjectDir)</code> i umieść <code>dane.txt</code> w katalogu projektu. Argumenty programu ustawisz w <strong>Debugging → Command Arguments</strong>.</p>
-</section>
-</section>
-<section id="najczęstsze-przeszkody" class="level2">
-<h2 class="anchored" data-anchor-id="najczęstsze-przeszkody">9. Najczęstsze przeszkody</h2>
+<pre class="text"><code>main.cpp → kompilacja → main.obj → konsolidacja → WDP_Lab01.exe</code></pre>
+<p>Program <code>.exe</code> powstaje z całego projektu, dlatego domyślnie ma nazwę projektu, nie pliku <code>main.cpp</code>. Wybranie polecenia Compile dla samego pliku może utworzyć tylko <code>.obj</code>. Folder wyjściowy często nazywa się <code>x64/Debug</code>; dokładną ścieżkę pokazuje okno Output.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -581,54 +352,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>Nie ma szablonu Empty Project z C++</td>
-<td>Doinstaluj obciążenie Desktop development with C++</td>
+<td>„Kompilacja ukończona”, ale nic się nie uruchamia</td>
+<td>Budowanie i uruchomienie to osobne działania; użyj Ctrl+F5</td>
 </tr>
 <tr class="even">
-<td>Nie ma sekcji C/C++ we właściwościach</td>
-<td>Dodaj plik <code>.c</code> i otwórz właściwości projektu, nie rozwiązania</td>
+<td>Brak pliku <code>.exe</code></td>
+<td>Zbuduj całe rozwiązanie, sprawdź błędy i typ projektu Application</td>
 </tr>
 <tr class="odd">
-<td>Błąd związany z <code>pch.h</code></td>
-<td>Ustaw Not Using Precompiled Headers; projekt tworzymy z Empty Project</td>
+<td>Nie ma przycisku uruchomienia właściwego projektu</td>
+<td>Prawy przycisk projektu → Set as Startup Project</td>
 </tr>
 <tr class="even">
-<td>Linker zgłasza kilka definicji <code>main</code></td>
-<td>Kilka plików z osobnymi programami trafiło do jednego projektu</td>
+<td>Uruchamia się stary komunikat</td>
+<td>Zapisz i zbuduj; przy błędzie nie uruchamiaj ostatniej poprawnej wersji</td>
 </tr>
 <tr class="odd">
-<td>Linker szuka <code>WinMain</code></td>
-<td>Sprawdź SubSystem = Console i obecność funkcji <code>main</code></td>
+<td>Błąd o wielu definicjach <code>main</code></td>
+<td>Jeden niezależny program powinien mieć jeden projekt i jedną funkcję <code>main</code></td>
 </tr>
 <tr class="even">
-<td>Uruchamia się inny program</td>
-<td>Sprawdź projekt startowy i wynik ostatniego budowania</td>
-</tr>
-<tr class="odd">
-<td>Nie można nadpisać <code>.exe</code></td>
-<td>Zakończ poprzedni proces i debugowanie, potem buduj ponownie</td>
-</tr>
-<tr class="even">
-<td>Punkt przerwania jest pusty lub nieaktywny</td>
-<td>Wybierz Debug, zbuduj aktualny kod i sprawdź projekt startowy</td>
-</tr>
-<tr class="odd">
-<td>Skrót klawiaturowy działa inaczej</td>
-<td>Użyj nazwanej operacji z menu; na laptopie może być potrzebny Fn</td>
+<td>Program czeka po wyświetleniu pytania</td>
+<td>Wpisz wymagane dane i zatwierdź Enter</td>
 </tr>
 </tbody>
 </table>
+<p><code>system("pause")</code> nie naprawia braku <code>.exe</code>. Na tych zajęciach do uruchamiania wystarcza Ctrl+F5.</p>
 </section>
-<section id="sprawdzenie-gotowości" class="level2">
-<h2 class="anchored" data-anchor-id="sprawdzenie-gotowości">Sprawdzenie gotowości</h2>
+<section id="krótki-pokaz-debuggera" class="level2">
+<h2 class="anchored" data-anchor-id="krótki-pokaz-debuggera">5. Krótki pokaz debuggera</h2>
+<p>Debugger pozwala obejrzeć program krok po kroku. W osobnym projekcie lub po zastąpieniu wcześniejszego kodu:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> available <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> issued <span class="op">=</span> <span class="dv">7</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> remaining <span class="op">=</span> available <span class="op">+</span> issued<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> remaining <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>W kodzie jest <strong>celowy błąd obliczenia</strong>: dodawanie zamiast odejmowania.</p>
+<ol type="1">
+<li>Kliknij linię obliczającą <code>remaining</code> i naciśnij <strong>F9</strong>, aby ustawić punkt zatrzymania (<em>breakpoint</em>).</li>
+<li>Uruchom debugowanie <strong>F5</strong>. Żółta strzałka wskazuje instrukcję, która dopiero zostanie wykonana.</li>
+<li>Obejrzyj <code>available</code> i <code>issued</code> w oknie <strong>Locals / Zmienne lokalne</strong>.</li>
+<li><strong>F10</strong> wykonuje kolejny krok. Sprawdź wynik 27 i porównaj z oczekiwanym 13.</li>
+<li>Zatrzymaj debugowanie <strong>Shift+F5</strong>, popraw <code>+</code> na <code>-</code>, zbuduj i ponownie uruchom.</li>
+</ol>
+<p>Błąd składni może uniemożliwić zbudowanie programu. Błąd obliczenia może dać poprawnie zbudowany program z niewłaściwym wynikiem.</p>
+</section>
+<section id="organizacja-plików" class="level2">
+<h2 class="anchored" data-anchor-id="organizacja-plików">6. Organizacja plików</h2>
+<p>Dla zadań A i B można utworzyć dwa projekty, np. <code>Spotkanie01_A</code> i <code>Spotkanie01_B</code>. Nie dodawaj wszystkich programów pokazowych do jednego projektu, bo każdy zawiera własne <code>main</code>. Na zajęcia wystarczy oddać pliki <code>.cpp</code> oraz wymagane wyniki prób.</p>
+<p><a href="../laboratoria/01_projekt.html">Przejdź do spotkania 1</a>.</p>
+</section>
+<section id="dokumentacja-środowiska" class="level2">
+<h2 class="anchored" data-anchor-id="dokumentacja-środowiska">Dokumentacja środowiska</h2>
 <ul>
-<li>Otwierasz właściwy projekt i wskazujesz plik <code>.c</code>.</li>
-<li>Budujesz program i uruchamiasz go w konsoli.</li>
-<li>Rozróżniasz zapis pliku, budowanie i uruchamianie.</li>
-<li>Odnajdujesz błąd kompilacji i nie uruchamiasz starej wersji jako nowej.</li>
-<li>Zatrzymujesz program na punkcie przerwania i obserwujesz wartości po F10.</li>
+<li><a href="https://learn.microsoft.com/cpp/build/vscpp-step-1-create">Microsoft — pierwszy projekt konsolowy C++</a>.</li>
+<li><a href="https://learn.microsoft.com/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio">Microsoft — budowanie projektów i rozwiązań</a>.</li>
+<li><a href="https://learn.microsoft.com/cpp/build/reference/tc-tp-tc-tp-specify-source-file-type">Microsoft — wybór kompilacji C albo C++</a>.</li>
 </ul>
-<p>Następnie przejdź do <a href="../podstawy_programowania/sesje/01_pierwszy_program.html">sesji 1 — pierwszy program</a>.</p>
 
 
 </section>
@@ -659,12 +444,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Skopiowano!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Skopiowano!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",

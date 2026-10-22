@@ -1,0 +1,279 @@
+---
+title: "Laboratorium 2"
+subtitle: "Operacje warunkowe"
+format:
+  html:
+    body-classes: lab-handout
+---
+
+::: {.lab-meta}
+**Wprowadzenie do programowania** · C++ · instrukcja laboratoryjna
+
+**Cel ćwiczenia:** Zapisanie reguł wyboru oraz sprawdzenie danych przed wykonaniem działania.
+
+**Środowisko:** Visual Studio Community, projekt Console App, standard C++17.
+:::
+
+## Wejściówka
+
+**3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego przygotowania.** Każde jest warte 1 punkt. Test rozwiązuje się indywidualnie; wynik pojawi się po potwierdzeniu zapisu.
+
+<div id="rsod-quiz"></div>
+<script src="../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById("rsod-quiz"), {
+  "course": "wdplab2026",
+  "lecture": "cpp02",
+  "title": "Wejściówka przed laboratorium 2",
+  "submitUrl": "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  "questions": [
+    {
+      "id": "q1",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Który typ wybierzesz do przechowania wyniku z częścią ułamkową?",
+      "options": [
+        {
+          "v": "A",
+          "t": "bool"
+        },
+        {
+          "v": "B",
+          "t": "double"
+        },
+        {
+          "v": "C",
+          "t": "char"
+        },
+        {
+          "v": "D",
+          "t": "int"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Co wypisze ten fragment?",
+      "options": [
+        {
+          "v": "A",
+          "t": "5.75 3"
+        },
+        {
+          "v": "B",
+          "t": "5 3"
+        },
+        {
+          "v": "C",
+          "t": "6 0"
+        },
+        {
+          "v": "D",
+          "t": "3 5"
+        }
+      ],
+      "code": "int value = 23;\nstd::cout << value / 4 << \" \" << value % 4;"
+    },
+    {
+      "id": "q3",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Jaki wynik zostanie wyświetlony?",
+      "options": [
+        {
+          "v": "A",
+          "t": "3.14159"
+        },
+        {
+          "v": "B",
+          "t": "3.14"
+        },
+        {
+          "v": "C",
+          "t": "3"
+        },
+        {
+          "v": "D",
+          "t": "3.15"
+        }
+      ],
+      "code": "double value = 3.14159265359;\nstd::cout << std::fixed << std::setprecision(2) << value;"
+    },
+    {
+      "id": "q4",
+      "points": 1,
+      "diff": "przygotowanie",
+      "text": "Przygotowanie: który komunikat zostanie wypisany?",
+      "options": [
+        {
+          "v": "A",
+          "t": "Recharge"
+        },
+        {
+          "v": "B",
+          "t": "Ready"
+        },
+        {
+          "v": "C",
+          "t": "Oba"
+        },
+        {
+          "v": "D",
+          "t": "Żaden"
+        }
+      ],
+      "code": "int charge = 30;\nif (charge < 30) {\n    std::cout << \"Recharge\";\n} else {\n    std::cout << \"Ready\";\n}"
+    }
+  ]
+});
+</script>
+
+## Wprowadzenie teoretyczne
+
+### Warunek jako decyzja programu
+
+W pierwszym laboratorium instrukcje wykonywały się kolejno. Instrukcja warunkowa pozwala wykonać fragment programu tylko wtedy, gdy spełnione jest kryterium. Wynik porównania ma typ `bool`: `true` oznacza prawdę, a `false` fałsz.
+
+| Zapis | Znaczenie | Przykład |
+|---|---|---|
+| `a == b`, `a != b` | Równość, nierówność | `charge == 100` |
+| `<`, `<=`, `>`, `>=` | Porównanie wartości | `charge >= 30` |
+| `a && b` | Oba warunki prawdziwe | `charge >= 0 && charge <= 100` |
+| `a \|\| b` | Co najmniej jeden warunek prawdziwy | `charge < 0 \|\| charge > 100` |
+| `!condition` | Zaprzeczenie warunku | `!active` |
+
+`=` przypisuje, a `==` porównuje. Te operatory mają różne zadania. Dla liczby 30 warunek `charge < 30` jest fałszywy, ale `charge <= 30` jest prawdziwy. Wybór znaku decyduje o zachowaniu programu dokładnie na granicy zakresu.
+
+### Instrukcje if, else if i else
+
+`if` rozpoczyna wybór. `else if` sprawdza kolejny warunek tylko wtedy, gdy wcześniejsze były fałszywe. `else` obsługuje pozostały przypadek. W jednym łańcuchu wykona się co najwyżej jedna gałąź. Kilka oddzielnych instrukcji `if` może wykonać kilka bloków.
+
+Pełny przykład klasyfikuje poziom naładowania. Najpierw odrzuca dane spoza zakresu, a potem przypisuje kategorię. Taka kolejność zapobiega zakwalifikowaniu wartości 150 jako poprawnej „pełnej gotowości”.
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    int charge = 0;
+    std::cout << "Charge (0-100): ";
+    if (!(std::cin >> charge)) {
+        std::cout << "Invalid input\n";
+        return 1;
+    }
+    if (charge < 0 || charge > 100) {
+        std::cout << "Invalid charge\n";
+    } else if (charge < 30) {
+        std::cout << "Recharge\n";
+    } else if (charge < 80) {
+        std::cout << "Ready\n";
+    } else {
+        std::cout << "Full readiness\n";
+    }
+    return 0;
+}
+```
+
+| Wejście | Wynik | Powód |
+|---|---|---|
+| `-1` lub `101` | Invalid charge | Poza zakresem |
+| `29` | Recharge | Poniżej 30 |
+| `30` i `79` | Ready | Co najmniej 30, ale poniżej 80 |
+| `80` i `100` | Full readiness | Poprawna wartość co najmniej 80 |
+
+Zapis `if (!(std::cin >> charge))` wykrywa nieudany odczyt, np. po wpisaniu tekstu zamiast liczby. Na tym etapie program kończy się wtedy komunikatem. Poprawność odczytu i poprawność zakresu to osobne sprawdzenia.
+
+### Wybór jednej operacji przez switch
+
+`switch` porównuje wartość z konkretnymi etykietami `case`. Nadaje się np. do wyboru operacji oznaczonej znakiem. `break` kończy wykonanie instrukcji `switch`, a `default` obsługuje wartości, których nie wymieniono.
+
+Poniższy fragment można umieścić wewnątrz `main`:
+
+```cpp
+char option = 'a';
+switch (option) {
+case 'a':
+    std::cout << "Add\n";
+    break;
+case 'r':
+    std::cout << "Report\n";
+    break;
+default:
+    std::cout << "Unknown option\n";
+}
+```
+
+Brak `break` może spowodować wykonanie instrukcji kolejnego przypadku. Do sprawdzania przedziałów, np. od 30 do 79, wygodniejszy jest `if`.
+
+### Przypadki graniczne i debugger
+
+Dla progu 30 warto sprawdzić 29, 30 i 31. Jeden poprawny przykład nie dowodzi, że warunek zapisano właściwie. Ustaw punkt zatrzymania przed `if`, sprawdź wartość zmiennej i wykonuj **F10**. Porównaj wybraną gałąź z wcześniejszą prognozą.
+
+[Pełny program pokazowy — pobierz plik .cpp](../assets/cpp/02_pokaz.cpp). Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.
+
+## Zadania do realizacji
+
+Przed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.
+
+::: {.lab-task}
+### Zadanie 1. Znak liczby
+
+Wczytaj liczbę całkowitą. Wypisz dokładnie jeden komunikat: dodatnia, ujemna albo zero. Zastosuj `if`, `else if`, `else`. Sprawdź `-5`, `0`, `5`.
+:::
+
+::: {.lab-task}
+### Zadanie 2. Dopuszczalny zakres pomiaru
+
+Wczytaj temperaturę typu `double`. Poprawny zakres to od `-20` do `50` włącznie. Wypisz informację o poprawności. Sprawdź `-21`, `-20`, `0`, `50`, `51`. Zapisz warunek poprawności z `&&`, a warunek błędu z `||` i porównaj ich znaczenie.
+:::
+
+::: {.lab-task}
+### Zadanie 3. Kategorie gotowości
+
+Uruchom pokaz dla wszystkich wartości z tabeli. Zmień próg pełnej gotowości z 80 na 90. Dodaj próby 89 i 90. Upewnij się, że 101 nadal jest odrzucane. Zapisz, które warunki sprawdza program dla wartości 30.
+:::
+
+::: {.lab-task}
+### Zadanie 4. Dzielenie z kontrolą danych
+
+Rozwiń zadanie z dzieleniem z laboratorium 1. Wczytaj dwie liczby `double`, sprawdź powodzenie odczytu i odrzuć zerowy dzielnik. Dopiero potem wykonaj dzielenie. Sprawdź `8, 2`, `8, 0` oraz tekst zamiast pierwszej liczby.
+:::
+
+::: {.lab-task}
+### Zadanie 5. Kalkulator z wyborem operacji
+
+Wczytaj dane w postaci `8 / 2`: liczba, znak działania, liczba. Użyj `switch` dla `+`, `-`, `*`, `/`. Dla dzielenia sprawdź zero, a nieznany operator obsłuż komunikatem. Próby: `8 / 2 → 4`, `8 / 0 → błąd`, `3 + 4 → 7`, `3 ? 4 → nieznana operacja`.
+:::
+
+::: {.lab-task}
+### Zadanie 6. Reguła wydania urządzenia
+
+Wczytaj procent baterii `charge` i informację `checked` jako `bool` (0 albo 1). Urządzenie można wydać, gdy bateria ma co najmniej 30% i przegląd jest wykonany. Najpierw odrzuć stan baterii poza 0–100. Sprawdź pary `(29,1)`, `(30,0)`, `(30,1)`, `(101,1)`. Wyjaśnij, dlaczego zastąpienie `&&` przez `||` zmieniłoby regułę.
+:::
+
+## Dokumentacja i sprawdzenie pracy
+
+- Zachowaj źródła `.cpp` oznaczone numerem zadania.
+- Dla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.
+- Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.
+- Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.
+
+Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów `.vs` i `Debug` ani plików `.exe`.
+
+## Przygotowanie do następnej wejściówki
+
+### Powtórz
+
+- Porównania, &&, || i !; różnica między przypisaniem a porównaniem.
+- Wybór gałęzi if/else i kontrola wartości na granicy zakresu.
+- switch, case, break i default; kontrola dzielenia przez zero.
+
+### Przeczytaj przed laboratorium 3
+
+W [instrukcji 3](03_petle_tablice.qmd#wprowadzenie-teoretyczne) przeczytaj wprowadzenie do for, while i do…while. Zapoznaj się z indeksem tablicy.
+
+**Minimalne przygotowanie:** podać kolejne wartości zmiennej w prostej pętli for. Dla `for (int i = 1; i <= 4; ++i)` są to 1, 2, 3, 4 — cztery powtórzenia. Nie trzeba jeszcze samodzielnie obliczać średniej z tablicy.
+
+Następna wejściówka: **3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu**, po 1 punkcie.

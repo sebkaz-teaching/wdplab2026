@@ -1,0 +1,284 @@
+---
+title: "Laboratorium 6"
+subtitle: "Własna klasa i jej obiekty"
+format:
+  html:
+    body-classes: lab-handout
+---
+
+::: {.lab-meta}
+**Wprowadzenie do programowania** · C++ · instrukcja laboratoryjna
+
+**Cel ćwiczenia:** Zdefiniowanie własnego typu, stanu obiektu i dozwolonych operacji.
+
+**Środowisko:** Visual Studio Community, projekt Console App, standard C++17.
+:::
+
+## Wejściówka
+
+**3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego przygotowania.** Każde jest warte 1 punkt. Test rozwiązuje się indywidualnie; wynik pojawi się po potwierdzeniu zapisu.
+
+<div id="rsod-quiz"></div>
+<script src="../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById("rsod-quiz"), {
+  "course": "wdplab2026",
+  "lecture": "cpp06",
+  "title": "Wejściówka przed laboratorium 6",
+  "submitUrl": "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  "questions": [
+    {
+      "id": "q1",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Jaka metoda sprawdza, czy wektor jest pusty?",
+      "options": [
+        {
+          "v": "A",
+          "t": "clear()"
+        },
+        {
+          "v": "B",
+          "t": "empty()"
+        },
+        {
+          "v": "C",
+          "t": "push_back()"
+        },
+        {
+          "v": "D",
+          "t": "pop_back()"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Co wypisze fragment?",
+      "options": [
+        {
+          "v": "A",
+          "t": "0"
+        },
+        {
+          "v": "B",
+          "t": "2"
+        },
+        {
+          "v": "C",
+          "t": "3"
+        },
+        {
+          "v": "D",
+          "t": "9"
+        }
+      ],
+      "code": "std::vector<int> values;\nvalues.push_back(3);\nvalues.push_back(9);\nstd::cout << values.size();"
+    },
+    {
+      "id": "q3",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Co wypisze fragment?",
+      "options": [
+        {
+          "v": "A",
+          "t": "15"
+        },
+        {
+          "v": "B",
+          "t": "10"
+        },
+        {
+          "v": "C",
+          "t": "5"
+        },
+        {
+          "v": "D",
+          "t": "0"
+        }
+      ],
+      "code": "std::vector<int> values = {10,20};\nfor (int value : values) { value += 5; }\nstd::cout << values[0];"
+    },
+    {
+      "id": "q4",
+      "points": 1,
+      "diff": "przygotowanie",
+      "text": "Przygotowanie: jaka jest rola sekcji public we własnej klasie?",
+      "options": [
+        {
+          "v": "A",
+          "t": "Przechowuje tylko dane tajne"
+        },
+        {
+          "v": "B",
+          "t": "Udostępnia elementy klasy kodowi korzystającemu z obiektu"
+        },
+        {
+          "v": "C",
+          "t": "Automatycznie tworzy wektor"
+        },
+        {
+          "v": "D",
+          "t": "Wyłącza sprawdzanie typów"
+        }
+      ]
+    }
+  ]
+});
+</script>
+
+## Wprowadzenie teoretyczne
+
+### Od klasy bibliotecznej do własnej klasy
+
+Wektor przechowywał wiele liczb, ale pojedyncze urządzenie ma kilka powiązanych cech: nazwę i poziom naładowania. Klasa pozwala opisać te dane razem z operacjami, które mają na nich działać. **Klasa** jest definicją typu; **obiekt** to konkretna zmienna tego typu.
+
+`Device radio("Radio A");` tworzy obiekt o nazwie zmiennej radio. Drugi obiekt, `Device sensor("Sensor B");`, ma własny stan. Zmiana baterii radia nie zmienia baterii czujnika.
+
+### Pola i dostęp do danych
+
+Pola to zmienne należące do obiektu. `private` udostępnia je metodom klasy, a nie bezpośrednio kodowi w main. `public` określa operacje dostępne dla użytkownika klasy. Dzięki temu można wymagać, aby poziom baterii zawsze mieścił się w zakresie 0–100.
+
+| Element | Rola w naszym modelu |
+|---|---|
+| `name`, `charge` | Stan konkretnego urządzenia |
+| `Device(...)` | Konstruktor tworzący początkowy stan |
+| `getName()`, `getCharge()` | Odczyt danych |
+| `setCharge(value)` | Próba zmiany stanu po sprawdzeniu zakresu |
+| `isReady()` | Odpowiedź na pytanie wynikające ze stanu |
+
+Ukrycie pola nie oznacza szyfrowania ani ochrony przed atakiem. Jest ograniczeniem dostępu w kodzie, które pomaga utrzymać reguły modelu. Main korzysta z operacji zamiast dowolnie nadpisywać wnętrze obiektu.
+
+### Konstruktor i stan początkowy
+
+Konstruktor ma nazwę klasy i nie ma typu wyniku. Wywołuje się podczas tworzenia obiektu. Zapis `: name(initialName)` inicjalizuje pole nazwą przekazaną przez użytkownika klasy. Pole `charge = 0` zapewnia poprawny początkowy poziom baterii, nawet zanim wywołamy metodę zmieniającą stan.
+
+Nie wprowadzamy jeszcze dziedziczenia, funkcji wirtualnych ani własnego zarządzania pamięcią. Cała definicja klasy może znajdować się nad main w jednym pliku `.cpp`.
+
+### Metody i zachowanie przy błędzie
+
+Metoda `setCharge` zwraca `bool`: true po przyjęciu poprawnej wartości i false po odrzuceniu. Odrzucona zmiana pozostawia poprzedni stan. Main może na podstawie wyniku wypisać komunikat lub poprosić o inne dane.
+
+Dopisanie `const` po nawiasach metody, np. `getCharge() const`, oznacza, że metoda nie zmienia zwykłych pól obiektu. Warto odróżnić operacje odczytujące od zmieniających stan. Konstrukcja klasy kończy się średnikiem po zamykającym nawiasie klamrowym.
+
+### Pełny przykład: poprawny stan mimo błędnej próby
+
+Najpierw ustawiamy 40, a potem próbujemy 150. Druga próba zostaje odrzucona, więc program wypisze `Radio A: 40`, `Update accepted: 0`, `Ready: 1`.
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Device
+{
+private:
+    std::string name;
+    int charge = 0;
+
+public:
+    Device(const std::string& initialName)
+        : name(initialName)
+    {
+    }
+
+    std::string getName() const
+    {
+        return name;
+    }
+
+    int getCharge() const
+    {
+        return charge;
+    }
+
+    bool setCharge(int value)
+    {
+        if (value < 0 || value > 100) {
+            return false;
+        }
+        charge = value;
+        return true;
+    }
+
+    bool isReady() const
+    {
+        return charge >= 30;
+    }
+};
+
+int main()
+{
+    Device radio("Radio A");
+    radio.setCharge(40);
+    bool accepted = radio.setCharge(150);
+    std::cout << radio.getName() << ": " << radio.getCharge() << '\n';
+    std::cout << "Update accepted: " << accepted << '\n';
+    std::cout << "Ready: " << radio.isReady() << '\n';
+    return 0;
+}
+```
+
+Porównaj to z publicznym polem: bezpośrednie przypisanie 150 ominęłoby sprawdzanie zakresu. Istotne jest nie samo użycie słowa class, ale umieszczenie reguły zmiany danych w jednym miejscu.
+
+[Pełny program pokazowy — pobierz plik .cpp](../assets/cpp/06_pokaz.cpp). Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.
+
+## Zadania do realizacji
+
+Przed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.
+
+::: {.lab-task}
+### Zadanie 1. Dwa niezależne obiekty
+
+Utwórz radio i czujnik z różnymi nazwami. Ustaw baterie odpowiednio na 40 i 20. Wypisz nazwę, baterię i gotowość obu urządzeń. Zmień tylko radio na 80 i pokaż, że czujnik nadal ma 20.
+:::
+
+::: {.lab-task}
+### Zadanie 2. Kontrola zmiany stanu
+
+Dla jednego obiektu wykonaj kolejno `setCharge(30)`, `setCharge(-1)`, `setCharge(101)`, `setCharge(100)`. Po każdej próbie wypisz wynik metody i stan. Oczekiwane stany: 30, 30, 30, 100. Sprawdź również nowy obiekt przed pierwszą zmianą: bateria wynosi 0.
+:::
+
+::: {.lab-task}
+### Zadanie 3. Nowa reguła gotowości
+
+Dodaj prywatne pole `bool checked = false;` i publiczną metodę `void markChecked()`. Zmień isReady tak, aby wymagała baterii co najmniej 30 oraz wykonanego przeglądu. Dla nowego urządzenia z baterią 80 gotowość ma być fałszywa, a po markChecked — prawdziwa.
+:::
+
+::: {.lab-task}
+### Zadanie 4. Zużywanie baterii
+
+Dodaj metodę `bool use(int amount)`. Przyjmuj tylko dodatnie amount nieprzekraczające bieżącego stanu. Po sukcesie odejmij amount, po błędzie pozostaw stan. Dla baterii 40: use(15) daje 25, use(30) zostawia 25, use(0) zostawia 25. Dla amount równego pozostałej baterii wynik ma być poprawny i stan 0.
+:::
+
+::: {.lab-task}
+### Zadanie 5. Wyjaśnienie interfejsu
+
+Zapisz komentarz w swoim kodzie wyjaśniający, dlaczego charge jest private, a setCharge public. Sprawdź komunikat kompilatora po próbie `radio.charge = 150;`, a następnie usuń własną próbę lub ją zakomentuj i przywróć poprawne budowanie. Do zmiany stanu użyj metody. Wyjaśnij, dlaczego metoda getCharge jest const.
+:::
+
+## Dokumentacja i sprawdzenie pracy
+
+- Zachowaj źródła `.cpp` oznaczone numerem zadania.
+- Dla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.
+- Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.
+- Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.
+
+Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów `.vs` i `Debug` ani plików `.exe`.
+
+## Przygotowanie do następnej wejściówki
+
+### Powtórz
+
+- Konstruktor i stan początkowy obiektu.
+- Pola private, metody public oraz odczytujące metody const.
+- Zachowanie setCharge po poprawnej i odrzuconej zmianie.
+
+### Przeczytaj przed laboratorium 7
+
+W [instrukcji 7](07_rejestr.qmd#wprowadzenie-teoretyczne) przeczytaj o wektorze obiektów i porównaj pętle pracujące na kopiach oraz referencjach.
+
+**Minimalne przygotowanie:** wiedzieć, że vector<Device> zawiera obiekty Device i może przechowywać wiele urządzeń. Użycie własnego typu jako elementu nie zmienia znaczenia size i push_back. Nie trzeba wcześniej budować pełnej aplikacji z menu.
+
+Następna wejściówka: **3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu**, po 1 punkcie.

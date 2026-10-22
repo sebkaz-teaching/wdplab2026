@@ -1,0 +1,72 @@
+{
+  "course_id": "wdplab2026",
+  "display_name": "Wprowadzenie do programowania",
+  "language": "C++17",
+  "ide": "Visual Studio Community / Console App",
+  "topics": 7,
+  "syllabus_code": "WELTXWSJ-WDP",
+  "source_intake": "2023/2024",
+  "source_card": "Wprowadzenie_do_programowania.pdf",
+  "first_lab_reference": "WDP_Lab1 3.pdf",
+  "basis": "Five syllabus topics plus two introductory class topics requested by the instructor.",
+  "schedule_policy": "No assignment of hours, dates or assessment slot; instructor decision.",
+  "checkpoint_policy": {
+    "from_topic": 2,
+    "review_questions": 3,
+    "preparation_questions": 1,
+    "points_per_question": 1
+  },
+  "quiz_ids": [
+    "cpp02",
+    "cpp03",
+    "cpp04",
+    "cpp05",
+    "cpp06",
+    "cpp07"
+  ],
+  "legacy_sources": "Historical C and CHIP-8 sources preserved, excluded from render.",
+  "sessions": [
+    {
+      "number": 1,
+      "title": "Algorytmy i programy w C++",
+      "path": "laboratoria/01_projekt.qmd",
+      "additional_topic": false
+    },
+    {
+      "number": 2,
+      "title": "Operacje warunkowe",
+      "path": "laboratoria/02_warunki.qmd",
+      "additional_topic": false
+    },
+    {
+      "number": 3,
+      "title": "Instrukcje cykliczne i tablice",
+      "path": "laboratoria/03_petle_tablice.qmd",
+      "additional_topic": false
+    },
+    {
+      "number": 4,
+      "title": "Funkcje w języku C++",
+      "path": "laboratoria/04_funkcje.qmd",
+      "additional_topic": false
+    },
+    {
+      "number": 5,
+      "title": "Klasy biblioteczne i kontener vector",
+      "path": "laboratoria/05_wektor.qmd",
+      "additional_topic": false
+    },
+    {
+      "number": 6,
+      "title": "Własna klasa i jej obiekty",
+      "path": "laboratoria/06_klasa.qmd",
+      "additional_topic": true
+    },
+    {
+      "number": 7,
+      "title": "Program wykorzystujący kolekcję obiektów",
+      "path": "laboratoria/07_rejestr.qmd",
+      "additional_topic": true
+    }
+  ]
+}

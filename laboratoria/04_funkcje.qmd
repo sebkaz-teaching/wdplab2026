@@ -1,0 +1,289 @@
+---
+title: "Laboratorium 4"
+subtitle: "Funkcje w języku C++"
+format:
+  html:
+    body-classes: lab-handout
+---
+
+::: {.lab-meta}
+**Wprowadzenie do programowania** · C++ · instrukcja laboratoryjna
+
+**Cel ćwiczenia:** Podział obliczeń na funkcje i świadomy wybór sposobu przekazywania argumentów.
+
+**Środowisko:** Visual Studio Community, projekt Console App, standard C++17.
+:::
+
+## Wejściówka
+
+**3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego przygotowania.** Każde jest warte 1 punkt. Test rozwiązuje się indywidualnie; wynik pojawi się po potwierdzeniu zapisu.
+
+<div id="rsod-quiz"></div>
+<script src="../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById("rsod-quiz"), {
+  "course": "wdplab2026",
+  "lecture": "cpp04",
+  "title": "Wejściówka przed laboratorium 4",
+  "submitUrl": "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  "questions": [
+    {
+      "id": "q1",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Jakie są poprawne indeksy tablicy int values[4]?",
+      "options": [
+        {
+          "v": "A",
+          "t": "1, 2, 3, 4"
+        },
+        {
+          "v": "B",
+          "t": "0, 1, 2, 3"
+        },
+        {
+          "v": "C",
+          "t": "0, 1, 2, 3, 4"
+        },
+        {
+          "v": "D",
+          "t": "Tylko 4"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Co wypisze program?",
+      "options": [
+        {
+          "v": "A",
+          "t": "4"
+        },
+        {
+          "v": "B",
+          "t": "12"
+        },
+        {
+          "v": "C",
+          "t": "11"
+        },
+        {
+          "v": "D",
+          "t": "5"
+        }
+      ],
+      "code": "int values[4] = {2,5,1,4};\nint total = 0;\nfor (int i = 0; i < 4; ++i) total += values[i];\nstd::cout << total;"
+    },
+    {
+      "id": "q3",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Która pętla sprawdza warunek dopiero po wykonaniu ciała?",
+      "options": [
+        {
+          "v": "A",
+          "t": "for"
+        },
+        {
+          "v": "B",
+          "t": "do…while"
+        },
+        {
+          "v": "C",
+          "t": "while"
+        },
+        {
+          "v": "D",
+          "t": "Każda"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "points": 1,
+      "diff": "przygotowanie",
+      "text": "Przygotowanie: do czego służy return value w funkcji zwracającej liczbę?",
+      "options": [
+        {
+          "v": "A",
+          "t": "Wczytuje nowy argument"
+        },
+        {
+          "v": "B",
+          "t": "Kończy wywołanie funkcji i przekazuje wynik"
+        },
+        {
+          "v": "C",
+          "t": "Powtarza funkcję"
+        },
+        {
+          "v": "D",
+          "t": "Zawsze wypisuje value na ekranie"
+        }
+      ]
+    }
+  ]
+});
+</script>
+
+## Wprowadzenie teoretyczne
+
+### Dlaczego wydzielamy funkcje?
+
+Obliczanie średniej lub sprawdzanie zakresu może być potrzebne w kilku miejscach. Zamiast kopiować instrukcje, można nazwać operację i wywoływać ją z różnymi danymi. Funkcja powinna mieć jasno określone argumenty, wynik i ewentualny wpływ na przekazane dane.
+
+```cpp
+int square(int value)
+{
+    return value * value;
+}
+```
+
+`int` przed nazwą określa typ wyniku. `value` jest parametrem, a wyrażenie `square(4)` wywołuje funkcję z argumentem 4 i daje wynik 16. Definicję tej funkcji umieszczamy przed `main`, a w `main` możemy napisać `std::cout << square(4);`.
+
+**Deklaracja**, np. `int square(int value);`, informuje o nazwie, parametrach i wyniku. **Definicja** zawiera również ciało. W naszych małych programach definicje nad `main` pozwalają uniknąć dodatkowych plików. Funkcji nie definiujemy wewnątrz `main`.
+
+### Przekazywanie przez wartość
+
+Parametr `int value` otrzymuje kopię wartości argumentu. Zmiana parametru nie zmienia zmiennej wywołującego. Możemy zwrócić nową wartość i jawnie ją przypisać:
+
+```cpp
+int increased(int value)
+{
+    return value + 5;
+}
+```
+
+Dla `int charge = 20;` wywołanie `increased(charge);` bez użycia wyniku pozostawi `charge` równe 20. Dopiero `charge = increased(charge);` zapisze 25. `return` przekazuje wynik i kończy dane wywołanie funkcji.
+
+### Referencja i zamierzona zmiana argumentu
+
+Parametr `int& value` jest referencją, czyli inną nazwą obiektu przekazanego przy wywołaniu. Zmiana takiego parametru zmienia oryginalną zmienną. Funkcja `void` nie zwraca wartości wyniku:
+
+```cpp
+void increase(int& value)
+{
+    value += 5;
+}
+```
+
+Wywołanie `increase(charge);` zmieni `charge` z 20 na 25. Referencję stosujemy wtedy, gdy zmiana argumentu jest częścią zadania funkcji. Nie dodajemy `&` automatycznie do każdego parametru.
+
+### Tablica jako argument
+
+W parametrze funkcji zapis `const int values[]` umożliwia odczytywanie elementów przekazanej tablicy. Funkcja nie dostaje automatycznie informacji o jej długości; liczbę elementów podajemy osobnym argumentem. Taki parametr jest traktowany jak wskaźnik do pierwszego elementu. Nie oznacza skopiowania całej tablicy.
+
+`const` zabrania modyfikowania elementów przez ten parametr. Bez `const` funkcja może zmieniać przekazaną tablicę. Podana długość musi odpowiadać dostępnej liczbie elementów — kompilator nie sprawdzi jej za nas.
+
+### Pełny przykład: funkcje w raporcie
+
+Program najpierw zmienia pierwszy pomiar z 20 na 35, a potem zlicza gotowe urządzenia. Wypisze `First: 35` i `Ready: 3`. Funkcja `isReady` jedynie odpowiada na pytanie; `addCorrection` celowo zmienia argument.
+
+```cpp
+#include <iostream>
+
+bool isReady(int charge)
+{
+    return charge >= 30 && charge <= 100;
+}
+
+int countReady(const int values[], int count)
+{
+    int ready = 0;
+    for (int i = 0; i < count; ++i) {
+        if (isReady(values[i])) {
+            ++ready;
+        }
+    }
+    return ready;
+}
+
+void addCorrection(int& value, int correction)
+{
+    value += correction;
+}
+
+int main()
+{
+    int charge[4] = {20, 30, 80, 0};
+    addCorrection(charge[0], 15);
+    std::cout << "First: " << charge[0] << '\n';
+    std::cout << "Ready: " << countReady(charge, 4) << '\n';
+    return 0;
+}
+```
+
+### Sprawdzanie funkcji osobno
+
+Funkcja jest łatwiejsza do sprawdzenia, gdy ma jedno zadanie. Dla `isReady` można przygotować przypadki 29, 30, 100, 101 bez odczytu z klawiatury. W debuggerze **F11 / Step Into** przechodzi do wywołanej funkcji; **F10 / Step Over** pozwala wykonać wywołanie bez śledzenia jego wnętrza.
+
+Dla funkcji liczącej średnią trzeba ustalić, co oznacza pusty zbiór. W zadaniu poniżej funkcja ma otrzymywać niepustą tablicę; `main` odpowiada za sprawdzenie tego warunku przed wywołaniem. Nie przyjmujemy przypadkowego wyniku z dzielenia przez zero.
+
+[Pełny program pokazowy — pobierz plik .cpp](../assets/cpp/04_pokaz.cpp). Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.
+
+## Zadania do realizacji
+
+Przed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.
+
+::: {.lab-task}
+### Zadanie 1. Funkcja przeliczeniowa
+
+Napisz `double celsiusToKelvin(double celsius)`. Funkcja ma zwracać wynik i niczego nie wczytywać ani wypisywać. W main sprawdź temperatury 0 i 100: wyniki 273.15 i 373.15. Następnie pozwól użytkownikowi wprowadzić temperaturę.
+:::
+
+::: {.lab-task}
+### Zadanie 2. Kopia i referencja
+
+Zdefiniuj dwie funkcje: `void increaseCopy(int value)` i `void increaseOriginal(int& value)`. Obie zwiększają parametr o 5 i wypisują go. Zacznij w main od 20, wywołaj pierwszą funkcję i wypisz oryginał; następnie wywołaj drugą i ponownie wypisz oryginał. Wyjaśnij przebieg 25, 20, 25, 25.
+:::
+
+::: {.lab-task}
+### Zadanie 3. Zamiana wartości
+
+Napisz `void swapValues(int& first, int& second)` z jedną zmienną pomocniczą. Dla a=3, b=7 po wywołaniu ma być a=7, b=3. Sprawdź też równe wartości. Nie używaj gotowej funkcji zamiany.
+:::
+
+::: {.lab-task}
+### Zadanie 4. Średnia z tablicy
+
+Napisz `double average(const int values[], int count)` dla niepustej tablicy. Zsumuj elementy i zwróć średnią bez utraty części ułamkowej. Sprawdź `{2,5,1,4}` → 3 oraz `{1,2}` → 1.5. W main sprawdzaj `count > 0` przed wywołaniem.
+:::
+
+::: {.lab-task}
+### Zadanie 5. Zmiana elementów tablicy
+
+Napisz `void resetValues(int values[], int count)`, która ustawi każdy element na zero. Po wywołaniu wypisz tablicę w main i wyjaśnij, dlaczego zmiany są widoczne. Nie zakładaj w funkcji stałej długości 4 lub 6.
+:::
+
+::: {.lab-task}
+### Zadanie 6. Raport podzielony na funkcje
+
+Wróć do raportu z laboratorium 3. Wydziel funkcje obliczające średnią i liczbę wartości poniżej zadanego progu oraz funkcję wypisującą raport. Main ma przygotować tablicę i uruchomić raport. Sprawdź dane `{80,20,55,0,100,30}`: średnia 47.5 i dwa pomiary poniżej 30. Nie używaj zmiennych globalnych.
+:::
+
+## Dokumentacja i sprawdzenie pracy
+
+- Zachowaj źródła `.cpp` oznaczone numerem zadania.
+- Dla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.
+- Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.
+- Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.
+
+Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów `.vs` i `Debug` ani plików `.exe`.
+
+## Przygotowanie do następnej wejściówki
+
+### Powtórz
+
+- Wynik funkcji i wywołanie; funkcje void.
+- Kopię argumentu i referencję; wpływ na zmienną w main.
+- Tablicę jako argument oraz potrzebę przekazania długości.
+
+### Przeczytaj przed laboratorium 5
+
+W [instrukcji 5](05_wektor.qmd#wprowadzenie-teoretyczne) przeczytaj sekcje o obiekcie, metodzie i kontenerze vector.
+
+**Minimalne przygotowanie:** wiedzieć, że vector przechowuje elementy, push_back dopisuje jeden na końcu, a size zwraca ich liczbę. Pusty wektor po dopisaniu 8, 12 i 16 ma trzy elementy. Nie trzeba jeszcze implementować menu rejestru.
+
+Następna wejściówka: **3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu**, po 1 punkcie.

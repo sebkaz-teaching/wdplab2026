@@ -1,238 +1,126 @@
 ---
-title: "Start: Visual Studio Community i program konsolowy w C"
-format: html
-toc: true
+title: "Visual Studio — projekt konsolowy C++"
 ---
 
-## Co przygotowujemy?
+## Co przygotować
 
-Na laboratoriach piszemy **programy konsolowe w języku C**. Tekst nadal pojawia
-się w konsoli, a kod tworzymy, budujemy i sprawdzamy w **Visual Studio Community
-na Windows**. Środowisko IDE — *Integrated Development Environment*,
-zintegrowane środowisko programistyczne — łączy edytor, narzędzia budowania
-programu i debugger, który pozwala zatrzymać program oraz obejrzeć jego stan.
+Używamy **Visual Studio Community na Windows**, projektu **Console App / Aplikacja konsolowa (C++)**
+i plików **`.cpp`**. IDE (*Integrated Development Environment*, zintegrowane środowisko programistyczne)
+łączy edytor, narzędzia budowania i debugger. Instalację warto wykonać przed pierwszym spotkaniem.
 
-Ta instrukcja poprzedza sesję 1 i nie zmienia numeracji sesji 1–18.
-Instalację wykonujemy przed zajęciami. Na pierwszym spotkaniu przechodzimy od
-utworzenia projektu do uruchomienia programu. Pokaz zmiennych w debuggerze
-można dokończyć na początku sesji 2.
+## 1. Instalacja
 
-## 1. Instalacja na Windows
+1. Pobierz Visual Studio Community z [oficjalnej strony Microsoft](https://visualstudio.microsoft.com/downloads/).
+2. W instalatorze zaznacz **Desktop development with C++ / Programowanie aplikacji klasycznych w C++**.
+3. Pozostaw zalecane składniki kompilatora MSVC oraz Windows SDK.
+4. Uruchom Visual Studio. Przy istniejącej instalacji składniki można dodać przez Visual Studio Installer → Modify / Modyfikuj.
 
-1. Otwórz [oficjalną stronę pobierania Visual Studio](https://visualstudio.microsoft.com/downloads/).
-   Wybierz **Visual Studio Community**, stabilne wydanie dla Windows.
-   Instrukcja jest przygotowana dla obecnego Visual Studio 2026; w pracowni
-   z Visual Studio 2022 kroki są podobne.
-2. Uruchom instalator. Instalacja składników może wymagać uprawnień
-   administratora; na komputerze pracowni zajmuje się tym administrator.
-3. W **Workloads / Obciążenia** zaznacz **Desktop development with C++**
-   (programowanie aplikacji klasycznych w C++).
-4. Pozostaw zalecany kompilator **MSVC** (*Microsoft Visual C++*) dla x64/x86
-   oraz aktualny **Windows SDK** (*Software Development Kit*, zestaw narzędzi
-   programistycznych). Ten zestaw obsługuje także C.
-5. Zakończ instalację i uruchom Visual Studio. Jeśli pojawi się prośba
-   o zalogowanie lub aktywację, wykonaj wskazane przez program kroki.
+Visual Studio Code jest innym programem; ta instrukcja dotyczy pełnego Visual Studio Community.
+Nie trzeba instalować dodatkowych bibliotek ani narzędzi konsolowych.
+Na komputerach pracowni instalację składników wymagających uprawnień wykonuje administrator.
 
-W tym kursie używamy pełnego **Visual Studio Community**, a nie edytora
-**Visual Studio Code**. Samo obciążenie .NET/C# nie instaluje potrzebnego
-kompilatora C. Jeśli Visual Studio już jest zainstalowane, brakujące składniki
-można dodać przez **Visual Studio Installer → Modify / Modyfikuj**.
+## 2. Utworzenie aplikacji konsolowej
 
-Źródło: [Microsoft — instalacja obsługi C i C++](https://learn.microsoft.com/cpp/build/vscpp-step-0-installation).
+1. **Create a new project / Utwórz nowy projekt**.
+2. Wyszukaj **Console App / Aplikacja konsolowa**. Wybierz wariant **C++**, Windows, Console — nie C#.
+3. Nadaj projektowi nazwę, np. `WDP_Lab01`, i wybierz katalog, w którym możesz zapisywać pliki.
+4. Otwórz wygenerowany plik `.cpp`. Zastąp jego zawartość przykładem poniżej; nie dopisuj drugiej funkcji `main`.
+5. Pozostaw konfigurację **Debug** i platformę **x64**.
 
-## 2. Rozwiązanie, projekt i plik: trzy różne rzeczy
+```cpp
+#include <iostream>
 
-| Element | Co oznacza w naszych zajęciach |
-|---|---|
-| Solution / Rozwiązanie | Zestaw projektów i ustawień; plik `.sln` lub `.slnx` zależnie od wersji |
-| Project / Projekt | Ustawienia budowania konkretnego programu; dla tego typu projektu plik `.vcxproj` |
-| Source file / Plik źródłowy | Kod C, np. `main.c` |
-| Executable / Plik wykonywalny | Wynik budowania, np. `WDP_Sesja01.exe` |
-
-Na początek: **jeden projekt, jeden plik `.c`, jedna funkcja `main`**.
-Do następnego niezależnego programu twórz nowy projekt, zamiast dodawać drugą
-funkcję `main` do tego samego programu.
-
-## 3. Utwórz pusty projekt
-
-1. W oknie startowym kliknij **Create a new project / Utwórz nowy projekt**.
-2. Wyszukaj **Empty Project / Pusty projekt**. Wybierz szablon oznaczony
-   **C++ / Windows**. Nie wybieraj „Blank Solution / Puste rozwiązanie”.
-3. Podaj nazwę `WDP_Sesja01` i wybierz własny katalog, np. `Dokumenty\WDP`.
-4. Kliknij **Create / Utwórz**. Na pasku wybierz **Debug** oraz **x64**.
-5. Odszukaj **Solution Explorer / Eksplorator rozwiązań**. Jeśli panel jest
-   zamknięty, otwórz go z menu **View / Widok**.
-6. Kliknij prawym przyciskiem **Source Files / Pliki źródłowe → Add → New Item**.
-   Wybierz pozycję **C++ File (.cpp)**, ale w polu nazwy wpisz **`main.c`**.
-   Sprawdź po dodaniu, że nazwa faktycznie kończy się na `.c`.
-
-Szablon ma kategorię C++, ponieważ Visual Studio grupuje te narzędzia razem.
-Plik `.c` jest domyślnie kompilowany jako C, a `.cpp` jako C++.
-
-## 4. Ustaw projekt do pracy w C
-
-Po dodaniu `main.c` kliknij prawym przyciskiem **nazwę projektu** (nie rozwiązania)
-i wybierz **Properties / Właściwości**. U góry ustaw **All Configurations** oraz
-**All Platforms**, żeby ustawienia nie zniknęły po zmianie Debug/Release.
-
-| Miejsce we właściwościach projektu | Ustawienie |
-|---|---|
-| C/C++ → Language → C Language Standard | **ISO C17 (`/std:c17`)** |
-| C/C++ → Advanced → Compile As | **Compile as C Code (`/TC`)** |
-| C/C++ → General → Warning Level | **Level 4 (`/W4`)** |
-| C/C++ → Precompiled Headers | **Not Using Precompiled Headers** |
-| Linker → System → SubSystem | **Console (`/SUBSYSTEM:CONSOLE`)** |
-
-Kliknij **Apply**, następnie **OK**. Na pasku głównym wróć do **Debug / x64**.
-Nie wybieraj „C++ Language Standard” zamiast „C Language Standard”.
-
-C17 określa wersję języka, a `/W4` poziom ostrzeżeń. Nie są to elementy kodu C,
-lecz ustawienia kompilatora. Starsze polecenia GCC w materiałach mogą zawierać
-`-std=c99`; MSVC nie ma identycznego przełącznika C99. Na zajęciach w Visual
-Studio ustawiamy C17. Nie oznacza to pełnej zgodności wszystkich rozszerzeń
-GCC i bibliotek systemowych z Windows.
-
-Źródło: [Microsoft — pliki C, opcja /TC i standardy C11/C17](https://learn.microsoft.com/en-us/cpp/build/walkthrough-compile-a-c-program-on-the-command-line?view=msvc-160).
-
-## 5. Pierwszy program: zapis, budowanie, uruchomienie
-
-W `main.c` wpisz:
-
-```c
-#include <stdio.h>
-
-int main(void) {
-    printf("Stanowisko dyzurnego gotowe.\n");
+int main()
+{
+    std::cout << "Hello, world!\n";
     return 0;
 }
 ```
 
-1. **Ctrl+S** — zapisz plik.
-2. **Build → Build Solution / Kompiluj rozwiązanie**, zwykle **Ctrl+Shift+B** —
-   zbuduj program. Sprawdź, czy kompilacja zakończyła się powodzeniem.
-3. **Debug → Start Without Debugging / Uruchom bez debugowania**, zwykle
-   **Ctrl+F5** — uruchom program w konsoli.
-4. Oczekiwany tekst: `Stanowisko dyzurnego gotowe.`. Po zakończeniu programu
-   środowisko może dopisać własny komunikat o zakończeniu procesu.
-5. Zmień komunikat, zapisz, zbuduj i uruchom ponownie. Konsola ma pokazać nową treść.
+**Pusty projekt C++ też jest poprawny**, ale nie tworzy automatycznie kodu startowego.
+W takim projekcie wybierz prawym przyciskiem projekt → Add / Dodaj → New Item / Nowy element
+→ C++ File i dodaj `main.cpp`. Sam plik otwarty w edytorze musi należeć do projektu.
 
-Podczas budowania kompilator tłumaczy kod, a linker łączy potrzebne elementy
-w program wykonywalny. Sam **Ctrl+S** nie przebudowuje pliku `.exe`.
+## 3. Ustawienia języka
 
-## 6. Dwa miejsca na komunikaty
+Kliknij prawym przyciskiem **projekt** w Solution Explorer / Eksploratorze rozwiązań → Properties / Właściwości.
+Wybierz **All Configurations / Wszystkie konfiguracje**, aby ustawienie nie dotyczyło tylko jednej wersji.
 
-| Okno | Co w nim sprawdzamy |
+| Ustawienie | Wartość |
 |---|---|
-| Konsola programu | Tekst z `printf` i dane wpisywane przez użytkownika |
-| Output / Dane wyjściowe | Przebieg budowania; wybierz źródło **Build** |
-| Error List / Lista błędów | Komunikaty z plikiem i numerem wiersza; przy diagnozie wybierz źródło **Build**, aby oddzielić je od podpowiedzi IntelliSense |
+| C/C++ → Language → C++ Language Standard | ISO C++17 (`/std:c++17`) |
+| C/C++ → Advanced → Compile As | Default; dla `.cpp` oznacza C++, albo Compile as C++ (`/TP`) |
+| Configuration Properties → General → Configuration Type | Application (`.exe`) |
+| Linker → System → SubSystem | Console (`/SUBSYSTEM:CONSOLE`) |
 
-Usuń średnik po `printf` i ponownie zbuduj program. Otwórz pierwszy błąd
-kompilatora dwuklikiem. Wskazana linia może znajdować się po miejscu rzeczywistego
-błędu — sprawdź również poprzednią instrukcję. Przywróć średnik i zbuduj ponownie.
+Jeśli wcześniej ustawiono **Compile as C (`/TC`)**, zmień je: nowa wersja kursu używa C++.
+Nie ustawiaj C17 — to standard innego języka. Dla tych zajęć nie potrzebujemy ręcznej konfiguracji prekompilowanych nagłówków.
+W razie komunikatu o `pch.h` wybierz C/C++ → Precompiled Headers → Not Using Precompiled Headers.
 
-**Jeśli po błędzie Visual Studio proponuje uruchomienie ostatniej poprawnej
-wersji, wybierz „Nie”.** Stary plik `.exe` nie jest dowodem, że bieżący kod działa.
+## 4. Zapis, budowanie i uruchomienie
 
-## 7. Pierwszy debugger: dlaczego wynik jest nieprawidłowy?
+1. **Ctrl+S** zapisuje plik źródłowy.
+2. **Build → Build Solution / Kompiluj → Kompiluj rozwiązanie**, zwykle **Ctrl+Shift+B**, buduje program.
+3. W **View → Output / Widok → Dane wyjściowe**, źródło **Build / Kompilacja**, sprawdź wynik.
+4. Oczekiwane jest zero niepowodzeń oraz ścieżka zakończona nazwą projektu i `.exe`.
+5. **Debug → Start Without Debugging / Uruchom bez debugowania**, zwykle **Ctrl+F5**, uruchamia program.
 
-Ten przykład zawiera **zamierzony błąd obliczenia**. W tym samym `main.c`
-zastąp cały poprzedni program poniższym kodem:
-
-```c
-#include <stdio.h>
-
-int main(void) {
-    int stock = 20;
-    int issued = 7;
-    int remaining = stock + issued;
-
-    printf("Pozostalo: %d\n", remaining);
-    return 0;
-}
+```text
+main.cpp → kompilacja → main.obj → konsolidacja → WDP_Lab01.exe
 ```
 
-Magazyn miał 20 kompletów i wydał 7, więc powinno pozostać 13. Kod kompiluje się,
-ale wypisuje 27. Poprawność składni nie zapewnia poprawności obliczenia.
-
-1. Zbuduj program w konfiguracji **Debug**.
-2. Ustaw kursor w wierszu `int remaining = stock + issued;` i naciśnij **F9**.
-   Czerwona kropka oznacza **breakpoint**, punkt przerwania.
-3. Naciśnij **F5 — Start Debugging**. Program zatrzyma się **przed wykonaniem**
-   tej instrukcji. Żółta strzałka wskazuje instrukcję, która ma się wykonać.
-4. Najedź na `stock` i `issued`: wartości powinny wynosić 20 i 7.
-   Otwórz także **Debug → Windows → Locals / Zmienne lokalne**.
-5. Naciśnij **F10 — Step Over / Krok z pominięciem**. Teraz `remaining` ma 27.
-   Przed tym krokiem zmienna nie miała jeszcze zainicjalizowanej wartości;
-   nie interpretuj wcześniejszego wskazania debuggera jako wyniku obliczenia.
-6. Zatrzymaj debugowanie przez **Shift+F5**. Popraw działanie, zbuduj i ponów
-   pokaz. Oczekiwany wynik po wykonaniu instrukcji to 13.
-
-`F10` wykonuje następną instrukcję bez wchodzenia w szczegóły wywoływanej funkcji;
-nie pomija jej działania. `F11` służy do wejścia do funkcji — przyda się w sesji 6.
-Na początku nie wchodzimy przez F11 do biblioteki realizującej `printf`.
-
-Źródło: [Microsoft — punkty przerwania, F5, F10 i podgląd zmiennych](https://learn.microsoft.com/en-us/visualstudio/debugger/quickstart-debug-with-cplusplus?view=visualstudio).
-
-## 8. Jak wykonywać kolejne zadania z kursu?
-
-1. Utwórz nowy projekt, np. `WDP_Sesja02`, i ustaw go tak jak powyżej.
-2. Dodaj **jeden aktywny program z funkcją `main`**. Możesz go stopniowo rozwijać.
-3. Jeśli rozwiązanie zawiera kilka projektów, kliknij właściwy prawym
-   przyciskiem i wybierz **Set as Startup Project / Ustaw jako projekt startowy**.
-4. Kod C z materiałów wklejaj do pliku `.c`. Poleceń `gcc …` i `./program`
-   nie wklejaj do edytora kodu: w Visual Studio ich rolę pełnią Build i uruchomienie.
-5. Przed oddaniem zadania zapisz pliki, zbuduj program i sprawdź oczekiwany wynik.
-   Do przeniesienia projektu zachowaj źródła i pliki projektu/rozwiązania;
-   sam `.exe` nie zastępuje kodu źródłowego.
-
-### Gdy w sesji 2 pojawi się scanf i komunikat C4996
-
-Przykłady kursu korzystają ze standardowych funkcji C, m.in. `scanf` i `fopen`.
-Microsoft oznacza część tych funkcji komunikatem C4996 i proponuje warianty `_s`.
-Dla zgodności kodu kursu ustaw w projekcie:
-
-**Properties → C/C++ → Preprocessor → Preprocessor Definitions → Edit**
-
-Dodaj **`_CRT_SECURE_NO_WARNINGS`**, zachowując istniejące i dziedziczone definicje.
-Ustawienie powinno dotyczyć wszystkich konfiguracji. Następnie przebuduj projekt.
-Nie wyłączaj wszystkich ostrzeżeń ani dodatkowych kontroli bezpieczeństwa.
-
-Ta definicja usuwa konkretną kategorię komunikatów biblioteki CRT
-(*C Runtime Library*). Nie poprawia kodu: nadal trzeba sprawdzać wynik odczytu,
-poprawność danych i rozmiary buforów. Nie zastępuj automatycznie każdego `scanf`
-przez `scanf_s`: dla niektórych formatów różnią się wymagane argumenty.
-
-Źródło: [Microsoft — C4996 i definicje preprocesora](https://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4996?view=msvc-170).
-
-### Pliki danych w późniejszych sesjach
-
-W przykładzie `fopen("dane.txt", "r")` plik jest szukany względem **katalogu
-roboczego procesu**, a nie zawsze obok `.c` lub `.exe`. Dla przewidywalnego
-pokazu ustaw w **Properties → Debugging → Working Directory** wartość
-`$(ProjectDir)` i umieść `dane.txt` w katalogu projektu. Argumenty programu
-ustawisz w **Debugging → Command Arguments**.
-
-## 9. Najczęstsze przeszkody
+Program `.exe` powstaje z całego projektu, dlatego domyślnie ma nazwę projektu, nie pliku `main.cpp`.
+Wybranie polecenia Compile dla samego pliku może utworzyć tylko `.obj`.
+Folder wyjściowy często nazywa się `x64/Debug`; dokładną ścieżkę pokazuje okno Output.
 
 | Objaw | Co sprawdzić |
 |---|---|
-| Nie ma szablonu Empty Project z C++ | Doinstaluj obciążenie Desktop development with C++ |
-| Nie ma sekcji C/C++ we właściwościach | Dodaj plik `.c` i otwórz właściwości projektu, nie rozwiązania |
-| Błąd związany z `pch.h` | Ustaw Not Using Precompiled Headers; projekt tworzymy z Empty Project |
-| Linker zgłasza kilka definicji `main` | Kilka plików z osobnymi programami trafiło do jednego projektu |
-| Linker szuka `WinMain` | Sprawdź SubSystem = Console i obecność funkcji `main` |
-| Uruchamia się inny program | Sprawdź projekt startowy i wynik ostatniego budowania |
-| Nie można nadpisać `.exe` | Zakończ poprzedni proces i debugowanie, potem buduj ponownie |
-| Punkt przerwania jest pusty lub nieaktywny | Wybierz Debug, zbuduj aktualny kod i sprawdź projekt startowy |
-| Skrót klawiaturowy działa inaczej | Użyj nazwanej operacji z menu; na laptopie może być potrzebny Fn |
+| „Kompilacja ukończona”, ale nic się nie uruchamia | Budowanie i uruchomienie to osobne działania; użyj Ctrl+F5 |
+| Brak pliku `.exe` | Zbuduj całe rozwiązanie, sprawdź błędy i typ projektu Application |
+| Nie ma przycisku uruchomienia właściwego projektu | Prawy przycisk projektu → Set as Startup Project |
+| Uruchamia się stary komunikat | Zapisz i zbuduj; przy błędzie nie uruchamiaj ostatniej poprawnej wersji |
+| Błąd o wielu definicjach `main` | Jeden niezależny program powinien mieć jeden projekt i jedną funkcję `main` |
+| Program czeka po wyświetleniu pytania | Wpisz wymagane dane i zatwierdź Enter |
 
-## Sprawdzenie gotowości
+`system("pause")` nie naprawia braku `.exe`. Na tych zajęciach do uruchamiania wystarcza Ctrl+F5.
 
-- Otwierasz właściwy projekt i wskazujesz plik `.c`.
-- Budujesz program i uruchamiasz go w konsoli.
-- Rozróżniasz zapis pliku, budowanie i uruchamianie.
-- Odnajdujesz błąd kompilacji i nie uruchamiasz starej wersji jako nowej.
-- Zatrzymujesz program na punkcie przerwania i obserwujesz wartości po F10.
+## 5. Krótki pokaz debuggera
 
-Następnie przejdź do [sesji 1 — pierwszy program](sesje/01_pierwszy_program.qmd).
+Debugger pozwala obejrzeć program krok po kroku. W osobnym projekcie lub po zastąpieniu wcześniejszego kodu:
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    int available = 20;
+    int issued = 7;
+    int remaining = available + issued;
+    std::cout << remaining << '\n';
+    return 0;
+}
+```
+
+W kodzie jest **celowy błąd obliczenia**: dodawanie zamiast odejmowania.
+
+1. Kliknij linię obliczającą `remaining` i naciśnij **F9**, aby ustawić punkt zatrzymania (*breakpoint*).
+2. Uruchom debugowanie **F5**. Żółta strzałka wskazuje instrukcję, która dopiero zostanie wykonana.
+3. Obejrzyj `available` i `issued` w oknie **Locals / Zmienne lokalne**.
+4. **F10** wykonuje kolejny krok. Sprawdź wynik 27 i porównaj z oczekiwanym 13.
+5. Zatrzymaj debugowanie **Shift+F5**, popraw `+` na `-`, zbuduj i ponownie uruchom.
+
+Błąd składni może uniemożliwić zbudowanie programu. Błąd obliczenia może dać poprawnie zbudowany program z niewłaściwym wynikiem.
+
+## 6. Organizacja plików
+
+Dla zadań A i B można utworzyć dwa projekty, np. `Spotkanie01_A` i `Spotkanie01_B`.
+Nie dodawaj wszystkich programów pokazowych do jednego projektu, bo każdy zawiera własne `main`.
+Na zajęcia wystarczy oddać pliki `.cpp` oraz wymagane wyniki prób.
+
+[Przejdź do spotkania 1](../laboratoria/01_projekt.qmd).
+
+## Dokumentacja środowiska
+
+- [Microsoft — pierwszy projekt konsolowy C++](https://learn.microsoft.com/cpp/build/vscpp-step-1-create).
+- [Microsoft — budowanie projektów i rozwiązań](https://learn.microsoft.com/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio).
+- [Microsoft — wybór kompilacji C albo C++](https://learn.microsoft.com/cpp/build/reference/tc-tp-tc-tp-specify-source-file-type).

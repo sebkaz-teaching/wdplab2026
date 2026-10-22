@@ -1,0 +1,285 @@
+---
+title: "Laboratorium 5"
+subtitle: "Klasy biblioteczne i kontener vector"
+format:
+  html:
+    body-classes: lab-handout
+---
+
+::: {.lab-meta}
+**Wprowadzenie do programowania** · C++ · instrukcja laboratoryjna
+
+**Cel ćwiczenia:** Używanie metod bibliotecznych oraz przechowywanie zmiennej liczby pomiarów.
+
+**Środowisko:** Visual Studio Community, projekt Console App, standard C++17.
+:::
+
+## Wejściówka
+
+**3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego przygotowania.** Każde jest warte 1 punkt. Test rozwiązuje się indywidualnie; wynik pojawi się po potwierdzeniu zapisu.
+
+<div id="rsod-quiz"></div>
+<script src="../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById("rsod-quiz"), {
+  "course": "wdplab2026",
+  "lecture": "cpp05",
+  "title": "Wejściówka przed laboratorium 5",
+  "submitUrl": "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  "questions": [
+    {
+      "id": "q1",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Co oznacza parametr int& value?",
+      "options": [
+        {
+          "v": "A",
+          "t": "Kopię tablicy"
+        },
+        {
+          "v": "B",
+          "t": "Referencję umożliwiającą zmianę przekazanej zmiennej"
+        },
+        {
+          "v": "C",
+          "t": "Stałą liczbę"
+        },
+        {
+          "v": "D",
+          "t": "Wynik funkcji"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Co wypisze program?",
+      "options": [
+        {
+          "v": "A",
+          "t": "25"
+        },
+        {
+          "v": "B",
+          "t": "20"
+        },
+        {
+          "v": "C",
+          "t": "5"
+        },
+        {
+          "v": "D",
+          "t": "0"
+        }
+      ],
+      "code": "void increase(int value) { value += 5; }\nint main() {\n    int charge = 20;\n    increase(charge);\n    std::cout << charge;\n}"
+    },
+    {
+      "id": "q3",
+      "points": 1,
+      "diff": "powtórka",
+      "text": "Dlaczego funkcji analizującej const int values[] przekazujemy także count?",
+      "options": [
+        {
+          "v": "A",
+          "t": "Aby skopiowała tablicę"
+        },
+        {
+          "v": "B",
+          "t": "Ponieważ sam parametr tablicowy nie przekazuje jej długości"
+        },
+        {
+          "v": "C",
+          "t": "Ponieważ każda tablica ma 100 elementów"
+        },
+        {
+          "v": "D",
+          "t": "Aby wyłączyć const"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "points": 1,
+      "diff": "przygotowanie",
+      "text": "Przygotowanie: co robi values.push_back(7) dla wektora liczb?",
+      "options": [
+        {
+          "v": "A",
+          "t": "Czyści wektor"
+        },
+        {
+          "v": "B",
+          "t": "Dodaje 7 jako nowy ostatni element"
+        },
+        {
+          "v": "C",
+          "t": "Usuwa liczbę 7"
+        },
+        {
+          "v": "D",
+          "t": "Zamienia wszystkie elementy na 7"
+        }
+      ]
+    }
+  ]
+});
+</script>
+
+## Wprowadzenie teoretyczne
+
+### Obiekt i metoda na znanym przykładzie
+
+`std::string` poznany na pierwszym laboratorium jest klasą biblioteczną. Zmienna `std::string name = "Radar";` jest obiektem tej klasy. Oprócz przechowywania tekstu obiekt udostępnia operacje, czyli **metody**. Zapis `name.size()` wywołuje metodę zwracającą rozmiar napisu. Kropka łączy konkretny obiekt z jego metodą.
+
+```cpp
+std::string name = "Radar";
+std::cout << name.size() << '\n';
+std::cout << name.empty() << '\n';
+```
+
+Fragment wewnątrz main wypisze 5 i 0: napis ma pięć elementów typu `char` i nie jest pusty. W przykładach długości używamy znaków ASCII. Dla tekstu UTF-8 liczba elementów `char` nie musi być równa liczbie liter widocznych na ekranie.
+
+`std::cin >> name` odczytuje pojedynczy wyraz. `std::getline(std::cin, name)` odczytuje całą linię. Po wcześniejszym odczycie liczby w strumieniu może pozostać znak końca linii. Zapis `std::getline(std::cin >> std::ws, name)` pomija początkowe białe znaki; nadaje się do nazw, w których nie chcemy zachowywać wiodących spacji ani pustej linii.
+
+### Kontener vector
+
+`std::vector<int>` przechowuje kolekcję liczb całkowitych i sam zarządza pamięcią. Wymaga `#include <vector>`. Inaczej niż tablica statyczna, może zmieniać liczbę elementów podczas działania programu. Zapis w nawiasach ostrych wskazuje typ elementu; nie trzeba jeszcze tworzyć własnych szablonów.
+
+| Operacja | Znaczenie |
+|---|---|
+| `std::vector<int> values;` | Pusty wektor |
+| `values.push_back(30);` | Dopisanie elementu na końcu |
+| `values.size()` | Aktualna liczba elementów |
+| `values.empty()` | Czy nie ma żadnego elementu |
+| `values[0]` | Dostęp do pierwszego elementu, jeśli istnieje |
+| `values.pop_back()` | Usunięcie ostatniego elementu; wymaga niepustego wektora |
+| `values.clear()` | Usunięcie wszystkich elementów |
+
+Deklaracja `std::vector<int> values(4);` tworzy **cztery elementy o wartości zero**. Nie jest tym samym co pusty wektor. Po `push_back(9)` będzie miał pięć elementów. Najczęstszy błąd polega na utworzeniu elementów przez podanie rozmiaru, a następnie niezamierzonym dopisywaniu kolejnych zamiast nadpisywania istniejących.
+
+### Przechodzenie przez elementy
+
+Pętla zakresowa odczytuje kolejne wartości bez ręcznego zarządzania indeksem:
+
+```cpp
+for (int value : values) {
+    std::cout << value << '\n';
+}
+```
+
+`value` jest kopią bieżącego elementu. Gdy chcemy zmienić elementy wektora, stosujemy referencję: `for (int& value : values)`. Długość wektora nie powinna być zmieniana wewnątrz tej pętli — dodawanie i usuwanie elementów wykonujemy osobno.
+
+Przy dostępie przez indeks musi zachodzić `0 <= index < size()`. `operator[]` sam nie sprawdza granicy. Do pobrania pierwszego elementu i do `pop_back` najpierw sprawdzamy `empty()`.
+
+### Wektor jako argument funkcji
+
+`const std::vector<int>& values` oznacza referencję umożliwiającą odczyt wektora bez kopiowania całej kolekcji. `const` zabrania zmiany przez ten parametr. Wektor zna własny rozmiar, więc nie potrzebujemy osobnego argumentu `count`, jak przy tablicy statycznej.
+
+W pełnym przykładzie funkcja average wymaga niepustego wektora, a main sprawdza ten warunek przed wywołaniem. Dla `20 40 60 -1` otrzymamy 3 pomiary i średnią 40.
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+double average(const std::vector<int>& values)
+{
+    double total = 0.0;
+    for (int value : values) {
+        total += value;
+    }
+    return total / values.size();
+}
+
+int main()
+{
+    std::string name = "Station A";
+    std::vector<int> readings;
+    int value = 0;
+    std::cout << "Readings 0-100; -1 ends input:\n";
+    while (std::cin >> value && value != -1) {
+        if (value >= 0 && value <= 100) {
+            readings.push_back(value);
+        } else {
+            std::cout << "Rejected\n";
+        }
+    }
+    std::cout << name << ", count: " << readings.size() << '\n';
+    if (readings.empty()) {
+        std::cout << "No readings\n";
+    } else {
+        std::cout << "Average: " << average(readings) << '\n';
+    }
+    return 0;
+}
+```
+
+[Pełny program pokazowy — pobierz plik .cpp](../assets/cpp/05_pokaz.cpp). Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.
+
+## Zadania do realizacji
+
+Przed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.
+
+::: {.lab-task}
+### Zadanie 1. Nazwa pomiaru
+
+Wczytaj całą nazwę stanowiska, także ze spacjami, do `std::string`. Wypisz nazwę, jej rozmiar oraz informację, czy jest pusta. W tym zadaniu użyj samego `getline` jako pierwszego odczytu, aby dało się sprawdzić pustą linię. Próby: `Radar`, `Station A`, pusty Enter.
+:::
+
+::: {.lab-task}
+### Zadanie 2. Zmiana rozmiaru wektora
+
+Utwórz pusty wektor liczb. Dopisz 20, 40, 60, wypisując rozmiar po każdym kroku. Usuń ostatni element, a potem wyczyść całość. Przed `pop_back` sprawdź pustkę. Oczekiwane rozmiary: 0 na początku, następnie 1, 2, 3, 2, 0.
+:::
+
+::: {.lab-task}
+### Zadanie 3. Rejestr pomiarów
+
+Uruchom pełny przykład dla `20 40 60 -1`, `-1` i `200 0 -1`. Rozbuduj go o minimum i maksimum dla niepustej kolekcji. W trzeciej próbie zapisany zostanie tylko jeden pomiar, równy 0. Nie włączaj -1 ani odrzuconych wartości do statystyk.
+:::
+
+::: {.lab-task}
+### Zadanie 4. Kopia a zmiana elementów
+
+Utwórz wektor `{10,20,30}`. Spróbuj dodać 5 do każdego elementu w pętli `for (int value : values)`, a potem wypisz wektor. Następnie zastosuj `int& value` i porównaj wyniki. Wyjaśnij, dlaczego dopiero druga pętla zmienia kolekcję na `{15,25,35}`.
+:::
+
+::: {.lab-task}
+### Zadanie 5. Oddzielna kolekcja spełniająca warunek
+
+Napisz funkcję `std::vector<int> selectReady(const std::vector<int>& values)`, która zwraca nowy wektor z poprawnymi poziomami 30–100. Dla `{20,30,80,0,150}` wynikiem jest `{30,80}`. Wejściowy wektor ma pozostać bez zmian.
+:::
+
+::: {.lab-task}
+### Zadanie 6. Menu rejestru
+
+Połącz pętlę i wektor. Opcje: 1 — dopisz poprawny pomiar 0–100, 2 — wypisz wszystkie, 3 — pokaż średnią lub komunikat o pustej kolekcji, 4 — wyczyść, 0 — zakończ. Wydziel co najmniej funkcję obliczającą średnią. Sprawdź raport przed dodaniem i po wyczyszczeniu.
+:::
+
+## Dokumentacja i sprawdzenie pracy
+
+- Zachowaj źródła `.cpp` oznaczone numerem zadania.
+- Dla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.
+- Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.
+- Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.
+
+Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów `.vs` i `Debug` ani plików `.exe`.
+
+## Przygotowanie do następnej wejściówki
+
+### Powtórz
+
+- size, empty, push_back, pop_back i clear.
+- Dostęp do elementów, sprawdzanie pustego wektora i jego granic.
+- Pętlę zakresową z kopią elementu i z referencją.
+
+### Przeczytaj przed laboratorium 6
+
+W [instrukcji 6](06_klasa.qmd#wprowadzenie-teoretyczne) przeczytaj, czym różnią się klasa, obiekt, pole i metoda, oraz co oznaczają private i public.
+
+**Minimalne przygotowanie:** rozumieć, że public udostępnia operacje kodowi korzystającemu z obiektu, a private ogranicza bezpośredni dostęp do wnętrza. Klasa określa typ; dwa utworzone obiekty mają własne dane. Pisanie klasy będzie zadaniem zajęć.
+
+Następna wejściówka: **3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu**, po 1 punkcie.
