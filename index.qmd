@@ -12,12 +12,16 @@ Pierwsze pięć tematów odpowiada zakresowi karty **Wprowadzenie do programowan
 | Instrukcja | Główne zagadnienia |
 |---|---|
 | [1. Algorytmy i programy w C++](laboratoria/01_projekt.qmd) | Utworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń. |
+<!-- Unreleased labs — move a row above this comment once the lab starts.
 | [2. Operacje warunkowe](laboratoria/02_warunki.qmd) | Zapisanie reguł wyboru oraz sprawdzenie danych przed wykonaniem działania. |
 | [3. Instrukcje cykliczne i tablice](laboratoria/03_petle_tablice.qmd) | Przetwarzanie serii danych z wykorzystaniem pętli i tablic. |
 | [4. Funkcje w języku C++](laboratoria/04_funkcje.qmd) | Podział obliczeń na funkcje i świadomy wybór sposobu przekazywania argumentów. |
 | [5. Klasy biblioteczne i kontener vector](laboratoria/05_wektor.qmd) | Używanie metod bibliotecznych oraz przechowywanie zmiennej liczby pomiarów. |
 | [6. Własna klasa i jej obiekty](laboratoria/06_klasa.qmd) | Zdefiniowanie własnego typu, stanu obiektu i dozwolonych operacji. |
 | [7. Program wykorzystujący kolekcję obiektów](laboratoria/07_rejestr.qmd) | Połączenie klas, funkcji, wektora i menu w działający rejestr urządzeń. |
+-->
+
+Kolejne instrukcje będą udostępniane w miarę postępu zajęć.
 
 ## Przed pierwszym laboratorium
 
@@ -25,7 +29,8 @@ Pierwsze pięć tematów odpowiada zakresowi karty **Wprowadzenie do programowan
 2. Otwórz [instrukcję laboratorium 1](laboratoria/01_projekt.qmd).
 3. Utwórz katalog na źródła i wyniki prób z kolejnych ćwiczeń.
 
-[Programy pokazowe C++ — pobierz ZIP](assets/cpp/pokazy-cpp.zip).
+<!-- [Programy pokazowe C++ — pobierz ZIP](assets/cpp/pokazy-cpp.zip). -->
+[Program pokazowy do laboratorium 1 — pobierz plik .cpp](assets/cpp/01_pokaz.cpp).
 
 ## Wejściówki i przygotowanie
 

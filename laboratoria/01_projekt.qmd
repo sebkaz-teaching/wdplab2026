@@ -222,7 +222,8 @@ Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalog�
 
 ### Przeczytaj przed laboratorium 2
 
-W [instrukcji 2](02_warunki.qmd#wprowadzenie-teoretyczne) przeczytaj sekcje o warunku oraz if/else. Poznaj `==`, `!=`, `<`, `<=`, `>`, `>=`, `&&`, `||` i `!`. Zapoznaj się również z przeznaczeniem switch; jego samodzielne stosowanie będzie ćwiczone na zajęciach.
+<!-- Restore once lab 2 is released: W [instrukcji 2](02_warunki.qmd#wprowadzenie-teoretyczne) przeczytaj -->
+Instrukcja 2 zostanie udostępniona później. Do tego czasu przygotuj się z krótkiego przykładu poniżej: poznaj `==`, `!=`, `<`, `<=`, `>`, `>=`, `&&`, `||` i `!`. Zapoznaj się również z przeznaczeniem switch; jego samodzielne stosowanie będzie ćwiczone na zajęciach.
 
 **Minimalne przygotowanie do pytania wyprzedzającego:** umieć wskazać gałąź prostego if/else. Przeanalizuj fragment: `if (temperature > 25) ... else ...` dla temperatur 25 i 26. Dla 25 wykona się else, dla 26 pierwszy blok. Nie jest wymagane napisanie całego kalkulatora przed zajęciami.
 

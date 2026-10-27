@@ -5,9 +5,24 @@ project:
     - "index.qmd"
     - "scenariusze.qmd"
     - "podstawy_programowania/visual-studio-community.qmd"
-    - "laboratoria/*.qmd"
+    # Labs are released one at a time — uncomment a line once that lab starts.
+    - "laboratoria/01_projekt.qmd"
+    # - "laboratoria/02_warunki.qmd"
+    # - "laboratoria/03_petle_tablice.qmd"
+    # - "laboratoria/04_funkcje.qmd"
+    # - "laboratoria/05_wektor.qmd"
+    # - "laboratoria/06_klasa.qmd"
+    # - "laboratoria/07_rejestr.qmd"
   resources:
-    - "assets/cpp/**"
+    - "assets/cpp/README.txt"
+    - "assets/cpp/01_pokaz.cpp"
+    # - "assets/cpp/02_pokaz.cpp"
+    # - "assets/cpp/03_pokaz.cpp"
+    # - "assets/cpp/04_pokaz.cpp"
+    # - "assets/cpp/05_pokaz.cpp"
+    # - "assets/cpp/06_pokaz.cpp"
+    # - "assets/cpp/07_pokaz.cpp"
+    # - "assets/cpp/pokazy-cpp.zip"
   # Historical C/CHIP-8 render rules, retained for reference only.
   # # Solution files stay OUT of the public render by default — reveal one
   # # only after that week's session is done, by commenting out its line
@@ -33,12 +48,12 @@ website:
       - section: "Instrukcje laboratoryjne"
         contents:
           - laboratoria/01_projekt.qmd
-          - laboratoria/02_warunki.qmd
-          - laboratoria/03_petle_tablice.qmd
-          - laboratoria/04_funkcje.qmd
-          - laboratoria/05_wektor.qmd
-          - laboratoria/06_klasa.qmd
-          - laboratoria/07_rejestr.qmd
+          # - laboratoria/02_warunki.qmd
+          # - laboratoria/03_petle_tablice.qmd
+          # - laboratoria/04_funkcje.qmd
+          # - laboratoria/05_wektor.qmd
+          # - laboratoria/06_klasa.qmd
+          # - laboratoria/07_rejestr.qmd
   page-footer: "Copyright 2026, Sebastian Zając"
 format:
   html:
