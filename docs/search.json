@@ -11,6 +11,17 @@
     ]
   },
   {
+    "objectID": "laboratoria/01_projekt.html#rozpocznij-zajęcia",
+    "href": "laboratoria/01_projekt.html#rozpocznij-zajęcia",
+    "title": "Laboratorium 1",
+    "section": "Rozpocznij zajęcia",
+    "text": "Rozpocznij zajęcia\nWpisz swój e-mail i kliknij Rozpocznij zajęcia. Pojawisz się na liście uczestników u prowadzącego. E-mail jest deklarowany — formularz nie loguje do poczty. Po wykonaniu zadania zgłoś je do sprawdzenia. Prowadzący sprawdza program przy stanowisku i zatwierdza zadanie w swoim panelu. Odświeżanie strony nie usuwa zapisanych postępów. Korzystaj z tej samej karty przeglądarki; dostęp jest zapamiętany w niej na czas sesji. Nie udostępniaj tej karty innym osobom.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
     "objectID": "laboratoria/01_projekt.html#informacje-wprowadzające",
     "href": "laboratoria/01_projekt.html#informacje-wprowadzające",
     "title": "Laboratorium 1",
@@ -44,11 +55,22 @@
     ]
   },
   {
+    "objectID": "laboratoria/01_projekt.html#dalsze-zadania-samodzielne-programy",
+    "href": "laboratoria/01_projekt.html#dalsze-zadania-samodzielne-programy",
+    "title": "Laboratorium 1",
+    "section": "Dalsze zadania — samodzielne programy",
+    "text": "Dalsze zadania — samodzielne programy\nW zadaniach 10–15 napisz każdy program od początku: samodzielnie dobierz nagłówki, napisz funkcję main, zadeklaruj zmienne i ułóż instrukcje. Nie otrzymujesz szablonu rozwiązania. Stosuj angielskie nazwy zmiennych i komunikaty. Załóż poprawne dane zgodne z poleceniem; nie trzeba jeszcze używać warunków ani pętli. W każdym zadaniu sprawdź podany przykład i własny zestaw danych. Przed uruchomieniem oblicz oczekiwany wynik.\n\nZadanie 10. Średnia z trzech pomiarów\nWczytaj trzy pomiary napięcia w woltach jako liczby typu double. Oblicz sumę i średnią arytmetyczną. Wypisz oba wyniki z opisami i jednostką, z trzema miejscami po przecinku. Dla pomiarów 2.1, 2.4 i 2.7 oczekiwane wyniki to suma 7.200 V i średnia 2.400 V. Sprawdź również trzy identyczne pomiary.\n\n\nZadanie 11. Droga, czas i prędkość\nWczytaj nieujemną drogę w kilometrach oraz dodatni czas przejazdu w minutach. Oblicz średnią prędkość w km/h i m/s. Zadbaj o przeliczenie jednostek i wypisz wyniki z dwoma miejscami po przecinku. Dla 9 km i 30 min oczekiwane wyniki to 18.00 km/h i 5.00 m/s. Sprawdź także drogę równą zero i czas niebędący pełną godziną.\n\n\nZadanie 12. Cena zakupów i rabat\nWczytaj nieujemną cenę jednostkową, dodatnią całkowitą liczbę sztuk oraz rabat w procentach z zakresu od 0 do 100. Oblicz wartość zakupów przed rabatem, kwotę rabatu i kwotę do zapłaty. Wypisz kwoty z dwoma miejscami po przecinku i oznaczeniem PLN. Dla ceny 12.50, liczby sztuk 4 i rabatu 10 wyniki to kolejno 50.00 PLN, 5.00 PLN i 45.00 PLN. Sprawdź też rabat 0% oraz 100%. W tym ćwiczeniu stosujemy double; nie projektujemy systemu księgowego.\n\n\nZadanie 13. Energia i koszt pracy urządzenia\nWczytaj nieujemne wartości: moc urządzenia w watach, czas pracy w godzinach i cenę jednej kilowatogodziny w PLN/kWh. Samodzielnie ułóż wzory na zużytą energię w kWh i jej koszt w PLN. Wypisz energię z trzema miejscami po przecinku, a koszt z dwoma. Dla 1500 W, 2 h i 1.20 PLN/kWh wyniki to 3.000 kWh i 3.60 PLN. Sprawdź zerowy czas pracy.\n\n\nZadanie 14. Godziny, minuty i sekundy\nWczytaj całkowitą liczbę sekund z zakresu od 0 do 1000000. Za pomocą dzielenia całkowitego i reszty z dzielenia oblicz liczbę pełnych godzin oraz pozostałych minut i sekund. Minuty i sekundy mają mieścić się w zakresie 0–59; godziny mogą przekroczyć 23. Dla 3665 wypisz 1 h 1 min 5 s. Sprawdź również 0, 59, 60, 3599 oraz 3600. Nie trzeba dopełniać liczb zerami.\n\n\nZadanie 15. Zamiana wartości zmiennych\nWczytaj dwie liczby całkowite. Wypisz ich wartości, zamień zawartości zmiennych z użyciem trzeciej zmiennej pomocniczej i ponownie wypisz wartości. Nie używaj std::swap ani ponownego wczytywania danych. Dla wartości 7 i -3 po zamianie pierwsza zmienna ma zawierać -3, a druga 7. Sprawdź także dwie jednakowe wartości. W debuggerze prześledź każdą instrukcję przypisania i wyjaśnij, po co potrzebna jest zmienna pomocnicza.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
     "objectID": "laboratoria/01_projekt.html#dokumentacja-i-sprawdzenie-pracy",
     "href": "laboratoria/01_projekt.html#dokumentacja-i-sprawdzenie-pracy",
     "title": "Laboratorium 1",
     "section": "Dokumentacja i sprawdzenie pracy",
-    "text": "Dokumentacja i sprawdzenie pracy\n\nZachowaj źródła .cpp oznaczone numerem zadania.\nDla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.\nOpisz wykryty błąd albo jeden sprawdzony przypadek graniczny.\nPrzygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.\n\nSposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów .vs i Debug ani plików .exe.",
+    "text": "Dokumentacja i sprawdzenie pracy\n\nZachowaj źródła .cpp oznaczone numerem zadania.\nDla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.\nOpisz wykryty błąd albo jeden sprawdzony przypadek graniczny.\nPrzygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.\n\nZgłoszenie zadania na stronie nie przesyła kodu źródłowego i nie oznacza zaliczenia. Zatwierdzenie nadaje prowadzący po sprawdzeniu programu. Na koniec kliknij Zakończ laboratorium w formularzu postępów; zapisane zgłoszenia i zatwierdzenia pozostają zachowane.\nSposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów .vs i Debug ani plików .exe.",
     "crumbs": [
       "Instrukcje laboratoryjne",
       "Laboratorium 1"
@@ -90,7 +112,7 @@
     "href": "scenariusze.html#praca-nad-zadaniami",
     "title": "Organizacja pracy laboratoryjnej",
     "section": "Praca nad zadaniami",
-    "text": "Praca nad zadaniami\nZadania można wykonywać w parach ze zmianą osoby przy klawiaturze. Każda osoba powinna umieć samodzielnie wyjaśnić kod i przewidzieć jego wynik. Wejściówka jest indywidualna.\nPierwsza instrukcja obejmuje dziewięć ćwiczeń: środowisko, zmienne, naprawę błędów, obliczenia i formatowanie. Kolejne instrukcje rozwijają warunki, pętle, funkcje, wektor oraz własne klasy. Przykłady pomiarów i urządzeń korzystają z danych ćwiczeniowych.\nKażdy niezależny program zawierający main wymaga osobnego projektu. Nie należy dodawać wszystkich plików pokazowych do jednej aplikacji. Rozwinięcia tego samego programu można zapisywać jako kolejne wersje.",
+    "text": "Praca nad zadaniami\nZadania można wykonywać w parach ze zmianą osoby przy klawiaturze. Każda osoba powinna umieć samodzielnie wyjaśnić kod i przewidzieć jego wynik. Wejściówka jest indywidualna.\nPierwsza instrukcja obejmuje piętnaście ćwiczeń: środowisko, zmienne, naprawę błędów, obliczenia, formatowanie i samodzielne programy utrwalające. Rozpoczęcie zajęć i zgłoszenia zadań zapisujesz w formularzu instrukcji; wykonanie zadania zatwierdza prowadzący po sprawdzeniu programu. Kolejne instrukcje rozwijają warunki, pętle, funkcje, wektor oraz własne klasy. Przykłady pomiarów i urządzeń korzystają z danych ćwiczeniowych.\nKażdy niezależny program zawierający main wymaga osobnego projektu. Nie należy dodawać wszystkich plików pokazowych do jednej aplikacji. Rozwinięcia tego samego programu można zapisywać jako kolejne wersje.",
     "crumbs": [
       "Organizacja pracy laboratoryjnej"
     ]

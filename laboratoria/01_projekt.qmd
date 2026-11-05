@@ -14,6 +14,15 @@ format:
 **Środowisko:** Visual Studio Community, projekt Console App, standard C++17.
 :::
 
+## Rozpocznij zajęcia
+
+Wpisz swój e-mail i kliknij **Rozpocznij zajęcia**. Pojawisz się na liście uczestników u prowadzącego. E-mail jest deklarowany — formularz nie loguje do poczty.
+Po wykonaniu zadania zgłoś je do sprawdzenia. Prowadzący sprawdza program przy stanowisku i zatwierdza zadanie w swoim panelu.
+Odświeżanie strony nie usuwa zapisanych postępów. Korzystaj z tej samej karty przeglądarki; dostęp jest zapamiętany w niej na czas sesji. Nie udostępniaj tej karty innym osobom.
+
+<div id="lab-progress" data-endpoint="https://sebastianzajac.pl/rsod-quiz/lab-progress.php"></div>
+<script src="../assets/js/lab-progress.js" defer></script>
+
 ## Informacje wprowadzające
 
 Ćwiczenie wprowadza do pracy w **Visual Studio Community**, w projekcie **Console App / Aplikacja konsolowa (C++)**.
@@ -203,12 +212,61 @@ Zacznij od `double value = 10.0;`. Kolejno dodaj `2.0` przez `+=`, odejmij `1.0`
 Dla `double value = 3.14159265359;` wypisz wartość najpierw z domyślnymi ustawieniami, a następnie z `std::fixed` i precyzją `0`, `2` oraz `4`. Trzy ostatnie wyniki: `3`, `3.14`, `3.1416`. Sprawdź w debuggerze, czy samo formatowanie zmieniło zawartość zmiennej.
 :::
 
+## Dalsze zadania — samodzielne programy
+
+W zadaniach 10–15 napisz każdy program od początku: samodzielnie dobierz nagłówki, napisz funkcję `main`, zadeklaruj zmienne i ułóż instrukcje. Nie otrzymujesz szablonu rozwiązania. Stosuj angielskie nazwy zmiennych i komunikaty.
+Załóż poprawne dane zgodne z poleceniem; nie trzeba jeszcze używać warunków ani pętli. W każdym zadaniu sprawdź podany przykład i własny zestaw danych. Przed uruchomieniem oblicz oczekiwany wynik.
+
+::: {.lab-task}
+### Zadanie 10. Średnia z trzech pomiarów
+
+Wczytaj trzy pomiary napięcia w woltach jako liczby typu `double`. Oblicz sumę i średnią arytmetyczną. Wypisz oba wyniki z opisami i jednostką, z trzema miejscami po przecinku.
+Dla pomiarów `2.1`, `2.4` i `2.7` oczekiwane wyniki to suma `7.200 V` i średnia `2.400 V`. Sprawdź również trzy identyczne pomiary.
+:::
+
+::: {.lab-task}
+### Zadanie 11. Droga, czas i prędkość
+
+Wczytaj nieujemną drogę w kilometrach oraz dodatni czas przejazdu w minutach. Oblicz średnią prędkość w `km/h` i `m/s`. Zadbaj o przeliczenie jednostek i wypisz wyniki z dwoma miejscami po przecinku.
+Dla `9 km` i `30 min` oczekiwane wyniki to `18.00 km/h` i `5.00 m/s`. Sprawdź także drogę równą zero i czas niebędący pełną godziną.
+:::
+
+::: {.lab-task}
+### Zadanie 12. Cena zakupów i rabat
+
+Wczytaj nieujemną cenę jednostkową, dodatnią całkowitą liczbę sztuk oraz rabat w procentach z zakresu od 0 do 100. Oblicz wartość zakupów przed rabatem, kwotę rabatu i kwotę do zapłaty. Wypisz kwoty z dwoma miejscami po przecinku i oznaczeniem `PLN`.
+Dla ceny `12.50`, liczby sztuk `4` i rabatu `10` wyniki to kolejno `50.00 PLN`, `5.00 PLN` i `45.00 PLN`. Sprawdź też rabat 0% oraz 100%. W tym ćwiczeniu stosujemy `double`; nie projektujemy systemu księgowego.
+:::
+
+::: {.lab-task}
+### Zadanie 13. Energia i koszt pracy urządzenia
+
+Wczytaj nieujemne wartości: moc urządzenia w watach, czas pracy w godzinach i cenę jednej kilowatogodziny w `PLN/kWh`. Samodzielnie ułóż wzory na zużytą energię w `kWh` i jej koszt w `PLN`.
+Wypisz energię z trzema miejscami po przecinku, a koszt z dwoma. Dla `1500 W`, `2 h` i `1.20 PLN/kWh` wyniki to `3.000 kWh` i `3.60 PLN`. Sprawdź zerowy czas pracy.
+:::
+
+::: {.lab-task}
+### Zadanie 14. Godziny, minuty i sekundy
+
+Wczytaj całkowitą liczbę sekund z zakresu od 0 do 1000000. Za pomocą dzielenia całkowitego i reszty z dzielenia oblicz liczbę pełnych godzin oraz pozostałych minut i sekund. Minuty i sekundy mają mieścić się w zakresie 0–59; godziny mogą przekroczyć 23.
+Dla `3665` wypisz `1 h 1 min 5 s`. Sprawdź również `0`, `59`, `60`, `3599` oraz `3600`. Nie trzeba dopełniać liczb zerami.
+:::
+
+::: {.lab-task}
+### Zadanie 15. Zamiana wartości zmiennych
+
+Wczytaj dwie liczby całkowite. Wypisz ich wartości, zamień zawartości zmiennych z użyciem trzeciej zmiennej pomocniczej i ponownie wypisz wartości. Nie używaj `std::swap` ani ponownego wczytywania danych.
+Dla wartości `7` i `-3` po zamianie pierwsza zmienna ma zawierać `-3`, a druga `7`. Sprawdź także dwie jednakowe wartości. W debuggerze prześledź każdą instrukcję przypisania i wyjaśnij, po co potrzebna jest zmienna pomocnicza.
+:::
+
 ## Dokumentacja i sprawdzenie pracy
 
 - Zachowaj źródła `.cpp` oznaczone numerem zadania.
 - Dla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.
 - Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.
 - Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.
+
+Zgłoszenie zadania na stronie nie przesyła kodu źródłowego i nie oznacza zaliczenia. Zatwierdzenie nadaje prowadzący po sprawdzeniu programu. Na koniec kliknij **Zakończ laboratorium** w formularzu postępów; zapisane zgłoszenia i zatwierdzenia pozostają zachowane.
 
 Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów `.vs` i `Debug` ani plików `.exe`.
 

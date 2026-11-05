@@ -2,7 +2,7 @@
 
 Polish laboratory handouts for Wprowadzenie do programowania (WELTXWSJ-WDP, supplied 2023/2024 syllabus). Five syllabus topics plus two requested introductory class topics. No lesson durations or assessment date are assigned.
 
-The first handout follows the supplied WDP_Lab1 document and retains its nine exercises. The remaining handouts use the same structure: objective, theory, complete demonstration, numbered tasks, documentation, next-checkpoint preparation. C++17, Visual Studio Community, Console App. No external C++ dependencies.
+The first handout follows the supplied WDP_Lab1 document and retains its nine exercises and adds six independent practice tasks without code templates. The first handout also registers attendance declarations and task review through the shared PHP backend. The remaining handouts use the same structure: objective, theory, complete demonstration, numbered tasks, documentation, next-checkpoint preparation. C++17, Visual Studio Community, Console App. No external C++ dependencies.
 
 Active sources: index.qmd, scenariusze.qmd, laboratoria/*.qmd and the Visual Studio guide. Historical C/CHIP-8 sources remain in podstawy_programowania, excluded from rendering. The superseded six-topic draft is archived privately outside this repository.
 

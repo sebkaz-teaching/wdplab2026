@@ -192,9 +192,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Na tej stronie</h2>
    
   <ul class="collapse">
-  <li><a href="#informacje-wprowadzające" id="toc-informacje-wprowadzające" class="nav-link active" data-scroll-target="#informacje-wprowadzające">Informacje wprowadzające</a></li>
+  <li><a href="#rozpocznij-zajęcia" id="toc-rozpocznij-zajęcia" class="nav-link active" data-scroll-target="#rozpocznij-zajęcia">Rozpocznij zajęcia</a></li>
+  <li><a href="#informacje-wprowadzające" id="toc-informacje-wprowadzające" class="nav-link" data-scroll-target="#informacje-wprowadzające">Informacje wprowadzające</a></li>
   <li><a href="#wprowadzenie-teoretyczne" id="toc-wprowadzenie-teoretyczne" class="nav-link" data-scroll-target="#wprowadzenie-teoretyczne">Wprowadzenie teoretyczne</a></li>
   <li><a href="#zadania-do-realizacji" id="toc-zadania-do-realizacji" class="nav-link" data-scroll-target="#zadania-do-realizacji">Zadania do realizacji</a></li>
+  <li><a href="#dalsze-zadania-samodzielne-programy" id="toc-dalsze-zadania-samodzielne-programy" class="nav-link" data-scroll-target="#dalsze-zadania-samodzielne-programy">Dalsze zadania — samodzielne programy</a></li>
   <li><a href="#dokumentacja-i-sprawdzenie-pracy" id="toc-dokumentacja-i-sprawdzenie-pracy" class="nav-link" data-scroll-target="#dokumentacja-i-sprawdzenie-pracy">Dokumentacja i sprawdzenie pracy</a></li>
   <li><a href="#przygotowanie-do-następnej-wejściówki" id="toc-przygotowanie-do-następnej-wejściówki" class="nav-link" data-scroll-target="#przygotowanie-do-następnej-wejściówki">Przygotowanie do następnej wejściówki</a></li>
   </ul>
@@ -228,6 +230,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Cel ćwiczenia:</strong> Utworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.</p>
 <p><strong>Środowisko:</strong> Visual Studio Community, projekt Console App, standard C++17.</p>
 </div>
+<section id="rozpocznij-zajęcia" class="level2">
+<h2 class="anchored" data-anchor-id="rozpocznij-zajęcia">Rozpocznij zajęcia</h2>
+<p>Wpisz swój e-mail i kliknij <strong>Rozpocznij zajęcia</strong>. Pojawisz się na liście uczestników u prowadzącego. E-mail jest deklarowany — formularz nie loguje do poczty. Po wykonaniu zadania zgłoś je do sprawdzenia. Prowadzący sprawdza program przy stanowisku i zatwierdza zadanie w swoim panelu. Odświeżanie strony nie usuwa zapisanych postępów. Korzystaj z tej samej karty przeglądarki; dostęp jest zapamiętany w niej na czas sesji. Nie udostępniaj tej karty innym osobom.</p>
+<div id="lab-progress" data-endpoint="https://sebastianzajac.pl/rsod-quiz/lab-progress.php">
+
+</div>
+<script src="../assets/js/lab-progress.js" defer=""></script>
+</section>
 <section id="informacje-wprowadzające" class="level2">
 <h2 class="anchored" data-anchor-id="informacje-wprowadzające">Informacje wprowadzające</h2>
 <p>Ćwiczenie wprowadza do pracy w <strong>Visual Studio Community</strong>, w projekcie <strong>Console App / Aplikacja konsolowa (C++)</strong>. Każdy niezależny program należy umieścić w osobnym projekcie. Nazwy zmiennych i komunikaty w przykładach są po angielsku; opisy zadań są po polsku.</p>
@@ -485,6 +495,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Dla <code>double value = 3.14159265359;</code> wypisz wartość najpierw z domyślnymi ustawieniami, a następnie z <code>std::fixed</code> i precyzją <code>0</code>, <code>2</code> oraz <code>4</code>. Trzy ostatnie wyniki: <code>3</code>, <code>3.14</code>, <code>3.1416</code>. Sprawdź w debuggerze, czy samo formatowanie zmieniło zawartość zmiennej.</p>
 </section>
 </section>
+<section id="dalsze-zadania-samodzielne-programy" class="level2">
+<h2 class="anchored" data-anchor-id="dalsze-zadania-samodzielne-programy">Dalsze zadania — samodzielne programy</h2>
+<p>W zadaniach 10–15 napisz każdy program od początku: samodzielnie dobierz nagłówki, napisz funkcję <code>main</code>, zadeklaruj zmienne i ułóż instrukcje. Nie otrzymujesz szablonu rozwiązania. Stosuj angielskie nazwy zmiennych i komunikaty. Załóż poprawne dane zgodne z poleceniem; nie trzeba jeszcze używać warunków ani pętli. W każdym zadaniu sprawdź podany przykład i własny zestaw danych. Przed uruchomieniem oblicz oczekiwany wynik.</p>
+<section id="zadanie-10.-średnia-z-trzech-pomiarów" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-10.-średnia-z-trzech-pomiarów">Zadanie 10. Średnia z trzech pomiarów</h3>
+<p>Wczytaj trzy pomiary napięcia w woltach jako liczby typu <code>double</code>. Oblicz sumę i średnią arytmetyczną. Wypisz oba wyniki z opisami i jednostką, z trzema miejscami po przecinku. Dla pomiarów <code>2.1</code>, <code>2.4</code> i <code>2.7</code> oczekiwane wyniki to suma <code>7.200 V</code> i średnia <code>2.400 V</code>. Sprawdź również trzy identyczne pomiary.</p>
+</section>
+<section id="zadanie-11.-droga-czas-i-prędkość" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-11.-droga-czas-i-prędkość">Zadanie 11. Droga, czas i prędkość</h3>
+<p>Wczytaj nieujemną drogę w kilometrach oraz dodatni czas przejazdu w minutach. Oblicz średnią prędkość w <code>km/h</code> i <code>m/s</code>. Zadbaj o przeliczenie jednostek i wypisz wyniki z dwoma miejscami po przecinku. Dla <code>9 km</code> i <code>30 min</code> oczekiwane wyniki to <code>18.00 km/h</code> i <code>5.00 m/s</code>. Sprawdź także drogę równą zero i czas niebędący pełną godziną.</p>
+</section>
+<section id="zadanie-12.-cena-zakupów-i-rabat" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-12.-cena-zakupów-i-rabat">Zadanie 12. Cena zakupów i rabat</h3>
+<p>Wczytaj nieujemną cenę jednostkową, dodatnią całkowitą liczbę sztuk oraz rabat w procentach z zakresu od 0 do 100. Oblicz wartość zakupów przed rabatem, kwotę rabatu i kwotę do zapłaty. Wypisz kwoty z dwoma miejscami po przecinku i oznaczeniem <code>PLN</code>. Dla ceny <code>12.50</code>, liczby sztuk <code>4</code> i rabatu <code>10</code> wyniki to kolejno <code>50.00 PLN</code>, <code>5.00 PLN</code> i <code>45.00 PLN</code>. Sprawdź też rabat 0% oraz 100%. W tym ćwiczeniu stosujemy <code>double</code>; nie projektujemy systemu księgowego.</p>
+</section>
+<section id="zadanie-13.-energia-i-koszt-pracy-urządzenia" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-13.-energia-i-koszt-pracy-urządzenia">Zadanie 13. Energia i koszt pracy urządzenia</h3>
+<p>Wczytaj nieujemne wartości: moc urządzenia w watach, czas pracy w godzinach i cenę jednej kilowatogodziny w <code>PLN/kWh</code>. Samodzielnie ułóż wzory na zużytą energię w <code>kWh</code> i jej koszt w <code>PLN</code>. Wypisz energię z trzema miejscami po przecinku, a koszt z dwoma. Dla <code>1500 W</code>, <code>2 h</code> i <code>1.20 PLN/kWh</code> wyniki to <code>3.000 kWh</code> i <code>3.60 PLN</code>. Sprawdź zerowy czas pracy.</p>
+</section>
+<section id="zadanie-14.-godziny-minuty-i-sekundy" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-14.-godziny-minuty-i-sekundy">Zadanie 14. Godziny, minuty i sekundy</h3>
+<p>Wczytaj całkowitą liczbę sekund z zakresu od 0 do 1000000. Za pomocą dzielenia całkowitego i reszty z dzielenia oblicz liczbę pełnych godzin oraz pozostałych minut i sekund. Minuty i sekundy mają mieścić się w zakresie 0–59; godziny mogą przekroczyć 23. Dla <code>3665</code> wypisz <code>1 h 1 min 5 s</code>. Sprawdź również <code>0</code>, <code>59</code>, <code>60</code>, <code>3599</code> oraz <code>3600</code>. Nie trzeba dopełniać liczb zerami.</p>
+</section>
+<section id="zadanie-15.-zamiana-wartości-zmiennych" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-15.-zamiana-wartości-zmiennych">Zadanie 15. Zamiana wartości zmiennych</h3>
+<p>Wczytaj dwie liczby całkowite. Wypisz ich wartości, zamień zawartości zmiennych z użyciem trzeciej zmiennej pomocniczej i ponownie wypisz wartości. Nie używaj <code>std::swap</code> ani ponownego wczytywania danych. Dla wartości <code>7</code> i <code>-3</code> po zamianie pierwsza zmienna ma zawierać <code>-3</code>, a druga <code>7</code>. Sprawdź także dwie jednakowe wartości. W debuggerze prześledź każdą instrukcję przypisania i wyjaśnij, po co potrzebna jest zmienna pomocnicza.</p>
+</section>
+</section>
 <section id="dokumentacja-i-sprawdzenie-pracy" class="level2">
 <h2 class="anchored" data-anchor-id="dokumentacja-i-sprawdzenie-pracy">Dokumentacja i sprawdzenie pracy</h2>
 <ul>
@@ -493,6 +531,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.</li>
 <li>Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.</li>
 </ul>
+<p>Zgłoszenie zadania na stronie nie przesyła kodu źródłowego i nie oznacza zaliczenia. Zatwierdzenie nadaje prowadzący po sprawdzeniu programu. Na koniec kliknij <strong>Zakończ laboratorium</strong> w formularzu postępów; zapisane zgłoszenia i zatwierdzenia pozostają zachowane.</p>
 <p>Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów <code>.vs</code> i <code>Debug</code> ani plików <code>.exe</code>.</p>
 </section>
 <section id="przygotowanie-do-następnej-wejściówki" class="level2">
