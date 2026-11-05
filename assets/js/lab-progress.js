@@ -19,7 +19,7 @@
   var style = document.createElement("style");
   style.textContent = ".lp-inline{padding:10px;margin-top:16px;border-top:1px solid #ccd8e4}.lp-inline button{font:inherit;padding:8px;margin:4px}.lp-approved{color:#176334;font-weight:bold}#lab-progress{padding:20px;border:1px solid #ccd8e4;border-radius:10px;background:#f3f6fa;margin:20px 0}#lab-progress button,#lab-progress input{font:inherit;padding:8px;margin:4px}#lab-progress ol{padding-left:24px}#lab-progress li{padding:6px}#lab-progress .lp-error{color:#9b2222}#lab-progress .lp-message{min-height:1.5em}#lab-progress .lp-approved{color:#176334;font-weight:bold}";
   document.head.appendChild(style);
-  root.innerHTML = '<form><label>E-mail: <input type="email" autocomplete="email" required maxlength="254"></label><button>Rozpocznij zajęcia</button></form><div class="lp-body"></div><p class="lp-message" role="status" aria-live="polite"></p>';
+  root.innerHTML = '<form><label>E-mail WAT: <input type="email" autocomplete="email" required maxlength="254" placeholder="imie.nazwisko@wat.edu.pl" aria-describedby="lp-email-help"></label><button>Rozpocznij zajęcia</button><p id="lp-email-help">Użyj adresu @wat.edu.pl lub jego subdomeny, np. @student.wat.edu.pl.</p></form><div class="lp-body"></div><p class="lp-message" role="status" aria-live="polite"></p>';
   var form = root.querySelector("form");
   var email = form.querySelector("input");
   var body = root.querySelector(".lp-body");
@@ -28,6 +28,7 @@
     already_registered: "Ten e-mail jest już zapisany na dzisiejsze zajęcia. Wróć do karty, w której rozpoczęto pracę, lub zgłoś prowadzącemu utratę dostępu.",
     invalid_access: "Nie można odtworzyć dostępu. Sprawdź, czy to właściwa karta, lub skontaktuj się z prowadzącym.",
     invalid_email: "Wpisz poprawny adres e-mail.",
+    email_domain_not_allowed: "Użyj adresu @wat.edu.pl lub jego subdomeny, np. @student.wat.edu.pl.",
     save_unavailable: "Serwer jest chwilowo niedostępny. Spróbuj ponownie."
   };
   function notify(text, failed) {
@@ -116,6 +117,11 @@
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     var normalized = email.value.trim().toLowerCase();
+    var domain = normalized.slice(normalized.lastIndexOf("@") + 1);
+    if (!/(?:^|\.)wat\.edu\.pl$/.test(domain)) {
+      notify(errors.email_domain_not_allowed, true);
+      return;
+    }
     if (!registration || registration.email !== normalized) {
       var bytes = crypto.getRandomValues(new Uint8Array(32));
       registration = {email: normalized, token: Array.from(bytes, function (b) { return b.toString(16).padStart(2, "0"); }).join("")};
