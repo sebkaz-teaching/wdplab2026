@@ -1,170 +1,156 @@
 [
   {
-    "objectID": "laboratoria/01_projekt.html",
-    "href": "laboratoria/01_projekt.html",
-    "title": "Laboratorium 1",
+    "objectID": "laboratoria/02_warunki.html",
+    "href": "laboratoria/02_warunki.html",
+    "title": "Laboratorium 2",
     "section": "",
-    "text": "Wprowadzenie do programowania · C++ · instrukcja laboratoryjna\nCel ćwiczenia: Utworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.\nŚrodowisko: Visual Studio Community, projekt Console App, standard C++17.",
+    "text": "Wprowadzenie do programowania · C++ · instrukcja laboratoryjna\nCel ćwiczenia: Zapisanie reguł wyboru oraz sprawdzenie danych przed wykonaniem działania.\nŚrodowisko: Visual Studio Community, projekt Console App, standard C++17.",
     "crumbs": [
       "Instrukcje laboratoryjne",
-      "Laboratorium 1"
+      "Laboratorium 2"
     ]
   },
   {
-    "objectID": "laboratoria/01_projekt.html#rozpocznij-zajęcia",
-    "href": "laboratoria/01_projekt.html#rozpocznij-zajęcia",
-    "title": "Laboratorium 1",
-    "section": "Rozpocznij zajęcia",
-    "text": "Rozpocznij zajęcia\nWpisz swój e-mail i kliknij Rozpocznij zajęcia. Pojawisz się na liście uczestników u prowadzącego. E-mail jest deklarowany — formularz nie loguje do poczty. Po wykonaniu zadania zgłoś je do sprawdzenia. Prowadzący sprawdza program przy stanowisku i zatwierdza zadanie w swoim panelu. Odświeżanie strony nie usuwa zapisanych postępów. Korzystaj z tej samej karty przeglądarki; dostęp jest zapamiętany w niej na czas sesji. Nie udostępniaj tej karty innym osobom.",
+    "objectID": "laboratoria/02_warunki.html#wejściówka",
+    "href": "laboratoria/02_warunki.html#wejściówka",
+    "title": "Laboratorium 2",
+    "section": "Wejściówka",
+    "text": "Wejściówka\n4 pytania z poprzedniego laboratorium: przewidywanie wyjścia programu, reszta z dzielenia, dzielenie całkowite i uzupełnienie kodu. Każde jest warte 1 punkt. Dodatkowo napisz krótki program z materiału laboratorium 1 w zadaniu otwartym pod pytaniami. Pracuj samodzielnie. Po potwierdzeniu zapisu pojawi się wynik testu wyboru (0–4); kod sprawdzi prowadzący osobno, bez automatycznej oceny.\nPrzyjmij, że każdy fragment znajduje się wewnątrz poprawnie zdefiniowanej funkcji main i dołączono nagłówek &lt;iostream&gt;. Pytanie o uzupełnienie zawiera celowo oznaczoną lukę. W pozostałych pytaniach analizuj kod dokładnie w podanej postaci.",
     "crumbs": [
       "Instrukcje laboratoryjne",
-      "Laboratorium 1"
+      "Laboratorium 2"
     ]
   },
   {
-    "objectID": "laboratoria/01_projekt.html#informacje-wprowadzające",
-    "href": "laboratoria/01_projekt.html#informacje-wprowadzające",
-    "title": "Laboratorium 1",
-    "section": "Informacje wprowadzające",
-    "text": "Informacje wprowadzające\nĆwiczenie wprowadza do pracy w Visual Studio Community, w projekcie Console App / Aplikacja konsolowa (C++). Każdy niezależny program należy umieścić w osobnym projekcie. Nazwy zmiennych i komunikaty w przykładach są po angielsku; opisy zadań są po polsku.\nPrzed rozpoczęciem pracy należy sprawdzić możliwość zapisania projektu. Problemy ze sprzętem należy zgłosić prowadzącemu; przy stanowisku nie należy spożywać napojów ani zmieniać konfiguracji pracowni bez zgody.\nNa pierwszym laboratorium nie ma wejściówki. Zasady rozliczania zadań są opisane na stronie organizacyjnej.",
+    "objectID": "laboratoria/02_warunki.html#wykonanie-instrukcji-pod-warunkiem-if",
+    "href": "laboratoria/02_warunki.html#wykonanie-instrukcji-pod-warunkiem-if",
+    "title": "Laboratorium 2",
+    "section": "1. Wykonanie instrukcji pod warunkiem — if",
+    "text": "1. Wykonanie instrukcji pod warunkiem — if\nInstrukcja if pozwala wykonać blok instrukcji tylko wtedy, gdy podany warunek jest prawdziwy. Jeżeli warunek jest fałszywy, program pomija blok i wykonuje dalsze instrukcje. Wynik porównania ma typ bool: wartość true oznacza prawdę, a false fałsz.\nOgólna postać:\nif (condition) {\n    // Instructions executed when condition is true.\n}\n// Execution continues here in either case.\ncondition to sprawdzany warunek. Zapisujemy go w nawiasach okrągłych, a zależne od niego instrukcje umieszczamy w nawiasach klamrowych. Nie stawiamy średnika bezpośrednio po if (condition) — taki średnik byłby pustą instrukcją, a następujący po nim blok nie zależałby od warunku.\nDo budowania warunków służą operatory porównania:\n\n\n\n\n\n\n\n\nOperator\nZnaczenie\nPrzykład\n\n\n\n\n==\nRówne\ncount == 10\n\n\n!=\nRóżne\ncount != 10\n\n\n&lt;, &gt;\nMniejsze, większe\ntemperature &gt; 50.0\n\n\n&lt;=, &gt;=\nMniejsze lub równe, większe lub równe\ntemperature &gt;= 50.0\n\n\n\n= służy do przypisania wartości, a == do porównania. Nie są zamienne: count = 10 zmienia zawartość zmiennej, natomiast count == 10 sprawdza jej wartość.\nPrzykład nowej konstrukcji: dla istniejącej zmiennej speed poniższy fragment wypisze ostrzeżenie tylko przy wartości większej od 80. Komunikat końcowy pojawi się niezależnie od wyniku porównania.\nif (speed &gt; 80.0) {\n    std::cout &lt;&lt; \"Speed limit exceeded\\n\";\n}\nstd::cout &lt;&lt; \"Check completed\\n\";\n\nZadanie 1. Ostrzeżenie o temperaturze\nNapisz od początku program, który wczytuje temperaturę typu double. Gdy temperatura przekracza 50°C, wypisz Temperature too high. Na końcu, niezależnie od temperatury, wypisz Measurement completed.\nSprawdź: 49, 50, 51. Dla 49 i 50 ma pojawić się tylko komunikat końcowy, a dla 51 oba komunikaty.\nWyjaśnij: dlaczego komunikat końcowy znajduje się poza blokiem if? Co zmieni zastąpienie &gt; przez &gt;=?",
     "crumbs": [
       "Instrukcje laboratoryjne",
-      "Laboratorium 1"
+      "Laboratorium 2"
     ]
   },
   {
-    "objectID": "laboratoria/01_projekt.html#wprowadzenie-teoretyczne",
-    "href": "laboratoria/01_projekt.html#wprowadzenie-teoretyczne",
-    "title": "Laboratorium 1",
-    "section": "Wprowadzenie teoretyczne",
-    "text": "Wprowadzenie teoretyczne\n\nŚrodowisko IDE i projekt\nIDE (Integrated Development Environment, zintegrowane środowisko programistyczne) łączy edytor kodu, narzędzia budowania i debugger. Projekt określa, które pliki tworzą wspólny program. Rozwiązanie (solution) może zawierać kilka projektów.\n\nUtwórz Console App dla języka C++ i otwórz wygenerowany plik .cpp.\nW tym pliku umieszczaj kod programu. Jeśli plik zawiera już main, zastąp przykład zamiast dopisywać drugą funkcję main.\nZapisz zmiany: Ctrl+S.\nZbuduj całe rozwiązanie: Ctrl+Shift+B. Odczytaj komunikaty w oknie Output / Dane wyjściowe.\nUruchom: Ctrl+F5. Samo zbudowanie programu nie oznacza jego uruchomienia.\n\nPełna instrukcja środowiska: Visual Studio krok po kroku.\n\n\nOd pliku źródłowego do programu\nKod .cpp jest tekstem. Preprocesor przygotowuje go do kompilacji, m.in. obsługując #include. Kompilator sprawdza składnię i znaczenie instrukcji oraz przetwarza kod; etap asemblacji prowadzi do kodu maszynowego w pliku obiektowym. Linker, czyli konsolidator, łączy pliki obiektowe z potrzebnymi bibliotekami w program wykonywalny.\nmain.cpp → przygotowanie i kompilacja → main.obj → konsolidacja → nazwa_projektu.exe\nW Visual Studio plik wynikowy zwykle ma nazwę projektu, a nie pojedynczego pliku źródłowego. Błąd składni może zatrzymać budowanie. Błąd obliczeń może pozostać w programie, który buduje się bez błędów.\n\n\nStruktura programu, nagłówki i main\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Hello, world!\\n\";\n    return 0;\n}\n\n\n\n\n\n\n\nElement\nZnaczenie\n\n\n\n\n#include &lt;iostream&gt;\nUdostępnia deklaracje potrzebne do standardowego wejścia i wyjścia\n\n\nint main()\nGłówna funkcja naszego programu konsolowego\n\n\n{ ... }\nBlok instrukcji\n\n\nstd::cout &lt;&lt; ...\nWypisanie danych na standardowe wyjście\n\n\n;\nZakończenie instrukcji, np. przypisania lub wypisania\n\n\n\\n\nZnak nowej linii wewnątrz napisu\n\n\nreturn 0;\nZakończenie funkcji main z kodem powodzenia\n\n\n\nPrzestrzeń nazw (namespace) grupuje nazwy. Przedrostek std:: wskazuje element biblioteki standardowej. Nagłówki standardowe, takie jak &lt;iostream&gt;, &lt;string&gt; i &lt;iomanip&gt;, zapisujemy w nawiasach ostrych; własne, np. \"calculations.hpp\", zwykle w cudzysłowie.\n\n\nZmienne, stałe i typy danych\nDeklaracja wprowadza nazwę i typ zmiennej. Inicjalizacja nadaje jej wartość początkową. Zmienna int count = 5; przechowuje liczbę całkowitą, którą można zmieniać. Zapis const int groupSize = 4; opisuje stałą, której nie można później przypisać innej wartości.\n\n\n\n\n\n\n\n\nTyp\nZastosowanie\nPrzykład\n\n\n\n\nint\nLiczba całkowita\nint count = 5;\n\n\nfloat\nLiczba zmiennoprzecinkowa\nfloat voltage = 3.3f;\n\n\ndouble\nObliczenia z częścią ułamkową, zwykle dokładniejsze niż float\ndouble length = 2.5;\n\n\nchar\nJeden znak\nchar group = 'A';\n\n\nbool\nWartość logiczna\nbool active = true;\n\n\nstd::string\nNapis, wymaga nagłówka string\nstd::string name = \"Sensor\";\n\n\n\nNazwy nie mogą zaczynać się od cyfry ani być słowami kluczowymi. Wielkość liter ma znaczenie: count i Count to różne nazwy. Pojedyncze apostrofy oznaczają znak, a cudzysłowy napis.\nRozmiar typu można sprawdzić przez sizeof, np. std::cout &lt;&lt; sizeof(int);. Nie należy zakładać identycznego rozmiaru wszystkich typów na każdej platformie. Dokładność liczb zmiennoprzecinkowych dotyczy cyfr znaczących, a nie stałej liczby miejsc po przecinku. Ustawienie formatu wyświetlania nie zwiększa dokładności przechowywanej liczby.\n\n\nOperacje matematyczne i przypisanie\n\n\n\n\n\n\n\n\nOperator\nZnaczenie\nWynik dla int a = 10, b = 3\n\n\n\n\n+, -, *\nDodawanie, odejmowanie, mnożenie\n13, 7, 30\n\n\n/\nDzielenie\n3\n\n\n%\nReszta z dzielenia całkowitego\n1\n\n\n=\nPrzypisanie wartości\na = 5; zmienia a na 5\n\n\n+=, -=\nZmiana o podaną wartość\na += 2; odpowiada a = a + 2;\n\n\n*=, /=, %=\nDziałanie i zapis wyniku w tej samej zmiennej\na *= 2; odpowiada a = a * 2;\n\n\n\nDzielenie dwóch int daje wynik całkowity: 10 / 4 to 2. Zapis 10.0 / 4 daje 2.5. Przypisanie wyniku 10 / 4 do double nie odzyska odrzuconej części ułamkowej. Nawiasy pozwalają ustalić kolejność obliczeń, np. 2 * (length + width).\n\n\nWejście, wyjście i formatowanie\nI/O (Input/Output) oznacza wejście i wyjście. std::cin &gt;&gt; value wczytuje wartość do zmiennej; std::cout &lt;&lt; value ją wyświetla. Odczyt z klawiatury kończymy klawiszem Enter. W tych ćwiczeniach stosujemy strumienie C++, bez równoległego wprowadzania scanf i printf.\nW poniższym pełnym programie &lt;iomanip&gt; udostępnia manipulatory formatu. Połączenie std::fixed i std::setprecision(2) ustawia dwa miejsca po przecinku. Dla wejścia 2.5 program wyświetla Measurement: 2.75.\n#include &lt;iostream&gt;\n#include &lt;iomanip&gt;\n#include &lt;string&gt;\n\nint main()\n{\n    std::string label = \"Measurement\";\n    double value = 0.0;\n    const double correction = 0.25;\n    std::cout &lt;&lt; \"Enter a value: \";\n    std::cin &gt;&gt; value;\n    value += correction;\n    std::cout &lt;&lt; label &lt;&lt; \": \" &lt;&lt; std::fixed &lt;&lt; std::setprecision(2)\n              &lt;&lt; value &lt;&lt; '\\n';\n    return 0;\n}\n\n\nŚledzenie wykonania\nPunkt zatrzymania (breakpoint, F9) pozwala zatrzymać program przed wybraną instrukcją. F5 uruchamia debugger, a F10 wykonuje kolejny krok. W oknie Locals / Zmienne lokalne można porównać wartość przed przypisaniem i po nim. Żółta strzałka wskazuje instrukcję, która dopiero zostanie wykonana.\nPełny program pokazowy — pobierz plik .cpp. Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.",
+    "objectID": "laboratoria/02_warunki.html#wybór-jednej-z-dwóch-możliwości-ifelse",
+    "href": "laboratoria/02_warunki.html#wybór-jednej-z-dwóch-możliwości-ifelse",
+    "title": "Laboratorium 2",
+    "section": "2. Wybór jednej z dwóch możliwości — if/else",
+    "text": "2. Wybór jednej z dwóch możliwości — if/else\nJeśli program ma wykonać jedną czynność po spełnieniu warunku, a inną w przeciwnym przypadku, używamy if/else. Wykona się dokładnie jeden z dwóch bloków. else nie ma własnego warunku — obejmuje przypadki, w których warunek przy if jest fałszywy.\nOgólna postać:\nif (condition) {\n    // Instructions executed when condition is true.\n} else {\n    // Instructions executed when condition is false.\n}\nPrzykład nowej konstrukcji: zakładamy, że zmienna age zawiera już wczytany wiek.\nif (age &gt;= 18) {\n    std::cout &lt;&lt; \"Adult\\n\";\n} else {\n    std::cout &lt;&lt; \"Under 18\\n\";\n}\nW zadaniu przyda się znany z poprzedniego laboratorium operator %, czyli reszta z dzielenia całkowitego. Liczba całkowita jest parzysta, gdy reszta z dzielenia przez 2 wynosi zero. Dotyczy to również zera i parzystych liczb ujemnych.\n\nZadanie 2. Parzystość liczby\nWczytaj liczbę typu int. Użyj if/else, aby wypisać dokładnie jeden komunikat: Even albo Odd.\nSprawdź: -4, -3, 0, 7, 8. Oczekiwane wyniki to kolejno Even, Odd, Even, Odd, Even.\nWyjaśnij: dlaczego sprawdzenie reszty różnej od zera rozpoznaje również ujemne liczby nieparzyste? Czy warunek reszty równej 1 obejmowałby wszystkie takie liczby?",
     "crumbs": [
       "Instrukcje laboratoryjne",
-      "Laboratorium 1"
+      "Laboratorium 2"
     ]
   },
   {
-    "objectID": "laboratoria/01_projekt.html#zadania-do-realizacji",
-    "href": "laboratoria/01_projekt.html#zadania-do-realizacji",
-    "title": "Laboratorium 1",
-    "section": "Zadania do realizacji",
-    "text": "Zadania do realizacji\nPrzed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.\n\nZadanie 1. Pierwszy projekt\nUtwórz projekt Console App. W pliku main.cpp wyświetl w osobnych liniach: „Wprowadzenie do programowania”, „Laboratorium 1”, „Algorytmy i programy w C++”. Zbuduj cały projekt i uruchom program. Zapisz nazwę powstałego pliku .exe.\n\n\nZadanie 2. Deklaracje i wyświetlanie danych\nZadeklaruj i zainicjalizuj: nazwę ćwiczenia jako std::string, liczbę pomiarów jako int, napięcie jako float, oznaczenie grupy jako char oraz informację o gotowości jako bool. Wypisz wartości wraz z opisami. Sprawdź, jak domyślnie wyświetlają się true i false. Użyj drugiej zmiennej std::string do nazwy urządzenia.\n\n\nZadanie 3. Odczyt błędów kompilacji\nPoniższy program celowo zawiera błędy. Zbuduj go, przeczytaj pierwszy komunikat i popraw kod. Powtarzaj do uzyskania działającego programu. Zapisz, czego brakowało; nie usuwaj instrukcji wypisującej wynik.\n#include &lt;iostream&gt;\n\nint main()\n{\n    int number = 10\n    cout &lt;&lt; \"Value: \" &lt;&lt; number &lt;&lt; '\\n';\n    return 0\n}\nWynik po poprawieniu: Value: 10.\n\n\nZadanie 4. Działania na liczbach double\nWczytaj dwie liczby typu double. Wyświetl sumę, różnicę, iloczyn i iloraz z opisami. Załóż poprawne dane i drugi argument różny od zera. Sprawdź pary 10, 4 i 2.5, 0.5. Dla pierwszej pary iloraz wynosi 2.5.\n\n\nZadanie 5. Dzielenie całkowite i reszta\nWczytaj dwie dodatnie liczby typu int. Wyświetl iloraz całkowity oraz resztę. Dla 23, 4 oczekiwane wartości to 5 i 3; dla 24, 4 — 6 i 0. Wyjaśnij, dlaczego ten program daje inny iloraz niż zadanie 4. Dzielnik musi być różny od zera.\n\n\nZadanie 6. Pole i obwód prostokąta\nWczytaj dodatnie długości boków w metrach jako double. Oblicz pole length * width oraz obwód 2 * (length + width). Wypisz wyniki z jednostkami m2 i m. Dla boków 2.5 i 4 oczekiwane wyniki to 10 m2 i 13 m.\n\n\nZadanie 7. Przeliczanie temperatury\nWczytaj temperaturę w stopniach Celsjusza. Oblicz Fahrenheita według F = C * 9.0 / 5.0 + 32.0 oraz kelwiny według K = C + 273.15. Sprawdź 0 i 100. Dla 0 wyniki to 32 i 273.15. Wyjaśnij, dlaczego podano 9.0 / 5.0, a nie (9 / 5).\n\n\nZadanie 8. Aktualizacja pomiaru\nZacznij od double value = 10.0;. Kolejno dodaj 2.0 przez +=, odejmij 1.0 przez -=, pomnóż przez 3.0 i podziel przez 2.0, używając *= i /=. Po każdej operacji wypisz wartość. Oczekiwany przebieg: 12, 11, 33, 16.5. Następnie wczytaj poprawki i współczynniki z klawiatury; współczynnik dzielenia ma być niezerowy.\n\n\nZadanie 9. Formatowanie wyników\nDla double value = 3.14159265359; wypisz wartość najpierw z domyślnymi ustawieniami, a następnie z std::fixed i precyzją 0, 2 oraz 4. Trzy ostatnie wyniki: 3, 3.14, 3.1416. Sprawdź w debuggerze, czy samo formatowanie zmieniło zawartość zmiennej.",
+    "objectID": "laboratoria/02_warunki.html#więcej-niż-dwie-możliwości-else-if",
+    "href": "laboratoria/02_warunki.html#więcej-niż-dwie-możliwości-else-if",
+    "title": "Laboratorium 2",
+    "section": "3. Więcej niż dwie możliwości — else if",
+    "text": "3. Więcej niż dwie możliwości — else if\nŁańcuch if / else if / else służy do wyboru spośród kilku możliwości. Program sprawdza warunki od góry. Po napotkaniu pierwszego prawdziwego warunku wykonuje jego blok i pomija pozostałe gałęzie tego łańcucha. Jeśli żaden warunek nie jest prawdziwy, wykonuje blok else, o ile został zapisany.\nOgólna postać:\nif (first_condition) {\n    // Instructions for the first case.\n} else if (second_condition) {\n    // Instructions for the second case.\n} else {\n    // Instructions for all remaining cases.\n}\nPrzykład nowej konstrukcji: dla istniejącej zmiennej temperature wybieramy jeden opis.\nif (temperature &lt; 0.0) {\n    std::cout &lt;&lt; \"Below freezing\\n\";\n} else if (temperature &lt; 20.0) {\n    std::cout &lt;&lt; \"Cool\\n\";\n} else {\n    std::cout &lt;&lt; \"Warm\\n\";\n}\nDrugi warunek jest sprawdzany dopiero po odrzuceniu pierwszego. Dlatego druga gałąź obejmuje temperatury od 0 włącznie do 20 wyłącznie, mimo że zapisano w niej tylko górną granicę. Zmiana kolejności warunków może zmienić wynik. Kilka oddzielnych instrukcji if działa inaczej: każda jest sprawdzana niezależnie i może wykonać własny blok.\n\nZadanie 3. Znak liczby\nWczytaj liczbę typu int. Za pomocą jednego łańcucha if / else if / else wypisz dokładnie jeden komunikat: Positive, Negative albo Zero. Nie dodawaj osobnego porównania w ostatniej gałęzi, jeśli wcześniejsze warunki wykluczają już oba pozostałe przypadki.\nSprawdź: -5, 0, 5.\nWyjaśnij: jakie informacje o liczbie masz już w ostatniej gałęzi? Prześledź w debuggerze, które porównania zostaną wykonane dla każdego wejścia. Ustaw punkt zatrzymania przed pierwszym if i wykonuj kolejne kroki klawiszem F10.",
     "crumbs": [
       "Instrukcje laboratoryjne",
-      "Laboratorium 1"
+      "Laboratorium 2"
     ]
   },
   {
-    "objectID": "laboratoria/01_projekt.html#dalsze-zadania-samodzielne-programy",
-    "href": "laboratoria/01_projekt.html#dalsze-zadania-samodzielne-programy",
-    "title": "Laboratorium 1",
-    "section": "Dalsze zadania — samodzielne programy",
-    "text": "Dalsze zadania — samodzielne programy\nW zadaniach 10–15 napisz każdy program od początku: samodzielnie dobierz nagłówki, napisz funkcję main, zadeklaruj zmienne i ułóż instrukcje. Nie otrzymujesz szablonu rozwiązania. Stosuj angielskie nazwy zmiennych i komunikaty. Załóż poprawne dane zgodne z poleceniem; nie trzeba jeszcze używać warunków ani pętli. W każdym zadaniu sprawdź podany przykład i własny zestaw danych. Przed uruchomieniem oblicz oczekiwany wynik.\n\nZadanie 10. Średnia z trzech pomiarów\nWczytaj trzy pomiary napięcia w woltach jako liczby typu double. Oblicz sumę i średnią arytmetyczną. Wypisz oba wyniki z opisami i jednostką, z trzema miejscami po przecinku. Dla pomiarów 2.1, 2.4 i 2.7 oczekiwane wyniki to suma 7.200 V i średnia 2.400 V. Sprawdź również trzy identyczne pomiary.\n\n\nZadanie 11. Droga, czas i prędkość\nWczytaj nieujemną drogę w kilometrach oraz dodatni czas przejazdu w minutach. Oblicz średnią prędkość w km/h i m/s. Zadbaj o przeliczenie jednostek i wypisz wyniki z dwoma miejscami po przecinku. Dla 9 km i 30 min oczekiwane wyniki to 18.00 km/h i 5.00 m/s. Sprawdź także drogę równą zero i czas niebędący pełną godziną.\n\n\nZadanie 12. Cena zakupów i rabat\nWczytaj nieujemną cenę jednostkową, dodatnią całkowitą liczbę sztuk oraz rabat w procentach z zakresu od 0 do 100. Oblicz wartość zakupów przed rabatem, kwotę rabatu i kwotę do zapłaty. Wypisz kwoty z dwoma miejscami po przecinku i oznaczeniem PLN. Dla ceny 12.50, liczby sztuk 4 i rabatu 10 wyniki to kolejno 50.00 PLN, 5.00 PLN i 45.00 PLN. Sprawdź też rabat 0% oraz 100%. W tym ćwiczeniu stosujemy double; nie projektujemy systemu księgowego.\n\n\nZadanie 13. Energia i koszt pracy urządzenia\nWczytaj nieujemne wartości: moc urządzenia w watach, czas pracy w godzinach i cenę jednej kilowatogodziny w PLN/kWh. Samodzielnie ułóż wzory na zużytą energię w kWh i jej koszt w PLN. Wypisz energię z trzema miejscami po przecinku, a koszt z dwoma. Dla 1500 W, 2 h i 1.20 PLN/kWh wyniki to 3.000 kWh i 3.60 PLN. Sprawdź zerowy czas pracy.\n\n\nZadanie 14. Godziny, minuty i sekundy\nWczytaj całkowitą liczbę sekund z zakresu od 0 do 1000000. Za pomocą dzielenia całkowitego i reszty z dzielenia oblicz liczbę pełnych godzin oraz pozostałych minut i sekund. Minuty i sekundy mają mieścić się w zakresie 0–59; godziny mogą przekroczyć 23. Dla 3665 wypisz 1 h 1 min 5 s. Sprawdź również 0, 59, 60, 3599 oraz 3600. Nie trzeba dopełniać liczb zerami.\n\n\nZadanie 15. Zamiana wartości zmiennych\nWczytaj dwie liczby całkowite. Wypisz ich wartości, zamień zawartości zmiennych z użyciem trzeciej zmiennej pomocniczej i ponownie wypisz wartości. Nie używaj std::swap ani ponownego wczytywania danych. Dla wartości 7 i -3 po zamianie pierwsza zmienna ma zawierać -3, a druga 7. Sprawdź także dwie jednakowe wartości. W debuggerze prześledź każdą instrukcję przypisania i wyjaśnij, po co potrzebna jest zmienna pomocnicza.",
+    "objectID": "laboratoria/02_warunki.html#jednoczesne-spełnienie-warunków-operator",
+    "href": "laboratoria/02_warunki.html#jednoczesne-spełnienie-warunków-operator",
+    "title": "Laboratorium 2",
+    "section": "4. Jednoczesne spełnienie warunków — operator &&",
+    "text": "4. Jednoczesne spełnienie warunków — operator &&\nOperator logiczny && oznacza „i”. Wyrażenie złożone z dwóch warunków jest prawdziwe tylko wtedy, gdy oba warunki są prawdziwe. Pozwala to np. sprawdzić dolną i górną granicę przedziału.\nOgólna postać:\nfirst_condition && second_condition\nPrzykład nowej konstrukcji: zmienna pressure zawiera już wynik pomiaru.\nif (pressure &gt;= 950.0 && pressure &lt;= 1050.0) {\n    std::cout &lt;&lt; \"Pressure within range\\n\";\n}\nKażde porównanie zapisujemy w całości. Matematyczny zapis 950 &lt;= pressure &lt;= 1050 nie sprawdza przedziału w C++: pierwsze porównanie dałoby wartość logiczną, która następnie byłaby porównywana z 1050. Operator && sprawdza prawy warunek tylko wtedy, gdy lewy jest prawdziwy; jest to obliczanie ze skracaniem.\n\nZadanie 4. Dopuszczalny zakres pomiaru\nWczytaj temperaturę typu double. Poprawny zakres wynosi od -20°C do 50°C włącznie. Użyj && i if/else, aby wypisać Valid temperature albo Invalid temperature.\nSprawdź: -21, -20, 0, 50, 51. Obie granice muszą zostać zaakceptowane.\nWyjaśnij: dlaczego potrzebne są dwa pełne porównania? Co stanie się dla temperatury 0, jeśli w swoim warunku zastąpisz && przez ||?",
     "crumbs": [
       "Instrukcje laboratoryjne",
-      "Laboratorium 1"
+      "Laboratorium 2"
     ]
   },
   {
-    "objectID": "laboratoria/01_projekt.html#dokumentacja-i-sprawdzenie-pracy",
-    "href": "laboratoria/01_projekt.html#dokumentacja-i-sprawdzenie-pracy",
-    "title": "Laboratorium 1",
+    "objectID": "laboratoria/02_warunki.html#wystarczy-jeden-spełniony-warunek-operator",
+    "href": "laboratoria/02_warunki.html#wystarczy-jeden-spełniony-warunek-operator",
+    "title": "Laboratorium 2",
+    "section": "5. Wystarczy jeden spełniony warunek — operator ||",
+    "text": "5. Wystarczy jeden spełniony warunek — operator ||\nOperator logiczny || oznacza „lub” w sensie niewykluczającym: wynik jest prawdziwy, gdy co najmniej jeden z warunków jest prawdziwy. Do wykrycia wartości spoza przedziału wystarczy przekroczenie jednej z jego granic.\nOgólna postać:\nfirst_condition || second_condition\nPrzykład nowej konstrukcji: zmienna humidity zawiera już wczytaną wilgotność procentową.\nif (humidity &lt; 0.0 || humidity &gt; 100.0) {\n    std::cout &lt;&lt; \"Invalid humidity\\n\";\n}\nPrawy warunek jest sprawdzany tylko wtedy, gdy lewy jest fałszywy. W wyrażeniach łączących && i || stosuj nawiasy, aby wyraźnie wskazać grupowanie reguł. Operator && ma wyższy priorytet niż ||.\n\nZadanie 5. Kategorie naładowania baterii\nWczytaj całkowity procent naładowania baterii. Najpierw za pomocą || odrzuć wartości spoza zakresu 0–100 komunikatem Invalid charge. Dla poprawnych danych wypisz jedną kategorię: poniżej 30 — Recharge, od 30 do 79 — Ready, od 80 do 100 — Full readiness. Zastosuj jeden łańcuch warunków, zaczynając od kontroli błędu.\nSprawdź: -1, 0, 29, 30, 79, 80, 100, 101. Dla -1 i 101 ma pojawić się wyłącznie komunikat o błędzie.\nWyjaśnij: dlaczego kontrola zakresu musi poprzedzać klasyfikację w tym układzie? Co byłoby wynikiem dla 101, gdyby program sprawdzał tylko progi 30 i 80? Następnie zmień próg pełnej gotowości na 90 i sprawdź 89 oraz 90.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 2"
+    ]
+  },
+  {
+    "objectID": "laboratoria/02_warunki.html#zaprzeczenie-i-zmienne-logiczne-operator",
+    "href": "laboratoria/02_warunki.html#zaprzeczenie-i-zmienne-logiczne-operator",
+    "title": "Laboratorium 2",
+    "section": "6. Zaprzeczenie i zmienne logiczne — operator !",
+    "text": "6. Zaprzeczenie i zmienne logiczne — operator !\nZmienna typu bool przechowuje wartość true albo false. Może opisywać stan, np. wykonanie przeglądu. Można użyć jej bezpośrednio jako warunku, bez dopisywania == true. Operator ! odwraca wartość logiczną: z prawdy tworzy fałsz, a z fałszu prawdę.\nOgólna postać:\n!condition\nPrzykład nowej konstrukcji: zakładamy, że istnieje zmienna bool connected.\nif (!connected) {\n    std::cout &lt;&lt; \"No connection\\n\";\n} else {\n    std::cout &lt;&lt; \"Connected\\n\";\n}\nDla wyrażenia złożonego zaprzeczenie zapisujemy z nawiasami, np. !(first_condition && second_condition). Taki zapis sprawdza, czy nie są spełnione oba wymagania jednocześnie; nie jest równoważny !first_condition && !second_condition.\n\nZadanie 6. Zgoda na wydanie urządzenia\nWczytaj procent baterii jako int oraz stan przeglądu checked jako bool. Na potrzeby tego zadania załóż poprawny odczyt: bateria jest w zakresie 0–100, a przegląd jest podany jako 0 albo 1. Urządzenie można wydać tylko wtedy, gdy bateria ma co najmniej 30% i przegląd wykonano.\nZapisz wynik tej reguły w zmiennej bool canIssue. Użyj !canIssue jako warunku odmowy i wypisz Cannot issue albo Can issue.\nSprawdź: (29, 1), (30, 0), (30, 1), (100, 1). Tylko dwie ostatnie pary pozwalają wydać urządzenie.\nWyjaśnij: czym różni się zaprzeczenie całej reguły od jednoczesnego wymagania niskiej baterii i braku przeglądu? Czy wystarczy niespełnienie jednego wymagania, aby odmówić wydania?",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 2"
+    ]
+  },
+  {
+    "objectID": "laboratoria/02_warunki.html#wybór-wartości-operator-warunkowy",
+    "href": "laboratoria/02_warunki.html#wybór-wartości-operator-warunkowy",
+    "title": "Laboratorium 2",
+    "section": "7. Wybór wartości — operator warunkowy ?:",
+    "text": "7. Wybór wartości — operator warunkowy ?:\nInstrukcja if/else wybiera instrukcje do wykonania. Operator warunkowy ?: tworzy natomiast wyrażenie: zależnie od warunku wybiera jedną z dwóch wartości. Wynik można np. przypisać do zmiennej albo wykorzystać w obliczeniu.\nOgólna postać:\ncondition ? value_if_true : value_if_false\nNajpierw obliczany jest condition. Jeżeli jest prawdziwy, obliczane jest wyrażenie po ?; jeżeli fałszywy — wyrażenie po :. Obliczana jest tylko wybrana gałąź. W tych ćwiczeniach stosuj w obu gałęziach wartości tego samego typu, aby nie wprowadzać dodatkowych konwersji.\nPrzykład nowej konstrukcji: istniejąca zmienna express ma typ bool. W zależności od jej wartości wybieramy koszt dostawy.\ndouble deliveryCost = express ? 15.0 : 8.0;\nDla express == true zmienna otrzyma 15.0, a dla false otrzyma 8.0. Średnik kończy deklarację zmiennej; nie jest częścią samego operatora. ?: stosuj do prostego wyboru wartości. Nie zagnieżdżaj go w tym zadaniu.\n\nZadanie 7. Większa z dwóch wartości\nWczytaj dwie liczby typu double. Za pomocą operatora ?: wybierz większą wartość i zapisz ją w nowej zmiennej typu double. Następnie wypisz tę zmienną. Nie zastępuj operatora instrukcją if/else ani gotową funkcją wybierającą maksimum.\nSprawdź: (2.5, 7.0), (8.0, -1.0), (-4.0, -2.0), (3.0, 3.0). Oczekiwane wartości to 7, 8, -2 i 3.\nWyjaśnij: która gałąź zostanie wybrana dla dwóch równych liczb przy porównaniu &gt;? Czy zmiana tego porównania na &gt;= zmieni wypisaną wartość? Zapisz odpowiednik swojego wyboru za pomocą if/else, aby porównać obie konstrukcje.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 2"
+    ]
+  },
+  {
+    "objectID": "laboratoria/02_warunki.html#sprawdzenie-odczytu-i-wcześniejsze-zakończenie-programu",
+    "href": "laboratoria/02_warunki.html#sprawdzenie-odczytu-i-wcześniejsze-zakończenie-programu",
+    "title": "Laboratorium 2",
+    "section": "8. Sprawdzenie odczytu i wcześniejsze zakończenie programu",
+    "text": "8. Sprawdzenie odczytu i wcześniejsze zakończenie programu\nDotąd w zadaniach zakładaliśmy poprawne wczytanie danych. Odczyt std::cin &gt;&gt; value może się jednak nie udać, np. po wpisaniu tekstu zamiast liczby. Stan strumienia można sprawdzić w warunku. Operator ! pozwala wejść do bloku obsługi nieudanego odczytu.\nOgólna postać dla jednego odczytu:\nif (!(std::cin &gt;&gt; value)) {\n    // Handle the failed read.\n    return 1;\n}\nZmienna value musi zostać wcześniej zadeklarowana. Nawiasy w !(std::cin &gt;&gt; value) obejmują cały odczyt. return 1; użyte wewnątrz main kończy program z niezerowym kodem, którym sygnalizujemy błąd. Instrukcje znajdujące się dalej nie zostaną wtedy wykonane.\nPrzykład nowej konstrukcji: dla istniejących zmiennych liczbowych length i width można sprawdzić dwa odczyty razem.\nif (!(std::cin &gt;&gt; length &gt;&gt; width)) {\n    std::cout &lt;&lt; \"Invalid input\\n\";\n    return 1;\n}\nNieudany odczyt i niedopuszczalna wartość to różne sytuacje. Zero może zostać poprawnie wczytane, a mimo to nie nadawać się na dzielnik. Sprawdzenie stanu strumienia nie gwarantuje też, że wykorzystano cały wpisany tekst: np. odczyt liczby z 12abc może wczytać początkowe 12 i pozostawić resztę w strumieniu. W tym laboratorium sprawdzamy powodzenie wymaganych odczytów, bez analizy całego wiersza.\n\nZadanie 8. Dzielenie z kontrolą danych\nWczytaj dwie liczby typu double. Jeżeli odczyt się nie powiedzie, wypisz Invalid input i zakończ program przed obliczeniami. Po poprawnym odczycie sprawdź dzielnik: dla zera wypisz Division by zero i również zakończ program. Dopiero po obu sprawdzeniach oblicz i wypisz iloraz.\nSprawdź: 8 2, 8 0, 0 2, abc 2, 8 abc. Oczekiwane wyniki to kolejno 4, komunikat o zerowym dzielniku, 0 oraz dwa komunikaty o błędzie odczytu. Dla każdej błędnej próby program ma wypisać jeden odpowiedni komunikat i nie wykonywać dzielenia.\nWyjaśnij: dlaczego poprawności odczytu nie zastępuje samo sprawdzenie dzielnika? Pokaż w debuggerze, że po wykonaniu return 1; program nie dochodzi do obliczania ilorazu.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 2"
+    ]
+  },
+  {
+    "objectID": "laboratoria/02_warunki.html#wybór-według-konkretnej-wartości-switch",
+    "href": "laboratoria/02_warunki.html#wybór-według-konkretnej-wartości-switch",
+    "title": "Laboratorium 2",
+    "section": "9. Wybór według konkretnej wartości — switch",
+    "text": "9. Wybór według konkretnej wartości — switch\nswitch służy do wyboru działania na podstawie wartości całkowitej, znaku lub wartości typu wyliczeniowego. Etykieta case wskazuje konkretną stałą, np. 1 albo 'a'. default obsługuje brak dopasowania. switch nie służy do bezpośredniego porównywania przedziałów ani wartości typu double.\nOgólna postać:\nswitch (selector) {\ncase first_value:\n    // Instructions for the first value.\n    break;\ncase second_value:\n    // Instructions for the second value.\n    break;\ndefault:\n    // Instructions when no case matches.\n    break;\n}\nselector jest sprawdzaną wartością. Stałe przy case muszą być znane w czasie kompilacji i nie mogą się powtarzać. break kończy wykonanie switch; bez niego program może wykonywać także instrukcje pod kolejnymi etykietami, bez ponownego sprawdzania dopasowania.\nPrzykład nowej konstrukcji: istniejąca zmienna option ma typ char.\nswitch (option) {\ncase 'a':\n    std::cout &lt;&lt; \"Add\\n\";\n    break;\ncase 'r':\n    std::cout &lt;&lt; \"Report\\n\";\n    break;\ndefault:\n    std::cout &lt;&lt; \"Unknown option\\n\";\n    break;\n}\n\nZadanie 9. Menu komunikatów\nWczytaj wybór użytkownika jako int. Użyj switch: dla 1 wypisz Start measurement, dla 2 — Show last result, dla 3 — Finish. Dla każdej innej liczby wypisz Unknown option. Program ma obsłużyć jeden wybór i zakończyć się; nie dodawaj pętli. Załóż poprawny odczyt liczby całkowitej.\nSprawdź: 1, 2, 3, 0, 4. Przy każdej próbie ma pojawić się dokładnie jeden komunikat.\nWyjaśnij: do czego służy default? Tymczasowo usuń break po pierwszym przypadku i uruchom program dla 1. Zapisz, które komunikaty się pojawiły i dlaczego, a następnie przywróć break.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 2"
+    ]
+  },
+  {
+    "objectID": "laboratoria/02_warunki.html#połączenie-wyboru-operacji-i-kontroli-danych",
+    "href": "laboratoria/02_warunki.html#połączenie-wyboru-operacji-i-kontroli-danych",
+    "title": "Laboratorium 2",
+    "section": "10. Połączenie wyboru operacji i kontroli danych",
+    "text": "10. Połączenie wyboru operacji i kontroli danych\nW jednym programie można łączyć poznane konstrukcje: sprawdzić odczyt, wybrać operację przez switch i wewnątrz wybranego przypadku użyć if. Każde sprawdzenie powinno poprzedzać działanie, które wymaga poprawnych danych. Szczególne wymaganie jednej operacji, np. niezerowy dzielnik, sprawdzamy w jej gałęzi.\nOgólna forma zagnieżdżenia — zakładamy, że operation jest wcześniej wczytanym znakiem, a condition opisuje wymaganie danej operacji:\nswitch (operation) {\ncase 'x': {\n    if (condition) {\n        // Perform the operation when its requirement is met.\n    } else {\n        // Report why this operation cannot be performed.\n    }\n    break;\n}\ndefault:\n    // Handle an unknown operation.\n    break;\n}\nKlamry po case 'x': tworzą blok. Są przydatne, gdy w danym przypadku deklarujesz zmienne lokalne: oddzielają je od pozostałych przypadków.\nPrzykład nowej kombinacji: wewnątrz switch taki przypadek mógłby obsłużyć wybór raportu. Zmienna hasData ma typ bool.\ncase 'r': {\n    if (hasData) {\n        std::cout &lt;&lt; \"Report available\\n\";\n    } else {\n        std::cout &lt;&lt; \"No data\\n\";\n    }\n    break;\n}\nTen fragment jest częścią switch, a nie samodzielną instrukcją do umieszczenia bezpośrednio w main.\n\nZadanie 10. Kalkulator z wyborem działania\nNapisz samodzielnie program wczytujący dane w postaci: liczba, znak działania, liczba, np. 8 / 2. Liczby mają typ double, a znak działania typ char.\nSprawdź powodzenie całego odczytu. W razie błędu wypisz Invalid input i zakończ program. Użyj switch do obsługi +, -, *, /. W przypadku dzielenia sprawdź, czy dzielnik nie jest zerem. Dla zerowego dzielnika wypisz Division by zero, a dla nieznanego operatora Unknown operation. Wynik poprawnego działania wypisz z dwoma miejscami po przecinku. Program wykonuje jedno działanie, bez pętli.\nSprawdź:\n\n\n\nWejście\nOczekiwane wyjście\n\n\n\n\n8 / 2\n4.00\n\n\n8 / 0\nDivision by zero\n\n\n3 + 4\n7.00\n\n\n3 - 5\n-2.00\n\n\n2.5 * 4\n10.00\n\n\n3 ? 4\nUnknown operation\n\n\nabc + 2\nInvalid input\n\n\n8 / abc\nInvalid input\n\n\n\nWyjaśnij: dlaczego kontrola zerowego dzielnika dotyczy tylko /, a nie np. mnożenia przez zero? Gdzie w Twoim programie kończy się obsługa nieznanego operatora i dlaczego nie powinna wypisywać wyniku obliczeń?",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 2"
+    ]
+  },
+  {
+    "objectID": "laboratoria/02_warunki.html#dokumentacja-i-sprawdzenie-pracy",
+    "href": "laboratoria/02_warunki.html#dokumentacja-i-sprawdzenie-pracy",
+    "title": "Laboratorium 2",
     "section": "Dokumentacja i sprawdzenie pracy",
-    "text": "Dokumentacja i sprawdzenie pracy\n\nZachowaj źródła .cpp oznaczone numerem zadania.\nDla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.\nOpisz wykryty błąd albo jeden sprawdzony przypadek graniczny.\nPrzygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.\n\nZgłoszenie zadania na stronie nie przesyła kodu źródłowego i nie oznacza zaliczenia. Zatwierdzenie nadaje prowadzący po sprawdzeniu programu. Na koniec kliknij Zakończ laboratorium w formularzu postępów; zapisane zgłoszenia i zatwierdzenia pozostają zachowane.\nSposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów .vs i Debug ani plików .exe.",
+    "text": "Dokumentacja i sprawdzenie pracy\nKażde zadanie napisz jako kompletny program w osobnym projekcie. Pokazane fragmenty objaśniają wyłącznie nową konstrukcję: samodzielnie dobierz nagłówki, napisz main, zadeklaruj zmienne i dodaj wejście oraz wyjście. Stosuj angielskie nazwy zmiennych i komunikaty. Jeżeli zadanie nie wymaga kontroli odczytu ani nie stanowi inaczej, zakładaj dane zgodne z poleceniem.\n\nZachowaj źródła .cpp oznaczone numerem zadania.\nPrzed każdą próbą zapisz przewidywany wynik, a następnie porównaj go z wynikiem programu.\nWykonaj wskazane próby, zwłaszcza te na granicy przedziału.\nDo każdego zadania przygotuj odpowiedź na pytanie „Wyjaśnij”.\nPrzygotuj się do samodzielnego omówienia wybranego fragmentu kodu.\n\nSposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów .vs i Debug ani plików .exe.",
     "crumbs": [
       "Instrukcje laboratoryjne",
-      "Laboratorium 1"
+      "Laboratorium 2"
     ]
   },
   {
-    "objectID": "laboratoria/01_projekt.html#przygotowanie-do-następnej-wejściówki",
-    "href": "laboratoria/01_projekt.html#przygotowanie-do-następnej-wejściówki",
-    "title": "Laboratorium 1",
+    "objectID": "laboratoria/02_warunki.html#przygotowanie-do-następnej-wejściówki",
+    "href": "laboratoria/02_warunki.html#przygotowanie-do-następnej-wejściówki",
+    "title": "Laboratorium 2",
     "section": "Przygotowanie do następnej wejściówki",
-    "text": "Przygotowanie do następnej wejściówki\n\nPowtórz materiał bieżącego laboratorium\n\nDeklaracja i inicjalizacja; zastosowanie int, double, char, bool i string.\nWyniki / i % dla liczb całkowitych oraz dzielenie zmiennoprzecinkowe.\nWejście i wyjście, średnik, std::, fixed i setprecision.\n\n\n\nPrzeczytaj przed laboratorium 2\n\nInstrukcja 2 zostanie udostępniona później. Do tego czasu przygotuj się z krótkiego przykładu poniżej: poznaj ==, !=, &lt;, &lt;=, &gt;, &gt;=, &&, || i !. Zapoznaj się również z przeznaczeniem switch; jego samodzielne stosowanie będzie ćwiczone na zajęciach.\nMinimalne przygotowanie do pytania wyprzedzającego: umieć wskazać gałąź prostego if/else. Przeanalizuj fragment: if (temperature &gt; 25) ... else ... dla temperatur 25 i 26. Dla 25 wykona się else, dla 26 pierwszy blok. Nie jest wymagane napisanie całego kalkulatora przed zajęciami.\nNastępna wejściówka: 3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu, po 1 punkcie.",
+    "text": "Przygotowanie do następnej wejściówki\n\nPowtórz\n\nPorównania i różnicę między = a ==.\nWybór gałęzi if/else, kolejność else if oraz wartości graniczne.\nOperatory &&, ||, ! i znaczenie nawiasów.\nWybór wartości przez condition ? value_if_true : value_if_false.\nSprawdzanie odczytu, wcześniejsze zakończenie i kontrolę dzielenia przez zero.\nswitch, case, break, default oraz zagnieżdżenie if w switch.\n\n\n\nPrzygotuj się do laboratorium 3\nKolejne zajęcia wprowadzą pętle for, while, do…while oraz indeksowanie tablic. Pętla powtarza blok instrukcji. W poniższym fragmencie zmienna sterująca zaczyna od 1; warunek jest sprawdzany przed każdym wykonaniem bloku, a ++i zwiększa wartość po jego wykonaniu.\nfor (int i = 1; i &lt;= 4; ++i) {\n    std::cout &lt;&lt; i &lt;&lt; '\\n';\n}\nMinimalne przygotowanie: wskaż kolejno wypisywane wartości i liczbę powtórzeń. W tym przykładzie wypisane zostaną 1, 2, 3, 4, więc blok wykona się cztery razy. Nie trzeba jeszcze samodzielnie obliczać średniej z tablicy.\nNastępna wejściówka: 3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu, po 1 punkcie.",
     "crumbs": [
       "Instrukcje laboratoryjne",
-      "Laboratorium 1"
-    ]
-  },
-  {
-    "objectID": "scenariusze.html",
-    "href": "scenariusze.html",
-    "title": "Organizacja pracy laboratoryjnej",
-    "section": "",
-    "text": "Przed zajęciami przeczytaj wskazany zakres przygotowania na końcu poprzedniej instrukcji.\nOd laboratorium 2 rozwiąż wejściówkę samodzielnie: trzy pytania powtórkowe i jedno z nowego materiału, po jednym punkcie.\nPrzeczytaj objaśnienia i uruchom pełny program pokazowy w osobnym projekcie.\nWykonuj numerowane zadania, zapisując źródła oraz próby.\nNa końcu sprawdź przygotowanie wymagane do kolejnego laboratorium.",
-    "crumbs": [
-      "Organizacja pracy laboratoryjnej"
-    ]
-  },
-  {
-    "objectID": "scenariusze.html#jak-korzystać-z-instrukcji",
-    "href": "scenariusze.html#jak-korzystać-z-instrukcji",
-    "title": "Organizacja pracy laboratoryjnej",
-    "section": "",
-    "text": "Przed zajęciami przeczytaj wskazany zakres przygotowania na końcu poprzedniej instrukcji.\nOd laboratorium 2 rozwiąż wejściówkę samodzielnie: trzy pytania powtórkowe i jedno z nowego materiału, po jednym punkcie.\nPrzeczytaj objaśnienia i uruchom pełny program pokazowy w osobnym projekcie.\nWykonuj numerowane zadania, zapisując źródła oraz próby.\nNa końcu sprawdź przygotowanie wymagane do kolejnego laboratorium.",
-    "crumbs": [
-      "Organizacja pracy laboratoryjnej"
-    ]
-  },
-  {
-    "objectID": "scenariusze.html#praca-nad-zadaniami",
-    "href": "scenariusze.html#praca-nad-zadaniami",
-    "title": "Organizacja pracy laboratoryjnej",
-    "section": "Praca nad zadaniami",
-    "text": "Praca nad zadaniami\nZadania można wykonywać w parach ze zmianą osoby przy klawiaturze. Każda osoba powinna umieć samodzielnie wyjaśnić kod i przewidzieć jego wynik. Wejściówka jest indywidualna.\nPierwsza instrukcja obejmuje piętnaście ćwiczeń: środowisko, zmienne, naprawę błędów, obliczenia, formatowanie i samodzielne programy utrwalające. Rozpoczęcie zajęć i zgłoszenia zadań zapisujesz w formularzu instrukcji; wykonanie zadania zatwierdza prowadzący po sprawdzeniu programu. Kolejne instrukcje rozwijają warunki, pętle, funkcje, wektor oraz własne klasy. Przykłady pomiarów i urządzeń korzystają z danych ćwiczeniowych.\nKażdy niezależny program zawierający main wymaga osobnego projektu. Nie należy dodawać wszystkich plików pokazowych do jednej aplikacji. Rozwinięcia tego samego programu można zapisywać jako kolejne wersje.",
-    "crumbs": [
-      "Organizacja pracy laboratoryjnej"
-    ]
-  },
-  {
-    "objectID": "scenariusze.html#co-zachować-do-rozliczenia",
-    "href": "scenariusze.html#co-zachować-do-rozliczenia",
-    "title": "Organizacja pracy laboratoryjnej",
-    "section": "Co zachować do rozliczenia",
-    "text": "Co zachować do rozliczenia\n\nPliki źródłowe .cpp z numerem zadania.\nDane wejściowe i wyniki przynajmniej wymaganych prób.\nKrótkie wyjaśnienie wykrytego błędu lub sprawdzonego przypadku granicznego.\n\nFormę przekazania pracy i zasady zaliczenia podaje prowadzący. Formularz wejściówki zapisuje wynik odpowiedzi, a nie pliki z rozwiązaniami.",
-    "crumbs": [
-      "Organizacja pracy laboratoryjnej"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Wprowadzenie do programowania",
-    "section": "",
-    "text": "Każda instrukcja zawiera cel ćwiczenia, wprowadzenie teoretyczne z przykładami, zadania do realizacji oraz przygotowanie do kolejnej wejściówki. Pracujemy w Visual Studio Community, w projektach Console App i plikach .cpp.",
-    "crumbs": [
-      "Wprowadzenie do programowania"
-    ]
-  },
-  {
-    "objectID": "index.html#program-laboratoriów",
-    "href": "index.html#program-laboratoriów",
-    "title": "Wprowadzenie do programowania",
-    "section": "Program laboratoriów",
-    "text": "Program laboratoriów\nPierwsze pięć tematów odpowiada zakresowi karty Wprowadzenie do programowania (WELTXWSJ-WDP). Dwa kolejne rozwijają tworzenie i używanie prostych klas.\n\n\n\nInstrukcja\nGłówne zagadnienia\n\n\n\n\n1. Algorytmy i programy w C++\nUtworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.\n\n\n\n\nKolejne instrukcje będą udostępniane w miarę postępu zajęć.",
-    "crumbs": [
-      "Wprowadzenie do programowania"
-    ]
-  },
-  {
-    "objectID": "index.html#przed-pierwszym-laboratorium",
-    "href": "index.html#przed-pierwszym-laboratorium",
-    "title": "Wprowadzenie do programowania",
-    "section": "Przed pierwszym laboratorium",
-    "text": "Przed pierwszym laboratorium\n\nPrzygotuj Visual Studio i uruchom projekt konsolowy.\nOtwórz instrukcję laboratorium 1.\nUtwórz katalog na źródła i wyniki prób z kolejnych ćwiczeń.\n\n\nProgram pokazowy do laboratorium 1 — pobierz plik .cpp.",
-    "crumbs": [
-      "Wprowadzenie do programowania"
-    ]
-  },
-  {
-    "objectID": "index.html#wejściówki-i-przygotowanie",
-    "href": "index.html#wejściówki-i-przygotowanie",
-    "title": "Wprowadzenie do programowania",
-    "section": "Wejściówki i przygotowanie",
-    "text": "Wejściówki i przygotowanie\nOd laboratorium 2 na początku instrukcji znajduje się test: 3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego nowego materiału. Każde pytanie jest warte 1 punkt. Pytanie wyprzedzające sprawdza podstawowe przygotowanie, a nie wykonanie nowych zadań przed zajęciami.\nNa końcu każdej instrukcji wskazano, co powtórzyć i co przeczytać przed następną wejściówką. Wynik testu pojawia się po potwierdzeniu zapisu przez serwer. Zadania programistyczne są rozliczane osobno.\nOrganizacja pracy i dokumentowanie wyników.\nTerminy, wymiar poszczególnych spotkań oraz formę i termin zaliczenia podaje prowadzący dla danej grupy.",
-    "crumbs": [
-      "Wprowadzenie do programowania"
+      "Laboratorium 2"
     ]
   },
   {
@@ -255,6 +241,174 @@
     "text": "Dokumentacja środowiska\n\nMicrosoft — pierwszy projekt konsolowy C++.\nMicrosoft — budowanie projektów i rozwiązań.\nMicrosoft — wybór kompilacji C albo C++.",
     "crumbs": [
       "Visual Studio — projekt konsolowy C++"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Wprowadzenie do programowania",
+    "section": "",
+    "text": "Każda instrukcja zawiera cel ćwiczenia, wprowadzenie teoretyczne z przykładami, zadania do realizacji oraz przygotowanie do kolejnej wejściówki. Pracujemy w Visual Studio Community, w projektach Console App i plikach .cpp.",
+    "crumbs": [
+      "Wprowadzenie do programowania"
+    ]
+  },
+  {
+    "objectID": "index.html#program-laboratoriów",
+    "href": "index.html#program-laboratoriów",
+    "title": "Wprowadzenie do programowania",
+    "section": "Program laboratoriów",
+    "text": "Program laboratoriów\nPierwsze pięć tematów odpowiada zakresowi karty Wprowadzenie do programowania (WELTXWSJ-WDP). Dwa kolejne rozwijają tworzenie i używanie prostych klas.\n\n\n\nInstrukcja\nGłówne zagadnienia\n\n\n\n\n1. Algorytmy i programy w C++\nUtworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.\n\n\n2. Operacje warunkowe\nZapisanie reguł wyboru oraz sprawdzenie danych przed wykonaniem działania.\n\n\n\n\nKolejne instrukcje będą udostępniane w miarę postępu zajęć.",
+    "crumbs": [
+      "Wprowadzenie do programowania"
+    ]
+  },
+  {
+    "objectID": "index.html#przed-pierwszym-laboratorium",
+    "href": "index.html#przed-pierwszym-laboratorium",
+    "title": "Wprowadzenie do programowania",
+    "section": "Przed pierwszym laboratorium",
+    "text": "Przed pierwszym laboratorium\n\nPrzygotuj Visual Studio i uruchom projekt konsolowy.\nOtwórz instrukcję laboratorium 1.\nUtwórz katalog na źródła i wyniki prób z kolejnych ćwiczeń.\n\n\nProgram pokazowy do laboratorium 1 — pobierz plik .cpp.",
+    "crumbs": [
+      "Wprowadzenie do programowania"
+    ]
+  },
+  {
+    "objectID": "index.html#wejściówki-i-przygotowanie",
+    "href": "index.html#wejściówki-i-przygotowanie",
+    "title": "Wprowadzenie do programowania",
+    "section": "Wejściówki i przygotowanie",
+    "text": "Wejściówki i przygotowanie\nOd laboratorium 2 na początku instrukcji znajduje się wejściówka. Przed laboratorium 2 obejmuje cztery pytania wyboru z materiału laboratorium 1 oraz krótki program do samodzielnego napisania. Każde pytanie wyboru jest warte 1 punkt; program sprawdza prowadzący osobno. Zakres kolejnych wejściówek jest zapowiadany w instrukcjach.\nNa końcu każdej instrukcji wskazano, co powtórzyć i co przeczytać przed następną wejściówką. Wynik testu pojawia się po potwierdzeniu zapisu przez serwer. Zadania programistyczne są rozliczane osobno.\nOrganizacja pracy i dokumentowanie wyników.\nTerminy, wymiar poszczególnych spotkań oraz formę i termin zaliczenia podaje prowadzący dla danej grupy.",
+    "crumbs": [
+      "Wprowadzenie do programowania"
+    ]
+  },
+  {
+    "objectID": "scenariusze.html",
+    "href": "scenariusze.html",
+    "title": "Organizacja pracy laboratoryjnej",
+    "section": "",
+    "text": "Przed zajęciami przeczytaj wskazany zakres przygotowania na końcu poprzedniej instrukcji.\nOd laboratorium 2 rozwiąż wejściówkę samodzielnie, zgodnie z zakresem podanym w instrukcji. Przed laboratorium 2 są to cztery pytania wyboru z poprzednich zajęć, po jednym punkcie, oraz krótki program do ręcznego sprawdzenia.\nPrzeczytaj objaśnienia i uruchom pełny program pokazowy w osobnym projekcie.\nWykonuj numerowane zadania, zapisując źródła oraz próby.\nNa końcu sprawdź przygotowanie wymagane do kolejnego laboratorium.",
+    "crumbs": [
+      "Organizacja pracy laboratoryjnej"
+    ]
+  },
+  {
+    "objectID": "scenariusze.html#jak-korzystać-z-instrukcji",
+    "href": "scenariusze.html#jak-korzystać-z-instrukcji",
+    "title": "Organizacja pracy laboratoryjnej",
+    "section": "",
+    "text": "Przed zajęciami przeczytaj wskazany zakres przygotowania na końcu poprzedniej instrukcji.\nOd laboratorium 2 rozwiąż wejściówkę samodzielnie, zgodnie z zakresem podanym w instrukcji. Przed laboratorium 2 są to cztery pytania wyboru z poprzednich zajęć, po jednym punkcie, oraz krótki program do ręcznego sprawdzenia.\nPrzeczytaj objaśnienia i uruchom pełny program pokazowy w osobnym projekcie.\nWykonuj numerowane zadania, zapisując źródła oraz próby.\nNa końcu sprawdź przygotowanie wymagane do kolejnego laboratorium.",
+    "crumbs": [
+      "Organizacja pracy laboratoryjnej"
+    ]
+  },
+  {
+    "objectID": "scenariusze.html#praca-nad-zadaniami",
+    "href": "scenariusze.html#praca-nad-zadaniami",
+    "title": "Organizacja pracy laboratoryjnej",
+    "section": "Praca nad zadaniami",
+    "text": "Praca nad zadaniami\nZadania można wykonywać w parach ze zmianą osoby przy klawiaturze. Każda osoba powinna umieć samodzielnie wyjaśnić kod i przewidzieć jego wynik. Wejściówka jest indywidualna.\nPierwsza instrukcja obejmuje piętnaście ćwiczeń: środowisko, zmienne, naprawę błędów, obliczenia, formatowanie i samodzielne programy utrwalające. Rozpoczęcie zajęć i zgłoszenia zadań zapisujesz w formularzu instrukcji; wykonanie zadania zatwierdza prowadzący po sprawdzeniu programu. Kolejne instrukcje rozwijają warunki, pętle, funkcje, wektor oraz własne klasy. Przykłady pomiarów i urządzeń korzystają z danych ćwiczeniowych.\nKażdy niezależny program zawierający main wymaga osobnego projektu. Nie należy dodawać wszystkich plików pokazowych do jednej aplikacji. Rozwinięcia tego samego programu można zapisywać jako kolejne wersje.",
+    "crumbs": [
+      "Organizacja pracy laboratoryjnej"
+    ]
+  },
+  {
+    "objectID": "scenariusze.html#co-zachować-do-rozliczenia",
+    "href": "scenariusze.html#co-zachować-do-rozliczenia",
+    "title": "Organizacja pracy laboratoryjnej",
+    "section": "Co zachować do rozliczenia",
+    "text": "Co zachować do rozliczenia\n\nPliki źródłowe .cpp z numerem zadania.\nDane wejściowe i wyniki przynajmniej wymaganych prób.\nKrótkie wyjaśnienie wykrytego błędu lub sprawdzonego przypadku granicznego.\n\nFormę przekazania pracy i zasady zaliczenia podaje prowadzący. Formularz wejściówki zapisuje wynik odpowiedzi, a nie pliki z rozwiązaniami.",
+    "crumbs": [
+      "Organizacja pracy laboratoryjnej"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html",
+    "href": "laboratoria/01_projekt.html",
+    "title": "Laboratorium 1",
+    "section": "",
+    "text": "Wprowadzenie do programowania · C++ · instrukcja laboratoryjna\nCel ćwiczenia: Utworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.\nŚrodowisko: Visual Studio Community, projekt Console App, standard C++17.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#rozpocznij-zajęcia",
+    "href": "laboratoria/01_projekt.html#rozpocznij-zajęcia",
+    "title": "Laboratorium 1",
+    "section": "Rozpocznij zajęcia",
+    "text": "Rozpocznij zajęcia\nWpisz swój e-mail i kliknij Rozpocznij zajęcia. Pojawisz się na liście uczestników u prowadzącego. E-mail jest deklarowany — formularz nie loguje do poczty. Po wykonaniu zadania zgłoś je do sprawdzenia. Prowadzący sprawdza program przy stanowisku i zatwierdza zadanie w swoim panelu. Odświeżanie strony nie usuwa zapisanych postępów. Korzystaj z tej samej karty przeglądarki; dostęp jest zapamiętany w niej na czas sesji. Nie udostępniaj tej karty innym osobom.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#informacje-wprowadzające",
+    "href": "laboratoria/01_projekt.html#informacje-wprowadzające",
+    "title": "Laboratorium 1",
+    "section": "Informacje wprowadzające",
+    "text": "Informacje wprowadzające\nĆwiczenie wprowadza do pracy w Visual Studio Community, w projekcie Console App / Aplikacja konsolowa (C++). Każdy niezależny program należy umieścić w osobnym projekcie. Nazwy zmiennych i komunikaty w przykładach są po angielsku; opisy zadań są po polsku.\nPrzed rozpoczęciem pracy należy sprawdzić możliwość zapisania projektu. Problemy ze sprzętem należy zgłosić prowadzącemu; przy stanowisku nie należy spożywać napojów ani zmieniać konfiguracji pracowni bez zgody.\nNa pierwszym laboratorium nie ma wejściówki. Zasady rozliczania zadań są opisane na stronie organizacyjnej.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#wprowadzenie-teoretyczne",
+    "href": "laboratoria/01_projekt.html#wprowadzenie-teoretyczne",
+    "title": "Laboratorium 1",
+    "section": "Wprowadzenie teoretyczne",
+    "text": "Wprowadzenie teoretyczne\n\nŚrodowisko IDE i projekt\nIDE (Integrated Development Environment, zintegrowane środowisko programistyczne) łączy edytor kodu, narzędzia budowania i debugger. Projekt określa, które pliki tworzą wspólny program. Rozwiązanie (solution) może zawierać kilka projektów.\n\nUtwórz Console App dla języka C++ i otwórz wygenerowany plik .cpp.\nW tym pliku umieszczaj kod programu. Jeśli plik zawiera już main, zastąp przykład zamiast dopisywać drugą funkcję main.\nZapisz zmiany: Ctrl+S.\nZbuduj całe rozwiązanie: Ctrl+Shift+B. Odczytaj komunikaty w oknie Output / Dane wyjściowe.\nUruchom: Ctrl+F5. Samo zbudowanie programu nie oznacza jego uruchomienia.\n\nPełna instrukcja środowiska: Visual Studio krok po kroku.\n\n\nOd pliku źródłowego do programu\nKod .cpp jest tekstem. Preprocesor przygotowuje go do kompilacji, m.in. obsługując #include. Kompilator sprawdza składnię i znaczenie instrukcji oraz przetwarza kod; etap asemblacji prowadzi do kodu maszynowego w pliku obiektowym. Linker, czyli konsolidator, łączy pliki obiektowe z potrzebnymi bibliotekami w program wykonywalny.\nmain.cpp → przygotowanie i kompilacja → main.obj → konsolidacja → nazwa_projektu.exe\nW Visual Studio plik wynikowy zwykle ma nazwę projektu, a nie pojedynczego pliku źródłowego. Błąd składni może zatrzymać budowanie. Błąd obliczeń może pozostać w programie, który buduje się bez błędów.\n\n\nStruktura programu, nagłówki i main\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Hello, world!\\n\";\n    return 0;\n}\n\n\n\n\n\n\n\nElement\nZnaczenie\n\n\n\n\n#include &lt;iostream&gt;\nUdostępnia deklaracje potrzebne do standardowego wejścia i wyjścia\n\n\nint main()\nGłówna funkcja naszego programu konsolowego\n\n\n{ ... }\nBlok instrukcji\n\n\nstd::cout &lt;&lt; ...\nWypisanie danych na standardowe wyjście\n\n\n;\nZakończenie instrukcji, np. przypisania lub wypisania\n\n\n\\n\nZnak nowej linii wewnątrz napisu\n\n\nreturn 0;\nZakończenie funkcji main z kodem powodzenia\n\n\n\nPrzestrzeń nazw (namespace) grupuje nazwy. Przedrostek std:: wskazuje element biblioteki standardowej. Nagłówki standardowe, takie jak &lt;iostream&gt;, &lt;string&gt; i &lt;iomanip&gt;, zapisujemy w nawiasach ostrych; własne, np. \"calculations.hpp\", zwykle w cudzysłowie.\n\n\nZmienne, stałe i typy danych\nDeklaracja wprowadza nazwę i typ zmiennej. Inicjalizacja nadaje jej wartość początkową. Zmienna int count = 5; przechowuje liczbę całkowitą, którą można zmieniać. Zapis const int groupSize = 4; opisuje stałą, której nie można później przypisać innej wartości.\n\n\n\n\n\n\n\n\nTyp\nZastosowanie\nPrzykład\n\n\n\n\nint\nLiczba całkowita\nint count = 5;\n\n\nfloat\nLiczba zmiennoprzecinkowa\nfloat voltage = 3.3f;\n\n\ndouble\nObliczenia z częścią ułamkową, zwykle dokładniejsze niż float\ndouble length = 2.5;\n\n\nchar\nJeden znak\nchar group = 'A';\n\n\nbool\nWartość logiczna\nbool active = true;\n\n\nstd::string\nNapis, wymaga nagłówka string\nstd::string name = \"Sensor\";\n\n\n\nNazwy nie mogą zaczynać się od cyfry ani być słowami kluczowymi. Wielkość liter ma znaczenie: count i Count to różne nazwy. Pojedyncze apostrofy oznaczają znak, a cudzysłowy napis.\nRozmiar typu można sprawdzić przez sizeof, np. std::cout &lt;&lt; sizeof(int);. Nie należy zakładać identycznego rozmiaru wszystkich typów na każdej platformie. Dokładność liczb zmiennoprzecinkowych dotyczy cyfr znaczących, a nie stałej liczby miejsc po przecinku. Ustawienie formatu wyświetlania nie zwiększa dokładności przechowywanej liczby.\n\n\nOperacje matematyczne i przypisanie\n\n\n\n\n\n\n\n\nOperator\nZnaczenie\nWynik dla int a = 10, b = 3\n\n\n\n\n+, -, *\nDodawanie, odejmowanie, mnożenie\n13, 7, 30\n\n\n/\nDzielenie\n3\n\n\n%\nReszta z dzielenia całkowitego\n1\n\n\n=\nPrzypisanie wartości\na = 5; zmienia a na 5\n\n\n+=, -=\nZmiana o podaną wartość\na += 2; odpowiada a = a + 2;\n\n\n*=, /=, %=\nDziałanie i zapis wyniku w tej samej zmiennej\na *= 2; odpowiada a = a * 2;\n\n\n\nDzielenie dwóch int daje wynik całkowity: 10 / 4 to 2. Zapis 10.0 / 4 daje 2.5. Przypisanie wyniku 10 / 4 do double nie odzyska odrzuconej części ułamkowej. Nawiasy pozwalają ustalić kolejność obliczeń, np. 2 * (length + width).\n\n\nWejście, wyjście i formatowanie\nI/O (Input/Output) oznacza wejście i wyjście. std::cin &gt;&gt; value wczytuje wartość do zmiennej; std::cout &lt;&lt; value ją wyświetla. Odczyt z klawiatury kończymy klawiszem Enter. W tych ćwiczeniach stosujemy strumienie C++, bez równoległego wprowadzania scanf i printf.\nW poniższym pełnym programie &lt;iomanip&gt; udostępnia manipulatory formatu. Połączenie std::fixed i std::setprecision(2) ustawia dwa miejsca po przecinku. Dla wejścia 2.5 program wyświetla Measurement: 2.75.\n#include &lt;iostream&gt;\n#include &lt;iomanip&gt;\n#include &lt;string&gt;\n\nint main()\n{\n    std::string label = \"Measurement\";\n    double value = 0.0;\n    const double correction = 0.25;\n    std::cout &lt;&lt; \"Enter a value: \";\n    std::cin &gt;&gt; value;\n    value += correction;\n    std::cout &lt;&lt; label &lt;&lt; \": \" &lt;&lt; std::fixed &lt;&lt; std::setprecision(2)\n              &lt;&lt; value &lt;&lt; '\\n';\n    return 0;\n}\n\n\nŚledzenie wykonania\nPunkt zatrzymania (breakpoint, F9) pozwala zatrzymać program przed wybraną instrukcją. F5 uruchamia debugger, a F10 wykonuje kolejny krok. W oknie Locals / Zmienne lokalne można porównać wartość przed przypisaniem i po nim. Żółta strzałka wskazuje instrukcję, która dopiero zostanie wykonana.\nPełny program pokazowy — pobierz plik .cpp. Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#zadania-do-realizacji",
+    "href": "laboratoria/01_projekt.html#zadania-do-realizacji",
+    "title": "Laboratorium 1",
+    "section": "Zadania do realizacji",
+    "text": "Zadania do realizacji\nPrzed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.\n\nZadanie 1. Pierwszy projekt\nUtwórz projekt Console App. W pliku main.cpp wyświetl w osobnych liniach: „Wprowadzenie do programowania”, „Laboratorium 1”, „Algorytmy i programy w C++”. Zbuduj cały projekt i uruchom program. Zapisz nazwę powstałego pliku .exe.\n\n\nZadanie 2. Deklaracje i wyświetlanie danych\nZadeklaruj i zainicjalizuj: nazwę ćwiczenia jako std::string, liczbę pomiarów jako int, napięcie jako float, oznaczenie grupy jako char oraz informację o gotowości jako bool. Wypisz wartości wraz z opisami. Sprawdź, jak domyślnie wyświetlają się true i false. Użyj drugiej zmiennej std::string do nazwy urządzenia.\n\n\nZadanie 3. Odczyt błędów kompilacji\nPoniższy program celowo zawiera błędy. Zbuduj go, przeczytaj pierwszy komunikat i popraw kod. Powtarzaj do uzyskania działającego programu. Zapisz, czego brakowało; nie usuwaj instrukcji wypisującej wynik.\n#include &lt;iostream&gt;\n\nint main()\n{\n    int number = 10\n    cout &lt;&lt; \"Value: \" &lt;&lt; number &lt;&lt; '\\n';\n    return 0\n}\nWynik po poprawieniu: Value: 10.\n\n\nZadanie 4. Działania na liczbach double\nWczytaj dwie liczby typu double. Wyświetl sumę, różnicę, iloczyn i iloraz z opisami. Załóż poprawne dane i drugi argument różny od zera. Sprawdź pary 10, 4 i 2.5, 0.5. Dla pierwszej pary iloraz wynosi 2.5.\n\n\nZadanie 5. Dzielenie całkowite i reszta\nWczytaj dwie dodatnie liczby typu int. Wyświetl iloraz całkowity oraz resztę. Dla 23, 4 oczekiwane wartości to 5 i 3; dla 24, 4 — 6 i 0. Wyjaśnij, dlaczego ten program daje inny iloraz niż zadanie 4. Dzielnik musi być różny od zera.\n\n\nZadanie 6. Pole i obwód prostokąta\nWczytaj dodatnie długości boków w metrach jako double. Oblicz pole length * width oraz obwód 2 * (length + width). Wypisz wyniki z jednostkami m2 i m. Dla boków 2.5 i 4 oczekiwane wyniki to 10 m2 i 13 m.\n\n\nZadanie 7. Przeliczanie temperatury\nWczytaj temperaturę w stopniach Celsjusza. Oblicz Fahrenheita według F = C * 9.0 / 5.0 + 32.0 oraz kelwiny według K = C + 273.15. Sprawdź 0 i 100. Dla 0 wyniki to 32 i 273.15. Wyjaśnij, dlaczego podano 9.0 / 5.0, a nie (9 / 5).\n\n\nZadanie 8. Aktualizacja pomiaru\nZacznij od double value = 10.0;. Kolejno dodaj 2.0 przez +=, odejmij 1.0 przez -=, pomnóż przez 3.0 i podziel przez 2.0, używając *= i /=. Po każdej operacji wypisz wartość. Oczekiwany przebieg: 12, 11, 33, 16.5. Następnie wczytaj poprawki i współczynniki z klawiatury; współczynnik dzielenia ma być niezerowy.\n\n\nZadanie 9. Formatowanie wyników\nDla double value = 3.14159265359; wypisz wartość najpierw z domyślnymi ustawieniami, a następnie z std::fixed i precyzją 0, 2 oraz 4. Trzy ostatnie wyniki: 3, 3.14, 3.1416. Sprawdź w debuggerze, czy samo formatowanie zmieniło zawartość zmiennej.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#dalsze-zadania-samodzielne-programy",
+    "href": "laboratoria/01_projekt.html#dalsze-zadania-samodzielne-programy",
+    "title": "Laboratorium 1",
+    "section": "Dalsze zadania — samodzielne programy",
+    "text": "Dalsze zadania — samodzielne programy\nW zadaniach 10–15 napisz każdy program od początku: samodzielnie dobierz nagłówki, napisz funkcję main, zadeklaruj zmienne i ułóż instrukcje. Nie otrzymujesz szablonu rozwiązania. Stosuj angielskie nazwy zmiennych i komunikaty. Załóż poprawne dane zgodne z poleceniem; nie trzeba jeszcze używać warunków ani pętli. W każdym zadaniu sprawdź podany przykład i własny zestaw danych. Przed uruchomieniem oblicz oczekiwany wynik.\n\nZadanie 10. Średnia z trzech pomiarów\nWczytaj trzy pomiary napięcia w woltach jako liczby typu double. Oblicz sumę i średnią arytmetyczną. Wypisz oba wyniki z opisami i jednostką, z trzema miejscami po przecinku. Dla pomiarów 2.1, 2.4 i 2.7 oczekiwane wyniki to suma 7.200 V i średnia 2.400 V. Sprawdź również trzy identyczne pomiary.\n\n\nZadanie 11. Droga, czas i prędkość\nWczytaj nieujemną drogę w kilometrach oraz dodatni czas przejazdu w minutach. Oblicz średnią prędkość w km/h i m/s. Zadbaj o przeliczenie jednostek i wypisz wyniki z dwoma miejscami po przecinku. Dla 9 km i 30 min oczekiwane wyniki to 18.00 km/h i 5.00 m/s. Sprawdź także drogę równą zero i czas niebędący pełną godziną.\n\n\nZadanie 12. Cena zakupów i rabat\nWczytaj nieujemną cenę jednostkową, dodatnią całkowitą liczbę sztuk oraz rabat w procentach z zakresu od 0 do 100. Oblicz wartość zakupów przed rabatem, kwotę rabatu i kwotę do zapłaty. Wypisz kwoty z dwoma miejscami po przecinku i oznaczeniem PLN. Dla ceny 12.50, liczby sztuk 4 i rabatu 10 wyniki to kolejno 50.00 PLN, 5.00 PLN i 45.00 PLN. Sprawdź też rabat 0% oraz 100%. W tym ćwiczeniu stosujemy double; nie projektujemy systemu księgowego.\n\n\nZadanie 13. Energia i koszt pracy urządzenia\nWczytaj nieujemne wartości: moc urządzenia w watach, czas pracy w godzinach i cenę jednej kilowatogodziny w PLN/kWh. Samodzielnie ułóż wzory na zużytą energię w kWh i jej koszt w PLN. Wypisz energię z trzema miejscami po przecinku, a koszt z dwoma. Dla 1500 W, 2 h i 1.20 PLN/kWh wyniki to 3.000 kWh i 3.60 PLN. Sprawdź zerowy czas pracy.\n\n\nZadanie 14. Godziny, minuty i sekundy\nWczytaj całkowitą liczbę sekund z zakresu od 0 do 1000000. Za pomocą dzielenia całkowitego i reszty z dzielenia oblicz liczbę pełnych godzin oraz pozostałych minut i sekund. Minuty i sekundy mają mieścić się w zakresie 0–59; godziny mogą przekroczyć 23. Dla 3665 wypisz 1 h 1 min 5 s. Sprawdź również 0, 59, 60, 3599 oraz 3600. Nie trzeba dopełniać liczb zerami.\n\n\nZadanie 15. Zamiana wartości zmiennych\nWczytaj dwie liczby całkowite. Wypisz ich wartości, zamień zawartości zmiennych z użyciem trzeciej zmiennej pomocniczej i ponownie wypisz wartości. Nie używaj std::swap ani ponownego wczytywania danych. Dla wartości 7 i -3 po zamianie pierwsza zmienna ma zawierać -3, a druga 7. Sprawdź także dwie jednakowe wartości. W debuggerze prześledź każdą instrukcję przypisania i wyjaśnij, po co potrzebna jest zmienna pomocnicza.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#dokumentacja-i-sprawdzenie-pracy",
+    "href": "laboratoria/01_projekt.html#dokumentacja-i-sprawdzenie-pracy",
+    "title": "Laboratorium 1",
+    "section": "Dokumentacja i sprawdzenie pracy",
+    "text": "Dokumentacja i sprawdzenie pracy\n\nZachowaj źródła .cpp oznaczone numerem zadania.\nDla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.\nOpisz wykryty błąd albo jeden sprawdzony przypadek graniczny.\nPrzygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.\n\nZgłoszenie zadania na stronie nie przesyła kodu źródłowego i nie oznacza zaliczenia. Zatwierdzenie nadaje prowadzący po sprawdzeniu programu. Na koniec kliknij Zakończ laboratorium w formularzu postępów; zapisane zgłoszenia i zatwierdzenia pozostają zachowane.\nSposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów .vs i Debug ani plików .exe.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#przygotowanie-do-następnej-wejściówki",
+    "href": "laboratoria/01_projekt.html#przygotowanie-do-następnej-wejściówki",
+    "title": "Laboratorium 1",
+    "section": "Przygotowanie do następnej wejściówki",
+    "text": "Przygotowanie do następnej wejściówki\n\nPowtórz materiał bieżącego laboratorium\n\nDeklaracja i inicjalizacja; zastosowanie int, double, char, bool i string.\nWyniki / i % dla liczb całkowitych oraz dzielenie zmiennoprzecinkowe.\nWejście i wyjście, średnik, std::, fixed i setprecision.\n\n\n\nPrzeczytaj przed laboratorium 2\nW instrukcji 2 przeczytaj objaśnienie pierwszego zadania: poznaj ==, !=, &lt;, &lt;=, &gt;, &gt;=, &&, || i !. Zapoznaj się również z przeznaczeniem switch; jego samodzielne stosowanie będzie ćwiczone na zajęciach.\nPrzygotowanie do nowych zadań: umieć wskazać gałąź prostego if/else. Przeanalizuj fragment: if (temperature &gt; 25) ... else ... dla temperatur 25 i 26. Dla 25 wykona się else, dla 26 pierwszy blok. Nie jest wymagane napisanie całego kalkulatora przed zajęciami.\nNastępna wejściówka: 4 pytania wyboru z laboratorium 1, po 1 punkcie, oraz krótki program z tego samego materiału do ręcznego sprawdzenia. Pytania wyboru dotyczą wypisywania danych, reszty z dzielenia, dzielenia całkowitego i uzupełniania kodu. Nowe konstrukcje warunkowe nie są w tej wejściówce oceniane.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
     ]
   }
 ]

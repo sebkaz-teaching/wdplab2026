@@ -16,7 +16,9 @@ format:
 
 ## Wejściówka
 
-**3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego przygotowania.** Każde jest warte 1 punkt. Test rozwiązuje się indywidualnie; wynik pojawi się po potwierdzeniu zapisu.
+**4 pytania z poprzedniego laboratorium:** przewidywanie wyjścia programu, reszta z dzielenia, dzielenie całkowite i uzupełnienie kodu. Każde jest warte 1 punkt. Dodatkowo napisz krótki program z materiału laboratorium 1 w zadaniu otwartym pod pytaniami. Pracuj samodzielnie. Po potwierdzeniu zapisu pojawi się wynik testu wyboru (0–4); kod sprawdzi prowadzący osobno, bez automatycznej oceny.
+
+Przyjmij, że każdy fragment znajduje się wewnątrz poprawnie zdefiniowanej funkcji `main` i dołączono nagłówek `<iostream>`. Pytanie o uzupełnienie zawiera celowo oznaczoną lukę. W pozostałych pytaniach analizuj kod dokładnie w podanej postaci.
 
 <div id="rsod-quiz"></div>
 <script src="../assets/js/quiz-engine.js"></script>
@@ -31,23 +33,24 @@ CourseQuiz.mount(document.getElementById("rsod-quiz"), {
       "id": "q1",
       "points": 1,
       "diff": "powtórka",
-      "text": "Który typ wybierzesz do przechowania wyniku z częścią ułamkową?",
+      "text": "Jak będą rozmieszczone napisy po wykonaniu tych trzech instrukcji?",
+      "code": "std::cout << \"Start\";\nstd::cout << \"Ready\" << std::endl;\nstd::cout << \"Stop\" << std::endl;",
       "options": [
         {
           "v": "A",
-          "t": "bool"
+          "t": "<code>Start<br>Ready<br>Stop</code>"
         },
         {
           "v": "B",
-          "t": "double"
+          "t": "<code>StartReady<br>Stop</code>"
         },
         {
           "v": "C",
-          "t": "char"
+          "t": "<code>Start Ready Stop</code>"
         },
         {
           "v": "D",
-          "t": "int"
+          "t": "<code>Start<br>ReadyStop</code>"
         }
       ]
     },
@@ -55,144 +58,391 @@ CourseQuiz.mount(document.getElementById("rsod-quiz"), {
       "id": "q2",
       "points": 1,
       "diff": "powtórka",
-      "text": "Co wypisze ten fragment?",
+      "text": "Jaką liczbę wypisze ten fragment?",
+      "code": "int number = 3;\nstd::cout << number % 2;",
       "options": [
         {
           "v": "A",
-          "t": "5.75 3"
+          "t": "0"
         },
         {
           "v": "B",
-          "t": "5 3"
+          "t": "1"
         },
         {
           "v": "C",
-          "t": "6 0"
+          "t": "2"
         },
         {
           "v": "D",
-          "t": "3 5"
+          "t": "3"
         }
-      ],
-      "code": "int value = 23;\nstd::cout << value / 4 << \" \" << value % 4;"
+      ]
     },
     {
       "id": "q3",
       "points": 1,
       "diff": "powtórka",
-      "text": "Jaki wynik zostanie wyświetlony?",
+      "text": "Co zostanie wypisane? Zwróć uwagę na typy argumentów dzielenia i typ zmiennej average.",
+      "code": "int total = 7;\nint count = 2;\ndouble average = total / count;\nstd::cout << average;",
       "options": [
         {
           "v": "A",
-          "t": "3.14159"
+          "t": "<code>3.5</code>"
         },
         {
           "v": "B",
-          "t": "3.14"
+          "t": "<code>3</code>"
         },
         {
           "v": "C",
-          "t": "3"
+          "t": "<code>4</code>"
         },
         {
           "v": "D",
-          "t": "3.15"
+          "t": "Program nie skompiluje się, ponieważ wynik dzielenia int nie może być przypisany do double."
         }
-      ],
-      "code": "double value = 3.14159265359;\nstd::cout << std::fixed << std::setprecision(2) << value;"
+      ]
     },
     {
       "id": "q4",
       "points": 1,
-      "diff": "przygotowanie",
-      "text": "Przygotowanie: który komunikat zostanie wypisany?",
+      "diff": "uzupełnianie kodu",
+      "text": "Którym operatorem należy zastąpić ???, aby program wczytał liczbę do value i wypisał jej połowę?",
+      "code": "double value = 0.0;\nstd::cin ??? value;\nstd::cout << value / 2.0;",
       "options": [
         {
           "v": "A",
-          "t": "Recharge"
+          "t": "<code>&lt;&lt;</code>"
         },
         {
           "v": "B",
-          "t": "Ready"
+          "t": "<code>&gt;&gt;</code>"
         },
         {
           "v": "C",
-          "t": "Oba"
+          "t": "<code>=</code>"
         },
         {
           "v": "D",
-          "t": "Żaden"
+          "t": "<code>==</code>"
         }
-      ],
-      "code": "int charge = 30;\nif (charge < 30) {\n    std::cout << \"Recharge\";\n} else {\n    std::cout << \"Ready\";\n}"
+      ]
     }
-  ]
+  ],
+  "openQuestion": {
+    "title": "Zadanie otwarte. Obwód koła",
+    "text": "Napisz kompletny program w C++, który wczytuje promień koła jako liczbę typu double, oblicza obwód i wypisuje wynik z opisem. Użyj wzoru L = 2 · π · r i przyjmij π = 3.14159 jako stałą typu double. Załóż poprawne dane i dodatni promień; nie stosuj warunków ani pętli. Samodzielnie napisz nagłówki, funkcję main, deklaracje oraz instrukcje wejścia i wyjścia. Nie jest wymagany określony format liczby miejsc po przecinku."
+  }
 });
 </script>
 
-## Wprowadzenie teoretyczne
+## 1. Wykonanie instrukcji pod warunkiem — if
 
-### Warunek jako decyzja programu
+Instrukcja `if` pozwala wykonać blok instrukcji tylko wtedy, gdy podany warunek jest prawdziwy. Jeżeli warunek jest fałszywy, program pomija blok i wykonuje dalsze instrukcje. Wynik porównania ma typ `bool`: wartość `true` oznacza prawdę, a `false` fałsz.
 
-W pierwszym laboratorium instrukcje wykonywały się kolejno. Instrukcja warunkowa pozwala wykonać fragment programu tylko wtedy, gdy spełnione jest kryterium. Wynik porównania ma typ `bool`: `true` oznacza prawdę, a `false` fałsz.
-
-| Zapis | Znaczenie | Przykład |
-|---|---|---|
-| `a == b`, `a != b` | Równość, nierówność | `charge == 100` |
-| `<`, `<=`, `>`, `>=` | Porównanie wartości | `charge >= 30` |
-| `a && b` | Oba warunki prawdziwe | `charge >= 0 && charge <= 100` |
-| `a \|\| b` | Co najmniej jeden warunek prawdziwy | `charge < 0 \|\| charge > 100` |
-| `!condition` | Zaprzeczenie warunku | `!active` |
-
-`=` przypisuje, a `==` porównuje. Te operatory mają różne zadania. Dla liczby 30 warunek `charge < 30` jest fałszywy, ale `charge <= 30` jest prawdziwy. Wybór znaku decyduje o zachowaniu programu dokładnie na granicy zakresu.
-
-### Instrukcje if, else if i else
-
-`if` rozpoczyna wybór. `else if` sprawdza kolejny warunek tylko wtedy, gdy wcześniejsze były fałszywe. `else` obsługuje pozostały przypadek. W jednym łańcuchu wykona się co najwyżej jedna gałąź. Kilka oddzielnych instrukcji `if` może wykonać kilka bloków.
-
-Pełny przykład klasyfikuje poziom naładowania. Najpierw odrzuca dane spoza zakresu, a potem przypisuje kategorię. Taka kolejność zapobiega zakwalifikowaniu wartości 150 jako poprawnej „pełnej gotowości”.
+**Ogólna postać:**
 
 ```cpp
-#include <iostream>
+if (condition) {
+    // Instructions executed when condition is true.
+}
+// Execution continues here in either case.
+```
 
-int main()
-{
-    int charge = 0;
-    std::cout << "Charge (0-100): ";
-    if (!(std::cin >> charge)) {
-        std::cout << "Invalid input\n";
-        return 1;
-    }
-    if (charge < 0 || charge > 100) {
-        std::cout << "Invalid charge\n";
-    } else if (charge < 30) {
-        std::cout << "Recharge\n";
-    } else if (charge < 80) {
-        std::cout << "Ready\n";
-    } else {
-        std::cout << "Full readiness\n";
-    }
-    return 0;
+`condition` to sprawdzany warunek. Zapisujemy go w nawiasach okrągłych, a zależne od niego instrukcje umieszczamy w nawiasach klamrowych. Nie stawiamy średnika bezpośrednio po `if (condition)` — taki średnik byłby pustą instrukcją, a następujący po nim blok nie zależałby od warunku.
+
+Do budowania warunków służą operatory porównania:
+
+| Operator | Znaczenie | Przykład |
+|---|---|---|
+| `==` | Równe | `count == 10` |
+| `!=` | Różne | `count != 10` |
+| `<`, `>` | Mniejsze, większe | `temperature > 50.0` |
+| `<=`, `>=` | Mniejsze lub równe, większe lub równe | `temperature >= 50.0` |
+
+`=` służy do przypisania wartości, a `==` do porównania. Nie są zamienne: `count = 10` zmienia zawartość zmiennej, natomiast `count == 10` sprawdza jej wartość.
+
+**Przykład nowej konstrukcji:** dla istniejącej zmiennej `speed` poniższy fragment wypisze ostrzeżenie tylko przy wartości większej od 80. Komunikat końcowy pojawi się niezależnie od wyniku porównania.
+
+```cpp
+if (speed > 80.0) {
+    std::cout << "Speed limit exceeded\n";
+}
+std::cout << "Check completed\n";
+```
+
+::: {.lab-task}
+### Zadanie 1. Ostrzeżenie o temperaturze
+
+Napisz od początku program, który wczytuje temperaturę typu `double`. Gdy temperatura przekracza 50°C, wypisz `Temperature too high`. Na końcu, niezależnie od temperatury, wypisz `Measurement completed`.
+
+**Sprawdź:** `49`, `50`, `51`. Dla 49 i 50 ma pojawić się tylko komunikat końcowy, a dla 51 oba komunikaty.
+
+**Wyjaśnij:** dlaczego komunikat końcowy znajduje się poza blokiem `if`? Co zmieni zastąpienie `>` przez `>=`?
+:::
+
+## 2. Wybór jednej z dwóch możliwości — if/else
+
+Jeśli program ma wykonać jedną czynność po spełnieniu warunku, a inną w przeciwnym przypadku, używamy `if/else`. Wykona się dokładnie jeden z dwóch bloków. `else` nie ma własnego warunku — obejmuje przypadki, w których warunek przy `if` jest fałszywy.
+
+**Ogólna postać:**
+
+```cpp
+if (condition) {
+    // Instructions executed when condition is true.
+} else {
+    // Instructions executed when condition is false.
 }
 ```
 
-| Wejście | Wynik | Powód |
-|---|---|---|
-| `-1` lub `101` | Invalid charge | Poza zakresem |
-| `29` | Recharge | Poniżej 30 |
-| `30` i `79` | Ready | Co najmniej 30, ale poniżej 80 |
-| `80` i `100` | Full readiness | Poprawna wartość co najmniej 80 |
-
-Zapis `if (!(std::cin >> charge))` wykrywa nieudany odczyt, np. po wpisaniu tekstu zamiast liczby. Na tym etapie program kończy się wtedy komunikatem. Poprawność odczytu i poprawność zakresu to osobne sprawdzenia.
-
-### Wybór jednej operacji przez switch
-
-`switch` porównuje wartość z konkretnymi etykietami `case`. Nadaje się np. do wyboru operacji oznaczonej znakiem. `break` kończy wykonanie instrukcji `switch`, a `default` obsługuje wartości, których nie wymieniono.
-
-Poniższy fragment można umieścić wewnątrz `main`:
+**Przykład nowej konstrukcji:** zakładamy, że zmienna `age` zawiera już wczytany wiek.
 
 ```cpp
-char option = 'a';
+if (age >= 18) {
+    std::cout << "Adult\n";
+} else {
+    std::cout << "Under 18\n";
+}
+```
+
+W zadaniu przyda się znany z poprzedniego laboratorium operator `%`, czyli reszta z dzielenia całkowitego. Liczba całkowita jest parzysta, gdy reszta z dzielenia przez 2 wynosi zero. Dotyczy to również zera i parzystych liczb ujemnych.
+
+::: {.lab-task}
+### Zadanie 2. Parzystość liczby
+
+Wczytaj liczbę typu `int`. Użyj `if/else`, aby wypisać dokładnie jeden komunikat: `Even` albo `Odd`.
+
+**Sprawdź:** `-4`, `-3`, `0`, `7`, `8`. Oczekiwane wyniki to kolejno `Even`, `Odd`, `Even`, `Odd`, `Even`.
+
+**Wyjaśnij:** dlaczego sprawdzenie reszty różnej od zera rozpoznaje również ujemne liczby nieparzyste? Czy warunek reszty równej 1 obejmowałby wszystkie takie liczby?
+:::
+
+## 3. Więcej niż dwie możliwości — else if
+
+Łańcuch `if / else if / else` służy do wyboru spośród kilku możliwości. Program sprawdza warunki od góry. Po napotkaniu pierwszego prawdziwego warunku wykonuje jego blok i pomija pozostałe gałęzie tego łańcucha. Jeśli żaden warunek nie jest prawdziwy, wykonuje blok `else`, o ile został zapisany.
+
+**Ogólna postać:**
+
+```cpp
+if (first_condition) {
+    // Instructions for the first case.
+} else if (second_condition) {
+    // Instructions for the second case.
+} else {
+    // Instructions for all remaining cases.
+}
+```
+
+**Przykład nowej konstrukcji:** dla istniejącej zmiennej `temperature` wybieramy jeden opis.
+
+```cpp
+if (temperature < 0.0) {
+    std::cout << "Below freezing\n";
+} else if (temperature < 20.0) {
+    std::cout << "Cool\n";
+} else {
+    std::cout << "Warm\n";
+}
+```
+
+Drugi warunek jest sprawdzany dopiero po odrzuceniu pierwszego. Dlatego druga gałąź obejmuje temperatury od 0 włącznie do 20 wyłącznie, mimo że zapisano w niej tylko górną granicę. Zmiana kolejności warunków może zmienić wynik. Kilka oddzielnych instrukcji `if` działa inaczej: każda jest sprawdzana niezależnie i może wykonać własny blok.
+
+::: {.lab-task}
+### Zadanie 3. Znak liczby
+
+Wczytaj liczbę typu `int`. Za pomocą jednego łańcucha `if / else if / else` wypisz dokładnie jeden komunikat: `Positive`, `Negative` albo `Zero`. Nie dodawaj osobnego porównania w ostatniej gałęzi, jeśli wcześniejsze warunki wykluczają już oba pozostałe przypadki.
+
+**Sprawdź:** `-5`, `0`, `5`.
+
+**Wyjaśnij:** jakie informacje o liczbie masz już w ostatniej gałęzi? Prześledź w debuggerze, które porównania zostaną wykonane dla każdego wejścia. Ustaw punkt zatrzymania przed pierwszym `if` i wykonuj kolejne kroki klawiszem **F10**.
+:::
+
+## 4. Jednoczesne spełnienie warunków — operator &&
+
+Operator logiczny `&&` oznacza „i”. Wyrażenie złożone z dwóch warunków jest prawdziwe tylko wtedy, gdy oba warunki są prawdziwe. Pozwala to np. sprawdzić dolną i górną granicę przedziału.
+
+**Ogólna postać:**
+
+```cpp
+first_condition && second_condition
+```
+
+**Przykład nowej konstrukcji:** zmienna `pressure` zawiera już wynik pomiaru.
+
+```cpp
+if (pressure >= 950.0 && pressure <= 1050.0) {
+    std::cout << "Pressure within range\n";
+}
+```
+
+Każde porównanie zapisujemy w całości. Matematyczny zapis `950 <= pressure <= 1050` nie sprawdza przedziału w C++: pierwsze porównanie dałoby wartość logiczną, która następnie byłaby porównywana z 1050. Operator `&&` sprawdza prawy warunek tylko wtedy, gdy lewy jest prawdziwy; jest to obliczanie ze skracaniem.
+
+::: {.lab-task}
+### Zadanie 4. Dopuszczalny zakres pomiaru
+
+Wczytaj temperaturę typu `double`. Poprawny zakres wynosi od -20°C do 50°C włącznie. Użyj `&&` i `if/else`, aby wypisać `Valid temperature` albo `Invalid temperature`.
+
+**Sprawdź:** `-21`, `-20`, `0`, `50`, `51`. Obie granice muszą zostać zaakceptowane.
+
+**Wyjaśnij:** dlaczego potrzebne są dwa pełne porównania? Co stanie się dla temperatury 0, jeśli w swoim warunku zastąpisz `&&` przez `||`?
+:::
+
+## 5. Wystarczy jeden spełniony warunek — operator ||
+
+Operator logiczny `||` oznacza „lub” w sensie niewykluczającym: wynik jest prawdziwy, gdy co najmniej jeden z warunków jest prawdziwy. Do wykrycia wartości spoza przedziału wystarczy przekroczenie jednej z jego granic.
+
+**Ogólna postać:**
+
+```cpp
+first_condition || second_condition
+```
+
+**Przykład nowej konstrukcji:** zmienna `humidity` zawiera już wczytaną wilgotność procentową.
+
+```cpp
+if (humidity < 0.0 || humidity > 100.0) {
+    std::cout << "Invalid humidity\n";
+}
+```
+
+Prawy warunek jest sprawdzany tylko wtedy, gdy lewy jest fałszywy. W wyrażeniach łączących `&&` i `||` stosuj nawiasy, aby wyraźnie wskazać grupowanie reguł. Operator `&&` ma wyższy priorytet niż `||`.
+
+::: {.lab-task}
+### Zadanie 5. Kategorie naładowania baterii
+
+Wczytaj całkowity procent naładowania baterii. Najpierw za pomocą `||` odrzuć wartości spoza zakresu 0–100 komunikatem `Invalid charge`. Dla poprawnych danych wypisz jedną kategorię: poniżej 30 — `Recharge`, od 30 do 79 — `Ready`, od 80 do 100 — `Full readiness`. Zastosuj jeden łańcuch warunków, zaczynając od kontroli błędu.
+
+**Sprawdź:** `-1`, `0`, `29`, `30`, `79`, `80`, `100`, `101`. Dla -1 i 101 ma pojawić się wyłącznie komunikat o błędzie.
+
+**Wyjaśnij:** dlaczego kontrola zakresu musi poprzedzać klasyfikację w tym układzie? Co byłoby wynikiem dla 101, gdyby program sprawdzał tylko progi 30 i 80? Następnie zmień próg pełnej gotowości na 90 i sprawdź 89 oraz 90.
+:::
+
+## 6. Zaprzeczenie i zmienne logiczne — operator !
+
+Zmienna typu `bool` przechowuje wartość `true` albo `false`. Może opisywać stan, np. wykonanie przeglądu. Można użyć jej bezpośrednio jako warunku, bez dopisywania `== true`. Operator `!` odwraca wartość logiczną: z prawdy tworzy fałsz, a z fałszu prawdę.
+
+**Ogólna postać:**
+
+```cpp
+!condition
+```
+
+**Przykład nowej konstrukcji:** zakładamy, że istnieje zmienna `bool connected`.
+
+```cpp
+if (!connected) {
+    std::cout << "No connection\n";
+} else {
+    std::cout << "Connected\n";
+}
+```
+
+Dla wyrażenia złożonego zaprzeczenie zapisujemy z nawiasami, np. `!(first_condition && second_condition)`. Taki zapis sprawdza, czy nie są spełnione oba wymagania jednocześnie; nie jest równoważny `!first_condition && !second_condition`.
+
+::: {.lab-task}
+### Zadanie 6. Zgoda na wydanie urządzenia
+
+Wczytaj procent baterii jako `int` oraz stan przeglądu `checked` jako `bool`. Na potrzeby tego zadania załóż poprawny odczyt: bateria jest w zakresie 0–100, a przegląd jest podany jako 0 albo 1. Urządzenie można wydać tylko wtedy, gdy bateria ma co najmniej 30% i przegląd wykonano.
+
+Zapisz wynik tej reguły w zmiennej `bool canIssue`. Użyj `!canIssue` jako warunku odmowy i wypisz `Cannot issue` albo `Can issue`.
+
+**Sprawdź:** `(29, 1)`, `(30, 0)`, `(30, 1)`, `(100, 1)`. Tylko dwie ostatnie pary pozwalają wydać urządzenie.
+
+**Wyjaśnij:** czym różni się zaprzeczenie całej reguły od jednoczesnego wymagania niskiej baterii i braku przeglądu? Czy wystarczy niespełnienie jednego wymagania, aby odmówić wydania?
+:::
+
+## 7. Wybór wartości — operator warunkowy ?:
+
+Instrukcja `if/else` wybiera instrukcje do wykonania. Operator warunkowy `?:` tworzy natomiast wyrażenie: zależnie od warunku wybiera jedną z dwóch wartości. Wynik można np. przypisać do zmiennej albo wykorzystać w obliczeniu.
+
+**Ogólna postać:**
+
+```cpp
+condition ? value_if_true : value_if_false
+```
+
+Najpierw obliczany jest `condition`. Jeżeli jest prawdziwy, obliczane jest wyrażenie po `?`; jeżeli fałszywy — wyrażenie po `:`. Obliczana jest tylko wybrana gałąź. W tych ćwiczeniach stosuj w obu gałęziach wartości tego samego typu, aby nie wprowadzać dodatkowych konwersji.
+
+**Przykład nowej konstrukcji:** istniejąca zmienna `express` ma typ `bool`. W zależności od jej wartości wybieramy koszt dostawy.
+
+```cpp
+double deliveryCost = express ? 15.0 : 8.0;
+```
+
+Dla `express == true` zmienna otrzyma 15.0, a dla `false` otrzyma 8.0. Średnik kończy deklarację zmiennej; nie jest częścią samego operatora. `?:` stosuj do prostego wyboru wartości. Nie zagnieżdżaj go w tym zadaniu.
+
+::: {.lab-task}
+### Zadanie 7. Większa z dwóch wartości
+
+Wczytaj dwie liczby typu `double`. Za pomocą operatora `?:` wybierz większą wartość i zapisz ją w nowej zmiennej typu `double`. Następnie wypisz tę zmienną. Nie zastępuj operatora instrukcją `if/else` ani gotową funkcją wybierającą maksimum.
+
+**Sprawdź:** `(2.5, 7.0)`, `(8.0, -1.0)`, `(-4.0, -2.0)`, `(3.0, 3.0)`. Oczekiwane wartości to 7, 8, -2 i 3.
+
+**Wyjaśnij:** która gałąź zostanie wybrana dla dwóch równych liczb przy porównaniu `>`? Czy zmiana tego porównania na `>=` zmieni wypisaną wartość? Zapisz odpowiednik swojego wyboru za pomocą `if/else`, aby porównać obie konstrukcje.
+:::
+
+## 8. Sprawdzenie odczytu i wcześniejsze zakończenie programu
+
+Dotąd w zadaniach zakładaliśmy poprawne wczytanie danych. Odczyt `std::cin >> value` może się jednak nie udać, np. po wpisaniu tekstu zamiast liczby. Stan strumienia można sprawdzić w warunku. Operator `!` pozwala wejść do bloku obsługi nieudanego odczytu.
+
+**Ogólna postać dla jednego odczytu:**
+
+```cpp
+if (!(std::cin >> value)) {
+    // Handle the failed read.
+    return 1;
+}
+```
+
+Zmienna `value` musi zostać wcześniej zadeklarowana. Nawiasy w `!(std::cin >> value)` obejmują cały odczyt. `return 1;` użyte wewnątrz `main` kończy program z niezerowym kodem, którym sygnalizujemy błąd. Instrukcje znajdujące się dalej nie zostaną wtedy wykonane.
+
+**Przykład nowej konstrukcji:** dla istniejących zmiennych liczbowych `length` i `width` można sprawdzić dwa odczyty razem.
+
+```cpp
+if (!(std::cin >> length >> width)) {
+    std::cout << "Invalid input\n";
+    return 1;
+}
+```
+
+Nieudany odczyt i niedopuszczalna wartość to różne sytuacje. Zero może zostać poprawnie wczytane, a mimo to nie nadawać się na dzielnik. Sprawdzenie stanu strumienia nie gwarantuje też, że wykorzystano cały wpisany tekst: np. odczyt liczby z `12abc` może wczytać początkowe 12 i pozostawić resztę w strumieniu. W tym laboratorium sprawdzamy powodzenie wymaganych odczytów, bez analizy całego wiersza.
+
+::: {.lab-task}
+### Zadanie 8. Dzielenie z kontrolą danych
+
+Wczytaj dwie liczby typu `double`. Jeżeli odczyt się nie powiedzie, wypisz `Invalid input` i zakończ program przed obliczeniami. Po poprawnym odczycie sprawdź dzielnik: dla zera wypisz `Division by zero` i również zakończ program. Dopiero po obu sprawdzeniach oblicz i wypisz iloraz.
+
+**Sprawdź:** `8 2`, `8 0`, `0 2`, `abc 2`, `8 abc`. Oczekiwane wyniki to kolejno 4, komunikat o zerowym dzielniku, 0 oraz dwa komunikaty o błędzie odczytu. Dla każdej błędnej próby program ma wypisać jeden odpowiedni komunikat i nie wykonywać dzielenia.
+
+**Wyjaśnij:** dlaczego poprawności odczytu nie zastępuje samo sprawdzenie dzielnika? Pokaż w debuggerze, że po wykonaniu `return 1;` program nie dochodzi do obliczania ilorazu.
+:::
+
+## 9. Wybór według konkretnej wartości — switch
+
+`switch` służy do wyboru działania na podstawie wartości całkowitej, znaku lub wartości typu wyliczeniowego. Etykieta `case` wskazuje konkretną stałą, np. `1` albo `'a'`. `default` obsługuje brak dopasowania. `switch` nie służy do bezpośredniego porównywania przedziałów ani wartości typu `double`.
+
+**Ogólna postać:**
+
+```cpp
+switch (selector) {
+case first_value:
+    // Instructions for the first value.
+    break;
+case second_value:
+    // Instructions for the second value.
+    break;
+default:
+    // Instructions when no case matches.
+    break;
+}
+```
+
+`selector` jest sprawdzaną wartością. Stałe przy `case` muszą być znane w czasie kompilacji i nie mogą się powtarzać. `break` kończy wykonanie `switch`; bez niego program może wykonywać także instrukcje pod kolejnymi etykietami, bez ponownego sprawdzania dopasowania.
+
+**Przykład nowej konstrukcji:** istniejąca zmienna `option` ma typ `char`.
+
+```cpp
 switch (option) {
 case 'a':
     std::cout << "Add\n";
@@ -202,63 +452,91 @@ case 'r':
     break;
 default:
     std::cout << "Unknown option\n";
+    break;
 }
 ```
 
-Brak `break` może spowodować wykonanie instrukcji kolejnego przypadku. Do sprawdzania przedziałów, np. od 30 do 79, wygodniejszy jest `if`.
-
-### Przypadki graniczne i debugger
-
-Dla progu 30 warto sprawdzić 29, 30 i 31. Jeden poprawny przykład nie dowodzi, że warunek zapisano właściwie. Ustaw punkt zatrzymania przed `if`, sprawdź wartość zmiennej i wykonuj **F10**. Porównaj wybraną gałąź z wcześniejszą prognozą.
-
-[Pełny program pokazowy — pobierz plik .cpp](../assets/cpp/02_pokaz.cpp). Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.
-
-## Zadania do realizacji
-
-Przed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.
-
 ::: {.lab-task}
-### Zadanie 1. Znak liczby
+### Zadanie 9. Menu komunikatów
 
-Wczytaj liczbę całkowitą. Wypisz dokładnie jeden komunikat: dodatnia, ujemna albo zero. Zastosuj `if`, `else if`, `else`. Sprawdź `-5`, `0`, `5`.
+Wczytaj wybór użytkownika jako `int`. Użyj `switch`: dla 1 wypisz `Start measurement`, dla 2 — `Show last result`, dla 3 — `Finish`. Dla każdej innej liczby wypisz `Unknown option`. Program ma obsłużyć jeden wybór i zakończyć się; nie dodawaj pętli. Załóż poprawny odczyt liczby całkowitej.
+
+**Sprawdź:** `1`, `2`, `3`, `0`, `4`. Przy każdej próbie ma pojawić się dokładnie jeden komunikat.
+
+**Wyjaśnij:** do czego służy `default`? Tymczasowo usuń `break` po pierwszym przypadku i uruchom program dla 1. Zapisz, które komunikaty się pojawiły i dlaczego, a następnie przywróć `break`.
 :::
 
+## 10. Połączenie wyboru operacji i kontroli danych
+
+W jednym programie można łączyć poznane konstrukcje: sprawdzić odczyt, wybrać operację przez `switch` i wewnątrz wybranego przypadku użyć `if`. Każde sprawdzenie powinno poprzedzać działanie, które wymaga poprawnych danych. Szczególne wymaganie jednej operacji, np. niezerowy dzielnik, sprawdzamy w jej gałęzi.
+
+**Ogólna forma zagnieżdżenia** — zakładamy, że `operation` jest wcześniej wczytanym znakiem, a `condition` opisuje wymaganie danej operacji:
+
+```cpp
+switch (operation) {
+case 'x': {
+    if (condition) {
+        // Perform the operation when its requirement is met.
+    } else {
+        // Report why this operation cannot be performed.
+    }
+    break;
+}
+default:
+    // Handle an unknown operation.
+    break;
+}
+```
+
+Klamry po `case 'x':` tworzą blok. Są przydatne, gdy w danym przypadku deklarujesz zmienne lokalne: oddzielają je od pozostałych przypadków.
+
+**Przykład nowej kombinacji:** wewnątrz `switch` taki przypadek mógłby obsłużyć wybór raportu. Zmienna `hasData` ma typ `bool`.
+
+```cpp
+case 'r': {
+    if (hasData) {
+        std::cout << "Report available\n";
+    } else {
+        std::cout << "No data\n";
+    }
+    break;
+}
+```
+
+Ten fragment jest częścią `switch`, a nie samodzielną instrukcją do umieszczenia bezpośrednio w `main`.
+
 ::: {.lab-task}
-### Zadanie 2. Dopuszczalny zakres pomiaru
+### Zadanie 10. Kalkulator z wyborem działania
 
-Wczytaj temperaturę typu `double`. Poprawny zakres to od `-20` do `50` włącznie. Wypisz informację o poprawności. Sprawdź `-21`, `-20`, `0`, `50`, `51`. Zapisz warunek poprawności z `&&`, a warunek błędu z `||` i porównaj ich znaczenie.
-:::
+Napisz samodzielnie program wczytujący dane w postaci: liczba, znak działania, liczba, np. `8 / 2`. Liczby mają typ `double`, a znak działania typ `char`.
 
-::: {.lab-task}
-### Zadanie 3. Kategorie gotowości
+Sprawdź powodzenie całego odczytu. W razie błędu wypisz `Invalid input` i zakończ program. Użyj `switch` do obsługi `+`, `-`, `*`, `/`. W przypadku dzielenia sprawdź, czy dzielnik nie jest zerem. Dla zerowego dzielnika wypisz `Division by zero`, a dla nieznanego operatora `Unknown operation`. Wynik poprawnego działania wypisz z dwoma miejscami po przecinku. Program wykonuje jedno działanie, bez pętli.
 
-Uruchom pokaz dla wszystkich wartości z tabeli. Zmień próg pełnej gotowości z 80 na 90. Dodaj próby 89 i 90. Upewnij się, że 101 nadal jest odrzucane. Zapisz, które warunki sprawdza program dla wartości 30.
-:::
+**Sprawdź:**
 
-::: {.lab-task}
-### Zadanie 4. Dzielenie z kontrolą danych
+| Wejście | Oczekiwane wyjście |
+|---|---|
+| `8 / 2` | `4.00` |
+| `8 / 0` | `Division by zero` |
+| `3 + 4` | `7.00` |
+| `3 - 5` | `-2.00` |
+| `2.5 * 4` | `10.00` |
+| `3 ? 4` | `Unknown operation` |
+| `abc + 2` | `Invalid input` |
+| `8 / abc` | `Invalid input` |
 
-Rozwiń zadanie z dzieleniem z laboratorium 1. Wczytaj dwie liczby `double`, sprawdź powodzenie odczytu i odrzuć zerowy dzielnik. Dopiero potem wykonaj dzielenie. Sprawdź `8, 2`, `8, 0` oraz tekst zamiast pierwszej liczby.
-:::
-
-::: {.lab-task}
-### Zadanie 5. Kalkulator z wyborem operacji
-
-Wczytaj dane w postaci `8 / 2`: liczba, znak działania, liczba. Użyj `switch` dla `+`, `-`, `*`, `/`. Dla dzielenia sprawdź zero, a nieznany operator obsłuż komunikatem. Próby: `8 / 2 → 4`, `8 / 0 → błąd`, `3 + 4 → 7`, `3 ? 4 → nieznana operacja`.
-:::
-
-::: {.lab-task}
-### Zadanie 6. Reguła wydania urządzenia
-
-Wczytaj procent baterii `charge` i informację `checked` jako `bool` (0 albo 1). Urządzenie można wydać, gdy bateria ma co najmniej 30% i przegląd jest wykonany. Najpierw odrzuć stan baterii poza 0–100. Sprawdź pary `(29,1)`, `(30,0)`, `(30,1)`, `(101,1)`. Wyjaśnij, dlaczego zastąpienie `&&` przez `||` zmieniłoby regułę.
+**Wyjaśnij:** dlaczego kontrola zerowego dzielnika dotyczy tylko `/`, a nie np. mnożenia przez zero? Gdzie w Twoim programie kończy się obsługa nieznanego operatora i dlaczego nie powinna wypisywać wyniku obliczeń?
 :::
 
 ## Dokumentacja i sprawdzenie pracy
 
+Każde zadanie napisz jako kompletny program w osobnym projekcie. Pokazane fragmenty objaśniają wyłącznie nową konstrukcję: samodzielnie dobierz nagłówki, napisz `main`, zadeklaruj zmienne i dodaj wejście oraz wyjście. Stosuj angielskie nazwy zmiennych i komunikaty. Jeżeli zadanie nie wymaga kontroli odczytu ani nie stanowi inaczej, zakładaj dane zgodne z poleceniem.
+
 - Zachowaj źródła `.cpp` oznaczone numerem zadania.
-- Dla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.
-- Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.
-- Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.
+- Przed każdą próbą zapisz przewidywany wynik, a następnie porównaj go z wynikiem programu.
+- Wykonaj wskazane próby, zwłaszcza te na granicy przedziału.
+- Do każdego zadania przygotuj odpowiedź na pytanie „Wyjaśnij”.
+- Przygotuj się do samodzielnego omówienia wybranego fragmentu kodu.
 
 Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów `.vs` i `Debug` ani plików `.exe`.
 
@@ -266,14 +544,23 @@ Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalog�
 
 ### Powtórz
 
-- Porównania, &&, || i !; różnica między przypisaniem a porównaniem.
-- Wybór gałęzi if/else i kontrola wartości na granicy zakresu.
-- switch, case, break i default; kontrola dzielenia przez zero.
+- Porównania i różnicę między `=` a `==`.
+- Wybór gałęzi `if/else`, kolejność `else if` oraz wartości graniczne.
+- Operatory `&&`, `||`, `!` i znaczenie nawiasów.
+- Wybór wartości przez `condition ? value_if_true : value_if_false`.
+- Sprawdzanie odczytu, wcześniejsze zakończenie i kontrolę dzielenia przez zero.
+- `switch`, `case`, `break`, `default` oraz zagnieżdżenie `if` w `switch`.
 
-### Przeczytaj przed laboratorium 3
+### Przygotuj się do laboratorium 3
 
-W [instrukcji 3](03_petle_tablice.qmd#wprowadzenie-teoretyczne) przeczytaj wprowadzenie do for, while i do…while. Zapoznaj się z indeksem tablicy.
+Kolejne zajęcia wprowadzą pętle `for`, `while`, `do…while` oraz indeksowanie tablic. Pętla powtarza blok instrukcji. W poniższym fragmencie zmienna sterująca zaczyna od 1; warunek jest sprawdzany przed każdym wykonaniem bloku, a `++i` zwiększa wartość po jego wykonaniu.
 
-**Minimalne przygotowanie:** podać kolejne wartości zmiennej w prostej pętli for. Dla `for (int i = 1; i <= 4; ++i)` są to 1, 2, 3, 4 — cztery powtórzenia. Nie trzeba jeszcze samodzielnie obliczać średniej z tablicy.
+```cpp
+for (int i = 1; i <= 4; ++i) {
+    std::cout << i << '\n';
+}
+```
+
+**Minimalne przygotowanie:** wskaż kolejno wypisywane wartości i liczbę powtórzeń. W tym przykładzie wypisane zostaną 1, 2, 3, 4, więc blok wykona się cztery razy. Nie trzeba jeszcze samodzielnie obliczać średniej z tablicy.
 
 Następna wejściówka: **3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu**, po 1 punkcie.

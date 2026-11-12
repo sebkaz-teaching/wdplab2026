@@ -5,7 +5,7 @@ title: "Organizacja pracy laboratoryjnej"
 ## Jak korzystać z instrukcji
 
 1. Przed zajęciami przeczytaj wskazany zakres przygotowania na końcu poprzedniej instrukcji.
-2. Od laboratorium 2 rozwiąż wejściówkę samodzielnie: trzy pytania powtórkowe i jedno z nowego materiału, po jednym punkcie.
+2. Od laboratorium 2 rozwiąż wejściówkę samodzielnie, zgodnie z zakresem podanym w instrukcji. Przed laboratorium 2 są to cztery pytania wyboru z poprzednich zajęć, po jednym punkcie, oraz krótki program do ręcznego sprawdzenia.
 3. Przeczytaj objaśnienia i uruchom pełny program pokazowy w osobnym projekcie.
 4. Wykonuj numerowane zadania, zapisując źródła oraz próby.
 5. Na końcu sprawdź przygotowanie wymagane do kolejnego laboratorium.

@@ -12,7 +12,8 @@
  *       course: "rsod2026",
  *       lecture: "wyklad2",
  *       submitUrl: "https://sebastianzajac.pl/rsod-quiz/submit.php",
- *       questions: [ { id, points, diff, text, code, options:[{v,t}] }, ... ]
+ *       questions: [ { id, points, diff, text, code, options:[{v,t}] }, ... ],
+ *       openQuestion: { title, text } // Optional; stored as answers.code for manual review.
  *     });
  */
 (function (global) {
@@ -55,6 +56,7 @@
   function mount(container, config) {
     injectStyle();
     var questions = config.questions;
+    var openQuestion = config.openQuestion;
     var maxScore = questions.reduce(function (s, q) { return s + q.points; }, 0);
 
     container.innerHTML =
@@ -62,7 +64,8 @@
       "<h3>" + (config.title || config.lecture) + "</h3>" +
       '<div class="rq-summary"><span>' + questions.length + ' pytań</span><span>' + maxScore +
       ' punktów</span><span>Jedna odpowiedź w każdym pytaniu</span></div>' +
-      '<p class="rq-instructions">Pracuj samodzielnie. Wpisz e-mail i zaznacz po jednej odpowiedzi we wszystkich pytaniach. Następnie wyślij test, aby otrzymać wynik.</p>' +
+      '<p class="rq-instructions">Pracuj samodzielnie. Wpisz e-mail i zaznacz po jednej odpowiedzi we wszystkich pytaniach.' +
+      (openQuestion ? ' Napisz również program w polu poniżej. Po wysłaniu zobaczysz wynik testu wyboru; kod oceni prowadzący osobno.' : ' Następnie wyślij test, aby otrzymać wynik.') + '</p>' +
       '<form class="rq-form">' +
       '<div class="rq-field"><label for="rq-email"><strong>E-mail</strong></label>' +
       '<input type="email" id="rq-email" required autocomplete="email" aria-describedby="rq-email-help" placeholder="imie.nazwisko@wat.edu.pl"><small id="rq-email-help">Adres pozwoli prowadzącemu przypisać wynik do Ciebie.</small></div>' +
@@ -101,9 +104,29 @@
       qHost.appendChild(block);
     });
 
+    if (openQuestion) {
+      var codeBlock = el('<fieldset class="rq-q"><legend></legend>' +
+        '<p class="rq-meta">Osobna odpowiedź do ręcznego sprawdzenia; poza wynikiem testu 0–' + maxScore + '.</p>' +
+        '<p class="rq-code-prompt" id="rq-code-help"></p>' +
+        '<label for="rq-code"><strong>Twój kompletny program C++</strong></label>' +
+        '<textarea id="rq-code" name="code" rows="14" maxlength="6000" required spellcheck="false" ' +
+        'autocapitalize="off" autocomplete="off" aria-describedby="rq-code-help" ' +
+        'style="display:block;width:100%;margin-top:10px;padding:12px;border:1px solid #9aaec2;border-radius:7px;font:14px/1.5 monospace;tab-size:4;white-space:pre;overflow:auto;resize:vertical"></textarea></fieldset>');
+      codeBlock.querySelector("legend").textContent = openQuestion.title;
+      codeBlock.querySelector(".rq-code-prompt").textContent = openQuestion.text;
+      qHost.appendChild(codeBlock);
+      container.querySelector(".rq-summary").appendChild(el('<span>+ program do ręcznego sprawdzenia</span>'));
+    }
+
     var form = container.querySelector(".rq-form");
     var output = container.querySelector(".rq-output");
     var submitBtn = container.querySelector(".rq-submit");
+
+    if (openQuestion) {
+      container.querySelector("#rq-code").addEventListener("input", function () {
+        this.setCustomValidity("");
+      });
+    }
 
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
@@ -113,6 +136,16 @@
         var picked = form.querySelector('input[name="' + q.id + '"]:checked');
         answers[q.id] = picked ? picked.value : null;
       });
+
+      if (openQuestion) {
+        var codeField = container.querySelector("#rq-code");
+        if (!codeField.value.trim()) {
+          codeField.setCustomValidity("Wpisz swój program przed wysłaniem.");
+          codeField.reportValidity();
+          return;
+        }
+        answers.code = codeField.value;
+      }
 
       submitBtn.disabled = true;
       submitBtn.textContent = "Wysyłanie…";
@@ -135,7 +168,7 @@
             data.maxScore +
             "</div><p>Wynik zapisany dla " +
             email +
-            ".</p></div>";
+            ".</p>" + (openQuestion ? "<p>Kod programu zapisano do ręcznego sprawdzenia. Powyższy wynik dotyczy tylko pytań wyboru.</p>" : "") + "</div>";
           submitBtn.textContent = "Wynik zapisany";
         })
         .catch(function (err) {

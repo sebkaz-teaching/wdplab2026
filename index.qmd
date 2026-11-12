@@ -12,8 +12,8 @@ Pierwsze pięć tematów odpowiada zakresowi karty **Wprowadzenie do programowan
 | Instrukcja | Główne zagadnienia |
 |---|---|
 | [1. Algorytmy i programy w C++](laboratoria/01_projekt.qmd) | Utworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń. |
-<!-- Unreleased labs — move a row above this comment once the lab starts.
 | [2. Operacje warunkowe](laboratoria/02_warunki.qmd) | Zapisanie reguł wyboru oraz sprawdzenie danych przed wykonaniem działania. |
+<!-- Unreleased labs — move a row above this comment once the lab starts.
 | [3. Instrukcje cykliczne i tablice](laboratoria/03_petle_tablice.qmd) | Przetwarzanie serii danych z wykorzystaniem pętli i tablic. |
 | [4. Funkcje w języku C++](laboratoria/04_funkcje.qmd) | Podział obliczeń na funkcje i świadomy wybór sposobu przekazywania argumentów. |
 | [5. Klasy biblioteczne i kontener vector](laboratoria/05_wektor.qmd) | Używanie metod bibliotecznych oraz przechowywanie zmiennej liczby pomiarów. |
@@ -34,7 +34,7 @@ Kolejne instrukcje będą udostępniane w miarę postępu zajęć.
 
 ## Wejściówki i przygotowanie
 
-Od laboratorium 2 na początku instrukcji znajduje się test: **3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego nowego materiału**. Każde pytanie jest warte 1 punkt. Pytanie wyprzedzające sprawdza podstawowe przygotowanie, a nie wykonanie nowych zadań przed zajęciami.
+Od laboratorium 2 na początku instrukcji znajduje się wejściówka. **Przed laboratorium 2 obejmuje cztery pytania wyboru z materiału laboratorium 1 oraz krótki program do samodzielnego napisania.** Każde pytanie wyboru jest warte 1 punkt; program sprawdza prowadzący osobno. Zakres kolejnych wejściówek jest zapowiadany w instrukcjach.
 
 Na końcu każdej instrukcji wskazano, co powtórzyć i co przeczytać przed następną wejściówką. Wynik testu pojawia się po potwierdzeniu zapisu przez serwer. Zadania programistyczne są rozliczane osobno.
 

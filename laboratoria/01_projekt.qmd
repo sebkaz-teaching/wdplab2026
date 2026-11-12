@@ -280,9 +280,8 @@ Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalog�
 
 ### Przeczytaj przed laboratorium 2
 
-<!-- Restore once lab 2 is released: W [instrukcji 2](02_warunki.qmd#wprowadzenie-teoretyczne) przeczytaj -->
-Instrukcja 2 zostanie udostępniona później. Do tego czasu przygotuj się z krótkiego przykładu poniżej: poznaj `==`, `!=`, `<`, `<=`, `>`, `>=`, `&&`, `||` i `!`. Zapoznaj się również z przeznaczeniem switch; jego samodzielne stosowanie będzie ćwiczone na zajęciach.
+W [instrukcji 2](02_warunki.qmd#wykonanie-instrukcji-pod-warunkiem-if) przeczytaj objaśnienie pierwszego zadania: poznaj `==`, `!=`, `<`, `<=`, `>`, `>=`, `&&`, `||` i `!`. Zapoznaj się również z przeznaczeniem switch; jego samodzielne stosowanie będzie ćwiczone na zajęciach.
 
-**Minimalne przygotowanie do pytania wyprzedzającego:** umieć wskazać gałąź prostego if/else. Przeanalizuj fragment: `if (temperature > 25) ... else ...` dla temperatur 25 i 26. Dla 25 wykona się else, dla 26 pierwszy blok. Nie jest wymagane napisanie całego kalkulatora przed zajęciami.
+**Przygotowanie do nowych zadań:** umieć wskazać gałąź prostego if/else. Przeanalizuj fragment: `if (temperature > 25) ... else ...` dla temperatur 25 i 26. Dla 25 wykona się else, dla 26 pierwszy blok. Nie jest wymagane napisanie całego kalkulatora przed zajęciami.
 
-Następna wejściówka: **3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu**, po 1 punkcie.
+Następna wejściówka: **4 pytania wyboru z laboratorium 1**, po 1 punkcie, oraz **krótki program z tego samego materiału do ręcznego sprawdzenia**. Pytania wyboru dotyczą wypisywania danych, reszty z dzielenia, dzielenia całkowitego i uzupełniania kodu. Nowe konstrukcje warunkowe nie są w tej wejściówce oceniane.

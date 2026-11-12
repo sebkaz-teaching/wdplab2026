@@ -7,7 +7,7 @@ project:
     - "podstawy_programowania/visual-studio-community.qmd"
     # Labs are released one at a time — uncomment a line once that lab starts.
     - "laboratoria/01_projekt.qmd"
-    # - "laboratoria/02_warunki.qmd"
+    - "laboratoria/02_warunki.qmd"
     # - "laboratoria/03_petle_tablice.qmd"
     # - "laboratoria/04_funkcje.qmd"
     # - "laboratoria/05_wektor.qmd"
@@ -48,7 +48,7 @@ website:
       - section: "Instrukcje laboratoryjne"
         contents:
           - laboratoria/01_projekt.qmd
-          # - laboratoria/02_warunki.qmd
+          - laboratoria/02_warunki.qmd
           # - laboratoria/03_petle_tablice.qmd
           # - laboratoria/04_funkcje.qmd
           # - laboratoria/05_wektor.qmd
