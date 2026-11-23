@@ -553,7 +553,7 @@ Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalog�
 
 ### Przygotuj się do laboratorium 3
 
-Kolejne zajęcia wprowadzą pętle `for`, `while`, `do…while` oraz indeksowanie tablic. Pętla powtarza blok instrukcji. W poniższym fragmencie zmienna sterująca zaczyna od 1; warunek jest sprawdzany przed każdym wykonaniem bloku, a `++i` zwiększa wartość po jego wykonaniu.
+W [instrukcji laboratorium 3](03_petle_tablice.qmd) poznasz pętle `for`, `while`, `do…while` oraz indeksowanie tablic. Pętla powtarza blok instrukcji. W poniższym fragmencie zmienna sterująca zaczyna od 1; warunek jest sprawdzany przed każdym wykonaniem bloku, a `++i` zwiększa wartość po jego wykonaniu.
 
 ```cpp
 for (int i = 1; i <= 4; ++i) {
@@ -563,4 +563,4 @@ for (int i = 1; i <= 4; ++i) {
 
 **Minimalne przygotowanie:** wskaż kolejno wypisywane wartości i liczbę powtórzeń. W tym przykładzie wypisane zostaną 1, 2, 3, 4, więc blok wykona się cztery razy. Nie trzeba jeszcze samodzielnie obliczać średniej z tablicy.
 
-Następna wejściówka: **3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu**, po 1 punkcie.
+Następna wejściówka: **4 pytania wyboru z poznanego materiału**, po 1 punkcie, oraz **krótki program z warunkami do ręcznego sprawdzenia**. Powtórz śledzenie wartości zmiennych, niezależne instrukcje `if` i łańcuchy `if/else`, operatory logiczne, `switch` oraz `?:` z dzieleniem całkowitym. Pętle i tablice nie będą jeszcze oceniane.

@@ -1,5 +1,417 @@
 [
   {
+    "objectID": "laboratoria/03_petle_tablice.html",
+    "href": "laboratoria/03_petle_tablice.html",
+    "title": "Laboratorium 3",
+    "section": "",
+    "text": "Wprowadzenie do programowania · C++ · instrukcja laboratoryjna\nCel ćwiczenia: Przetwarzanie serii danych z wykorzystaniem pętli i tablic.\nŚrodowisko: Visual Studio Community, projekt Console App, standard C++17.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#wejściówka",
+    "href": "laboratoria/03_petle_tablice.html#wejściówka",
+    "title": "Laboratorium 3",
+    "section": "Wejściówka",
+    "text": "Wejściówka\n4 pytania wyboru z materiału laboratoriów 1–2, po 1 punkcie, oraz krótki program do ręcznego sprawdzenia. Test wymaga prześledzenia kodu, a nie tylko rozpoznania nazwy konstrukcji. Pętle i tablice nie są jeszcze oceniane.\nPracuj samodzielnie. Przyjmij, że fragmenty pytań wyboru znajdują się wewnątrz poprawnie zdefiniowanej funkcji main i dołączono &lt;iostream&gt;. Analizuj kod dokładnie w zapisanej postaci. Po potwierdzeniu zapisu pojawi się wynik testu wyboru (0–4); kod sprawdzi prowadzący osobno.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#powtarzanie-znanej-liczby-operacji-for",
+    "href": "laboratoria/03_petle_tablice.html#powtarzanie-znanej-liczby-operacji-for",
+    "title": "Laboratorium 3",
+    "section": "1. Powtarzanie znanej liczby operacji — for",
+    "text": "1. Powtarzanie znanej liczby operacji — for\nPętla pozwala wielokrotnie wykonać ten sam blok instrukcji. for jest wygodna, gdy znamy liczbę powtórzeń lub kolejne wartości zmiennej sterującej. Zamiast powielać kod, zapisujemy go raz w ciele pętli.\nOgólna postać:\nfor (initialization; condition; step) {\n    // Instructions repeated while condition is true.\n}\nInicjalizacja wykonuje się tylko raz, przed pierwszym sprawdzeniem warunku. Jeżeli warunek jest prawdziwy, program wykonuje ciało, następnie krok i ponownie sprawdza warunek. Jeżeli warunek jest fałszywy od początku, ciało nie wykona się ani razu. Dwa średniki rozdzielają części nagłówka; nie dopisujemy średnika za jego zamykającym nawiasem.\nPrzykład nowej konstrukcji:\nfor (int i = 0; i &lt; 4; ++i) {\n    std::cout &lt;&lt; i &lt;&lt; '\\n';\n}\nFragment wypisuje 0, 1, 2 i 3. ++i zwiększa zmienną o jeden, a --i zmniejsza ją o jeden. Można też użyć kroku takiego jak i += 2. Zmienna zadeklarowana w nagłówku jest dostępna w pętli, ale nie po jej zakończeniu.\n\nZadanie 1. Liczby i ich kwadraty\nNapisz program, który w pierwszej pętli for wypisuje liczby od 1 do 10 wraz z ich kwadratami, a w drugiej te same pary w kolejności od 10 do 1. Każdą parę wypisz w osobnym wierszu. Nie używaj dziesięciu oddzielnych instrukcji wypisujących.\nSprawdź: pierwszy raport zaczyna się od pary 1 1 i kończy parą 10 100; drugi ma kolejność odwrotną. Każda pętla wykonuje 10 obiegów.\nWyjaśnij: jaka jest ostatnia wartość zmiennej, przy której wykonuje się ciało każdej pętli? Co zmieni zastąpienie &lt;= 10 przez &lt; 10 w pierwszej pętli?",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#wynik-przechowywany-między-obiegami-akumulator",
+    "href": "laboratoria/03_petle_tablice.html#wynik-przechowywany-między-obiegami-akumulator",
+    "title": "Laboratorium 3",
+    "section": "2. Wynik przechowywany między obiegami — akumulator",
+    "text": "2. Wynik przechowywany między obiegami — akumulator\nJeżeli kolejne obiegi mają współtworzyć jeden wynik, potrzebna jest zmienna zachowująca wartość pomiędzy nimi. Zmienną gromadzącą sumę nazywamy akumulatorem. Deklarujemy ją przed pętlą i nadajemy jej wartość początkową zero.\nOgólna postać:\nint total = 0;\nfor (initialization; condition; step) {\n    total += current_value;\n}\ntotal += current_value dodaje bieżący składnik do dotychczasowej sumy. Przypisanie total = current_value zastępowałoby poprzedni wynik. Umieszczenie inicjalizacji total = 0 wewnątrz ciała zerowałoby sumę przed każdym dodaniem.\nPrzykład nowej konstrukcji:\nint total = 0;\nfor (int value = 2; value &lt;= 6; value += 2) {\n    total += value;\n    std::cout &lt;&lt; value &lt;&lt; \": \" &lt;&lt; total &lt;&lt; '\\n';\n}\nKolejne składniki wynoszą 2, 4 i 6, a sumy po ich dodaniu — 2, 6 i 12. Taki wydruk stanowi ślad obliczeń: pokazuje nie tylko wynik końcowy, ale również sposób jego powstawania.\n\nZadanie 2. Suma od 1 do N\nWczytaj całkowite N z zakresu 0–100. Dla wartości spoza zakresu wypisz Invalid N i zakończ program. Oblicz sumę liczb od 1 do N w pętli for, bez gotowego wzoru. Wypisz wynik.\nSprawdź: N = 0, 1, 5, 100. Oczekiwane sumy to 0, 1, 15 i 5050. Sprawdź również odrzucenie -1 i 101. Załóż poprawny odczyt liczby całkowitej.\nWyjaśnij: dlaczego dla N równego zero wynik nadal jest poprawny, mimo że ciało pętli się nie wykonuje? Dla N równego 5 zapisz składnik i sumę po każdym obiegu.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#powtarzanie-zależne-od-warunku-while",
+    "href": "laboratoria/03_petle_tablice.html#powtarzanie-zależne-od-warunku-while",
+    "title": "Laboratorium 3",
+    "section": "3. Powtarzanie zależne od warunku — while",
+    "text": "3. Powtarzanie zależne od warunku — while\nPętla while jest przydatna, gdy powtarzamy działanie tak długo, jak długo spełniony jest warunek. Liczba powtórzeń może wynikać z przebiegu obliczeń, zamiast być bezpośrednio podana w nagłówku.\nOgólna postać:\nwhile (condition) {\n    // Instructions that may change the condition.\n}\nWarunek jest sprawdzany przed każdym obiegiem. Trzeba zapewnić zmianę danych wpływających na ten warunek, jeśli program ma zakończyć pętlę. Brak takiej zmiany może prowadzić do pętli nieskończonej.\nPrzykład nowej konstrukcji:\nint remaining = 3;\nwhile (remaining &gt; 0) {\n    std::cout &lt;&lt; remaining &lt;&lt; '\\n';\n    --remaining;\n}\nFragment wypisuje 3, 2 i 1. Po ostatnim zmniejszeniu zmienna ma wartość zero i kolejne sprawdzenie kończy pętlę. Gdyby początkowo miała wartość zero, nie zostałby wypisany żaden wiersz.\n\nZadanie 3. Podwajanie do osiągnięcia progu\nWczytaj całkowity próg limit z zakresu 1–1000; niepoprawną wartość odrzuć komunikatem. Zacznij od wartości 1 i podwajaj ją w pętli while, dopóki jest mniejsza od progu. Zlicz wykonane podwojenia. Wypisz końcową wartość i liczbę podwojeń. Załóż poprawny odczyt liczby.\nSprawdź: dla progów 1, 3, 16 i 17 oczekiwane pary „wartość, liczba podwojeń” to odpowiednio (1, 0), (4, 2), (16, 4) i (32, 5).\nWyjaśnij: dlaczego wartość końcowa może przekroczyć próg? Która instrukcja gwarantuje, że dla dopuszczalnych danych warunek w końcu przestanie być prawdziwy?",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#wykonanie-co-najmniej-raz-dowhile",
+    "href": "laboratoria/03_petle_tablice.html#wykonanie-co-najmniej-raz-dowhile",
+    "title": "Laboratorium 3",
+    "section": "4. Wykonanie co najmniej raz — do…while",
+    "text": "4. Wykonanie co najmniej raz — do…while\nW do…while warunek jest sprawdzany po wykonaniu ciała. Z tego powodu ciało wykona się przynajmniej raz. Jest to wygodne dla menu: najpierw pokazujemy opcje i odczytujemy wybór, a dopiero potem sprawdzamy, czy użytkownik chce kontynuować.\nOgólna postać:\ndo {\n    // Instructions executed at least once.\n} while (condition);\nPo nawiasie zamykającym warunek występuje średnik — jest częścią tej konstrukcji. To różnica względem zapisu zwykłej pętli while z blokiem instrukcji.\nPrzykład nowej konstrukcji:\nint answer = 0;\ndo {\n    std::cout &lt;&lt; \"Enter 0 to finish: \";\n    if (!(std::cin &gt;&gt; answer)) {\n        return 1;\n    }\n} while (answer != 0);\nMimo początkowej wartości zero pytanie zostanie wyświetlone. Warunek sprawdzany po odczycie decyduje, czy trzeba zapytać ponownie. return 1; użyte w main kończy cały program w razie błędu odczytu.\n\nZadanie 4. Menu licznika zgłoszeń\nNapisz program z licznikiem początkowo równym zero. W pętli do…while wyświetlaj menu i wczytuj opcję: 1 — zwiększ licznik, 2 — wyświetl licznik, 3 — wyzeruj licznik, 0 — zakończ. Wybór obsłuż przez switch. Inne liczby dają Unknown option, po czym menu pojawia się ponownie. Błąd odczytu kończy program komunikatem Invalid input.\nSprawdź: sekwencja 1 1 2 3 2 0 pokazuje licznik 2, a potem 0. Dla samego 0 menu pojawia się raz. Sprawdź również 9 0 i wpisanie tekstu zamiast liczby.\nWyjaśnij: dlaczego break kończący przypadek w switch nie kończy otaczającej go pętli? Który warunek decyduje o zakończeniu pracy menu?",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#przerwanie-pętli-i-pominięcie-obiegu-break-i-continue",
+    "href": "laboratoria/03_petle_tablice.html#przerwanie-pętli-i-pominięcie-obiegu-break-i-continue",
+    "title": "Laboratorium 3",
+    "section": "5. Przerwanie pętli i pominięcie obiegu — break i continue",
+    "text": "5. Przerwanie pętli i pominięcie obiegu — break i continue\nbreak kończy najbliższą otaczającą pętlę lub instrukcję switch. continue dotyczy pętli: pomija resztę bieżącego obiegu. W while przechodzi do sprawdzenia warunku, a w for najpierw do kroku, a następnie do sprawdzenia warunku.\nOgólna postać:\nwhile (condition) {\n    if (stop_condition) {\n        break;\n    }\n    if (skip_condition) {\n        continue;\n    }\n    // Process the accepted value.\n}\ncontinue nie może omijać jedynej instrukcji, która pozwala pętli posunąć się dalej. Jednym ze sposobów uniknięcia tego błędu jest umieszczenie kolejnego odczytu w warunku while.\nPrzykład nowej konstrukcji:\nint value = 0;\nwhile (std::cin &gt;&gt; value) {\n    if (value == -1) {\n        break;\n    }\n    if (value &lt; 0) {\n        continue;\n    }\n    std::cout &lt;&lt; \"Accepted: \" &lt;&lt; value &lt;&lt; '\\n';\n}\nWartość -1 jest sygnałem końca, a nie elementem danych. Inne wartości ujemne są pomijane. Po continue następna próba odczytu następuje w warunku pętli. Nieudany odczyt również kończy tę pętlę, ponieważ warunek staje się fałszywy.\n\nZadanie 5. Pomiary do sygnału końca\nWczytuj całkowite poziomy baterii aż do -1 albo nieudanego odczytu. Dopuszczalne pomiary to 0–100. Sprawdzaj -1 przed sprawdzeniem zakresu i użyj break do zakończenia wprowadzania. Pozostałe liczby spoza zakresu pomijaj komunikatem Invalid charge i instrukcją continue.\nZlicz zaakceptowane pomiary i oblicz ich sumę. Nie przechowuj pomiarów w tablicy. Po zakończeniu wypisz liczbę i sumę, a jeśli nie przyjęto żadnego pomiaru — dodatkowo No data.\nSprawdź: 50 0 100 -1 daje 3 pomiary i sumę 150. Sekwencja 20 -2 101 30 -1 daje 2 pomiary i sumę 50. Dla samego -1 liczba i suma wynoszą zero. Przyjmij nie więcej niż 1000 poprawnych pomiarów, aby suma mieściła się w używanym typie int na stanowisku laboratoryjnym.\nWyjaśnij: dlaczego -1 trzeba obsłużyć przed pozostałymi liczbami ujemnymi? Czy pominięty pomiar ma wpływać na licznik lub sumę?",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#kilka-wartości-tego-samego-typu-tablica",
+    "href": "laboratoria/03_petle_tablice.html#kilka-wartości-tego-samego-typu-tablica",
+    "title": "Laboratorium 3",
+    "section": "6. Kilka wartości tego samego typu — tablica",
+    "text": "6. Kilka wartości tego samego typu — tablica\nTablica przechowuje ustaloną liczbę elementów tego samego typu. Do poszczególnych elementów odwołujemy się przez nazwę tablicy i indeks w nawiasach kwadratowych. Indeksowanie zaczyna się od zera.\nOgólna postać:\nelement_type array_name[element_count];\narray_name[index] = value;\nW zwykłej tablicy C++ używanej w tych ćwiczeniach liczba elementów musi być dodatnią stałą znaną podczas kompilacji. Nie deklarujemy jej rozmiarem wczytanym przez std::cin. Dla tablicy o rozmiarze count poprawne indeksy to od 0 do count - 1. Dostęp poza tym zakresem ma niezdefiniowane zachowanie — nie musi wywołać czytelnego komunikatu błędu.\nPrzykład nowej konstrukcji:\nconst int count = 4;\nint values[count] = {2, 5, 1, 4};\nvalues[1] = 9;\nstd::cout &lt;&lt; values[0] &lt;&lt; \" \" &lt;&lt; values[count - 1] &lt;&lt; '\\n';\nPrzypisanie zmienia drugi element na 9. Fragment wypisuje 2 i 4, bo odczytuje pierwszy i ostatni element. Zapis int values[count] = {}; wyzerowałby wszystkie elementy. Samo int values[count]; dla tablicy lokalnej nie zapewnia ich wyzerowania.\n\nZadanie 6. Odczyt i zmiana elementu\nZadeklaruj tablicę sześciu liczb całkowitych o początkowych wartościach {10, 20, 30, 40, 50, 60}. Wypisz pierwszy i ostatni element, zmień trzeci element na -5, a następnie wypisz drugi, trzeci i czwarty element. W tym zadaniu odwołuj się do konkretnych indeksów, bez pętli.\nSprawdź: pierwszy wydruk zawiera 10 i 60, a drugi 20, -5 i 40. W debuggerze obejrzyj całą tablicę po przypisaniu.\nWyjaśnij: dlaczego trzeci element ma indeks 2? Dlaczego wyrażenie values[6] nie wskazuje ostatniego elementu takiej tablicy? Nie sprawdzaj tego przez celowe wykonywanie odczytu poza zakresem.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#przejście-przez-tablicę-w-pętli",
+    "href": "laboratoria/03_petle_tablice.html#przejście-przez-tablicę-w-pętli",
+    "title": "Laboratorium 3",
+    "section": "7. Przejście przez tablicę w pętli",
+    "text": "7. Przejście przez tablicę w pętli\nZmienna sterująca pętli może pełnić rolę indeksu. Pozwala to tą samą instrukcją wczytywać, wypisywać albo zmieniać kolejne elementy. Pętla musi obejmować wyłącznie poprawne indeksy.\nOgólna postać:\nfor (int i = 0; i &lt; count; ++i) {\n    // Read, display or modify array_name[i].\n}\nDla dodatniego count taki nagłówek daje indeksy 0, 1, …, count - 1. Warunek i &lt;= count dopuściłby dodatkowy, niepoprawny indeks. Dla przejścia wstecz przy zmiennej typu int zaczynamy od count - 1 i kończymy po indeksie zero.\nPrzykład nowej konstrukcji:\nconst int count = 3;\nint values[count] = {4, 7, 2};\nfor (int i = 0; i &lt; count; ++i) {\n    std::cout &lt;&lt; i &lt;&lt; \": \" &lt;&lt; values[i] &lt;&lt; '\\n';\n}\nFragment wypisuje pary 0: 4, 1: 7, 2: 2. Na tej samej zasadzie std::cin &gt;&gt; values[i] zapisuje wczytaną liczbę bezpośrednio w bieżącym elemencie.\n\nZadanie 7. Wczytanie i odwrócona kolejność\nUtwórz wyzerowaną tablicę pięciu liczb typu double. W pierwszej pętli wczytaj wszystkie elementy, a w drugiej wypisz je w kolejności odwrotnej do wczytania. Przy każdej wartości wypisz jej oryginalny indeks. Sprawdź powodzenie odczytu; w razie błędu zakończ program komunikatem Invalid input, bez wypisywania niepełnej tablicy.\nSprawdź: dla 2.5 0 -1 8 4 wynik ma obejmować pary 4: 4, 3: 8, 2: -1, 1: 0, 0: 2.5. Sprawdź też pięć jednakowych wartości i tekst zamiast trzeciej liczby.\nWyjaśnij: czy wypisywanie w odwrotnej kolejności zmieniło rozmieszczenie danych w tablicy? Dlaczego przy indeksie typu int warunek i &gt;= 0 pozwala obsłużyć pierwszy element i potem zakończyć pętlę?",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#suma-i-średnia-tablicy-konwersja-przed-dzieleniem",
+    "href": "laboratoria/03_petle_tablice.html#suma-i-średnia-tablicy-konwersja-przed-dzieleniem",
+    "title": "Laboratorium 3",
+    "section": "8. Suma i średnia tablicy — konwersja przed dzieleniem",
+    "text": "8. Suma i średnia tablicy — konwersja przed dzieleniem\nDo sumowania elementów wykorzystujemy akumulator oraz pętlę po indeksach. Jeżeli suma i liczba elementów mają typ int, ich iloraz również powstaje przez dzielenie całkowite. Samo zapisanie wyniku w zmiennej double nie przywróci odrzuconej części ułamkowej.\nOgólna postać konwersji:\nstatic_cast&lt;target_type&gt;(expression)\nstatic_cast&lt;double&gt;(total) tworzy wartość typu double odpowiadającą sumie. Nie zmienia typu zmiennej total. Gdy jeden argument dzielenia jest typu double, drugi zostaje do tego typu przekonwertowany i wykonuje się dzielenie zmiennoprzecinkowe.\nPrzykład nowej konstrukcji:\nint total = 7;\nint count = 2;\ndouble average = static_cast&lt;double&gt;(total) / count;\nstd::cout &lt;&lt; average &lt;&lt; '\\n';\nWynik wynosi 3.5. Umieszczenie konwersji dopiero wokół total / count dałoby 3.0, ponieważ dzielenie całkowite nastąpiłoby wcześniej. Liczba elementów musi być niezerowa; w następnych zadaniach tablice mają ustalone dodatnie rozmiary.\n\nZadanie 8. Suma, średnia i ślad obliczeń\nZadeklaruj tablicę sześciu liczb całkowitych {80, 20, 55, 0, 100, 30}. W pętli oblicz sumę. Po każdym dodaniu wypisz indeks, wartość elementu i aktualną sumę. Po pętli oblicz średnią za pomocą konwersji static_cast&lt;double&gt; przed dzieleniem.\nSprawdź: kolejne sumy to 80, 100, 155, 155, 255 i 285; średnia wynosi 47.5. Następnie sprawdź sześć zer oraz {1, 1, 1, 1, 1, 2} — dla ostatniej tablicy średnia wynosi w przybliżeniu 1.16667 przy domyślnym formatowaniu.\nWyjaśnij: dlaczego static_cast&lt;double&gt;(total / count) nie jest równoważne konwersji samego total przed dzieleniem? Czy liczba elementów równa sześć może dać niecałkowitą średnią mimo całkowitych danych?",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#minimum-maksimum-i-pozycja-pierwszego-wystąpienia",
+    "href": "laboratoria/03_petle_tablice.html#minimum-maksimum-i-pozycja-pierwszego-wystąpienia",
+    "title": "Laboratorium 3",
+    "section": "9. Minimum, maksimum i pozycja pierwszego wystąpienia",
+    "text": "9. Minimum, maksimum i pozycja pierwszego wystąpienia\nDla niepustej tablicy można rozpocząć wyszukiwanie minimum od jej pierwszego elementu. Następnie porównujemy kolejne elementy z dotychczasowym kandydatem. Ta metoda nie wymaga zgadywania wartości, która na pewno będzie większa lub mniejsza od wszystkich danych.\nOgólna postać:\nint minimum = values[0];\nint minimumIndex = 0;\nfor (int i = 1; i &lt; count; ++i) {\n    if (values[i] &lt; minimum) {\n        // Save the new minimum and its index.\n    }\n}\nZaczynamy od indeksu 1, ponieważ element zerowy jest już kandydatem. Przy &lt; równy element nie zastępuje wcześniejszego, więc zachowujemy indeks pierwszego minimum. Przy &lt;= kolejny równy element zastąpi poprzedni i po pełnym przejściu otrzymamy ostatnie wystąpienie. Wyszukiwanie maksimum jest analogiczne, ale kierunek porównania trzeba odwrócić.\nPrzykład nowej konstrukcji:\nconst int count = 3;\nint values[count] = {8, 3, 6};\nint maximum = values[0];\nfor (int i = 1; i &lt; count; ++i) {\n    if (values[i] &gt; maximum) {\n        maximum = values[i];\n    }\n}\nstd::cout &lt;&lt; maximum &lt;&lt; '\\n';\nFragment wypisuje 8. Inicjalizacja minimum zerem byłaby błędna np. dla samych dodatnich danych; inicjalizacja maksimum zerem byłaby błędna dla samych ujemnych. Odczyt values[0] wymaga niepustej tablicy.\n\nZadanie 9. Ekstrema i remis\nDla tablicy sześciu liczb oblicz minimum, maksimum i indeks pierwszego minimum. Każdy wynik wyznacz na podstawie danych, bez wpisywania odpowiedzi na stałe i bez sortowania tablicy.\nSprawdź:\n\n\n\nTablica\nMinimum\nMaksimum\nIndeks pierwszego minimum\n\n\n\n\n{80, 20, 55, 0, 100, 30}\n0\n100\n3\n\n\n{40, 20, 20, 60, 80, 30}\n20\n80\n1\n\n\n{-4, -9, -2, -9, -5, -3}\n-9\n-2\n1\n\n\n{7, 7, 7, 7, 7, 7}\n7\n7\n0\n\n\n\nWyjaśnij: co zmieni &lt;= zamiast &lt; przy aktualizacji minimum? Wskaż zmienione wyniki dla tablic zawierających powtarzające się minimum.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#raport-z-danych-połączenie-tablic-pętli-i-warunków",
+    "href": "laboratoria/03_petle_tablice.html#raport-z-danych-połączenie-tablic-pętli-i-warunków",
+    "title": "Laboratorium 3",
+    "section": "10. Raport z danych — połączenie tablic, pętli i warunków",
+    "text": "10. Raport z danych — połączenie tablic, pętli i warunków\nTablica zachowuje wczytane wartości, dzięki czemu można je przechodzić wielokrotnie. Warunki wewnątrz pętli pozwalają klasyfikować każdy element, a osobne liczniki gromadzą liczebności kategorii. Łańcuch if / else if / else daje jedną kategorię dla każdego poprawnego pomiaru.\nOgólna postać przetwarzania:\nfor (int i = 0; i &lt; count; ++i) {\n    if (first_category_condition) {\n        // Update the first category counter.\n    } else if (second_category_condition) {\n        // Update the second category counter.\n    } else {\n        // Update the remaining category counter.\n    }\n}\nPrzed raportowaniem trzeba ustalić, czy wszystkie dane są poprawne. W zadaniu poniżej kończymy program po pierwszej niepoprawnej wartości; nie obliczamy raportu z niepełnej tablicy. To inna reguła niż w zadaniu 5, gdzie błędny pomiar pomijaliśmy i mogliśmy wczytywać następne dane.\nPrzykład nowej kombinacji:\nconst int count = 3;\nint values[count] = {4, 7, 2};\nint evenCount = 0;\nfor (int i = 0; i &lt; count; ++i) {\n    if (values[i] % 2 == 0) {\n        ++evenCount;\n    }\n}\nstd::cout &lt;&lt; evenCount &lt;&lt; '\\n';\nFragment wypisuje 2: dwie liczby w tablicy są parzyste. Licznik zaczyna od zera i zwiększa się tylko dla elementów spełniających warunek.\n\nZadanie 10. Raport gotowości urządzeń\nWczytaj do tablicy sześć całkowitych poziomów baterii. Sprawdzaj powodzenie każdego odczytu i zakres 0–100. Nieudany odczyt kończy program komunikatem Invalid input, a wartość spoza zakresu — Invalid charge. W obu sytuacjach nie wypisuj raportu.\nDla kompletu poprawnych danych wypisz wszystkie pomiary z indeksami oraz oblicz: sumę, średnią, minimum, maksimum, indeks pierwszego minimum i liczebności kategorii Recharge (poniżej 30), Ready (30–79), Full readiness (80–100). Wypisz też indeksy urządzeń wymagających ładowania. Kategorie mają się wzajemnie wykluczać, a suma ich liczebności ma wynosić sześć.\nSprawdź: dla 80 20 55 0 100 30 suma wynosi 285, średnia 47.5, minimum 0, maksimum 100, indeks pierwszego minimum 3; każda kategoria ma po dwa urządzenia, a ładowania wymagają indeksy 1 i 3. Dla sześciu zer wszystkie urządzenia wymagają ładowania, średnia wynosi zero, a pierwszy indeks minimum to 0. Dla sześciu wartości 100 wszystkie urządzenia są w pełnej gotowości. Sprawdź także błąd zakresu na początku i na końcu wprowadzania.\nWyjaśnij: dlaczego do kontroli wartości równej 30 i 80 warto przygotować osobne próby? Czy liczenie kategorii za pomocą trzech niezależnych warunków o nakładających się zakresach mogłoby policzyć jedno urządzenie kilka razy?",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#dokumentacja-i-sprawdzenie-pracy",
+    "href": "laboratoria/03_petle_tablice.html#dokumentacja-i-sprawdzenie-pracy",
+    "title": "Laboratorium 3",
+    "section": "Dokumentacja i sprawdzenie pracy",
+    "text": "Dokumentacja i sprawdzenie pracy\nKażde zadanie napisz jako kompletny program w osobnym projekcie. Fragmenty objaśniają tylko nowe konstrukcje: samodzielnie dobierz nagłówki, napisz main, deklaracje oraz wejście i wyjście. Stosuj angielskie nazwy zmiennych i komunikaty. W zadaniach bez wymogu sprawdzania odczytu zakładaj poprawny zapis liczb zgodnych z poleceniem.\n\nZachowaj pliki .cpp oznaczone numerami zadań.\nPrzed uruchomieniem zapisz przewidywany wynik, a następnie porównaj go z wynikiem programu.\nWykonaj wskazane próby, zwłaszcza wartości graniczne, powtarzające się minima i przypadek braku danych.\nPrzygotuj odpowiedź na pytanie „Wyjaśnij” przy każdym zadaniu.\nPrześledź co najmniej jedną pętlę w debuggerze, zapisując indeks, bieżącą wartość i aktualny wynik.\n\nSposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów .vs i Debug ani plików .exe.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/03_petle_tablice.html#przygotowanie-do-kolejnych-zajęć",
+    "href": "laboratoria/03_petle_tablice.html#przygotowanie-do-kolejnych-zajęć",
+    "title": "Laboratorium 3",
+    "section": "Przygotowanie do kolejnych zajęć",
+    "text": "Przygotowanie do kolejnych zajęć\n\nPowtórz materiał laboratorium 3\n\nKolejność inicjalizacji, sprawdzenia warunku, ciała i kroku w for.\nRóżnicę między while i do…while oraz rolę break i continue.\nIndeksy tablicy, wczytywanie i wypisywanie elementów.\nSumowanie, konwersję przed dzieleniem i obliczanie średniej.\nInicjalizację ekstremów i zachowanie indeksu pierwszego minimum.\nPrzetwarzanie pustej serii pomiarów bez odczytywania nieistniejącego elementu lub dzielenia przez zero.\n\n\n\nPrzygotuj się do laboratorium 4\nKolejne zajęcia wprowadzą funkcje. Funkcja może otrzymać parametr i zwrócić wynik przez return. Poniższy przykład pokazuje definicję jednej funkcji, a nie całego programu:\nint doubled(int value)\n{\n    return 2 * value;\n}\nWywołanie doubled(3) zwraca 6. Samo zwrócenie wartości niczego nie wypisuje; wynik można przypisać do zmiennej lub przekazać do std::cout. Wskaż nazwę funkcji, parametr i typ wyniku. Przekazywanie przez referencję oraz tablic przećwiczymy na kolejnych zajęciach.\nNastępna wejściówka będzie sprawdzać poznany materiał pętli i tablic. Zakres testu i krótkiego programu zostanie podany w instrukcji kolejnego laboratorium.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 3"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html",
+    "href": "laboratoria/01_projekt.html",
+    "title": "Laboratorium 1",
+    "section": "",
+    "text": "Wprowadzenie do programowania · C++ · instrukcja laboratoryjna\nCel ćwiczenia: Utworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.\nŚrodowisko: Visual Studio Community, projekt Console App, standard C++17.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#rozpocznij-zajęcia",
+    "href": "laboratoria/01_projekt.html#rozpocznij-zajęcia",
+    "title": "Laboratorium 1",
+    "section": "Rozpocznij zajęcia",
+    "text": "Rozpocznij zajęcia\nWpisz swój e-mail i kliknij Rozpocznij zajęcia. Pojawisz się na liście uczestników u prowadzącego. E-mail jest deklarowany — formularz nie loguje do poczty. Po wykonaniu zadania zgłoś je do sprawdzenia. Prowadzący sprawdza program przy stanowisku i zatwierdza zadanie w swoim panelu. Odświeżanie strony nie usuwa zapisanych postępów. Korzystaj z tej samej karty przeglądarki; dostęp jest zapamiętany w niej na czas sesji. Nie udostępniaj tej karty innym osobom.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#informacje-wprowadzające",
+    "href": "laboratoria/01_projekt.html#informacje-wprowadzające",
+    "title": "Laboratorium 1",
+    "section": "Informacje wprowadzające",
+    "text": "Informacje wprowadzające\nĆwiczenie wprowadza do pracy w Visual Studio Community, w projekcie Console App / Aplikacja konsolowa (C++). Każdy niezależny program należy umieścić w osobnym projekcie. Nazwy zmiennych i komunikaty w przykładach są po angielsku; opisy zadań są po polsku.\nPrzed rozpoczęciem pracy należy sprawdzić możliwość zapisania projektu. Problemy ze sprzętem należy zgłosić prowadzącemu; przy stanowisku nie należy spożywać napojów ani zmieniać konfiguracji pracowni bez zgody.\nNa pierwszym laboratorium nie ma wejściówki. Zasady rozliczania zadań są opisane na stronie organizacyjnej.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#wprowadzenie-teoretyczne",
+    "href": "laboratoria/01_projekt.html#wprowadzenie-teoretyczne",
+    "title": "Laboratorium 1",
+    "section": "Wprowadzenie teoretyczne",
+    "text": "Wprowadzenie teoretyczne\n\nŚrodowisko IDE i projekt\nIDE (Integrated Development Environment, zintegrowane środowisko programistyczne) łączy edytor kodu, narzędzia budowania i debugger. Projekt określa, które pliki tworzą wspólny program. Rozwiązanie (solution) może zawierać kilka projektów.\n\nUtwórz Console App dla języka C++ i otwórz wygenerowany plik .cpp.\nW tym pliku umieszczaj kod programu. Jeśli plik zawiera już main, zastąp przykład zamiast dopisywać drugą funkcję main.\nZapisz zmiany: Ctrl+S.\nZbuduj całe rozwiązanie: Ctrl+Shift+B. Odczytaj komunikaty w oknie Output / Dane wyjściowe.\nUruchom: Ctrl+F5. Samo zbudowanie programu nie oznacza jego uruchomienia.\n\nPełna instrukcja środowiska: Visual Studio krok po kroku.\n\n\nOd pliku źródłowego do programu\nKod .cpp jest tekstem. Preprocesor przygotowuje go do kompilacji, m.in. obsługując #include. Kompilator sprawdza składnię i znaczenie instrukcji oraz przetwarza kod; etap asemblacji prowadzi do kodu maszynowego w pliku obiektowym. Linker, czyli konsolidator, łączy pliki obiektowe z potrzebnymi bibliotekami w program wykonywalny.\nmain.cpp → przygotowanie i kompilacja → main.obj → konsolidacja → nazwa_projektu.exe\nW Visual Studio plik wynikowy zwykle ma nazwę projektu, a nie pojedynczego pliku źródłowego. Błąd składni może zatrzymać budowanie. Błąd obliczeń może pozostać w programie, który buduje się bez błędów.\n\n\nStruktura programu, nagłówki i main\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Hello, world!\\n\";\n    return 0;\n}\n\n\n\n\n\n\n\nElement\nZnaczenie\n\n\n\n\n#include &lt;iostream&gt;\nUdostępnia deklaracje potrzebne do standardowego wejścia i wyjścia\n\n\nint main()\nGłówna funkcja naszego programu konsolowego\n\n\n{ ... }\nBlok instrukcji\n\n\nstd::cout &lt;&lt; ...\nWypisanie danych na standardowe wyjście\n\n\n;\nZakończenie instrukcji, np. przypisania lub wypisania\n\n\n\\n\nZnak nowej linii wewnątrz napisu\n\n\nreturn 0;\nZakończenie funkcji main z kodem powodzenia\n\n\n\nPrzestrzeń nazw (namespace) grupuje nazwy. Przedrostek std:: wskazuje element biblioteki standardowej. Nagłówki standardowe, takie jak &lt;iostream&gt;, &lt;string&gt; i &lt;iomanip&gt;, zapisujemy w nawiasach ostrych; własne, np. \"calculations.hpp\", zwykle w cudzysłowie.\n\n\nZmienne, stałe i typy danych\nDeklaracja wprowadza nazwę i typ zmiennej. Inicjalizacja nadaje jej wartość początkową. Zmienna int count = 5; przechowuje liczbę całkowitą, którą można zmieniać. Zapis const int groupSize = 4; opisuje stałą, której nie można później przypisać innej wartości.\n\n\n\n\n\n\n\n\nTyp\nZastosowanie\nPrzykład\n\n\n\n\nint\nLiczba całkowita\nint count = 5;\n\n\nfloat\nLiczba zmiennoprzecinkowa\nfloat voltage = 3.3f;\n\n\ndouble\nObliczenia z częścią ułamkową, zwykle dokładniejsze niż float\ndouble length = 2.5;\n\n\nchar\nJeden znak\nchar group = 'A';\n\n\nbool\nWartość logiczna\nbool active = true;\n\n\nstd::string\nNapis, wymaga nagłówka string\nstd::string name = \"Sensor\";\n\n\n\nNazwy nie mogą zaczynać się od cyfry ani być słowami kluczowymi. Wielkość liter ma znaczenie: count i Count to różne nazwy. Pojedyncze apostrofy oznaczają znak, a cudzysłowy napis.\nRozmiar typu można sprawdzić przez sizeof, np. std::cout &lt;&lt; sizeof(int);. Nie należy zakładać identycznego rozmiaru wszystkich typów na każdej platformie. Dokładność liczb zmiennoprzecinkowych dotyczy cyfr znaczących, a nie stałej liczby miejsc po przecinku. Ustawienie formatu wyświetlania nie zwiększa dokładności przechowywanej liczby.\n\n\nOperacje matematyczne i przypisanie\n\n\n\n\n\n\n\n\nOperator\nZnaczenie\nWynik dla int a = 10, b = 3\n\n\n\n\n+, -, *\nDodawanie, odejmowanie, mnożenie\n13, 7, 30\n\n\n/\nDzielenie\n3\n\n\n%\nReszta z dzielenia całkowitego\n1\n\n\n=\nPrzypisanie wartości\na = 5; zmienia a na 5\n\n\n+=, -=\nZmiana o podaną wartość\na += 2; odpowiada a = a + 2;\n\n\n*=, /=, %=\nDziałanie i zapis wyniku w tej samej zmiennej\na *= 2; odpowiada a = a * 2;\n\n\n\nDzielenie dwóch int daje wynik całkowity: 10 / 4 to 2. Zapis 10.0 / 4 daje 2.5. Przypisanie wyniku 10 / 4 do double nie odzyska odrzuconej części ułamkowej. Nawiasy pozwalają ustalić kolejność obliczeń, np. 2 * (length + width).\n\n\nWejście, wyjście i formatowanie\nI/O (Input/Output) oznacza wejście i wyjście. std::cin &gt;&gt; value wczytuje wartość do zmiennej; std::cout &lt;&lt; value ją wyświetla. Odczyt z klawiatury kończymy klawiszem Enter. W tych ćwiczeniach stosujemy strumienie C++, bez równoległego wprowadzania scanf i printf.\nW poniższym pełnym programie &lt;iomanip&gt; udostępnia manipulatory formatu. Połączenie std::fixed i std::setprecision(2) ustawia dwa miejsca po przecinku. Dla wejścia 2.5 program wyświetla Measurement: 2.75.\n#include &lt;iostream&gt;\n#include &lt;iomanip&gt;\n#include &lt;string&gt;\n\nint main()\n{\n    std::string label = \"Measurement\";\n    double value = 0.0;\n    const double correction = 0.25;\n    std::cout &lt;&lt; \"Enter a value: \";\n    std::cin &gt;&gt; value;\n    value += correction;\n    std::cout &lt;&lt; label &lt;&lt; \": \" &lt;&lt; std::fixed &lt;&lt; std::setprecision(2)\n              &lt;&lt; value &lt;&lt; '\\n';\n    return 0;\n}\n\n\nŚledzenie wykonania\nPunkt zatrzymania (breakpoint, F9) pozwala zatrzymać program przed wybraną instrukcją. F5 uruchamia debugger, a F10 wykonuje kolejny krok. W oknie Locals / Zmienne lokalne można porównać wartość przed przypisaniem i po nim. Żółta strzałka wskazuje instrukcję, która dopiero zostanie wykonana.\nPełny program pokazowy — pobierz plik .cpp. Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#zadania-do-realizacji",
+    "href": "laboratoria/01_projekt.html#zadania-do-realizacji",
+    "title": "Laboratorium 1",
+    "section": "Zadania do realizacji",
+    "text": "Zadania do realizacji\nPrzed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.\n\nZadanie 1. Pierwszy projekt\nUtwórz projekt Console App. W pliku main.cpp wyświetl w osobnych liniach: „Wprowadzenie do programowania”, „Laboratorium 1”, „Algorytmy i programy w C++”. Zbuduj cały projekt i uruchom program. Zapisz nazwę powstałego pliku .exe.\n\n\nZadanie 2. Deklaracje i wyświetlanie danych\nZadeklaruj i zainicjalizuj: nazwę ćwiczenia jako std::string, liczbę pomiarów jako int, napięcie jako float, oznaczenie grupy jako char oraz informację o gotowości jako bool. Wypisz wartości wraz z opisami. Sprawdź, jak domyślnie wyświetlają się true i false. Użyj drugiej zmiennej std::string do nazwy urządzenia.\n\n\nZadanie 3. Odczyt błędów kompilacji\nPoniższy program celowo zawiera błędy. Zbuduj go, przeczytaj pierwszy komunikat i popraw kod. Powtarzaj do uzyskania działającego programu. Zapisz, czego brakowało; nie usuwaj instrukcji wypisującej wynik.\n#include &lt;iostream&gt;\n\nint main()\n{\n    int number = 10\n    cout &lt;&lt; \"Value: \" &lt;&lt; number &lt;&lt; '\\n';\n    return 0\n}\nWynik po poprawieniu: Value: 10.\n\n\nZadanie 4. Działania na liczbach double\nWczytaj dwie liczby typu double. Wyświetl sumę, różnicę, iloczyn i iloraz z opisami. Załóż poprawne dane i drugi argument różny od zera. Sprawdź pary 10, 4 i 2.5, 0.5. Dla pierwszej pary iloraz wynosi 2.5.\n\n\nZadanie 5. Dzielenie całkowite i reszta\nWczytaj dwie dodatnie liczby typu int. Wyświetl iloraz całkowity oraz resztę. Dla 23, 4 oczekiwane wartości to 5 i 3; dla 24, 4 — 6 i 0. Wyjaśnij, dlaczego ten program daje inny iloraz niż zadanie 4. Dzielnik musi być różny od zera.\n\n\nZadanie 6. Pole i obwód prostokąta\nWczytaj dodatnie długości boków w metrach jako double. Oblicz pole length * width oraz obwód 2 * (length + width). Wypisz wyniki z jednostkami m2 i m. Dla boków 2.5 i 4 oczekiwane wyniki to 10 m2 i 13 m.\n\n\nZadanie 7. Przeliczanie temperatury\nWczytaj temperaturę w stopniach Celsjusza. Oblicz Fahrenheita według F = C * 9.0 / 5.0 + 32.0 oraz kelwiny według K = C + 273.15. Sprawdź 0 i 100. Dla 0 wyniki to 32 i 273.15. Wyjaśnij, dlaczego podano 9.0 / 5.0, a nie (9 / 5).\n\n\nZadanie 8. Aktualizacja pomiaru\nZacznij od double value = 10.0;. Kolejno dodaj 2.0 przez +=, odejmij 1.0 przez -=, pomnóż przez 3.0 i podziel przez 2.0, używając *= i /=. Po każdej operacji wypisz wartość. Oczekiwany przebieg: 12, 11, 33, 16.5. Następnie wczytaj poprawki i współczynniki z klawiatury; współczynnik dzielenia ma być niezerowy.\n\n\nZadanie 9. Formatowanie wyników\nDla double value = 3.14159265359; wypisz wartość najpierw z domyślnymi ustawieniami, a następnie z std::fixed i precyzją 0, 2 oraz 4. Trzy ostatnie wyniki: 3, 3.14, 3.1416. Sprawdź w debuggerze, czy samo formatowanie zmieniło zawartość zmiennej.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#dalsze-zadania-samodzielne-programy",
+    "href": "laboratoria/01_projekt.html#dalsze-zadania-samodzielne-programy",
+    "title": "Laboratorium 1",
+    "section": "Dalsze zadania — samodzielne programy",
+    "text": "Dalsze zadania — samodzielne programy\nW zadaniach 10–15 napisz każdy program od początku: samodzielnie dobierz nagłówki, napisz funkcję main, zadeklaruj zmienne i ułóż instrukcje. Nie otrzymujesz szablonu rozwiązania. Stosuj angielskie nazwy zmiennych i komunikaty. Załóż poprawne dane zgodne z poleceniem; nie trzeba jeszcze używać warunków ani pętli. W każdym zadaniu sprawdź podany przykład i własny zestaw danych. Przed uruchomieniem oblicz oczekiwany wynik.\n\nZadanie 10. Średnia z trzech pomiarów\nWczytaj trzy pomiary napięcia w woltach jako liczby typu double. Oblicz sumę i średnią arytmetyczną. Wypisz oba wyniki z opisami i jednostką, z trzema miejscami po przecinku. Dla pomiarów 2.1, 2.4 i 2.7 oczekiwane wyniki to suma 7.200 V i średnia 2.400 V. Sprawdź również trzy identyczne pomiary.\n\n\nZadanie 11. Droga, czas i prędkość\nWczytaj nieujemną drogę w kilometrach oraz dodatni czas przejazdu w minutach. Oblicz średnią prędkość w km/h i m/s. Zadbaj o przeliczenie jednostek i wypisz wyniki z dwoma miejscami po przecinku. Dla 9 km i 30 min oczekiwane wyniki to 18.00 km/h i 5.00 m/s. Sprawdź także drogę równą zero i czas niebędący pełną godziną.\n\n\nZadanie 12. Cena zakupów i rabat\nWczytaj nieujemną cenę jednostkową, dodatnią całkowitą liczbę sztuk oraz rabat w procentach z zakresu od 0 do 100. Oblicz wartość zakupów przed rabatem, kwotę rabatu i kwotę do zapłaty. Wypisz kwoty z dwoma miejscami po przecinku i oznaczeniem PLN. Dla ceny 12.50, liczby sztuk 4 i rabatu 10 wyniki to kolejno 50.00 PLN, 5.00 PLN i 45.00 PLN. Sprawdź też rabat 0% oraz 100%. W tym ćwiczeniu stosujemy double; nie projektujemy systemu księgowego.\n\n\nZadanie 13. Energia i koszt pracy urządzenia\nWczytaj nieujemne wartości: moc urządzenia w watach, czas pracy w godzinach i cenę jednej kilowatogodziny w PLN/kWh. Samodzielnie ułóż wzory na zużytą energię w kWh i jej koszt w PLN. Wypisz energię z trzema miejscami po przecinku, a koszt z dwoma. Dla 1500 W, 2 h i 1.20 PLN/kWh wyniki to 3.000 kWh i 3.60 PLN. Sprawdź zerowy czas pracy.\n\n\nZadanie 14. Godziny, minuty i sekundy\nWczytaj całkowitą liczbę sekund z zakresu od 0 do 1000000. Za pomocą dzielenia całkowitego i reszty z dzielenia oblicz liczbę pełnych godzin oraz pozostałych minut i sekund. Minuty i sekundy mają mieścić się w zakresie 0–59; godziny mogą przekroczyć 23. Dla 3665 wypisz 1 h 1 min 5 s. Sprawdź również 0, 59, 60, 3599 oraz 3600. Nie trzeba dopełniać liczb zerami.\n\n\nZadanie 15. Zamiana wartości zmiennych\nWczytaj dwie liczby całkowite. Wypisz ich wartości, zamień zawartości zmiennych z użyciem trzeciej zmiennej pomocniczej i ponownie wypisz wartości. Nie używaj std::swap ani ponownego wczytywania danych. Dla wartości 7 i -3 po zamianie pierwsza zmienna ma zawierać -3, a druga 7. Sprawdź także dwie jednakowe wartości. W debuggerze prześledź każdą instrukcję przypisania i wyjaśnij, po co potrzebna jest zmienna pomocnicza.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#dokumentacja-i-sprawdzenie-pracy",
+    "href": "laboratoria/01_projekt.html#dokumentacja-i-sprawdzenie-pracy",
+    "title": "Laboratorium 1",
+    "section": "Dokumentacja i sprawdzenie pracy",
+    "text": "Dokumentacja i sprawdzenie pracy\n\nZachowaj źródła .cpp oznaczone numerem zadania.\nDla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.\nOpisz wykryty błąd albo jeden sprawdzony przypadek graniczny.\nPrzygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.\n\nZgłoszenie zadania na stronie nie przesyła kodu źródłowego i nie oznacza zaliczenia. Zatwierdzenie nadaje prowadzący po sprawdzeniu programu. Na koniec kliknij Zakończ laboratorium w formularzu postępów; zapisane zgłoszenia i zatwierdzenia pozostają zachowane.\nSposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów .vs i Debug ani plików .exe.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "laboratoria/01_projekt.html#przygotowanie-do-następnej-wejściówki",
+    "href": "laboratoria/01_projekt.html#przygotowanie-do-następnej-wejściówki",
+    "title": "Laboratorium 1",
+    "section": "Przygotowanie do następnej wejściówki",
+    "text": "Przygotowanie do następnej wejściówki\n\nPowtórz materiał bieżącego laboratorium\n\nDeklaracja i inicjalizacja; zastosowanie int, double, char, bool i string.\nWyniki / i % dla liczb całkowitych oraz dzielenie zmiennoprzecinkowe.\nWejście i wyjście, średnik, std::, fixed i setprecision.\n\n\n\nPrzeczytaj przed laboratorium 2\nW instrukcji 2 przeczytaj objaśnienie pierwszego zadania: poznaj ==, !=, &lt;, &lt;=, &gt;, &gt;=, &&, || i !. Zapoznaj się również z przeznaczeniem switch; jego samodzielne stosowanie będzie ćwiczone na zajęciach.\nPrzygotowanie do nowych zadań: umieć wskazać gałąź prostego if/else. Przeanalizuj fragment: if (temperature &gt; 25) ... else ... dla temperatur 25 i 26. Dla 25 wykona się else, dla 26 pierwszy blok. Nie jest wymagane napisanie całego kalkulatora przed zajęciami.\nNastępna wejściówka: 4 pytania wyboru z laboratorium 1, po 1 punkcie, oraz krótki program z tego samego materiału do ręcznego sprawdzenia. Pytania wyboru dotyczą wypisywania danych, reszty z dzielenia, dzielenia całkowitego i uzupełniania kodu. Nowe konstrukcje warunkowe nie są w tej wejściówce oceniane.",
+    "crumbs": [
+      "Instrukcje laboratoryjne",
+      "Laboratorium 1"
+    ]
+  },
+  {
+    "objectID": "scenariusze.html",
+    "href": "scenariusze.html",
+    "title": "Organizacja pracy laboratoryjnej",
+    "section": "",
+    "text": "Przed zajęciami przeczytaj wskazany zakres przygotowania na końcu poprzedniej instrukcji.\nOd laboratorium 2 rozwiąż wejściówkę samodzielnie, zgodnie z zakresem podanym w instrukcji. Przed laboratorium 2 są to cztery pytania wyboru z poprzednich zajęć, po jednym punkcie, oraz krótki program do ręcznego sprawdzenia.\nPrzeczytaj objaśnienia i uruchom pełny program pokazowy w osobnym projekcie.\nWykonuj numerowane zadania, zapisując źródła oraz próby.\nNa końcu sprawdź przygotowanie wymagane do kolejnego laboratorium.",
+    "crumbs": [
+      "Organizacja pracy laboratoryjnej"
+    ]
+  },
+  {
+    "objectID": "scenariusze.html#jak-korzystać-z-instrukcji",
+    "href": "scenariusze.html#jak-korzystać-z-instrukcji",
+    "title": "Organizacja pracy laboratoryjnej",
+    "section": "",
+    "text": "Przed zajęciami przeczytaj wskazany zakres przygotowania na końcu poprzedniej instrukcji.\nOd laboratorium 2 rozwiąż wejściówkę samodzielnie, zgodnie z zakresem podanym w instrukcji. Przed laboratorium 2 są to cztery pytania wyboru z poprzednich zajęć, po jednym punkcie, oraz krótki program do ręcznego sprawdzenia.\nPrzeczytaj objaśnienia i uruchom pełny program pokazowy w osobnym projekcie.\nWykonuj numerowane zadania, zapisując źródła oraz próby.\nNa końcu sprawdź przygotowanie wymagane do kolejnego laboratorium.",
+    "crumbs": [
+      "Organizacja pracy laboratoryjnej"
+    ]
+  },
+  {
+    "objectID": "scenariusze.html#praca-nad-zadaniami",
+    "href": "scenariusze.html#praca-nad-zadaniami",
+    "title": "Organizacja pracy laboratoryjnej",
+    "section": "Praca nad zadaniami",
+    "text": "Praca nad zadaniami\nZadania można wykonywać w parach ze zmianą osoby przy klawiaturze. Każda osoba powinna umieć samodzielnie wyjaśnić kod i przewidzieć jego wynik. Wejściówka jest indywidualna.\nPierwsza instrukcja obejmuje piętnaście ćwiczeń: środowisko, zmienne, naprawę błędów, obliczenia, formatowanie i samodzielne programy utrwalające. Rozpoczęcie zajęć i zgłoszenia zadań zapisujesz w formularzu instrukcji; wykonanie zadania zatwierdza prowadzący po sprawdzeniu programu. Kolejne instrukcje rozwijają warunki, pętle, funkcje, wektor oraz własne klasy. Przykłady pomiarów i urządzeń korzystają z danych ćwiczeniowych.\nKażdy niezależny program zawierający main wymaga osobnego projektu. Nie należy dodawać wszystkich plików pokazowych do jednej aplikacji. Rozwinięcia tego samego programu można zapisywać jako kolejne wersje.",
+    "crumbs": [
+      "Organizacja pracy laboratoryjnej"
+    ]
+  },
+  {
+    "objectID": "scenariusze.html#co-zachować-do-rozliczenia",
+    "href": "scenariusze.html#co-zachować-do-rozliczenia",
+    "title": "Organizacja pracy laboratoryjnej",
+    "section": "Co zachować do rozliczenia",
+    "text": "Co zachować do rozliczenia\n\nPliki źródłowe .cpp z numerem zadania.\nDane wejściowe i wyniki przynajmniej wymaganych prób.\nKrótkie wyjaśnienie wykrytego błędu lub sprawdzonego przypadku granicznego.\n\nFormę przekazania pracy i zasady zaliczenia podaje prowadzący. Formularz wejściówki zapisuje wynik odpowiedzi, a nie pliki z rozwiązaniami.",
+    "crumbs": [
+      "Organizacja pracy laboratoryjnej"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Wprowadzenie do programowania",
+    "section": "",
+    "text": "Każda instrukcja zawiera cel ćwiczenia, wprowadzenie teoretyczne z przykładami, zadania do realizacji oraz przygotowanie do kolejnej wejściówki. Pracujemy w Visual Studio Community, w projektach Console App i plikach .cpp.",
+    "crumbs": [
+      "Wprowadzenie do programowania"
+    ]
+  },
+  {
+    "objectID": "index.html#program-laboratoriów",
+    "href": "index.html#program-laboratoriów",
+    "title": "Wprowadzenie do programowania",
+    "section": "Program laboratoriów",
+    "text": "Program laboratoriów\nPierwsze pięć tematów odpowiada zakresowi karty Wprowadzenie do programowania (WELTXWSJ-WDP). Dwa kolejne rozwijają tworzenie i używanie prostych klas.\n\n\n\nInstrukcja\nGłówne zagadnienia\n\n\n\n\n1. Algorytmy i programy w C++\nUtworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.\n\n\n2. Operacje warunkowe\nZapisanie reguł wyboru oraz sprawdzenie danych przed wykonaniem działania.\n\n\n3. Instrukcje cykliczne i tablice\nPrzetwarzanie serii danych z wykorzystaniem pętli i tablic.\n\n\n\n\nKolejne instrukcje będą udostępniane w miarę postępu zajęć.",
+    "crumbs": [
+      "Wprowadzenie do programowania"
+    ]
+  },
+  {
+    "objectID": "index.html#przed-pierwszym-laboratorium",
+    "href": "index.html#przed-pierwszym-laboratorium",
+    "title": "Wprowadzenie do programowania",
+    "section": "Przed pierwszym laboratorium",
+    "text": "Przed pierwszym laboratorium\n\nPrzygotuj Visual Studio i uruchom projekt konsolowy.\nOtwórz instrukcję laboratorium 1.\nUtwórz katalog na źródła i wyniki prób z kolejnych ćwiczeń.\n\n\nProgram pokazowy do laboratorium 1 — pobierz plik .cpp.",
+    "crumbs": [
+      "Wprowadzenie do programowania"
+    ]
+  },
+  {
+    "objectID": "index.html#wejściówki-i-przygotowanie",
+    "href": "index.html#wejściówki-i-przygotowanie",
+    "title": "Wprowadzenie do programowania",
+    "section": "Wejściówki i przygotowanie",
+    "text": "Wejściówki i przygotowanie\nOd laboratorium 2 na początku instrukcji znajduje się wejściówka. Przed laboratoriami 2 i 3 obejmuje cztery pytania wyboru z poznanego materiału oraz krótki program do samodzielnego napisania. Każde pytanie wyboru jest warte 1 punkt; program sprawdza prowadzący osobno. Zakres kolejnych wejściówek jest zapowiadany w instrukcjach.\nNa końcu każdej instrukcji wskazano, co powtórzyć i co przeczytać przed następną wejściówką. Wynik testu pojawia się po potwierdzeniu zapisu przez serwer. Zadania programistyczne są rozliczane osobno.\nOrganizacja pracy i dokumentowanie wyników.\nTerminy, wymiar poszczególnych spotkań oraz formę i termin zaliczenia podaje prowadzący dla danej grupy.",
+    "crumbs": [
+      "Wprowadzenie do programowania"
+    ]
+  },
+  {
+    "objectID": "podstawy_programowania/visual-studio-community.html",
+    "href": "podstawy_programowania/visual-studio-community.html",
+    "title": "Visual Studio — projekt konsolowy C++",
+    "section": "",
+    "text": "Używamy Visual Studio Community na Windows, projektu Console App / Aplikacja konsolowa (C++) i plików .cpp. IDE (Integrated Development Environment, zintegrowane środowisko programistyczne) łączy edytor, narzędzia budowania i debugger. Instalację warto wykonać przed pierwszym spotkaniem.",
+    "crumbs": [
+      "Visual Studio — projekt konsolowy C++"
+    ]
+  },
+  {
+    "objectID": "podstawy_programowania/visual-studio-community.html#co-przygotować",
+    "href": "podstawy_programowania/visual-studio-community.html#co-przygotować",
+    "title": "Visual Studio — projekt konsolowy C++",
+    "section": "",
+    "text": "Używamy Visual Studio Community na Windows, projektu Console App / Aplikacja konsolowa (C++) i plików .cpp. IDE (Integrated Development Environment, zintegrowane środowisko programistyczne) łączy edytor, narzędzia budowania i debugger. Instalację warto wykonać przed pierwszym spotkaniem.",
+    "crumbs": [
+      "Visual Studio — projekt konsolowy C++"
+    ]
+  },
+  {
+    "objectID": "podstawy_programowania/visual-studio-community.html#instalacja",
+    "href": "podstawy_programowania/visual-studio-community.html#instalacja",
+    "title": "Visual Studio — projekt konsolowy C++",
+    "section": "1. Instalacja",
+    "text": "1. Instalacja\n\nPobierz Visual Studio Community z oficjalnej strony Microsoft.\nW instalatorze zaznacz Desktop development with C++ / Programowanie aplikacji klasycznych w C++.\nPozostaw zalecane składniki kompilatora MSVC oraz Windows SDK.\nUruchom Visual Studio. Przy istniejącej instalacji składniki można dodać przez Visual Studio Installer → Modify / Modyfikuj.\n\nVisual Studio Code jest innym programem; ta instrukcja dotyczy pełnego Visual Studio Community. Nie trzeba instalować dodatkowych bibliotek ani narzędzi konsolowych. Na komputerach pracowni instalację składników wymagających uprawnień wykonuje administrator.",
+    "crumbs": [
+      "Visual Studio — projekt konsolowy C++"
+    ]
+  },
+  {
+    "objectID": "podstawy_programowania/visual-studio-community.html#utworzenie-aplikacji-konsolowej",
+    "href": "podstawy_programowania/visual-studio-community.html#utworzenie-aplikacji-konsolowej",
+    "title": "Visual Studio — projekt konsolowy C++",
+    "section": "2. Utworzenie aplikacji konsolowej",
+    "text": "2. Utworzenie aplikacji konsolowej\n\nCreate a new project / Utwórz nowy projekt.\nWyszukaj Console App / Aplikacja konsolowa. Wybierz wariant C++, Windows, Console — nie C#.\nNadaj projektowi nazwę, np. WDP_Lab01, i wybierz katalog, w którym możesz zapisywać pliki.\nOtwórz wygenerowany plik .cpp. Zastąp jego zawartość przykładem poniżej; nie dopisuj drugiej funkcji main.\nPozostaw konfigurację Debug i platformę x64.\n\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Hello, world!\\n\";\n    return 0;\n}\nPusty projekt C++ też jest poprawny, ale nie tworzy automatycznie kodu startowego. W takim projekcie wybierz prawym przyciskiem projekt → Add / Dodaj → New Item / Nowy element → C++ File i dodaj main.cpp. Sam plik otwarty w edytorze musi należeć do projektu.",
+    "crumbs": [
+      "Visual Studio — projekt konsolowy C++"
+    ]
+  },
+  {
+    "objectID": "podstawy_programowania/visual-studio-community.html#ustawienia-języka",
+    "href": "podstawy_programowania/visual-studio-community.html#ustawienia-języka",
+    "title": "Visual Studio — projekt konsolowy C++",
+    "section": "3. Ustawienia języka",
+    "text": "3. Ustawienia języka\nKliknij prawym przyciskiem projekt w Solution Explorer / Eksploratorze rozwiązań → Properties / Właściwości. Wybierz All Configurations / Wszystkie konfiguracje, aby ustawienie nie dotyczyło tylko jednej wersji.\n\n\n\n\n\n\n\nUstawienie\nWartość\n\n\n\n\nC/C++ → Language → C++ Language Standard\nISO C++17 (/std:c++17)\n\n\nC/C++ → Advanced → Compile As\nDefault; dla .cpp oznacza C++, albo Compile as C++ (/TP)\n\n\nConfiguration Properties → General → Configuration Type\nApplication (.exe)\n\n\nLinker → System → SubSystem\nConsole (/SUBSYSTEM:CONSOLE)\n\n\n\nJeśli wcześniej ustawiono Compile as C (/TC), zmień je: nowa wersja kursu używa C++. Nie ustawiaj C17 — to standard innego języka. Dla tych zajęć nie potrzebujemy ręcznej konfiguracji prekompilowanych nagłówków. W razie komunikatu o pch.h wybierz C/C++ → Precompiled Headers → Not Using Precompiled Headers.",
+    "crumbs": [
+      "Visual Studio — projekt konsolowy C++"
+    ]
+  },
+  {
+    "objectID": "podstawy_programowania/visual-studio-community.html#zapis-budowanie-i-uruchomienie",
+    "href": "podstawy_programowania/visual-studio-community.html#zapis-budowanie-i-uruchomienie",
+    "title": "Visual Studio — projekt konsolowy C++",
+    "section": "4. Zapis, budowanie i uruchomienie",
+    "text": "4. Zapis, budowanie i uruchomienie\n\nCtrl+S zapisuje plik źródłowy.\nBuild → Build Solution / Kompiluj → Kompiluj rozwiązanie, zwykle Ctrl+Shift+B, buduje program.\nW View → Output / Widok → Dane wyjściowe, źródło Build / Kompilacja, sprawdź wynik.\nOczekiwane jest zero niepowodzeń oraz ścieżka zakończona nazwą projektu i .exe.\nDebug → Start Without Debugging / Uruchom bez debugowania, zwykle Ctrl+F5, uruchamia program.\n\nmain.cpp → kompilacja → main.obj → konsolidacja → WDP_Lab01.exe\nProgram .exe powstaje z całego projektu, dlatego domyślnie ma nazwę projektu, nie pliku main.cpp. Wybranie polecenia Compile dla samego pliku może utworzyć tylko .obj. Folder wyjściowy często nazywa się x64/Debug; dokładną ścieżkę pokazuje okno Output.\n\n\n\n\n\n\n\nObjaw\nCo sprawdzić\n\n\n\n\n„Kompilacja ukończona”, ale nic się nie uruchamia\nBudowanie i uruchomienie to osobne działania; użyj Ctrl+F5\n\n\nBrak pliku .exe\nZbuduj całe rozwiązanie, sprawdź błędy i typ projektu Application\n\n\nNie ma przycisku uruchomienia właściwego projektu\nPrawy przycisk projektu → Set as Startup Project\n\n\nUruchamia się stary komunikat\nZapisz i zbuduj; przy błędzie nie uruchamiaj ostatniej poprawnej wersji\n\n\nBłąd o wielu definicjach main\nJeden niezależny program powinien mieć jeden projekt i jedną funkcję main\n\n\nProgram czeka po wyświetleniu pytania\nWpisz wymagane dane i zatwierdź Enter\n\n\n\nsystem(\"pause\") nie naprawia braku .exe. Na tych zajęciach do uruchamiania wystarcza Ctrl+F5.",
+    "crumbs": [
+      "Visual Studio — projekt konsolowy C++"
+    ]
+  },
+  {
+    "objectID": "podstawy_programowania/visual-studio-community.html#krótki-pokaz-debuggera",
+    "href": "podstawy_programowania/visual-studio-community.html#krótki-pokaz-debuggera",
+    "title": "Visual Studio — projekt konsolowy C++",
+    "section": "5. Krótki pokaz debuggera",
+    "text": "5. Krótki pokaz debuggera\nDebugger pozwala obejrzeć program krok po kroku. W osobnym projekcie lub po zastąpieniu wcześniejszego kodu:\n#include &lt;iostream&gt;\n\nint main()\n{\n    int available = 20;\n    int issued = 7;\n    int remaining = available + issued;\n    std::cout &lt;&lt; remaining &lt;&lt; '\\n';\n    return 0;\n}\nW kodzie jest celowy błąd obliczenia: dodawanie zamiast odejmowania.\n\nKliknij linię obliczającą remaining i naciśnij F9, aby ustawić punkt zatrzymania (breakpoint).\nUruchom debugowanie F5. Żółta strzałka wskazuje instrukcję, która dopiero zostanie wykonana.\nObejrzyj available i issued w oknie Locals / Zmienne lokalne.\nF10 wykonuje kolejny krok. Sprawdź wynik 27 i porównaj z oczekiwanym 13.\nZatrzymaj debugowanie Shift+F5, popraw + na -, zbuduj i ponownie uruchom.\n\nBłąd składni może uniemożliwić zbudowanie programu. Błąd obliczenia może dać poprawnie zbudowany program z niewłaściwym wynikiem.",
+    "crumbs": [
+      "Visual Studio — projekt konsolowy C++"
+    ]
+  },
+  {
+    "objectID": "podstawy_programowania/visual-studio-community.html#organizacja-plików",
+    "href": "podstawy_programowania/visual-studio-community.html#organizacja-plików",
+    "title": "Visual Studio — projekt konsolowy C++",
+    "section": "6. Organizacja plików",
+    "text": "6. Organizacja plików\nDla zadań A i B można utworzyć dwa projekty, np. Spotkanie01_A i Spotkanie01_B. Nie dodawaj wszystkich programów pokazowych do jednego projektu, bo każdy zawiera własne main. Na zajęcia wystarczy oddać pliki .cpp oraz wymagane wyniki prób.\nPrzejdź do spotkania 1.",
+    "crumbs": [
+      "Visual Studio — projekt konsolowy C++"
+    ]
+  },
+  {
+    "objectID": "podstawy_programowania/visual-studio-community.html#dokumentacja-środowiska",
+    "href": "podstawy_programowania/visual-studio-community.html#dokumentacja-środowiska",
+    "title": "Visual Studio — projekt konsolowy C++",
+    "section": "Dokumentacja środowiska",
+    "text": "Dokumentacja środowiska\n\nMicrosoft — pierwszy projekt konsolowy C++.\nMicrosoft — budowanie projektów i rozwiązań.\nMicrosoft — wybór kompilacji C albo C++.",
+    "crumbs": [
+      "Visual Studio — projekt konsolowy C++"
+    ]
+  },
+  {
     "objectID": "laboratoria/02_warunki.html",
     "href": "laboratoria/02_warunki.html",
     "title": "Laboratorium 2",
@@ -147,268 +559,10 @@
     "href": "laboratoria/02_warunki.html#przygotowanie-do-następnej-wejściówki",
     "title": "Laboratorium 2",
     "section": "Przygotowanie do następnej wejściówki",
-    "text": "Przygotowanie do następnej wejściówki\n\nPowtórz\n\nPorównania i różnicę między = a ==.\nWybór gałęzi if/else, kolejność else if oraz wartości graniczne.\nOperatory &&, ||, ! i znaczenie nawiasów.\nWybór wartości przez condition ? value_if_true : value_if_false.\nSprawdzanie odczytu, wcześniejsze zakończenie i kontrolę dzielenia przez zero.\nswitch, case, break, default oraz zagnieżdżenie if w switch.\n\n\n\nPrzygotuj się do laboratorium 3\nKolejne zajęcia wprowadzą pętle for, while, do…while oraz indeksowanie tablic. Pętla powtarza blok instrukcji. W poniższym fragmencie zmienna sterująca zaczyna od 1; warunek jest sprawdzany przed każdym wykonaniem bloku, a ++i zwiększa wartość po jego wykonaniu.\nfor (int i = 1; i &lt;= 4; ++i) {\n    std::cout &lt;&lt; i &lt;&lt; '\\n';\n}\nMinimalne przygotowanie: wskaż kolejno wypisywane wartości i liczbę powtórzeń. W tym przykładzie wypisane zostaną 1, 2, 3, 4, więc blok wykona się cztery razy. Nie trzeba jeszcze samodzielnie obliczać średniej z tablicy.\nNastępna wejściówka: 3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu, po 1 punkcie.",
+    "text": "Przygotowanie do następnej wejściówki\n\nPowtórz\n\nPorównania i różnicę między = a ==.\nWybór gałęzi if/else, kolejność else if oraz wartości graniczne.\nOperatory &&, ||, ! i znaczenie nawiasów.\nWybór wartości przez condition ? value_if_true : value_if_false.\nSprawdzanie odczytu, wcześniejsze zakończenie i kontrolę dzielenia przez zero.\nswitch, case, break, default oraz zagnieżdżenie if w switch.\n\n\n\nPrzygotuj się do laboratorium 3\nW instrukcji laboratorium 3 poznasz pętle for, while, do…while oraz indeksowanie tablic. Pętla powtarza blok instrukcji. W poniższym fragmencie zmienna sterująca zaczyna od 1; warunek jest sprawdzany przed każdym wykonaniem bloku, a ++i zwiększa wartość po jego wykonaniu.\nfor (int i = 1; i &lt;= 4; ++i) {\n    std::cout &lt;&lt; i &lt;&lt; '\\n';\n}\nMinimalne przygotowanie: wskaż kolejno wypisywane wartości i liczbę powtórzeń. W tym przykładzie wypisane zostaną 1, 2, 3, 4, więc blok wykona się cztery razy. Nie trzeba jeszcze samodzielnie obliczać średniej z tablicy.\nNastępna wejściówka: 4 pytania wyboru z poznanego materiału, po 1 punkcie, oraz krótki program z warunkami do ręcznego sprawdzenia. Powtórz śledzenie wartości zmiennych, niezależne instrukcje if i łańcuchy if/else, operatory logiczne, switch oraz ?: z dzieleniem całkowitym. Pętle i tablice nie będą jeszcze oceniane.",
     "crumbs": [
       "Instrukcje laboratoryjne",
       "Laboratorium 2"
-    ]
-  },
-  {
-    "objectID": "podstawy_programowania/visual-studio-community.html",
-    "href": "podstawy_programowania/visual-studio-community.html",
-    "title": "Visual Studio — projekt konsolowy C++",
-    "section": "",
-    "text": "Używamy Visual Studio Community na Windows, projektu Console App / Aplikacja konsolowa (C++) i plików .cpp. IDE (Integrated Development Environment, zintegrowane środowisko programistyczne) łączy edytor, narzędzia budowania i debugger. Instalację warto wykonać przed pierwszym spotkaniem.",
-    "crumbs": [
-      "Visual Studio — projekt konsolowy C++"
-    ]
-  },
-  {
-    "objectID": "podstawy_programowania/visual-studio-community.html#co-przygotować",
-    "href": "podstawy_programowania/visual-studio-community.html#co-przygotować",
-    "title": "Visual Studio — projekt konsolowy C++",
-    "section": "",
-    "text": "Używamy Visual Studio Community na Windows, projektu Console App / Aplikacja konsolowa (C++) i plików .cpp. IDE (Integrated Development Environment, zintegrowane środowisko programistyczne) łączy edytor, narzędzia budowania i debugger. Instalację warto wykonać przed pierwszym spotkaniem.",
-    "crumbs": [
-      "Visual Studio — projekt konsolowy C++"
-    ]
-  },
-  {
-    "objectID": "podstawy_programowania/visual-studio-community.html#instalacja",
-    "href": "podstawy_programowania/visual-studio-community.html#instalacja",
-    "title": "Visual Studio — projekt konsolowy C++",
-    "section": "1. Instalacja",
-    "text": "1. Instalacja\n\nPobierz Visual Studio Community z oficjalnej strony Microsoft.\nW instalatorze zaznacz Desktop development with C++ / Programowanie aplikacji klasycznych w C++.\nPozostaw zalecane składniki kompilatora MSVC oraz Windows SDK.\nUruchom Visual Studio. Przy istniejącej instalacji składniki można dodać przez Visual Studio Installer → Modify / Modyfikuj.\n\nVisual Studio Code jest innym programem; ta instrukcja dotyczy pełnego Visual Studio Community. Nie trzeba instalować dodatkowych bibliotek ani narzędzi konsolowych. Na komputerach pracowni instalację składników wymagających uprawnień wykonuje administrator.",
-    "crumbs": [
-      "Visual Studio — projekt konsolowy C++"
-    ]
-  },
-  {
-    "objectID": "podstawy_programowania/visual-studio-community.html#utworzenie-aplikacji-konsolowej",
-    "href": "podstawy_programowania/visual-studio-community.html#utworzenie-aplikacji-konsolowej",
-    "title": "Visual Studio — projekt konsolowy C++",
-    "section": "2. Utworzenie aplikacji konsolowej",
-    "text": "2. Utworzenie aplikacji konsolowej\n\nCreate a new project / Utwórz nowy projekt.\nWyszukaj Console App / Aplikacja konsolowa. Wybierz wariant C++, Windows, Console — nie C#.\nNadaj projektowi nazwę, np. WDP_Lab01, i wybierz katalog, w którym możesz zapisywać pliki.\nOtwórz wygenerowany plik .cpp. Zastąp jego zawartość przykładem poniżej; nie dopisuj drugiej funkcji main.\nPozostaw konfigurację Debug i platformę x64.\n\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Hello, world!\\n\";\n    return 0;\n}\nPusty projekt C++ też jest poprawny, ale nie tworzy automatycznie kodu startowego. W takim projekcie wybierz prawym przyciskiem projekt → Add / Dodaj → New Item / Nowy element → C++ File i dodaj main.cpp. Sam plik otwarty w edytorze musi należeć do projektu.",
-    "crumbs": [
-      "Visual Studio — projekt konsolowy C++"
-    ]
-  },
-  {
-    "objectID": "podstawy_programowania/visual-studio-community.html#ustawienia-języka",
-    "href": "podstawy_programowania/visual-studio-community.html#ustawienia-języka",
-    "title": "Visual Studio — projekt konsolowy C++",
-    "section": "3. Ustawienia języka",
-    "text": "3. Ustawienia języka\nKliknij prawym przyciskiem projekt w Solution Explorer / Eksploratorze rozwiązań → Properties / Właściwości. Wybierz All Configurations / Wszystkie konfiguracje, aby ustawienie nie dotyczyło tylko jednej wersji.\n\n\n\n\n\n\n\nUstawienie\nWartość\n\n\n\n\nC/C++ → Language → C++ Language Standard\nISO C++17 (/std:c++17)\n\n\nC/C++ → Advanced → Compile As\nDefault; dla .cpp oznacza C++, albo Compile as C++ (/TP)\n\n\nConfiguration Properties → General → Configuration Type\nApplication (.exe)\n\n\nLinker → System → SubSystem\nConsole (/SUBSYSTEM:CONSOLE)\n\n\n\nJeśli wcześniej ustawiono Compile as C (/TC), zmień je: nowa wersja kursu używa C++. Nie ustawiaj C17 — to standard innego języka. Dla tych zajęć nie potrzebujemy ręcznej konfiguracji prekompilowanych nagłówków. W razie komunikatu o pch.h wybierz C/C++ → Precompiled Headers → Not Using Precompiled Headers.",
-    "crumbs": [
-      "Visual Studio — projekt konsolowy C++"
-    ]
-  },
-  {
-    "objectID": "podstawy_programowania/visual-studio-community.html#zapis-budowanie-i-uruchomienie",
-    "href": "podstawy_programowania/visual-studio-community.html#zapis-budowanie-i-uruchomienie",
-    "title": "Visual Studio — projekt konsolowy C++",
-    "section": "4. Zapis, budowanie i uruchomienie",
-    "text": "4. Zapis, budowanie i uruchomienie\n\nCtrl+S zapisuje plik źródłowy.\nBuild → Build Solution / Kompiluj → Kompiluj rozwiązanie, zwykle Ctrl+Shift+B, buduje program.\nW View → Output / Widok → Dane wyjściowe, źródło Build / Kompilacja, sprawdź wynik.\nOczekiwane jest zero niepowodzeń oraz ścieżka zakończona nazwą projektu i .exe.\nDebug → Start Without Debugging / Uruchom bez debugowania, zwykle Ctrl+F5, uruchamia program.\n\nmain.cpp → kompilacja → main.obj → konsolidacja → WDP_Lab01.exe\nProgram .exe powstaje z całego projektu, dlatego domyślnie ma nazwę projektu, nie pliku main.cpp. Wybranie polecenia Compile dla samego pliku może utworzyć tylko .obj. Folder wyjściowy często nazywa się x64/Debug; dokładną ścieżkę pokazuje okno Output.\n\n\n\n\n\n\n\nObjaw\nCo sprawdzić\n\n\n\n\n„Kompilacja ukończona”, ale nic się nie uruchamia\nBudowanie i uruchomienie to osobne działania; użyj Ctrl+F5\n\n\nBrak pliku .exe\nZbuduj całe rozwiązanie, sprawdź błędy i typ projektu Application\n\n\nNie ma przycisku uruchomienia właściwego projektu\nPrawy przycisk projektu → Set as Startup Project\n\n\nUruchamia się stary komunikat\nZapisz i zbuduj; przy błędzie nie uruchamiaj ostatniej poprawnej wersji\n\n\nBłąd o wielu definicjach main\nJeden niezależny program powinien mieć jeden projekt i jedną funkcję main\n\n\nProgram czeka po wyświetleniu pytania\nWpisz wymagane dane i zatwierdź Enter\n\n\n\nsystem(\"pause\") nie naprawia braku .exe. Na tych zajęciach do uruchamiania wystarcza Ctrl+F5.",
-    "crumbs": [
-      "Visual Studio — projekt konsolowy C++"
-    ]
-  },
-  {
-    "objectID": "podstawy_programowania/visual-studio-community.html#krótki-pokaz-debuggera",
-    "href": "podstawy_programowania/visual-studio-community.html#krótki-pokaz-debuggera",
-    "title": "Visual Studio — projekt konsolowy C++",
-    "section": "5. Krótki pokaz debuggera",
-    "text": "5. Krótki pokaz debuggera\nDebugger pozwala obejrzeć program krok po kroku. W osobnym projekcie lub po zastąpieniu wcześniejszego kodu:\n#include &lt;iostream&gt;\n\nint main()\n{\n    int available = 20;\n    int issued = 7;\n    int remaining = available + issued;\n    std::cout &lt;&lt; remaining &lt;&lt; '\\n';\n    return 0;\n}\nW kodzie jest celowy błąd obliczenia: dodawanie zamiast odejmowania.\n\nKliknij linię obliczającą remaining i naciśnij F9, aby ustawić punkt zatrzymania (breakpoint).\nUruchom debugowanie F5. Żółta strzałka wskazuje instrukcję, która dopiero zostanie wykonana.\nObejrzyj available i issued w oknie Locals / Zmienne lokalne.\nF10 wykonuje kolejny krok. Sprawdź wynik 27 i porównaj z oczekiwanym 13.\nZatrzymaj debugowanie Shift+F5, popraw + na -, zbuduj i ponownie uruchom.\n\nBłąd składni może uniemożliwić zbudowanie programu. Błąd obliczenia może dać poprawnie zbudowany program z niewłaściwym wynikiem.",
-    "crumbs": [
-      "Visual Studio — projekt konsolowy C++"
-    ]
-  },
-  {
-    "objectID": "podstawy_programowania/visual-studio-community.html#organizacja-plików",
-    "href": "podstawy_programowania/visual-studio-community.html#organizacja-plików",
-    "title": "Visual Studio — projekt konsolowy C++",
-    "section": "6. Organizacja plików",
-    "text": "6. Organizacja plików\nDla zadań A i B można utworzyć dwa projekty, np. Spotkanie01_A i Spotkanie01_B. Nie dodawaj wszystkich programów pokazowych do jednego projektu, bo każdy zawiera własne main. Na zajęcia wystarczy oddać pliki .cpp oraz wymagane wyniki prób.\nPrzejdź do spotkania 1.",
-    "crumbs": [
-      "Visual Studio — projekt konsolowy C++"
-    ]
-  },
-  {
-    "objectID": "podstawy_programowania/visual-studio-community.html#dokumentacja-środowiska",
-    "href": "podstawy_programowania/visual-studio-community.html#dokumentacja-środowiska",
-    "title": "Visual Studio — projekt konsolowy C++",
-    "section": "Dokumentacja środowiska",
-    "text": "Dokumentacja środowiska\n\nMicrosoft — pierwszy projekt konsolowy C++.\nMicrosoft — budowanie projektów i rozwiązań.\nMicrosoft — wybór kompilacji C albo C++.",
-    "crumbs": [
-      "Visual Studio — projekt konsolowy C++"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Wprowadzenie do programowania",
-    "section": "",
-    "text": "Każda instrukcja zawiera cel ćwiczenia, wprowadzenie teoretyczne z przykładami, zadania do realizacji oraz przygotowanie do kolejnej wejściówki. Pracujemy w Visual Studio Community, w projektach Console App i plikach .cpp.",
-    "crumbs": [
-      "Wprowadzenie do programowania"
-    ]
-  },
-  {
-    "objectID": "index.html#program-laboratoriów",
-    "href": "index.html#program-laboratoriów",
-    "title": "Wprowadzenie do programowania",
-    "section": "Program laboratoriów",
-    "text": "Program laboratoriów\nPierwsze pięć tematów odpowiada zakresowi karty Wprowadzenie do programowania (WELTXWSJ-WDP). Dwa kolejne rozwijają tworzenie i używanie prostych klas.\n\n\n\nInstrukcja\nGłówne zagadnienia\n\n\n\n\n1. Algorytmy i programy w C++\nUtworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.\n\n\n2. Operacje warunkowe\nZapisanie reguł wyboru oraz sprawdzenie danych przed wykonaniem działania.\n\n\n\n\nKolejne instrukcje będą udostępniane w miarę postępu zajęć.",
-    "crumbs": [
-      "Wprowadzenie do programowania"
-    ]
-  },
-  {
-    "objectID": "index.html#przed-pierwszym-laboratorium",
-    "href": "index.html#przed-pierwszym-laboratorium",
-    "title": "Wprowadzenie do programowania",
-    "section": "Przed pierwszym laboratorium",
-    "text": "Przed pierwszym laboratorium\n\nPrzygotuj Visual Studio i uruchom projekt konsolowy.\nOtwórz instrukcję laboratorium 1.\nUtwórz katalog na źródła i wyniki prób z kolejnych ćwiczeń.\n\n\nProgram pokazowy do laboratorium 1 — pobierz plik .cpp.",
-    "crumbs": [
-      "Wprowadzenie do programowania"
-    ]
-  },
-  {
-    "objectID": "index.html#wejściówki-i-przygotowanie",
-    "href": "index.html#wejściówki-i-przygotowanie",
-    "title": "Wprowadzenie do programowania",
-    "section": "Wejściówki i przygotowanie",
-    "text": "Wejściówki i przygotowanie\nOd laboratorium 2 na początku instrukcji znajduje się wejściówka. Przed laboratorium 2 obejmuje cztery pytania wyboru z materiału laboratorium 1 oraz krótki program do samodzielnego napisania. Każde pytanie wyboru jest warte 1 punkt; program sprawdza prowadzący osobno. Zakres kolejnych wejściówek jest zapowiadany w instrukcjach.\nNa końcu każdej instrukcji wskazano, co powtórzyć i co przeczytać przed następną wejściówką. Wynik testu pojawia się po potwierdzeniu zapisu przez serwer. Zadania programistyczne są rozliczane osobno.\nOrganizacja pracy i dokumentowanie wyników.\nTerminy, wymiar poszczególnych spotkań oraz formę i termin zaliczenia podaje prowadzący dla danej grupy.",
-    "crumbs": [
-      "Wprowadzenie do programowania"
-    ]
-  },
-  {
-    "objectID": "scenariusze.html",
-    "href": "scenariusze.html",
-    "title": "Organizacja pracy laboratoryjnej",
-    "section": "",
-    "text": "Przed zajęciami przeczytaj wskazany zakres przygotowania na końcu poprzedniej instrukcji.\nOd laboratorium 2 rozwiąż wejściówkę samodzielnie, zgodnie z zakresem podanym w instrukcji. Przed laboratorium 2 są to cztery pytania wyboru z poprzednich zajęć, po jednym punkcie, oraz krótki program do ręcznego sprawdzenia.\nPrzeczytaj objaśnienia i uruchom pełny program pokazowy w osobnym projekcie.\nWykonuj numerowane zadania, zapisując źródła oraz próby.\nNa końcu sprawdź przygotowanie wymagane do kolejnego laboratorium.",
-    "crumbs": [
-      "Organizacja pracy laboratoryjnej"
-    ]
-  },
-  {
-    "objectID": "scenariusze.html#jak-korzystać-z-instrukcji",
-    "href": "scenariusze.html#jak-korzystać-z-instrukcji",
-    "title": "Organizacja pracy laboratoryjnej",
-    "section": "",
-    "text": "Przed zajęciami przeczytaj wskazany zakres przygotowania na końcu poprzedniej instrukcji.\nOd laboratorium 2 rozwiąż wejściówkę samodzielnie, zgodnie z zakresem podanym w instrukcji. Przed laboratorium 2 są to cztery pytania wyboru z poprzednich zajęć, po jednym punkcie, oraz krótki program do ręcznego sprawdzenia.\nPrzeczytaj objaśnienia i uruchom pełny program pokazowy w osobnym projekcie.\nWykonuj numerowane zadania, zapisując źródła oraz próby.\nNa końcu sprawdź przygotowanie wymagane do kolejnego laboratorium.",
-    "crumbs": [
-      "Organizacja pracy laboratoryjnej"
-    ]
-  },
-  {
-    "objectID": "scenariusze.html#praca-nad-zadaniami",
-    "href": "scenariusze.html#praca-nad-zadaniami",
-    "title": "Organizacja pracy laboratoryjnej",
-    "section": "Praca nad zadaniami",
-    "text": "Praca nad zadaniami\nZadania można wykonywać w parach ze zmianą osoby przy klawiaturze. Każda osoba powinna umieć samodzielnie wyjaśnić kod i przewidzieć jego wynik. Wejściówka jest indywidualna.\nPierwsza instrukcja obejmuje piętnaście ćwiczeń: środowisko, zmienne, naprawę błędów, obliczenia, formatowanie i samodzielne programy utrwalające. Rozpoczęcie zajęć i zgłoszenia zadań zapisujesz w formularzu instrukcji; wykonanie zadania zatwierdza prowadzący po sprawdzeniu programu. Kolejne instrukcje rozwijają warunki, pętle, funkcje, wektor oraz własne klasy. Przykłady pomiarów i urządzeń korzystają z danych ćwiczeniowych.\nKażdy niezależny program zawierający main wymaga osobnego projektu. Nie należy dodawać wszystkich plików pokazowych do jednej aplikacji. Rozwinięcia tego samego programu można zapisywać jako kolejne wersje.",
-    "crumbs": [
-      "Organizacja pracy laboratoryjnej"
-    ]
-  },
-  {
-    "objectID": "scenariusze.html#co-zachować-do-rozliczenia",
-    "href": "scenariusze.html#co-zachować-do-rozliczenia",
-    "title": "Organizacja pracy laboratoryjnej",
-    "section": "Co zachować do rozliczenia",
-    "text": "Co zachować do rozliczenia\n\nPliki źródłowe .cpp z numerem zadania.\nDane wejściowe i wyniki przynajmniej wymaganych prób.\nKrótkie wyjaśnienie wykrytego błędu lub sprawdzonego przypadku granicznego.\n\nFormę przekazania pracy i zasady zaliczenia podaje prowadzący. Formularz wejściówki zapisuje wynik odpowiedzi, a nie pliki z rozwiązaniami.",
-    "crumbs": [
-      "Organizacja pracy laboratoryjnej"
-    ]
-  },
-  {
-    "objectID": "laboratoria/01_projekt.html",
-    "href": "laboratoria/01_projekt.html",
-    "title": "Laboratorium 1",
-    "section": "",
-    "text": "Wprowadzenie do programowania · C++ · instrukcja laboratoryjna\nCel ćwiczenia: Utworzenie projektu, zbudowanie programu, wczytanie danych i wykonanie obliczeń.\nŚrodowisko: Visual Studio Community, projekt Console App, standard C++17.",
-    "crumbs": [
-      "Instrukcje laboratoryjne",
-      "Laboratorium 1"
-    ]
-  },
-  {
-    "objectID": "laboratoria/01_projekt.html#rozpocznij-zajęcia",
-    "href": "laboratoria/01_projekt.html#rozpocznij-zajęcia",
-    "title": "Laboratorium 1",
-    "section": "Rozpocznij zajęcia",
-    "text": "Rozpocznij zajęcia\nWpisz swój e-mail i kliknij Rozpocznij zajęcia. Pojawisz się na liście uczestników u prowadzącego. E-mail jest deklarowany — formularz nie loguje do poczty. Po wykonaniu zadania zgłoś je do sprawdzenia. Prowadzący sprawdza program przy stanowisku i zatwierdza zadanie w swoim panelu. Odświeżanie strony nie usuwa zapisanych postępów. Korzystaj z tej samej karty przeglądarki; dostęp jest zapamiętany w niej na czas sesji. Nie udostępniaj tej karty innym osobom.",
-    "crumbs": [
-      "Instrukcje laboratoryjne",
-      "Laboratorium 1"
-    ]
-  },
-  {
-    "objectID": "laboratoria/01_projekt.html#informacje-wprowadzające",
-    "href": "laboratoria/01_projekt.html#informacje-wprowadzające",
-    "title": "Laboratorium 1",
-    "section": "Informacje wprowadzające",
-    "text": "Informacje wprowadzające\nĆwiczenie wprowadza do pracy w Visual Studio Community, w projekcie Console App / Aplikacja konsolowa (C++). Każdy niezależny program należy umieścić w osobnym projekcie. Nazwy zmiennych i komunikaty w przykładach są po angielsku; opisy zadań są po polsku.\nPrzed rozpoczęciem pracy należy sprawdzić możliwość zapisania projektu. Problemy ze sprzętem należy zgłosić prowadzącemu; przy stanowisku nie należy spożywać napojów ani zmieniać konfiguracji pracowni bez zgody.\nNa pierwszym laboratorium nie ma wejściówki. Zasady rozliczania zadań są opisane na stronie organizacyjnej.",
-    "crumbs": [
-      "Instrukcje laboratoryjne",
-      "Laboratorium 1"
-    ]
-  },
-  {
-    "objectID": "laboratoria/01_projekt.html#wprowadzenie-teoretyczne",
-    "href": "laboratoria/01_projekt.html#wprowadzenie-teoretyczne",
-    "title": "Laboratorium 1",
-    "section": "Wprowadzenie teoretyczne",
-    "text": "Wprowadzenie teoretyczne\n\nŚrodowisko IDE i projekt\nIDE (Integrated Development Environment, zintegrowane środowisko programistyczne) łączy edytor kodu, narzędzia budowania i debugger. Projekt określa, które pliki tworzą wspólny program. Rozwiązanie (solution) może zawierać kilka projektów.\n\nUtwórz Console App dla języka C++ i otwórz wygenerowany plik .cpp.\nW tym pliku umieszczaj kod programu. Jeśli plik zawiera już main, zastąp przykład zamiast dopisywać drugą funkcję main.\nZapisz zmiany: Ctrl+S.\nZbuduj całe rozwiązanie: Ctrl+Shift+B. Odczytaj komunikaty w oknie Output / Dane wyjściowe.\nUruchom: Ctrl+F5. Samo zbudowanie programu nie oznacza jego uruchomienia.\n\nPełna instrukcja środowiska: Visual Studio krok po kroku.\n\n\nOd pliku źródłowego do programu\nKod .cpp jest tekstem. Preprocesor przygotowuje go do kompilacji, m.in. obsługując #include. Kompilator sprawdza składnię i znaczenie instrukcji oraz przetwarza kod; etap asemblacji prowadzi do kodu maszynowego w pliku obiektowym. Linker, czyli konsolidator, łączy pliki obiektowe z potrzebnymi bibliotekami w program wykonywalny.\nmain.cpp → przygotowanie i kompilacja → main.obj → konsolidacja → nazwa_projektu.exe\nW Visual Studio plik wynikowy zwykle ma nazwę projektu, a nie pojedynczego pliku źródłowego. Błąd składni może zatrzymać budowanie. Błąd obliczeń może pozostać w programie, który buduje się bez błędów.\n\n\nStruktura programu, nagłówki i main\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Hello, world!\\n\";\n    return 0;\n}\n\n\n\n\n\n\n\nElement\nZnaczenie\n\n\n\n\n#include &lt;iostream&gt;\nUdostępnia deklaracje potrzebne do standardowego wejścia i wyjścia\n\n\nint main()\nGłówna funkcja naszego programu konsolowego\n\n\n{ ... }\nBlok instrukcji\n\n\nstd::cout &lt;&lt; ...\nWypisanie danych na standardowe wyjście\n\n\n;\nZakończenie instrukcji, np. przypisania lub wypisania\n\n\n\\n\nZnak nowej linii wewnątrz napisu\n\n\nreturn 0;\nZakończenie funkcji main z kodem powodzenia\n\n\n\nPrzestrzeń nazw (namespace) grupuje nazwy. Przedrostek std:: wskazuje element biblioteki standardowej. Nagłówki standardowe, takie jak &lt;iostream&gt;, &lt;string&gt; i &lt;iomanip&gt;, zapisujemy w nawiasach ostrych; własne, np. \"calculations.hpp\", zwykle w cudzysłowie.\n\n\nZmienne, stałe i typy danych\nDeklaracja wprowadza nazwę i typ zmiennej. Inicjalizacja nadaje jej wartość początkową. Zmienna int count = 5; przechowuje liczbę całkowitą, którą można zmieniać. Zapis const int groupSize = 4; opisuje stałą, której nie można później przypisać innej wartości.\n\n\n\n\n\n\n\n\nTyp\nZastosowanie\nPrzykład\n\n\n\n\nint\nLiczba całkowita\nint count = 5;\n\n\nfloat\nLiczba zmiennoprzecinkowa\nfloat voltage = 3.3f;\n\n\ndouble\nObliczenia z częścią ułamkową, zwykle dokładniejsze niż float\ndouble length = 2.5;\n\n\nchar\nJeden znak\nchar group = 'A';\n\n\nbool\nWartość logiczna\nbool active = true;\n\n\nstd::string\nNapis, wymaga nagłówka string\nstd::string name = \"Sensor\";\n\n\n\nNazwy nie mogą zaczynać się od cyfry ani być słowami kluczowymi. Wielkość liter ma znaczenie: count i Count to różne nazwy. Pojedyncze apostrofy oznaczają znak, a cudzysłowy napis.\nRozmiar typu można sprawdzić przez sizeof, np. std::cout &lt;&lt; sizeof(int);. Nie należy zakładać identycznego rozmiaru wszystkich typów na każdej platformie. Dokładność liczb zmiennoprzecinkowych dotyczy cyfr znaczących, a nie stałej liczby miejsc po przecinku. Ustawienie formatu wyświetlania nie zwiększa dokładności przechowywanej liczby.\n\n\nOperacje matematyczne i przypisanie\n\n\n\n\n\n\n\n\nOperator\nZnaczenie\nWynik dla int a = 10, b = 3\n\n\n\n\n+, -, *\nDodawanie, odejmowanie, mnożenie\n13, 7, 30\n\n\n/\nDzielenie\n3\n\n\n%\nReszta z dzielenia całkowitego\n1\n\n\n=\nPrzypisanie wartości\na = 5; zmienia a na 5\n\n\n+=, -=\nZmiana o podaną wartość\na += 2; odpowiada a = a + 2;\n\n\n*=, /=, %=\nDziałanie i zapis wyniku w tej samej zmiennej\na *= 2; odpowiada a = a * 2;\n\n\n\nDzielenie dwóch int daje wynik całkowity: 10 / 4 to 2. Zapis 10.0 / 4 daje 2.5. Przypisanie wyniku 10 / 4 do double nie odzyska odrzuconej części ułamkowej. Nawiasy pozwalają ustalić kolejność obliczeń, np. 2 * (length + width).\n\n\nWejście, wyjście i formatowanie\nI/O (Input/Output) oznacza wejście i wyjście. std::cin &gt;&gt; value wczytuje wartość do zmiennej; std::cout &lt;&lt; value ją wyświetla. Odczyt z klawiatury kończymy klawiszem Enter. W tych ćwiczeniach stosujemy strumienie C++, bez równoległego wprowadzania scanf i printf.\nW poniższym pełnym programie &lt;iomanip&gt; udostępnia manipulatory formatu. Połączenie std::fixed i std::setprecision(2) ustawia dwa miejsca po przecinku. Dla wejścia 2.5 program wyświetla Measurement: 2.75.\n#include &lt;iostream&gt;\n#include &lt;iomanip&gt;\n#include &lt;string&gt;\n\nint main()\n{\n    std::string label = \"Measurement\";\n    double value = 0.0;\n    const double correction = 0.25;\n    std::cout &lt;&lt; \"Enter a value: \";\n    std::cin &gt;&gt; value;\n    value += correction;\n    std::cout &lt;&lt; label &lt;&lt; \": \" &lt;&lt; std::fixed &lt;&lt; std::setprecision(2)\n              &lt;&lt; value &lt;&lt; '\\n';\n    return 0;\n}\n\n\nŚledzenie wykonania\nPunkt zatrzymania (breakpoint, F9) pozwala zatrzymać program przed wybraną instrukcją. F5 uruchamia debugger, a F10 wykonuje kolejny krok. W oknie Locals / Zmienne lokalne można porównać wartość przed przypisaniem i po nim. Żółta strzałka wskazuje instrukcję, która dopiero zostanie wykonana.\nPełny program pokazowy — pobierz plik .cpp. Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.",
-    "crumbs": [
-      "Instrukcje laboratoryjne",
-      "Laboratorium 1"
-    ]
-  },
-  {
-    "objectID": "laboratoria/01_projekt.html#zadania-do-realizacji",
-    "href": "laboratoria/01_projekt.html#zadania-do-realizacji",
-    "title": "Laboratorium 1",
-    "section": "Zadania do realizacji",
-    "text": "Zadania do realizacji\nPrzed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.\n\nZadanie 1. Pierwszy projekt\nUtwórz projekt Console App. W pliku main.cpp wyświetl w osobnych liniach: „Wprowadzenie do programowania”, „Laboratorium 1”, „Algorytmy i programy w C++”. Zbuduj cały projekt i uruchom program. Zapisz nazwę powstałego pliku .exe.\n\n\nZadanie 2. Deklaracje i wyświetlanie danych\nZadeklaruj i zainicjalizuj: nazwę ćwiczenia jako std::string, liczbę pomiarów jako int, napięcie jako float, oznaczenie grupy jako char oraz informację o gotowości jako bool. Wypisz wartości wraz z opisami. Sprawdź, jak domyślnie wyświetlają się true i false. Użyj drugiej zmiennej std::string do nazwy urządzenia.\n\n\nZadanie 3. Odczyt błędów kompilacji\nPoniższy program celowo zawiera błędy. Zbuduj go, przeczytaj pierwszy komunikat i popraw kod. Powtarzaj do uzyskania działającego programu. Zapisz, czego brakowało; nie usuwaj instrukcji wypisującej wynik.\n#include &lt;iostream&gt;\n\nint main()\n{\n    int number = 10\n    cout &lt;&lt; \"Value: \" &lt;&lt; number &lt;&lt; '\\n';\n    return 0\n}\nWynik po poprawieniu: Value: 10.\n\n\nZadanie 4. Działania na liczbach double\nWczytaj dwie liczby typu double. Wyświetl sumę, różnicę, iloczyn i iloraz z opisami. Załóż poprawne dane i drugi argument różny od zera. Sprawdź pary 10, 4 i 2.5, 0.5. Dla pierwszej pary iloraz wynosi 2.5.\n\n\nZadanie 5. Dzielenie całkowite i reszta\nWczytaj dwie dodatnie liczby typu int. Wyświetl iloraz całkowity oraz resztę. Dla 23, 4 oczekiwane wartości to 5 i 3; dla 24, 4 — 6 i 0. Wyjaśnij, dlaczego ten program daje inny iloraz niż zadanie 4. Dzielnik musi być różny od zera.\n\n\nZadanie 6. Pole i obwód prostokąta\nWczytaj dodatnie długości boków w metrach jako double. Oblicz pole length * width oraz obwód 2 * (length + width). Wypisz wyniki z jednostkami m2 i m. Dla boków 2.5 i 4 oczekiwane wyniki to 10 m2 i 13 m.\n\n\nZadanie 7. Przeliczanie temperatury\nWczytaj temperaturę w stopniach Celsjusza. Oblicz Fahrenheita według F = C * 9.0 / 5.0 + 32.0 oraz kelwiny według K = C + 273.15. Sprawdź 0 i 100. Dla 0 wyniki to 32 i 273.15. Wyjaśnij, dlaczego podano 9.0 / 5.0, a nie (9 / 5).\n\n\nZadanie 8. Aktualizacja pomiaru\nZacznij od double value = 10.0;. Kolejno dodaj 2.0 przez +=, odejmij 1.0 przez -=, pomnóż przez 3.0 i podziel przez 2.0, używając *= i /=. Po każdej operacji wypisz wartość. Oczekiwany przebieg: 12, 11, 33, 16.5. Następnie wczytaj poprawki i współczynniki z klawiatury; współczynnik dzielenia ma być niezerowy.\n\n\nZadanie 9. Formatowanie wyników\nDla double value = 3.14159265359; wypisz wartość najpierw z domyślnymi ustawieniami, a następnie z std::fixed i precyzją 0, 2 oraz 4. Trzy ostatnie wyniki: 3, 3.14, 3.1416. Sprawdź w debuggerze, czy samo formatowanie zmieniło zawartość zmiennej.",
-    "crumbs": [
-      "Instrukcje laboratoryjne",
-      "Laboratorium 1"
-    ]
-  },
-  {
-    "objectID": "laboratoria/01_projekt.html#dalsze-zadania-samodzielne-programy",
-    "href": "laboratoria/01_projekt.html#dalsze-zadania-samodzielne-programy",
-    "title": "Laboratorium 1",
-    "section": "Dalsze zadania — samodzielne programy",
-    "text": "Dalsze zadania — samodzielne programy\nW zadaniach 10–15 napisz każdy program od początku: samodzielnie dobierz nagłówki, napisz funkcję main, zadeklaruj zmienne i ułóż instrukcje. Nie otrzymujesz szablonu rozwiązania. Stosuj angielskie nazwy zmiennych i komunikaty. Załóż poprawne dane zgodne z poleceniem; nie trzeba jeszcze używać warunków ani pętli. W każdym zadaniu sprawdź podany przykład i własny zestaw danych. Przed uruchomieniem oblicz oczekiwany wynik.\n\nZadanie 10. Średnia z trzech pomiarów\nWczytaj trzy pomiary napięcia w woltach jako liczby typu double. Oblicz sumę i średnią arytmetyczną. Wypisz oba wyniki z opisami i jednostką, z trzema miejscami po przecinku. Dla pomiarów 2.1, 2.4 i 2.7 oczekiwane wyniki to suma 7.200 V i średnia 2.400 V. Sprawdź również trzy identyczne pomiary.\n\n\nZadanie 11. Droga, czas i prędkość\nWczytaj nieujemną drogę w kilometrach oraz dodatni czas przejazdu w minutach. Oblicz średnią prędkość w km/h i m/s. Zadbaj o przeliczenie jednostek i wypisz wyniki z dwoma miejscami po przecinku. Dla 9 km i 30 min oczekiwane wyniki to 18.00 km/h i 5.00 m/s. Sprawdź także drogę równą zero i czas niebędący pełną godziną.\n\n\nZadanie 12. Cena zakupów i rabat\nWczytaj nieujemną cenę jednostkową, dodatnią całkowitą liczbę sztuk oraz rabat w procentach z zakresu od 0 do 100. Oblicz wartość zakupów przed rabatem, kwotę rabatu i kwotę do zapłaty. Wypisz kwoty z dwoma miejscami po przecinku i oznaczeniem PLN. Dla ceny 12.50, liczby sztuk 4 i rabatu 10 wyniki to kolejno 50.00 PLN, 5.00 PLN i 45.00 PLN. Sprawdź też rabat 0% oraz 100%. W tym ćwiczeniu stosujemy double; nie projektujemy systemu księgowego.\n\n\nZadanie 13. Energia i koszt pracy urządzenia\nWczytaj nieujemne wartości: moc urządzenia w watach, czas pracy w godzinach i cenę jednej kilowatogodziny w PLN/kWh. Samodzielnie ułóż wzory na zużytą energię w kWh i jej koszt w PLN. Wypisz energię z trzema miejscami po przecinku, a koszt z dwoma. Dla 1500 W, 2 h i 1.20 PLN/kWh wyniki to 3.000 kWh i 3.60 PLN. Sprawdź zerowy czas pracy.\n\n\nZadanie 14. Godziny, minuty i sekundy\nWczytaj całkowitą liczbę sekund z zakresu od 0 do 1000000. Za pomocą dzielenia całkowitego i reszty z dzielenia oblicz liczbę pełnych godzin oraz pozostałych minut i sekund. Minuty i sekundy mają mieścić się w zakresie 0–59; godziny mogą przekroczyć 23. Dla 3665 wypisz 1 h 1 min 5 s. Sprawdź również 0, 59, 60, 3599 oraz 3600. Nie trzeba dopełniać liczb zerami.\n\n\nZadanie 15. Zamiana wartości zmiennych\nWczytaj dwie liczby całkowite. Wypisz ich wartości, zamień zawartości zmiennych z użyciem trzeciej zmiennej pomocniczej i ponownie wypisz wartości. Nie używaj std::swap ani ponownego wczytywania danych. Dla wartości 7 i -3 po zamianie pierwsza zmienna ma zawierać -3, a druga 7. Sprawdź także dwie jednakowe wartości. W debuggerze prześledź każdą instrukcję przypisania i wyjaśnij, po co potrzebna jest zmienna pomocnicza.",
-    "crumbs": [
-      "Instrukcje laboratoryjne",
-      "Laboratorium 1"
-    ]
-  },
-  {
-    "objectID": "laboratoria/01_projekt.html#dokumentacja-i-sprawdzenie-pracy",
-    "href": "laboratoria/01_projekt.html#dokumentacja-i-sprawdzenie-pracy",
-    "title": "Laboratorium 1",
-    "section": "Dokumentacja i sprawdzenie pracy",
-    "text": "Dokumentacja i sprawdzenie pracy\n\nZachowaj źródła .cpp oznaczone numerem zadania.\nDla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.\nOpisz wykryty błąd albo jeden sprawdzony przypadek graniczny.\nPrzygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.\n\nZgłoszenie zadania na stronie nie przesyła kodu źródłowego i nie oznacza zaliczenia. Zatwierdzenie nadaje prowadzący po sprawdzeniu programu. Na koniec kliknij Zakończ laboratorium w formularzu postępów; zapisane zgłoszenia i zatwierdzenia pozostają zachowane.\nSposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów .vs i Debug ani plików .exe.",
-    "crumbs": [
-      "Instrukcje laboratoryjne",
-      "Laboratorium 1"
-    ]
-  },
-  {
-    "objectID": "laboratoria/01_projekt.html#przygotowanie-do-następnej-wejściówki",
-    "href": "laboratoria/01_projekt.html#przygotowanie-do-następnej-wejściówki",
-    "title": "Laboratorium 1",
-    "section": "Przygotowanie do następnej wejściówki",
-    "text": "Przygotowanie do następnej wejściówki\n\nPowtórz materiał bieżącego laboratorium\n\nDeklaracja i inicjalizacja; zastosowanie int, double, char, bool i string.\nWyniki / i % dla liczb całkowitych oraz dzielenie zmiennoprzecinkowe.\nWejście i wyjście, średnik, std::, fixed i setprecision.\n\n\n\nPrzeczytaj przed laboratorium 2\nW instrukcji 2 przeczytaj objaśnienie pierwszego zadania: poznaj ==, !=, &lt;, &lt;=, &gt;, &gt;=, &&, || i !. Zapoznaj się również z przeznaczeniem switch; jego samodzielne stosowanie będzie ćwiczone na zajęciach.\nPrzygotowanie do nowych zadań: umieć wskazać gałąź prostego if/else. Przeanalizuj fragment: if (temperature &gt; 25) ... else ... dla temperatur 25 i 26. Dla 25 wykona się else, dla 26 pierwszy blok. Nie jest wymagane napisanie całego kalkulatora przed zajęciami.\nNastępna wejściówka: 4 pytania wyboru z laboratorium 1, po 1 punkcie, oraz krótki program z tego samego materiału do ręcznego sprawdzenia. Pytania wyboru dotyczą wypisywania danych, reszty z dzielenia, dzielenia całkowitego i uzupełniania kodu. Nowe konstrukcje warunkowe nie są w tej wejściówce oceniane.",
-    "crumbs": [
-      "Instrukcje laboratoryjne",
-      "Laboratorium 1"
     ]
   }
 ]

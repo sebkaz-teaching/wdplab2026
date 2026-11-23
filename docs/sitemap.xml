@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sebkaz-teaching.github.io/wdplab2026/laboratoria/02_warunki.html</loc>
-    <lastmod>2026-11-05T21:19:26.980Z</lastmod>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/laboratoria/03_petle_tablice.html</loc>
+    <lastmod>2026-11-23T16:24:53.585Z</lastmod>
   </url>
   <url>
-    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/visual-studio-community.html</loc>
-    <lastmod>2026-10-22T11:41:59.041Z</lastmod>
-  </url>
-  <url>
-    <loc>https://sebkaz-teaching.github.io/wdplab2026/index.html</loc>
-    <lastmod>2026-11-12T15:19:11.342Z</lastmod>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/laboratoria/01_projekt.html</loc>
+    <lastmod>2026-11-12T15:19:11.343Z</lastmod>
   </url>
   <url>
     <loc>https://sebkaz-teaching.github.io/wdplab2026/scenariusze.html</loc>
     <lastmod>2026-11-12T15:19:11.343Z</lastmod>
   </url>
   <url>
-    <loc>https://sebkaz-teaching.github.io/wdplab2026/laboratoria/01_projekt.html</loc>
-    <lastmod>2026-11-12T15:19:11.343Z</lastmod>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/index.html</loc>
+    <lastmod>2026-11-23T16:24:53.586Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/podstawy_programowania/visual-studio-community.html</loc>
+    <lastmod>2026-10-22T11:41:59.041Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sebkaz-teaching.github.io/wdplab2026/laboratoria/02_warunki.html</loc>
+    <lastmod>2026-11-23T16:24:53.586Z</lastmod>
   </url>
 </urlset>

@@ -16,7 +16,9 @@ format:
 
 ## Wejściówka
 
-**3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego przygotowania.** Każde jest warte 1 punkt. Test rozwiązuje się indywidualnie; wynik pojawi się po potwierdzeniu zapisu.
+**4 pytania wyboru z materiału laboratoriów 1–2**, po 1 punkcie, oraz **krótki program do ręcznego sprawdzenia**. Test wymaga prześledzenia kodu, a nie tylko rozpoznania nazwy konstrukcji. Pętle i tablice nie są jeszcze oceniane.
+
+Pracuj samodzielnie. Przyjmij, że fragmenty pytań wyboru znajdują się wewnątrz poprawnie zdefiniowanej funkcji `main` i dołączono `<iostream>`. Analizuj kod dokładnie w zapisanej postaci. Po potwierdzeniu zapisu pojawi się wynik testu wyboru (0–4); kod sprawdzi prowadzący osobno.
 
 <div id="rsod-quiz"></div>
 <script src="../assets/js/quiz-engine.js"></script>
@@ -30,90 +32,17 @@ CourseQuiz.mount(document.getElementById("rsod-quiz"), {
     {
       "id": "q1",
       "points": 1,
-      "diff": "powtórka",
-      "text": "Co oznacza operator && między dwoma warunkami?",
+      "diff": "analiza kodu z laboratorium 2",
+      "text": "Co wypisze ten fragment? Uwzględnij zmianę wartości pomiędzy instrukcjami if.",
+      "code": "int value = 5;\nif (value > 3) {\n    value -= 2;\n}\nif (value == 3) {\n    value *= 2;\n} else {\n    value += 1;\n}\nstd::cout << value;",
       "options": [
         {
           "v": "A",
-          "t": "Wystarczy jeden prawdziwy warunek"
-        },
-        {
-          "v": "B",
-          "t": "Oba warunki muszą być prawdziwe"
-        },
-        {
-          "v": "C",
-          "t": "Przypisuje wynik do obu zmiennych"
-        },
-        {
-          "v": "D",
-          "t": "Neguje pierwszy warunek"
-        }
-      ]
-    },
-    {
-      "id": "q2",
-      "points": 1,
-      "diff": "powtórka",
-      "text": "Co wypisze fragment?",
-      "options": [
-        {
-          "v": "A",
-          "t": "Low"
-        },
-        {
-          "v": "B",
-          "t": "Ready"
-        },
-        {
-          "v": "C",
-          "t": "Oba słowa"
-        },
-        {
-          "v": "D",
-          "t": "Program się nie zbuduje"
-        }
-      ],
-      "code": "int charge = 30;\nif (charge < 30) std::cout << \"Low\";\nelse std::cout << \"Ready\";"
-    },
-    {
-      "id": "q3",
-      "points": 1,
-      "diff": "powtórka",
-      "text": "Co wypisze switch?",
-      "options": [
-        {
-          "v": "A",
-          "t": "AB"
-        },
-        {
-          "v": "B",
-          "t": "A"
-        },
-        {
-          "v": "C",
-          "t": "B"
-        },
-        {
-          "v": "D",
-          "t": "Nic"
-        }
-      ],
-      "code": "int option = 1;\nswitch (option) {\ncase 1: std::cout << \"A\"; break;\ncase 2: std::cout << \"B\"; break;\n}"
-    },
-    {
-      "id": "q4",
-      "points": 1,
-      "diff": "przygotowanie",
-      "text": "Przygotowanie: ile razy wykona się ciało pętli?",
-      "options": [
-        {
-          "v": "A",
-          "t": "2"
-        },
-        {
-          "v": "B",
           "t": "3"
+        },
+        {
+          "v": "B",
+          "t": "6"
         },
         {
           "v": "C",
@@ -121,20 +50,108 @@ CourseQuiz.mount(document.getElementById("rsod-quiz"), {
         },
         {
           "v": "D",
-          "t": "Ani razu"
+          "t": "10"
         }
-      ],
-      "code": "for (int i = 0; i < 3; ++i) {\n    std::cout << i;\n}"
+      ]
+    },
+    {
+      "id": "q2",
+      "points": 1,
+      "diff": "analiza kodu z laboratorium 2",
+      "text": "Który napis zostanie wypisany? Przeanalizuj całe wyrażenie logiczne.",
+      "code": "int charge = 25;\nbool checked = true;\nbool blocked = false;\nif ((charge >= 30 && checked) || !blocked) {\n    std::cout << \"Ready\";\n} else {\n    std::cout << \"Blocked\";\n}",
+      "options": [
+        {
+          "v": "A",
+          "t": "Blocked"
+        },
+        {
+          "v": "B",
+          "t": "Ready"
+        },
+        {
+          "v": "C",
+          "t": "ReadyBlocked"
+        },
+        {
+          "v": "D",
+          "t": "Nie zostanie wypisany żaden napis."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "points": 1,
+      "diff": "analiza kodu z laboratorium 2",
+      "text": "Co wypisze switch w podanej postaci?",
+      "code": "int option = 2;\nswitch (option) {\ncase 1:\n    std::cout << \"A\";\n    break;\ncase 2:\n    std::cout << \"B\";\ncase 3:\n    std::cout << \"C\";\n    break;\ndefault:\n    std::cout << \"D\";\n}",
+      "options": [
+        {
+          "v": "A",
+          "t": "B"
+        },
+        {
+          "v": "B",
+          "t": "BC"
+        },
+        {
+          "v": "C",
+          "t": "BCD"
+        },
+        {
+          "v": "D",
+          "t": "Program nie skompiluje się bez break po każdym case."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "points": 1,
+      "diff": "analiza kodu z laboratorium 2",
+      "text": "Jaki wynik zostanie wypisany? Zwróć uwagę na wybór gałęzi i typy argumentów dzielenia.",
+      "code": "int a = 7;\nint b = 2;\ndouble result = (a > b) ? a / b : a / 2.0;\nstd::cout << result;",
+      "options": [
+        {
+          "v": "A",
+          "t": "3.5"
+        },
+        {
+          "v": "B",
+          "t": "3"
+        },
+        {
+          "v": "C",
+          "t": "2"
+        },
+        {
+          "v": "D",
+          "t": "1"
+        }
+      ]
     }
-  ]
+  ],
+  "openQuestion": {
+    "title": "Zadanie otwarte. Kwota po rabacie",
+    "text": "Napisz kompletny program w C++, który wczytuje kwotę zakupu jako double. Załóż poprawny odczyt liczby. Dla kwoty ujemnej wypisz Invalid amount i zakończ program bez dalszych obliczeń. Dla kwoty co najmniej 100 PLN zastosuj rabat 10%, a dla mniejszej nieujemnej kwoty nie stosuj rabatu. Wypisz kwotę do zapłaty z dwoma miejscami po przecinku. Samodzielnie napisz nagłówki, funkcję main, deklaracje i instrukcje. Nie używaj pętli ani tablic."
+  }
 });
 </script>
 
-## Wprowadzenie teoretyczne
+## 1. Powtarzanie znanej liczby operacji — for
 
-### Powtarzanie operacji: for
+Pętla pozwala wielokrotnie wykonać ten sam blok instrukcji. `for` jest wygodna, gdy znamy liczbę powtórzeń lub kolejne wartości zmiennej sterującej. Zamiast powielać kod, zapisujemy go raz w ciele pętli.
 
-Pętla wykonuje ten sam blok dla kolejnych danych. `for` jest wygodna, gdy znamy liczbę powtórzeń lub zakres indeksów. Składa się z inicjalizacji, warunku kontynuacji i kroku:
+**Ogólna postać:**
+
+```cpp
+for (initialization; condition; step) {
+    // Instructions repeated while condition is true.
+}
+```
+
+Inicjalizacja wykonuje się tylko raz, przed pierwszym sprawdzeniem warunku. Jeżeli warunek jest prawdziwy, program wykonuje ciało, następnie krok i ponownie sprawdza warunek. Jeżeli warunek jest fałszywy od początku, ciało nie wykona się ani razu. Dwa średniki rozdzielają części nagłówka; nie dopisujemy średnika za jego zamykającym nawiasem.
+
+**Przykład nowej konstrukcji:**
 
 ```cpp
 for (int i = 0; i < 4; ++i) {
@@ -142,131 +159,414 @@ for (int i = 0; i < 4; ++i) {
 }
 ```
 
-Wypisane zostaną 0, 1, 2, 3. Inicjalizacja wykonuje się raz. Przed każdym obiegiem sprawdzany jest warunek, a po ciele wykonywany jest krok. `++i` zwiększa zmienną o jeden; `--i` ją zmniejsza. Zmienna zadeklarowana w nagłówku tej pętli jest dostępna w pętli, ale nie po jej zakończeniu.
-
-### while i do…while
-
-`while` sprawdza warunek przed ciałem, więc może nie wykonać go ani razu. `do…while` sprawdza warunek po ciele i wykona je przynajmniej raz. Ten drugi zapis pasuje do menu, które trzeba najpierw wyświetlić.
-
-```cpp
-int value = 0;
-while (std::cin >> value && value != -1) {
-    std::cout << "Accepted input: " << value << '\n';
-}
-```
-
-To fragment do `main`: odczytuje kolejne liczby aż do wartości `-1` albo błędu odczytu. Liczba `-1` jest umówionym sygnałem zakończenia, a nie pomiarem. `&&` sprawdza drugi warunek tylko wtedy, gdy odczyt się powiódł.
-
-```cpp
-int option = 0;
-do {
-    std::cout << "1 - report, 0 - exit: ";
-    if (!(std::cin >> option)) {
-        break;
-    }
-    if (option == 1) {
-        std::cout << "Report requested\n";
-    }
-} while (option != 0);
-```
-
-`break` kończy najbliższą obejmującą pętlę lub instrukcję `switch`. `continue` pomija resztę bieżącego obiegu pętli i przechodzi do następnego kroku. W `while` trzeba zadbać o zmianę warunku lub kolejny odczyt, aby nie utworzyć przypadkowo pętli nieskończonej.
-
-### Tablica i indeks
-
-Tablica przechowuje ustaloną liczbę elementów tego samego typu. W deklaracji `int values[4] = {2, 5, 1, 4};` poprawne indeksy to **0, 1, 2, 3**. `values[0]` jest pierwszym elementem, a `values[3]` ostatnim. Nie istnieje element `values[4]`.
-
-W tej części rozmiar tablicy ustalamy podczas pisania programu, np. przez stałą `const int count = 6;`. Zmienną liczbę elementów obsłuży później `std::vector`. Odczyt poza tablicą nie ma gwarantowanego wyniku; nie jest poprawną metodą sprawdzania granic.
-
-### Suma, średnia i ślad obliczeń
-
-Suma wymaga akumulatora z wartością początkową zero. W każdym obiegu dodajemy bieżący element. W programie poniżej wynik wynosi 285, a średnia 47.5.
-
-```cpp
-#include <iostream>
-
-int main()
-{
-    const int count = 6;
-    int charge[count] = {80, 20, 55, 0, 100, 30};
-    int total = 0;
-    for (int i = 0; i < count; ++i) {
-        total += charge[i];
-        std::cout << i << ": " << charge[i] << ", total: " << total << '\n';
-    }
-    double average = static_cast<double>(total) / count;
-    std::cout << "Average: " << average << '\n';
-    return 0;
-}
-```
-
-`static_cast<double>(total)` zmienia typ wartości przed dzieleniem. Bez tej konwersji dwa argumenty całkowite dałyby dzielenie całkowite. Ślad wykonania to tabela: indeks, bieżący element, suma po dodaniu.
-
-Minimum nie powinno zaczynać się od zera, jeśli w danych występują tylko wartości dodatnie. Dla niepustej tablicy można zacząć od `int minimum = charge[0];`, a następnie porównywać kolejne elementy. Przy pustym zbiorze nie wolno odczytywać pierwszego elementu.
-
-[Pełny program pokazowy — pobierz plik .cpp](../assets/cpp/03_pokaz.cpp). Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.
-
-## Zadania do realizacji
-
-Przed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.
+Fragment wypisuje 0, 1, 2 i 3. `++i` zwiększa zmienną o jeden, a `--i` zmniejsza ją o jeden. Można też użyć kroku takiego jak `i += 2`. Zmienna zadeklarowana w nagłówku jest dostępna w pętli, ale nie po jej zakończeniu.
 
 ::: {.lab-task}
-### Zadanie 1. Przebieg pętli
+### Zadanie 1. Liczby i ich kwadraty
 
-Wypisz liczby od 1 do 10 przez `for`, a następnie od 10 do 1. Obok każdej wypisz jej kwadrat. Przed uruchomieniem podaj pierwszą i ostatnią wartość zmiennej pętli. Nie używaj dziesięciu osobnych instrukcji wypisujących.
+Napisz program, który w pierwszej pętli `for` wypisuje liczby od 1 do 10 wraz z ich kwadratami, a w drugiej te same pary w kolejności od 10 do 1. Każdą parę wypisz w osobnym wierszu. Nie używaj dziesięciu oddzielnych instrukcji wypisujących.
+
+**Sprawdź:** pierwszy raport zaczyna się od pary `1 1` i kończy parą `10 100`; drugi ma kolejność odwrotną. Każda pętla wykonuje 10 obiegów.
+
+**Wyjaśnij:** jaka jest ostatnia wartość zmiennej, przy której wykonuje się ciało każdej pętli? Co zmieni zastąpienie `<= 10` przez `< 10` w pierwszej pętli?
 :::
+
+## 2. Wynik przechowywany między obiegami — akumulator
+
+Jeżeli kolejne obiegi mają współtworzyć jeden wynik, potrzebna jest zmienna zachowująca wartość pomiędzy nimi. Zmienną gromadzącą sumę nazywamy akumulatorem. Deklarujemy ją przed pętlą i nadajemy jej wartość początkową zero.
+
+**Ogólna postać:**
+
+```cpp
+int total = 0;
+for (initialization; condition; step) {
+    total += current_value;
+}
+```
+
+`total += current_value` dodaje bieżący składnik do dotychczasowej sumy. Przypisanie `total = current_value` zastępowałoby poprzedni wynik. Umieszczenie inicjalizacji `total = 0` wewnątrz ciała zerowałoby sumę przed każdym dodaniem.
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+int total = 0;
+for (int value = 2; value <= 6; value += 2) {
+    total += value;
+    std::cout << value << ": " << total << '\n';
+}
+```
+
+Kolejne składniki wynoszą 2, 4 i 6, a sumy po ich dodaniu — 2, 6 i 12. Taki wydruk stanowi ślad obliczeń: pokazuje nie tylko wynik końcowy, ale również sposób jego powstawania.
 
 ::: {.lab-task}
 ### Zadanie 2. Suma od 1 do N
 
-Wczytaj `N` od 0 do 100. Oblicz sumę od 1 do N w pętli, bez gotowego wzoru. Dla `0` wynik to 0, dla `5` — 15. Przygotuj wariant `for` i wariant `while`. Odrzuć N spoza zakresu.
+Wczytaj całkowite `N` z zakresu 0–100. Dla wartości spoza zakresu wypisz `Invalid N` i zakończ program. Oblicz sumę liczb od 1 do N w pętli `for`, bez gotowego wzoru. Wypisz wynik.
+
+**Sprawdź:** `N = 0`, `1`, `5`, `100`. Oczekiwane sumy to 0, 1, 15 i 5050. Sprawdź również odrzucenie -1 i 101. Załóż poprawny odczyt liczby całkowitej.
+
+**Wyjaśnij:** dlaczego dla N równego zero wynik nadal jest poprawny, mimo że ciało pętli się nie wykonuje? Dla N równego 5 zapisz składnik i sumę po każdym obiegu.
 :::
+
+## 3. Powtarzanie zależne od warunku — while
+
+Pętla `while` jest przydatna, gdy powtarzamy działanie tak długo, jak długo spełniony jest warunek. Liczba powtórzeń może wynikać z przebiegu obliczeń, zamiast być bezpośrednio podana w nagłówku.
+
+**Ogólna postać:**
+
+```cpp
+while (condition) {
+    // Instructions that may change the condition.
+}
+```
+
+Warunek jest sprawdzany przed każdym obiegiem. Trzeba zapewnić zmianę danych wpływających na ten warunek, jeśli program ma zakończyć pętlę. Brak takiej zmiany może prowadzić do pętli nieskończonej.
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+int remaining = 3;
+while (remaining > 0) {
+    std::cout << remaining << '\n';
+    --remaining;
+}
+```
+
+Fragment wypisuje 3, 2 i 1. Po ostatnim zmniejszeniu zmienna ma wartość zero i kolejne sprawdzenie kończy pętlę. Gdyby początkowo miała wartość zero, nie zostałby wypisany żaden wiersz.
 
 ::: {.lab-task}
-### Zadanie 3. Raport z tablicy
+### Zadanie 3. Podwajanie do osiągnięcia progu
 
-Rozbuduj przykład o liczbę urządzeń z baterią poniżej 30% i co najmniej 30%. Dla danych pokazu wyniki to 2 i 4. Wyświetl indeksy urządzeń wymagających ładowania. Sprawdź też tablicę sześciu zer i sześciu wartości 100.
+Wczytaj całkowity próg `limit` z zakresu 1–1000; niepoprawną wartość odrzuć komunikatem. Zacznij od wartości 1 i podwajaj ją w pętli `while`, dopóki jest mniejsza od progu. Zlicz wykonane podwojenia. Wypisz końcową wartość i liczbę podwojeń. Załóż poprawny odczyt liczby.
+
+**Sprawdź:** dla progów 1, 3, 16 i 17 oczekiwane pary „wartość, liczba podwojeń” to odpowiednio `(1, 0)`, `(4, 2)`, `(16, 4)` i `(32, 5)`.
+
+**Wyjaśnij:** dlaczego wartość końcowa może przekroczyć próg? Która instrukcja gwarantuje, że dla dopuszczalnych danych warunek w końcu przestanie być prawdziwy?
 :::
+
+## 4. Wykonanie co najmniej raz — do…while
+
+W `do…while` warunek jest sprawdzany po wykonaniu ciała. Z tego powodu ciało wykona się przynajmniej raz. Jest to wygodne dla menu: najpierw pokazujemy opcje i odczytujemy wybór, a dopiero potem sprawdzamy, czy użytkownik chce kontynuować.
+
+**Ogólna postać:**
+
+```cpp
+do {
+    // Instructions executed at least once.
+} while (condition);
+```
+
+Po nawiasie zamykającym warunek występuje średnik — jest częścią tej konstrukcji. To różnica względem zapisu zwykłej pętli `while` z blokiem instrukcji.
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+int answer = 0;
+do {
+    std::cout << "Enter 0 to finish: ";
+    if (!(std::cin >> answer)) {
+        return 1;
+    }
+} while (answer != 0);
+```
+
+Mimo początkowej wartości zero pytanie zostanie wyświetlone. Warunek sprawdzany po odczycie decyduje, czy trzeba zapytać ponownie. `return 1;` użyte w `main` kończy cały program w razie błędu odczytu.
 
 ::: {.lab-task}
-### Zadanie 4. Minimum, maksimum i remis
+### Zadanie 4. Menu licznika zgłoszeń
 
-Dla tablicy z pokazu oblicz minimum, maksimum i indeks pierwszego minimum. Oczekiwane: 0, 100, indeks 3. Dla `{40,20,20,60,80,30}` pierwsze minimum ma indeks 1. Wyjaśnij różnicę między `<` i `<=` przy aktualizacji minimum.
+Napisz program z licznikiem początkowo równym zero. W pętli `do…while` wyświetlaj menu i wczytuj opcję: 1 — zwiększ licznik, 2 — wyświetl licznik, 3 — wyzeruj licznik, 0 — zakończ. Wybór obsłuż przez `switch`. Inne liczby dają `Unknown option`, po czym menu pojawia się ponownie. Błąd odczytu kończy program komunikatem `Invalid input`.
+
+**Sprawdź:** sekwencja `1 1 2 3 2 0` pokazuje licznik 2, a potem 0. Dla samego 0 menu pojawia się raz. Sprawdź również `9 0` i wpisanie tekstu zamiast liczby.
+
+**Wyjaśnij:** dlaczego `break` kończący przypadek w `switch` nie kończy otaczającej go pętli? Który warunek decyduje o zakończeniu pracy menu?
 :::
+
+## 5. Przerwanie pętli i pominięcie obiegu — break i continue
+
+`break` kończy najbliższą otaczającą pętlę lub instrukcję `switch`. `continue` dotyczy pętli: pomija resztę bieżącego obiegu. W `while` przechodzi do sprawdzenia warunku, a w `for` najpierw do kroku, a następnie do sprawdzenia warunku.
+
+**Ogólna postać:**
+
+```cpp
+while (condition) {
+    if (stop_condition) {
+        break;
+    }
+    if (skip_condition) {
+        continue;
+    }
+    // Process the accepted value.
+}
+```
+
+`continue` nie może omijać jedynej instrukcji, która pozwala pętli posunąć się dalej. Jednym ze sposobów uniknięcia tego błędu jest umieszczenie kolejnego odczytu w warunku `while`.
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+int value = 0;
+while (std::cin >> value) {
+    if (value == -1) {
+        break;
+    }
+    if (value < 0) {
+        continue;
+    }
+    std::cout << "Accepted: " << value << '\n';
+}
+```
+
+Wartość -1 jest sygnałem końca, a nie elementem danych. Inne wartości ujemne są pomijane. Po `continue` następna próba odczytu następuje w warunku pętli. Nieudany odczyt również kończy tę pętlę, ponieważ warunek staje się fałszywy.
 
 ::: {.lab-task}
 ### Zadanie 5. Pomiary do sygnału końca
 
-Wczytuj całkowite poziomy baterii 0–100 do `-1`. Inne liczby pomijaj z komunikatem. Oblicz liczbę poprawnych pomiarów i średnią, bez przechowywania ich w tablicy. Dla `50 0 100 -1` wynik to 3 i 50. Dla samego `-1` wypisz „brak pomiarów”, bez dzielenia. Błąd odczytu kończy wprowadzanie.
+Wczytuj całkowite poziomy baterii aż do -1 albo nieudanego odczytu. Dopuszczalne pomiary to 0–100. Sprawdzaj -1 przed sprawdzeniem zakresu i użyj `break` do zakończenia wprowadzania. Pozostałe liczby spoza zakresu pomijaj komunikatem `Invalid charge` i instrukcją `continue`.
+
+Zlicz zaakceptowane pomiary i oblicz ich sumę. Nie przechowuj pomiarów w tablicy. Po zakończeniu wypisz liczbę i sumę, a jeśli nie przyjęto żadnego pomiaru — dodatkowo `No data`.
+
+**Sprawdź:** `50 0 100 -1` daje 3 pomiary i sumę 150. Sekwencja `20 -2 101 30 -1` daje 2 pomiary i sumę 50. Dla samego -1 liczba i suma wynoszą zero. Przyjmij nie więcej niż 1000 poprawnych pomiarów, aby suma mieściła się w używanym typie `int` na stanowisku laboratoryjnym.
+
+**Wyjaśnij:** dlaczego -1 trzeba obsłużyć przed pozostałymi liczbami ujemnymi? Czy pominięty pomiar ma wpływać na licznik lub sumę?
 :::
 
-::: {.lab-task}
-### Zadanie 6. Menu licznika zgłoszeń
+## 6. Kilka wartości tego samego typu — tablica
 
-Zastosuj `do…while`: opcja 1 zwiększa licznik zgłoszeń, 2 wyświetla licznik, 3 zeruje go, 0 kończy program. Inne numery dają komunikat. Sekwencja `1 1 2 3 2 0` powinna pokazać 2, a potem 0. Zwróć uwagę, że `break` wewnątrz `switch` nie kończy zewnętrznej pętli.
+Tablica przechowuje ustaloną liczbę elementów tego samego typu. Do poszczególnych elementów odwołujemy się przez nazwę tablicy i indeks w nawiasach kwadratowych. Indeksowanie zaczyna się od zera.
+
+**Ogólna postać:**
+
+```cpp
+element_type array_name[element_count];
+array_name[index] = value;
+```
+
+W zwykłej tablicy C++ używanej w tych ćwiczeniach liczba elementów musi być dodatnią stałą znaną podczas kompilacji. Nie deklarujemy jej rozmiarem wczytanym przez `std::cin`. Dla tablicy o rozmiarze `count` poprawne indeksy to od 0 do `count - 1`. Dostęp poza tym zakresem ma niezdefiniowane zachowanie — nie musi wywołać czytelnego komunikatu błędu.
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+const int count = 4;
+int values[count] = {2, 5, 1, 4};
+values[1] = 9;
+std::cout << values[0] << " " << values[count - 1] << '\n';
+```
+
+Przypisanie zmienia drugi element na 9. Fragment wypisuje 2 i 4, bo odczytuje pierwszy i ostatni element. Zapis `int values[count] = {};` wyzerowałby wszystkie elementy. Samo `int values[count];` dla tablicy lokalnej nie zapewnia ich wyzerowania.
+
+::: {.lab-task}
+### Zadanie 6. Odczyt i zmiana elementu
+
+Zadeklaruj tablicę sześciu liczb całkowitych o początkowych wartościach `{10, 20, 30, 40, 50, 60}`. Wypisz pierwszy i ostatni element, zmień trzeci element na -5, a następnie wypisz drugi, trzeci i czwarty element. W tym zadaniu odwołuj się do konkretnych indeksów, bez pętli.
+
+**Sprawdź:** pierwszy wydruk zawiera 10 i 60, a drugi 20, -5 i 40. W debuggerze obejrzyj całą tablicę po przypisaniu.
+
+**Wyjaśnij:** dlaczego trzeci element ma indeks 2? Dlaczego wyrażenie `values[6]` nie wskazuje ostatniego elementu takiej tablicy? Nie sprawdzaj tego przez celowe wykonywanie odczytu poza zakresem.
+:::
+
+## 7. Przejście przez tablicę w pętli
+
+Zmienna sterująca pętli może pełnić rolę indeksu. Pozwala to tą samą instrukcją wczytywać, wypisywać albo zmieniać kolejne elementy. Pętla musi obejmować wyłącznie poprawne indeksy.
+
+**Ogólna postać:**
+
+```cpp
+for (int i = 0; i < count; ++i) {
+    // Read, display or modify array_name[i].
+}
+```
+
+Dla dodatniego `count` taki nagłówek daje indeksy 0, 1, ..., `count - 1`. Warunek `i <= count` dopuściłby dodatkowy, niepoprawny indeks. Dla przejścia wstecz przy zmiennej typu `int` zaczynamy od `count - 1` i kończymy po indeksie zero.
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+const int count = 3;
+int values[count] = {4, 7, 2};
+for (int i = 0; i < count; ++i) {
+    std::cout << i << ": " << values[i] << '\n';
+}
+```
+
+Fragment wypisuje pary `0: 4`, `1: 7`, `2: 2`. Na tej samej zasadzie `std::cin >> values[i]` zapisuje wczytaną liczbę bezpośrednio w bieżącym elemencie.
+
+::: {.lab-task}
+### Zadanie 7. Wczytanie i odwrócona kolejność
+
+Utwórz wyzerowaną tablicę pięciu liczb typu `double`. W pierwszej pętli wczytaj wszystkie elementy, a w drugiej wypisz je w kolejności odwrotnej do wczytania. Przy każdej wartości wypisz jej oryginalny indeks. Sprawdź powodzenie odczytu; w razie błędu zakończ program komunikatem `Invalid input`, bez wypisywania niepełnej tablicy.
+
+**Sprawdź:** dla `2.5 0 -1 8 4` wynik ma obejmować pary `4: 4`, `3: 8`, `2: -1`, `1: 0`, `0: 2.5`. Sprawdź też pięć jednakowych wartości i tekst zamiast trzeciej liczby.
+
+**Wyjaśnij:** czy wypisywanie w odwrotnej kolejności zmieniło rozmieszczenie danych w tablicy? Dlaczego przy indeksie typu `int` warunek `i >= 0` pozwala obsłużyć pierwszy element i potem zakończyć pętlę?
+:::
+
+## 8. Suma i średnia tablicy — konwersja przed dzieleniem
+
+Do sumowania elementów wykorzystujemy akumulator oraz pętlę po indeksach. Jeżeli suma i liczba elementów mają typ `int`, ich iloraz również powstaje przez dzielenie całkowite. Samo zapisanie wyniku w zmiennej `double` nie przywróci odrzuconej części ułamkowej.
+
+**Ogólna postać konwersji:**
+
+```cpp
+static_cast<target_type>(expression)
+```
+
+`static_cast<double>(total)` tworzy wartość typu `double` odpowiadającą sumie. Nie zmienia typu zmiennej `total`. Gdy jeden argument dzielenia jest typu `double`, drugi zostaje do tego typu przekonwertowany i wykonuje się dzielenie zmiennoprzecinkowe.
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+int total = 7;
+int count = 2;
+double average = static_cast<double>(total) / count;
+std::cout << average << '\n';
+```
+
+Wynik wynosi 3.5. Umieszczenie konwersji dopiero wokół `total / count` dałoby 3.0, ponieważ dzielenie całkowite nastąpiłoby wcześniej. Liczba elementów musi być niezerowa; w następnych zadaniach tablice mają ustalone dodatnie rozmiary.
+
+::: {.lab-task}
+### Zadanie 8. Suma, średnia i ślad obliczeń
+
+Zadeklaruj tablicę sześciu liczb całkowitych `{80, 20, 55, 0, 100, 30}`. W pętli oblicz sumę. Po każdym dodaniu wypisz indeks, wartość elementu i aktualną sumę. Po pętli oblicz średnią za pomocą konwersji `static_cast<double>` przed dzieleniem.
+
+**Sprawdź:** kolejne sumy to 80, 100, 155, 155, 255 i 285; średnia wynosi 47.5. Następnie sprawdź sześć zer oraz `{1, 1, 1, 1, 1, 2}` — dla ostatniej tablicy średnia wynosi w przybliżeniu 1.16667 przy domyślnym formatowaniu.
+
+**Wyjaśnij:** dlaczego `static_cast<double>(total / count)` nie jest równoważne konwersji samego `total` przed dzieleniem? Czy liczba elementów równa sześć może dać niecałkowitą średnią mimo całkowitych danych?
+:::
+
+## 9. Minimum, maksimum i pozycja pierwszego wystąpienia
+
+Dla niepustej tablicy można rozpocząć wyszukiwanie minimum od jej pierwszego elementu. Następnie porównujemy kolejne elementy z dotychczasowym kandydatem. Ta metoda nie wymaga zgadywania wartości, która na pewno będzie większa lub mniejsza od wszystkich danych.
+
+**Ogólna postać:**
+
+```cpp
+int minimum = values[0];
+int minimumIndex = 0;
+for (int i = 1; i < count; ++i) {
+    if (values[i] < minimum) {
+        // Save the new minimum and its index.
+    }
+}
+```
+
+Zaczynamy od indeksu 1, ponieważ element zerowy jest już kandydatem. Przy `<` równy element nie zastępuje wcześniejszego, więc zachowujemy indeks pierwszego minimum. Przy `<=` kolejny równy element zastąpi poprzedni i po pełnym przejściu otrzymamy ostatnie wystąpienie. Wyszukiwanie maksimum jest analogiczne, ale kierunek porównania trzeba odwrócić.
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+const int count = 3;
+int values[count] = {8, 3, 6};
+int maximum = values[0];
+for (int i = 1; i < count; ++i) {
+    if (values[i] > maximum) {
+        maximum = values[i];
+    }
+}
+std::cout << maximum << '\n';
+```
+
+Fragment wypisuje 8. Inicjalizacja minimum zerem byłaby błędna np. dla samych dodatnich danych; inicjalizacja maksimum zerem byłaby błędna dla samych ujemnych. Odczyt `values[0]` wymaga niepustej tablicy.
+
+::: {.lab-task}
+### Zadanie 9. Ekstrema i remis
+
+Dla tablicy sześciu liczb oblicz minimum, maksimum i indeks pierwszego minimum. Każdy wynik wyznacz na podstawie danych, bez wpisywania odpowiedzi na stałe i bez sortowania tablicy.
+
+**Sprawdź:**
+
+| Tablica | Minimum | Maksimum | Indeks pierwszego minimum |
+|---|---|---|---|
+| `{80, 20, 55, 0, 100, 30}` | 0 | 100 | 3 |
+| `{40, 20, 20, 60, 80, 30}` | 20 | 80 | 1 |
+| `{-4, -9, -2, -9, -5, -3}` | -9 | -2 | 1 |
+| `{7, 7, 7, 7, 7, 7}` | 7 | 7 | 0 |
+
+**Wyjaśnij:** co zmieni `<=` zamiast `<` przy aktualizacji minimum? Wskaż zmienione wyniki dla tablic zawierających powtarzające się minimum.
+:::
+
+## 10. Raport z danych — połączenie tablic, pętli i warunków
+
+Tablica zachowuje wczytane wartości, dzięki czemu można je przechodzić wielokrotnie. Warunki wewnątrz pętli pozwalają klasyfikować każdy element, a osobne liczniki gromadzą liczebności kategorii. Łańcuch `if / else if / else` daje jedną kategorię dla każdego poprawnego pomiaru.
+
+**Ogólna postać przetwarzania:**
+
+```cpp
+for (int i = 0; i < count; ++i) {
+    if (first_category_condition) {
+        // Update the first category counter.
+    } else if (second_category_condition) {
+        // Update the second category counter.
+    } else {
+        // Update the remaining category counter.
+    }
+}
+```
+
+Przed raportowaniem trzeba ustalić, czy wszystkie dane są poprawne. W zadaniu poniżej kończymy program po pierwszej niepoprawnej wartości; nie obliczamy raportu z niepełnej tablicy. To inna reguła niż w zadaniu 5, gdzie błędny pomiar pomijaliśmy i mogliśmy wczytywać następne dane.
+
+**Przykład nowej kombinacji:**
+
+```cpp
+const int count = 3;
+int values[count] = {4, 7, 2};
+int evenCount = 0;
+for (int i = 0; i < count; ++i) {
+    if (values[i] % 2 == 0) {
+        ++evenCount;
+    }
+}
+std::cout << evenCount << '\n';
+```
+
+Fragment wypisuje 2: dwie liczby w tablicy są parzyste. Licznik zaczyna od zera i zwiększa się tylko dla elementów spełniających warunek.
+
+::: {.lab-task}
+### Zadanie 10. Raport gotowości urządzeń
+
+Wczytaj do tablicy sześć całkowitych poziomów baterii. Sprawdzaj powodzenie każdego odczytu i zakres 0–100. Nieudany odczyt kończy program komunikatem `Invalid input`, a wartość spoza zakresu — `Invalid charge`. W obu sytuacjach nie wypisuj raportu.
+
+Dla kompletu poprawnych danych wypisz wszystkie pomiary z indeksami oraz oblicz: sumę, średnią, minimum, maksimum, indeks pierwszego minimum i liczebności kategorii `Recharge` (poniżej 30), `Ready` (30–79), `Full readiness` (80–100). Wypisz też indeksy urządzeń wymagających ładowania. Kategorie mają się wzajemnie wykluczać, a suma ich liczebności ma wynosić sześć.
+
+**Sprawdź:** dla `80 20 55 0 100 30` suma wynosi 285, średnia 47.5, minimum 0, maksimum 100, indeks pierwszego minimum 3; każda kategoria ma po dwa urządzenia, a ładowania wymagają indeksy 1 i 3. Dla sześciu zer wszystkie urządzenia wymagają ładowania, średnia wynosi zero, a pierwszy indeks minimum to 0. Dla sześciu wartości 100 wszystkie urządzenia są w pełnej gotowości. Sprawdź także błąd zakresu na początku i na końcu wprowadzania.
+
+**Wyjaśnij:** dlaczego do kontroli wartości równej 30 i 80 warto przygotować osobne próby? Czy liczenie kategorii za pomocą trzech niezależnych warunków o nakładających się zakresach mogłoby policzyć jedno urządzenie kilka razy?
 :::
 
 ## Dokumentacja i sprawdzenie pracy
 
-- Zachowaj źródła `.cpp` oznaczone numerem zadania.
-- Dla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.
-- Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.
-- Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.
+Każde zadanie napisz jako kompletny program w osobnym projekcie. Fragmenty objaśniają tylko nowe konstrukcje: samodzielnie dobierz nagłówki, napisz `main`, deklaracje oraz wejście i wyjście. Stosuj angielskie nazwy zmiennych i komunikaty. W zadaniach bez wymogu sprawdzania odczytu zakładaj poprawny zapis liczb zgodnych z poleceniem.
+
+- Zachowaj pliki `.cpp` oznaczone numerami zadań.
+- Przed uruchomieniem zapisz przewidywany wynik, a następnie porównaj go z wynikiem programu.
+- Wykonaj wskazane próby, zwłaszcza wartości graniczne, powtarzające się minima i przypadek braku danych.
+- Przygotuj odpowiedź na pytanie „Wyjaśnij” przy każdym zadaniu.
+- Prześledź co najmniej jedną pętlę w debuggerze, zapisując indeks, bieżącą wartość i aktualny wynik.
 
 Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów `.vs` i `Debug` ani plików `.exe`.
 
-## Przygotowanie do następnej wejściówki
+## Przygotowanie do kolejnych zajęć
 
-### Powtórz
+### Powtórz materiał laboratorium 3
 
-- Kolejność kroków for oraz różnicę między while i do…while.
-- Indeksy tablicy, sumowanie elementów i poprawne obliczanie średniej.
-- Sygnał zakończenia, break, continue i przypadek braku danych.
+- Kolejność inicjalizacji, sprawdzenia warunku, ciała i kroku w `for`.
+- Różnicę między `while` i `do…while` oraz rolę `break` i `continue`.
+- Indeksy tablicy, wczytywanie i wypisywanie elementów.
+- Sumowanie, konwersję przed dzieleniem i obliczanie średniej.
+- Inicjalizację ekstremów i zachowanie indeksu pierwszego minimum.
+- Przetwarzanie pustej serii pomiarów bez odczytywania nieistniejącego elementu lub dzielenia przez zero.
 
-### Przeczytaj przed laboratorium 4
+### Przygotuj się do laboratorium 4
 
-W [instrukcji 4](04_funkcje.qmd#wprowadzenie-teoretyczne) przeczytaj wprowadzenie do funkcji i przekazywania przez wartość. Rozpoznaj nazwę, parametr, typ wyniku i wywołanie.
+Kolejne zajęcia wprowadzą funkcje. Funkcja może otrzymać parametr i zwrócić wynik przez `return`. Poniższy przykład pokazuje definicję jednej funkcji, a nie całego programu:
 
-**Minimalne przygotowanie:** wyjaśnić rolę return. Dla funkcji `int doubled(int value) { return 2 * value; }` wywołanie doubled(3) daje wynik 6, ale samo go nie wyświetla. Referencje i przekazywanie tablic przećwiczymy na zajęciach.
+```cpp
+int doubled(int value)
+{
+    return 2 * value;
+}
+```
 
-Następna wejściówka: **3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu**, po 1 punkcie.
+Wywołanie `doubled(3)` zwraca 6. Samo zwrócenie wartości niczego nie wypisuje; wynik można przypisać do zmiennej lub przekazać do `std::cout`. Wskaż nazwę funkcji, parametr i typ wyniku. Przekazywanie przez referencję oraz tablic przećwiczymy na kolejnych zajęciach.
+
+Następna wejściówka będzie sprawdzać poznany materiał pętli i tablic. Zakres testu i krótkiego programu zostanie podany w instrukcji kolejnego laboratorium.
