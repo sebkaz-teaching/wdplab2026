@@ -558,7 +558,7 @@ Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalog�
 
 ### Przygotuj się do laboratorium 4
 
-Kolejne zajęcia wprowadzą funkcje. Funkcja może otrzymać parametr i zwrócić wynik przez `return`. Poniższy przykład pokazuje definicję jednej funkcji, a nie całego programu:
+W [instrukcji laboratorium 4](04_funkcje.qmd) poznasz funkcje. Funkcja może otrzymać parametr i zwrócić wynik przez `return`. Poniższy przykład pokazuje definicję jednej funkcji, a nie całego programu:
 
 ```cpp
 int doubled(int value)
@@ -569,4 +569,4 @@ int doubled(int value)
 
 Wywołanie `doubled(3)` zwraca 6. Samo zwrócenie wartości niczego nie wypisuje; wynik można przypisać do zmiennej lub przekazać do `std::cout`. Wskaż nazwę funkcji, parametr i typ wyniku. Przekazywanie przez referencję oraz tablic przećwiczymy na kolejnych zajęciach.
 
-Następna wejściówka będzie sprawdzać poznany materiał pętli i tablic. Zakres testu i krótkiego programu zostanie podany w instrukcji kolejnego laboratorium.
+Następna wejściówka obejmuje **4 pytania wyboru z poznanego materiału**, po 1 punkcie, oraz **krótki program z pętlą i tablicą do ręcznego sprawdzenia**. Powtórz `continue`, kolejność wykonywania pętli, aktualizowanie elementów, indeks pierwszego minimum i konwersję przed dzieleniem. Nowe funkcje pomocnicze nie będą jeszcze oceniane.

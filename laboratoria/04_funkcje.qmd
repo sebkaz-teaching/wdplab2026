@@ -16,7 +16,9 @@ format:
 
 ## Wejściówka
 
-**3 pytania z poprzedniego laboratorium i 1 pytanie z zapowiedzianego przygotowania.** Każde jest warte 1 punkt. Test rozwiązuje się indywidualnie; wynik pojawi się po potwierdzeniu zapisu.
+**4 pytania wyboru z materiału laboratoriów 1–3**, po 1 punkcie, oraz **krótki program do ręcznego sprawdzenia**. Pytania wymagają prześledzenia pętli, zmian tablicy i obliczeń. Funkcje pomocnicze, które poznasz na tych zajęciach, nie są jeszcze oceniane.
+
+Pracuj samodzielnie. Przyjmij, że fragmenty pytań wyboru znajdują się wewnątrz poprawnie zdefiniowanej funkcji `main` i dołączono `<iostream>`. Analizuj kod dokładnie w zapisanej postaci. Po potwierdzeniu zapisu pojawi się wynik testu wyboru (0–4); program sprawdzi prowadzący osobno.
 
 <div id="rsod-quiz"></div>
 <script src="../assets/js/quiz-engine.js"></script>
@@ -30,109 +32,127 @@ CourseQuiz.mount(document.getElementById("rsod-quiz"), {
     {
       "id": "q1",
       "points": 1,
-      "diff": "powtórka",
-      "text": "Jakie są poprawne indeksy tablicy int values[4]?",
+      "diff": "analiza kodu z laboratorium 3",
+      "text": "Jaką wartość wypisze program po zakończeniu pętli?",
+      "code": "int total = 0;\nfor (int i = 1; i <= 5; ++i) {\n    if (i % 2 == 0) {\n        continue;\n    }\n    total += i;\n}\nstd::cout << total;",
       "options": [
         {
           "v": "A",
-          "t": "1, 2, 3, 4"
+          "t": "15"
         },
         {
           "v": "B",
-          "t": "0, 1, 2, 3"
+          "t": "9"
         },
         {
           "v": "C",
-          "t": "0, 1, 2, 3, 4"
+          "t": "6"
         },
         {
           "v": "D",
-          "t": "Tylko 4"
+          "t": "5"
         }
       ]
     },
     {
       "id": "q2",
       "points": 1,
-      "diff": "powtórka",
-      "text": "Co wypisze program?",
+      "diff": "analiza kodu z laboratorium 3",
+      "text": "Co zostanie wypisane po wykonaniu obu pętli?",
+      "code": "int value = 0;\ndo {\n    value += 2;\n} while (value < 0);\nwhile (value < 5) {\n    ++value;\n}\nstd::cout << value;",
       "options": [
         {
           "v": "A",
-          "t": "4"
+          "t": "0"
         },
         {
           "v": "B",
-          "t": "12"
+          "t": "5"
         },
         {
           "v": "C",
-          "t": "11"
+          "t": "2"
         },
         {
           "v": "D",
-          "t": "5"
+          "t": "6"
         }
-      ],
-      "code": "int values[4] = {2,5,1,4};\nint total = 0;\nfor (int i = 0; i < 4; ++i) total += values[i];\nstd::cout << total;"
+      ]
     },
     {
       "id": "q3",
       "points": 1,
-      "diff": "powtórka",
-      "text": "Która pętla sprawdza warunek dopiero po wykonaniu ciała?",
+      "diff": "analiza kodu z laboratorium 3",
+      "text": "Co wypisze fragment? Elementy tablicy są zmieniane w trakcie przejścia.",
+      "code": "int values[4] = {2, 5, 1, 4};\nfor (int i = 1; i < 4; ++i) {\n    values[i] += values[i - 1];\n}\nstd::cout << values[2] << \" \" << values[3];",
       "options": [
         {
           "v": "A",
-          "t": "for"
+          "t": "6 5"
         },
         {
           "v": "B",
-          "t": "do…while"
+          "t": "8 12"
         },
         {
           "v": "C",
-          "t": "while"
+          "t": "1 4"
         },
         {
           "v": "D",
-          "t": "Każda"
+          "t": "7 8"
         }
       ]
     },
     {
       "id": "q4",
       "points": 1,
-      "diff": "przygotowanie",
-      "text": "Przygotowanie: do czego służy return value w funkcji zwracającej liczbę?",
+      "diff": "analiza kodu z laboratorium 3",
+      "text": "Jakie będą indeks pierwszego minimum i wypisana wartość average?",
+      "code": "int values[4] = {5, 2, 2, 4};\nint index = 0;\nfor (int i = 1; i < 4; ++i) {\n    if (values[i] < values[index]) {\n        index = i;\n    }\n}\ndouble average = static_cast<double>(values[0] + values[1]) / 2;\nstd::cout << index << \" \" << average;",
       "options": [
         {
           "v": "A",
-          "t": "Wczytuje nowy argument"
+          "t": "2 3.5"
         },
         {
           "v": "B",
-          "t": "Kończy wywołanie funkcji i przekazuje wynik"
+          "t": "1 3.5"
         },
         {
           "v": "C",
-          "t": "Powtarza funkcję"
+          "t": "1 3"
         },
         {
           "v": "D",
-          "t": "Zawsze wypisuje value na ekranie"
+          "t": "0 3.5"
         }
       ]
     }
-  ]
+  ],
+  "openQuestion": {
+    "title": "Zadanie otwarte. Średnia i liczba dodatnich pomiarów",
+    "text": "Napisz kompletny program w C++, który wczytuje pięć liczb całkowitych do tablicy, oblicza ich średnią arytmetyczną i liczbę wartości ściśle większych od zera. Średnią wypisz z dwoma miejscami po przecinku, a liczbę dodatnich elementów jako liczbę całkowitą. Załóż poprawny odczyt i wartości z zakresu od -100 do 100. Użyj pętli oraz tablicy. Samodzielnie napisz nagłówki, funkcję main, deklaracje i obliczenia; własne funkcje pomocnicze nie są wymagane."
+  }
 });
 </script>
 
-## Wprowadzenie teoretyczne
+## 1. Nazwana operacja i jej wynik — definicja funkcji
 
-### Dlaczego wydzielamy funkcje?
+Funkcja jest nazwanym fragmentem programu, który można wywołać z różnymi danymi. Parametry określają dane przyjmowane przez funkcję, a typ przed jej nazwą opisuje zwracany wynik. `return` przekazuje wynik do miejsca wywołania i kończy bieżące wykonanie funkcji.
 
-Obliczanie średniej lub sprawdzanie zakresu może być potrzebne w kilku miejscach. Zamiast kopiować instrukcje, można nazwać operację i wywoływać ją z różnymi danymi. Funkcja powinna mieć jasno określone argumenty, wynik i ewentualny wpływ na przekazane dane.
+**Ogólna postać:**
+
+```cpp
+return_type function_name(parameter_type parameter_name) {
+    // Compute the result.
+    return result;
+}
+```
+
+Definicję zwykłej funkcji umieszczamy poza `main`. Na początku zapisuj ją przed `main`, aby kompilator znał funkcję przed jej użyciem. Nazwy parametrów obowiązują wewnątrz funkcji. Wyrażenie przekazane przy wywołaniu nazywamy argumentem; parametr otrzymuje jego wartość.
+
+**Przykład nowej konstrukcji:**
 
 ```cpp
 int square(int value)
@@ -141,26 +161,168 @@ int square(int value)
 }
 ```
 
-`int` przed nazwą określa typ wyniku. `value` jest parametrem, a wyrażenie `square(4)` wywołuje funkcję z argumentem 4 i daje wynik 16. Definicję tej funkcji umieszczamy przed `main`, a w `main` możemy napisać `std::cout << square(4);`.
+Wywołanie `square(4)` daje wynik 16. Możesz użyć go np. w `int result = square(4);` albo `std::cout << square(4);` wewnątrz `main`. Sama funkcja `square` niczego nie wypisuje. Zapis `square(4);` bez wykorzystania wyniku wykona obliczenie, ale nie zapisze wyniku w zmiennej wywołującego i nie pokaże go na ekranie.
 
-**Deklaracja**, np. `int square(int value);`, informuje o nazwie, parametrach i wyniku. **Definicja** zawiera również ciało. W naszych małych programach definicje nad `main` pozwalają uniknąć dodatkowych plików. Funkcji nie definiujemy wewnątrz `main`.
+::: {.lab-task}
+### Zadanie 1. Przeliczenie temperatury
 
-### Przekazywanie przez wartość
+Napisz funkcję `double celsiusToKelvin(double celsius)`, która zwraca temperaturę w kelwinach obliczoną jako temperatura w stopniach Celsjusza plus 273.15. W funkcji nie wczytuj ani nie wypisuj danych. W `main` wczytaj temperaturę, wywołaj funkcję, zapisz jej wynik i wypisz go z opisem. Załóż poprawny odczyt i temperaturę nie mniejszą niż -273.15°C.
 
-Parametr `int value` otrzymuje kopię wartości argumentu. Zmiana parametru nie zmienia zmiennej wywołującego. Możemy zwrócić nową wartość i jawnie ją przypisać:
+**Sprawdź:** dla -273.15, 0 i 100 wyniki wynoszą odpowiednio 0, 273.15 i 373.15.
+
+**Wyjaśnij:** czym różni się zwrócenie wyniku od jego wypisania? Dlaczego odczyt z klawiatury znajduje się w `main`, a nie w funkcji przeliczeniowej?
+:::
+
+## 2. Kilka parametrów i kolejność argumentów
+
+Funkcja może przyjmować więcej niż jeden parametr. Oddzielamy je przecinkami i dla każdego podajemy typ. Przy wywołaniu liczba oraz kolejność argumentów muszą odpowiadać deklaracji funkcji. Nawet gdy parametry mają ten sam typ, ich znaczenia mogą być różne.
+
+**Ogólna postać:**
 
 ```cpp
-int increased(int value)
-{
-    return value + 5;
+return_type function_name(first_type first, second_type second) {
+    // Use both parameters to compute the result.
+    return result;
 }
 ```
 
-Dla `int charge = 20;` wywołanie `increased(charge);` bez użycia wyniku pozostawi `charge` równe 20. Dopiero `charge = increased(charge);` zapisze 25. `return` przekazuje wynik i kończy dane wywołanie funkcji.
+**Przykład nowej konstrukcji:**
 
-### Referencja i zamierzona zmiana argumentu
+```cpp
+double difference(double first, double second)
+{
+    return first - second;
+}
+```
 
-Parametr `int& value` jest referencją, czyli inną nazwą obiektu przekazanego przy wywołaniu. Zmiana takiego parametru zmienia oryginalną zmienną. Funkcja `void` nie zwraca wartości wyniku:
+Wywołanie `difference(8.0, 3.0)` daje 5, a `difference(3.0, 8.0)` daje -5. Kompilator zaakceptuje obie kolejności, ponieważ typy pasują. Poprawność znaczenia argumentów musi zapewnić programista.
+
+::: {.lab-task}
+### Zadanie 2. Prędkość średnia
+
+Napisz funkcję `double averageSpeed(double distance, double time)`, zwracającą iloraz drogi i czasu. Argumenty oznaczają drogę w kilometrach i czas w godzinach. Funkcja nie obsługuje wejścia ani wyjścia. W `main` wczytaj oba argumenty, wywołaj funkcję i wypisz prędkość w `km/h`. Na razie załóż poprawne liczby, nieujemną drogę oraz dodatni czas.
+
+**Sprawdź:** `(120, 2)` daje 60, `(2.5, 0.5)` daje 5, a `(0, 3)` daje 0.
+
+**Wyjaśnij:** dlaczego czas musi być dodatni? Co stanie się z wynikiem dla pierwszej pary po zamianie kolejności argumentów i dlaczego kompilator nie musi zgłosić takiej pomyłki?
+:::
+
+## 3. Funkcja wykonująca czynność — void
+
+Nie każda funkcja musi zwracać wartość. Typ `void` oznacza brak wartości wyniku. Taką funkcję można wykorzystać np. do wyświetlania komunikatu lub fragmentu raportu. Jej wywołanie jest samodzielną instrukcją; nie przypisujemy go do zmiennej liczbowej.
+
+**Ogólna postać:**
+
+```cpp
+void function_name(parameter_list) {
+    // Perform an action without returning a value.
+}
+```
+
+Funkcja `void` kończy się po dojściu do końca ciała. Może też zakończyć się wcześniej przez `return;`, bez wyrażenia po słowie `return`.
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+void printStatus(bool ready)
+{
+    std::cout << (ready ? "Ready" : "Not ready") << '\n';
+}
+```
+
+Wywołanie `printStatus(true);` wypisuje `Ready` i przechodzi do nowej linii. Nie daje jednak wartości, którą można przypisać np. do `int result`.
+
+::: {.lab-task}
+### Zadanie 3. Separator raportu
+
+Napisz funkcję `void printSeparator(int width)`, która wypisuje w jednej linii `width` znaków `-`, a następnie znak nowej linii. Użyj pętli. Dla szerokości zero funkcja ma wypisać wyłącznie nową linię. W `main` wywołaj ją kilka razy z różnymi argumentami, umieszczając pomiędzy separatorami dowolny krótki komunikat. Przyjmij szerokości od 0 do 40.
+
+**Sprawdź:** szerokości 0, 1 i 5 dają odpowiednio pusty wiersz, `-` oraz `-----`.
+
+**Wyjaśnij:** dlaczego funkcja ma typ `void`, mimo że wywołuje instrukcje wypisujące? Czy próba przypisania `printSeparator(5)` do zmiennej `int` byłaby poprawna?
+:::
+
+## 4. Funkcja odpowiadająca na pytanie — wynik bool
+
+Warunek można wydzielić do funkcji zwracającej `bool`. Taka funkcja odpowiada na jedno pytanie i może zostać użyta bezpośrednio w `if`, `while` albo innym wyrażeniu logicznym. Pozwala to nadać regule nazwę i stosować tę samą definicję w kilku miejscach programu.
+
+**Ogólna postać:**
+
+```cpp
+bool predicate(parameter_list) {
+    return condition;
+}
+```
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+bool isNonzero(double value)
+{
+    return value != 0.0;
+}
+```
+
+Wywołanie `isNonzero(2.0)` daje `true`, a `isNonzero(0.0)` daje `false`. W `main` można użyć `if (!isNonzero(divisor))`, aby obsłużyć zerowy dzielnik przed dzieleniem. `return` z funkcji pomocniczej kończy tylko jej wywołanie, a nie cały program.
+
+::: {.lab-task}
+### Zadanie 4. Kontrola poziomu baterii
+
+Napisz funkcję `bool isValidCharge(int charge)`, która zwraca prawdę wyłącznie dla wartości 0–100 włącznie. W funkcji nie wyświetlaj komunikatów. W `main` wczytaj liczbę i na podstawie wyniku funkcji wypisz `Valid charge` albo `Invalid charge`. Załóż poprawny odczyt liczby całkowitej.
+
+**Sprawdź:** -1, 0, 30, 100 i 101. Tylko pierwsza i ostatnia wartość mają zostać odrzucone.
+
+**Wyjaśnij:** dlaczego wynik typu `bool` jest przydatniejszy do ponownego użycia reguły niż samo wypisanie komunikatu w funkcji? Czy `return false;` wewnątrz tej funkcji kończy `main`?
+:::
+
+## 5. Kopia argumentu i jawne wykorzystanie wyniku
+
+Parametr przekazywany przez wartość, np. `int value`, jest osobną zmienną lokalną funkcji. Zmiana tego parametru nie zmienia zmiennej użytej jako argument wywołania. Jeśli funkcja ma obliczyć nową wartość, można ją zwrócić, a następnie jawnie przypisać do wybranej zmiennej w `main`.
+
+**Ogólna postać:**
+
+```cpp
+int function_name(int value) {
+    // Modify the local copy.
+    return value;
+}
+```
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+int nextValue(int value)
+{
+    value += 1;
+    return value;
+}
+```
+
+Dla `int count = 4;` wywołanie `nextValue(count);` pozostawi `count` równe 4. Dopiero `count = nextValue(count);` zapisze w nim 5. Nazwa parametru i nazwa zmiennej w `main` mogą być takie same, ale nie oznacza to, że są jednym obiektem. Nie przenoś ich do zmiennych globalnych.
+
+::: {.lab-task}
+### Zadanie 5. Korekta bez zmiany oryginału
+
+Napisz `int corrected(int value, int correction)`. W ciele funkcji dodaj poprawkę do parametru `value` i zwróć zmodyfikowaną wartość. Zacznij w `main` od `int measurement = 20;`. Najpierw wywołaj funkcję z poprawką 5 bez zapisania jej wyniku i wypisz `measurement`. Następnie zapisz wynik w drugiej zmiennej i wypisz obie. Na końcu przypisz wynik funkcji do samego `measurement` i ponownie go wypisz.
+
+**Sprawdź:** pierwszy wydruk to 20, następna para to `20 25`, a końcowa wartość `measurement` to 25. Sprawdź także poprawkę -3 dla początkowego pomiaru 20.
+
+**Wyjaśnij:** dlaczego zmiana parametru wewnątrz funkcji nie zmienia oryginału? W debuggerze użyj **F11 / Step Into**, aby wejść do funkcji i porównać jej parametr ze zmienną w `main`; **F10 / Step Over** wykonuje wywołanie bez wchodzenia do środka.
+:::
+
+## 6. Zamierzona zmiana argumentu — referencja
+
+Parametr zapisany jako `int& value` jest referencją: w tym wywołaniu stanowi inną nazwę obiektu przekazanego przez wywołującego. Przypisanie do takiego parametru zmienia oryginalną zmienną. Stosujemy referencję wtedy, gdy modyfikacja argumentu jest częścią zadania funkcji.
+
+**Ogólna postać:**
+
+```cpp
+void function_name(int& value) {
+    // Modify the caller's object through the reference.
+}
+```
+
+**Przykład nowej konstrukcji:**
 
 ```cpp
 void increase(int& value)
@@ -169,121 +331,210 @@ void increase(int& value)
 }
 ```
 
-Wywołanie `increase(charge);` zmieni `charge` z 20 na 25. Referencję stosujemy wtedy, gdy zmiana argumentu jest częścią zadania funkcji. Nie dodajemy `&` automatycznie do każdego parametru.
+Dla `int count = 20;` wywołanie `increase(count);` zmieni `count` na 25. Nie trzeba przypisywać wyniku, bo funkcja go nie zwraca. Przy wywołaniu nie dopisujemy `&` przed nazwą zmiennej. Zwykła referencja do nie-const `int` wymaga odpowiedniego obiektu, np. zmiennej: wywołanie `increase(20)` z literałem jest niepoprawne.
 
-### Tablica jako argument
+::: {.lab-task}
+### Zadanie 6. Korekta przez referencję
 
-W parametrze funkcji zapis `const int values[]` umożliwia odczytywanie elementów przekazanej tablicy. Funkcja nie dostaje automatycznie informacji o jej długości; liczbę elementów podajemy osobnym argumentem. Taki parametr jest traktowany jak wskaźnik do pierwszego elementu. Nie oznacza skopiowania całej tablicy.
+Napisz `void addCorrection(int& value, int correction)`, która zmienia pomiar przekazany jako pierwszy argument. Drugi argument przekazuj przez wartość. W `main` zacznij od 20, zastosuj kolejno poprawki 5 i -3 oraz wypisz pomiar po każdym wywołaniu. Następnie porównaj ten przebieg z funkcją `corrected` z zadania 5.
 
-`const` zabrania modyfikowania elementów przez ten parametr. Bez `const` funkcja może zmieniać przekazaną tablicę. Podana długość musi odpowiadać dostępnej liczbie elementów — kompilator nie sprawdzi jej za nas.
+**Sprawdź:** kolejne wartości oryginalnego pomiaru to 25 i 22. Dla poprawki zero wartość pozostaje bez zmian. Używaj małych liczb, aby nie przekroczyć zakresu `int`.
 
-### Pełny przykład: funkcje w raporcie
+**Wyjaśnij:** który parametr może zmienić oryginalny obiekt i dlaczego? Co zmieniłoby usunięcie `&` z deklaracji i definicji tej funkcji?
+:::
 
-Program najpierw zmienia pierwszy pomiar z 20 na 35, a potem zlicza gotowe urządzenia. Wypisze `First: 35` i `Ready: 3`. Funkcja `isReady` jedynie odpowiada na pytanie; `addCorrection` celowo zmienia argument.
+## 7. Deklaracja przed wywołaniem — prototyp funkcji
+
+Kompilator musi znać deklarację funkcji przed miejscem jej wywołania. Dotychczas zapewnialiśmy to, umieszczając całą definicję nad `main`. Można też zapisać tam tylko deklarację, a definicję umieścić dalej. Deklaracja informuje o nazwie, typach parametrów i typie wyniku; definicja zawiera dodatkowo ciało.
+
+**Ogólna postać deklaracji:**
 
 ```cpp
-#include <iostream>
+return_type function_name(parameter_list);
+```
 
-bool isReady(int charge)
-{
-    return charge >= 30 && charge <= 100;
-}
+Średnik kończy deklarację. Jeżeli późniejsza definicja ma inne typy parametrów, może opisywać inną funkcję zamiast implementować zapowiedzianą. Zapis `int value` i `int& value` nie oznacza tego samego sposobu przekazywania argumentu. Pilnuj zgodności deklaracji i definicji.
 
-int countReady(const int values[], int count)
-{
-    int ready = 0;
-    for (int i = 0; i < count; ++i) {
-        if (isReady(values[i])) {
-            ++ready;
-        }
-    }
-    return ready;
-}
+**Przykład nowej konstrukcji:**
 
-void addCorrection(int& value, int correction)
-{
-    value += correction;
-}
+```cpp
+int doubled(int value);
 
-int main()
+int doubled(int value)
 {
-    int charge[4] = {20, 30, 80, 0};
-    addCorrection(charge[0], 15);
-    std::cout << "First: " << charge[0] << '\n';
-    std::cout << "Ready: " << countReady(charge, 4) << '\n';
-    return 0;
+    return 2 * value;
 }
 ```
 
-### Sprawdzanie funkcji osobno
-
-Funkcja jest łatwiejsza do sprawdzenia, gdy ma jedno zadanie. Dla `isReady` można przygotować przypadki 29, 30, 100, 101 bez odczytu z klawiatury. W debuggerze **F11 / Step Into** przechodzi do wywołanej funkcji; **F10 / Step Over** pozwala wykonać wywołanie bez śledzenia jego wnętrza.
-
-Dla funkcji liczącej średnią trzeba ustalić, co oznacza pusty zbiór. W zadaniu poniżej funkcja ma otrzymywać niepustą tablicę; `main` odpowiada za sprawdzenie tego warunku przed wywołaniem. Nie przyjmujemy przypadkowego wyniku z dzielenia przez zero.
-
-[Pełny program pokazowy — pobierz plik .cpp](../assets/cpp/04_pokaz.cpp). Każdy pokaz ma własną funkcję main i wymaga osobnego projektu.
-
-## Zadania do realizacji
-
-Przed uruchomieniem zapisz przewidywany wynik. Każdy niezależny program umieść w osobnym projekcie. Zadania rozwijające wcześniejszy program można wykonywać w jego kolejnych zapisanych wersjach.
+W kompletnym programie możesz umieścić `main` pomiędzy tą deklaracją i definicją. Wywołanie `doubled(3)` w `main` nadal będzie poprawne, a wynik wyniesie 6. Sama deklaracja nie zastępuje definicji potrzebnej do zbudowania programu używającego tej funkcji.
 
 ::: {.lab-task}
-### Zadanie 1. Funkcja przeliczeniowa
+### Zadanie 7. Zamiana wartości i prototyp
 
-Napisz `double celsiusToKelvin(double celsius)`. Funkcja ma zwracać wynik i niczego nie wczytywać ani wypisywać. W main sprawdź temperatury 0 i 100: wyniki 273.15 i 373.15. Następnie pozwól użytkownikowi wprowadzić temperaturę.
+Napisz funkcję `void swapValues(int& first, int& second)` zamieniającą wartości za pomocą jednej zmiennej pomocniczej. Nie używaj gotowej funkcji zamiany. Nad `main` umieść tylko deklarację, a definicję własnej funkcji pod `main`. W `main` wywołaj ją dla dwóch zmiennych i wypisz wynik.
+
+**Sprawdź:** `(3, 7)` zmienia się na `(7, 3)`, `(-2, 5)` na `(5, -2)`, a `(4, 4)` pozostaje bez zmian. Sprawdź też wywołanie z tą samą zmienną w obu argumentach — jej wartość powinna się zachować.
+
+**Wyjaśnij:** dlaczego funkcja potrzebuje dwóch referencji? Co zgłosi proces budowania, gdy pozostawisz deklarację i wywołanie, ale usuniesz definicję? Po próbie przywróć definicję.
 :::
 
-::: {.lab-task}
-### Zadanie 2. Kopia i referencja
+## 8. Tablica tylko do odczytu i osobny rozmiar
 
-Zdefiniuj dwie funkcje: `void increaseCopy(int value)` i `void increaseOriginal(int& value)`. Obie zwiększają parametr o 5 i wypisują go. Zacznij w main od 20, wywołaj pierwszą funkcję i wypisz oryginał; następnie wywołaj drugą i ponownie wypisz oryginał. Wyjaśnij przebieg 25, 20, 25, 25.
+Parametr `const int values[]` umożliwia funkcji odczyt elementów przekazanej tablicy. Taki parametr jest w języku traktowany jak wskaźnik do elementu tablicy, a nie kopia wszystkich elementów. Nie zawiera automatycznie informacji o ich liczbie, dlatego przekazujemy rozmiar osobno. `const` zabrania zmiany elementów przez ten parametr.
+
+**Ogólna postać:**
+
+```cpp
+return_type function_name(const int values[], int count) {
+    // Read values[0] through values[count - 1].
+    return result;
+}
+```
+
+Wywołując funkcję, podajemy nazwę tablicy, bez pustych nawiasów: np. `sumValues(measurements, 4)`. Kompilator nie sprawdzi, czy zadeklarowana liczba elementów jest dostępna. Funkcja może przetwarzać początkową część tablicy, ale nie wolno przekazać liczby większej od liczby dostępnych elementów.
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+int sumValues(const int values[], int count)
+{
+    int total = 0;
+    for (int i = 0; i < count; ++i) {
+        total += values[i];
+    }
+    return total;
+}
+```
+
+Dla tablicy `{2, 5, 1, 4}` wywołanie z liczbą elementów 4 daje 12, a z liczbą 2 daje 7. Dla liczby zero ta konkretna funkcja zwróci zero bez odczytu elementów. Nie oznacza to, że każda operacja, np. średnia, jest zdefiniowana dla pustego zbioru. `sizeof(values)` wewnątrz tej funkcji nie poda rozmiaru oryginalnej tablicy.
+
+::: {.lab-task}
+### Zadanie 8. Średnia jako funkcja
+
+Napisz `double average(const int values[], int count)`, która oblicza i zwraca średnią z niepustej tablicy. Wykorzystaj konwersję przed dzieleniem, aby zachować część ułamkową. Nie wczytuj ani nie wypisuj danych w tej funkcji.
+
+W `main` przygotuj tablicę `{2, 5, 1, 4}` i wczytaj liczbę jej początkowych elementów do analizy. Dopuść zakres 0–4; inne liczby odrzuć. Dla zera wypisz `No data` bez wywoływania `average`. Załóż poprawny odczyt liczby. To `main` odpowiada za spełnienie warunku niepustych, dostępnych danych przed wywołaniem funkcji.
+
+**Sprawdź:** dla liczby elementów 1, 2 i 4 średnie wynoszą 2, 3.5 i 3. W osobnej próbie dla tablicy `{1, 2}` i liczby 2 wynik ma wynieść 1.5. Sprawdź zero oraz odrzucenie -1 i 5.
+
+**Wyjaśnij:** dlaczego rozmiar jest osobnym argumentem? Dlaczego funkcji nie wolno wywołać z zerem lub z liczbą większą niż dostępny rozmiar, nawet jeśli kod się skompiluje?
 :::
 
-::: {.lab-task}
-### Zadanie 3. Zamiana wartości
+## 9. Funkcja zmieniająca elementy tablicy
 
-Napisz `void swapValues(int& first, int& second)` z jedną zmienną pomocniczą. Dla a=3, b=7 po wywołaniu ma być a=7, b=3. Sprawdź też równe wartości. Nie używaj gotowej funkcji zamiany.
+Usunięcie `const` z parametru tablicowego umożliwia modyfikowanie elementów przez ten parametr. Nie trzeba dodawać referencji `&` do zapisu `int values[]`, aby zmiany były widoczne po wywołaniu: parametr nadal wskazuje elementy oryginalnej tablicy. To inna sytuacja niż pojedynczy parametr `int value` przekazywany przez wartość.
+
+**Ogólna postać:**
+
+```cpp
+void function_name(int values[], int count) {
+    for (int i = 0; i < count; ++i) {
+        // Modify values[i].
+    }
+}
+```
+
+**Przykład nowej konstrukcji:**
+
+```cpp
+void addToAll(int values[], int count, int correction)
+{
+    for (int i = 0; i < count; ++i) {
+        values[i] += correction;
+    }
+}
+```
+
+Dla tablicy `{2, 5, 1, 4}` wywołanie `addToAll(values, 4, 3)` zmienia dane na `{5, 8, 4, 7}`. Przekazanie liczby elementów 2 zmieniłoby tylko dwie pierwsze wartości. Nadal trzeba zapewnić poprawny zakres indeksów i takie dane, dla których dodawanie mieści się w `int`.
+
+::: {.lab-task}
+### Zadanie 9. Zerowanie przekazanych danych
+
+Napisz `void resetValues(int values[], int count)`, która zeruje wskazaną liczbę początkowych elementów tablicy. W funkcji nie zakładaj stałego rozmiaru 4 ani 6. W `main` przygotuj tablicę `{2, 5, 1, 4}`, wywołaj funkcję i dopiero potem wypisz wszystkie elementy. Argument `count` ma być nieujemny i nie większy od dostępnego rozmiaru.
+
+**Sprawdź:** dla 3 otrzymasz `{0, 0, 0, 4}`, a dla 4 — cztery zera. Osobno sprawdź 0 na ponownie zainicjalizowanej tablicy: żaden element nie powinien się zmienić.
+
+**Wyjaśnij:** dlaczego zmiany są widoczne w `main` mimo braku `&` w parametrze tablicowym? Dlaczego dodanie `const` uniemożliwiłoby wykonanie zadania? Nie usuwaj `const` w funkcjach, które mają wyłącznie czytać dane.
 :::
 
+## 10. Podział raportu na funkcje o różnych zadaniach
+
+Funkcje można łączyć: jedna sprawdza dane, druga oblicza wynik, a kolejna przygotowuje wydruk. Funkcja może wywołać inną funkcję, jeśli zna jej deklarację. Wynik jednego wywołania może być argumentem następnego. Taki podział ułatwia sprawdzanie obliczeń niezależnie od formatowania i odczytu.
+
+**Ogólna postać złożenia wywołań:**
+
+```cpp
+result_type result = outer_function(inner_function(argument));
+```
+
+Najpierw musi powstać wynik wywołania wewnętrznego, aby można go było przekazać jako argument wywołania zewnętrznego. Jeśli czytelniejsze są dwa kroki, zapisz wynik pośredni w osobnej zmiennej.
+
+**Przykład nowej kombinacji:**
+
+```cpp
+int doubled(int value)
+{
+    return 2 * value;
+}
+
+int adjusted(int value)
+{
+    return doubled(value) + 1;
+}
+```
+
+Wywołanie `adjusted(3)` daje 7. Funkcja `adjusted` korzysta z już zadeklarowanej funkcji `doubled`. Do przekazania danych nie są potrzebne zmienne globalne.
+
 ::: {.lab-task}
-### Zadanie 4. Średnia z tablicy
+### Zadanie 10. Raport gotowości podzielony na funkcje
 
-Napisz `double average(const int values[], int count)` dla niepustej tablicy. Zsumuj elementy i zwróć średnią bez utraty części ułamkowej. Sprawdź `{2,5,1,4}` → 3 oraz `{1,2}` → 1.5. W main sprawdzaj `count > 0` przed wywołaniem.
-:::
+Przebuduj raport z laboratorium 3. Użyj funkcji `bool isValidCharge(int charge)` i `double average(const int values[], int count)` z wcześniejszych zadań. Dodaj:
 
-::: {.lab-task}
-### Zadanie 5. Zmiana elementów tablicy
+- `int countBelow(const int values[], int count, int threshold)` — zwraca liczbę elementów ściśle mniejszych od progu;
+- `void printReport(const int values[], int count)` — wypisuje pomiary z indeksami, średnią z dwoma miejscami po przecinku oraz liczbę pomiarów poniżej 30; korzysta z funkcji obliczeniowych.
 
-Napisz `void resetValues(int values[], int count)`, która ustawi każdy element na zero. Po wywołaniu wypisz tablicę w main i wyjaśnij, dlaczego zmiany są widoczne. Nie zakładaj w funkcji stałej długości 4 lub 6.
-:::
+W `main` wczytaj sześć poziomów baterii do tablicy. Sprawdzaj odczyt i używaj `isValidCharge` do kontroli zakresu. Błędny odczyt kończy program komunikatem `Invalid input`, a błędny zakres — `Invalid charge`; w obu przypadkach nie wywołuj raportu. Dla kompletu poprawnych danych wywołaj `printReport`. Nie używaj zmiennych globalnych, nie wpisuj rozmiaru sześć na stałe do funkcji pomocniczych i nie zmieniaj analizowanej tablicy.
 
-::: {.lab-task}
-### Zadanie 6. Raport podzielony na funkcje
+**Sprawdź:** dla `80 20 55 0 100 30` raport ma średnią 47.50 i dwa pomiary poniżej 30. Dla sześciu zer średnia wynosi 0.00, a liczba takich pomiarów 6. Dla sześciu wartości 100 wyniki to 100.00 i 0. Dodatkowo sprawdź `countBelow` dla danych pierwszej próby i progów 0, 30, 80 oraz 101: oczekiwane liczby to 0, 2, 4 i 6.
 
-Wróć do raportu z laboratorium 3. Wydziel funkcje obliczające średnią i liczbę wartości poniżej zadanego progu oraz funkcję wypisującą raport. Main ma przygotować tablicę i uruchomić raport. Sprawdź dane `{80,20,55,0,100,30}`: średnia 47.5 i dwa pomiary poniżej 30. Nie używaj zmiennych globalnych.
+**Wyjaśnij:** które funkcje zwracają wynik, która odpowiada za wypisywanie i czy którakolwiek powinna zmieniać analizowaną tablicę? Czy funkcję `average` można sprawdzić osobno bez uruchamiania całego menu lub raportu? Wskaż w kodzie, gdzie zapewniasz jej warunek niepustych danych.
 :::
 
 ## Dokumentacja i sprawdzenie pracy
 
-- Zachowaj źródła `.cpp` oznaczone numerem zadania.
-- Dla każdego programu zapisz dane wejściowe, oczekiwany wynik i wynik rzeczywisty.
-- Opisz wykryty błąd albo jeden sprawdzony przypadek graniczny.
-- Przygotuj się do wyjaśnienia wybranego fragmentu. Sam wynik bez zrozumienia kodu nie wystarcza.
+Każde zadanie przygotuj jako kompletny program w osobnym projekcie. Przykłady pokazują wyłącznie nowe konstrukcje lub pojedyncze funkcje, a nie pełny program. Samodzielnie napisz `main`, dobierz nagłówki i połącz wywołania. Stosuj angielskie nazwy, komunikaty i komentarze.
+
+- Zachowaj źródła `.cpp` oznaczone numerami zadań.
+- Zapisz argumenty wywołań, oczekiwane wyniki i wyniki rzeczywiste dla wskazanych prób.
+- Przy każdej funkcji wskaż, czy zwraca wynik, wypisuje dane lub modyfikuje argumenty.
+- Przygotuj odpowiedzi na pytania „Wyjaśnij”.
+- Prześledź co najmniej jedno wywołanie przez **F11** i porównaj stan przed nim oraz po powrocie do wywołującego.
 
 Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów `.vs` i `Debug` ani plików `.exe`.
 
-## Przygotowanie do następnej wejściówki
+## Przygotowanie do kolejnych zajęć
 
-### Powtórz
+### Powtórz materiał laboratorium 4
 
-- Wynik funkcji i wywołanie; funkcje void.
-- Kopię argumentu i referencję; wpływ na zmienną w main.
-- Tablicę jako argument oraz potrzebę przekazania długości.
+- Definicję, deklarację, parametry, argumenty i wywołanie funkcji.
+- Różnicę między `return` a wypisywaniem oraz znaczenie `void`.
+- Przekazywanie przez wartość i referencję, użycie wyniku i zamierzone modyfikacje.
+- Tablicę jako argument, znaczenie `const` i osobnej liczby elementów.
+- Warunki poprawnego wywołania, zwłaszcza niepuste dane dla średniej.
+- Współpracę funkcji bez zmiennych globalnych.
 
-### Przeczytaj przed laboratorium 5
+### Przygotuj się do laboratorium 5
 
-W [instrukcji 5](05_wektor.qmd#wprowadzenie-teoretyczne) przeczytaj sekcje o obiekcie, metodzie i kontenerze vector.
+Kolejne zajęcia wprowadzą obiekty biblioteczne i kontener `std::vector`. Wektor przechowuje elementy; `push_back` dopisuje element na końcu, a `size` zwraca aktualną liczbę elementów. Poniższy fragment wymaga nagłówka `<vector>`:
 
-**Minimalne przygotowanie:** wiedzieć, że vector przechowuje elementy, push_back dopisuje jeden na końcu, a size zwraca ich liczbę. Pusty wektor po dopisaniu 8, 12 i 16 ma trzy elementy. Nie trzeba jeszcze implementować menu rejestru.
+```cpp
+std::vector<int> values;
+values.push_back(8);
+values.push_back(12);
+values.push_back(16);
+std::cout << values.size() << '\n';
+```
 
-Następna wejściówka: **3 pytania powtórkowe i 1 podstawowe pytanie z zapowiedzianego nowego tematu**, po 1 punkcie.
+Fragment wypisuje 3. `values.size()` jest wywołaniem metody na obiekcie `values`; w odróżnieniu od zwykłej funkcji pokazuje również obiekt, do którego odnosi się operacja. Nie trzeba jeszcze samodzielnie implementować menu rejestru.
+
+Następna wejściówka będzie sprawdzać poznany materiał funkcji. Zakres pytań i krótkiego programu będzie podany w instrukcji kolejnego laboratorium.

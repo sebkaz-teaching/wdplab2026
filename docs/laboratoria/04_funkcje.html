@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Laboratorium 4 – Wprowadzenie do programowania — C++</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-5de16f5e46225c21e2daa90d340bf64f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5be0a0167123a4a6964ea0d6cb4a87f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź",
+    "search-label": "Szukaj"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked lab-handout quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Pasek narzędzi">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Okruszki chleba"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../laboratoria/01_projekt.html">Instrukcje laboratoryjne</a></li><li class="breadcrumb-item"><a href="../laboratoria/04_funkcje.html">Laboratorium 4</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Szukaj" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Serwis internetowy">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Wprowadzenie do programowania — C++</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Szukaj"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wprowadzenie do programowania</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../podstawy_programowania/visual-studio-community.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Visual Studio — projekt konsolowy C++</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../scenariusze.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Organizacja pracy laboratoryjnej</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Instrukcje laboratoryjne</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../laboratoria/01_projekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../laboratoria/02_warunki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../laboratoria/03_petle_tablice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Laboratorium 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../laboratoria/04_funkcje.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Laboratorium 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Na tej stronie</h2>
+   
+  <ul class="collapse">
+  <li><a href="#wejściówka" id="toc-wejściówka" class="nav-link active" data-scroll-target="#wejściówka">Wejściówka</a></li>
+  <li><a href="#nazwana-operacja-i-jej-wynik-definicja-funkcji" id="toc-nazwana-operacja-i-jej-wynik-definicja-funkcji" class="nav-link" data-scroll-target="#nazwana-operacja-i-jej-wynik-definicja-funkcji">1. Nazwana operacja i jej wynik — definicja funkcji</a></li>
+  <li><a href="#kilka-parametrów-i-kolejność-argumentów" id="toc-kilka-parametrów-i-kolejność-argumentów" class="nav-link" data-scroll-target="#kilka-parametrów-i-kolejność-argumentów">2. Kilka parametrów i kolejność argumentów</a></li>
+  <li><a href="#funkcja-wykonująca-czynność-void" id="toc-funkcja-wykonująca-czynność-void" class="nav-link" data-scroll-target="#funkcja-wykonująca-czynność-void">3. Funkcja wykonująca czynność — void</a></li>
+  <li><a href="#funkcja-odpowiadająca-na-pytanie-wynik-bool" id="toc-funkcja-odpowiadająca-na-pytanie-wynik-bool" class="nav-link" data-scroll-target="#funkcja-odpowiadająca-na-pytanie-wynik-bool">4. Funkcja odpowiadająca na pytanie — wynik bool</a></li>
+  <li><a href="#kopia-argumentu-i-jawne-wykorzystanie-wyniku" id="toc-kopia-argumentu-i-jawne-wykorzystanie-wyniku" class="nav-link" data-scroll-target="#kopia-argumentu-i-jawne-wykorzystanie-wyniku">5. Kopia argumentu i jawne wykorzystanie wyniku</a></li>
+  <li><a href="#zamierzona-zmiana-argumentu-referencja" id="toc-zamierzona-zmiana-argumentu-referencja" class="nav-link" data-scroll-target="#zamierzona-zmiana-argumentu-referencja">6. Zamierzona zmiana argumentu — referencja</a></li>
+  <li><a href="#deklaracja-przed-wywołaniem-prototyp-funkcji" id="toc-deklaracja-przed-wywołaniem-prototyp-funkcji" class="nav-link" data-scroll-target="#deklaracja-przed-wywołaniem-prototyp-funkcji">7. Deklaracja przed wywołaniem — prototyp funkcji</a></li>
+  <li><a href="#tablica-tylko-do-odczytu-i-osobny-rozmiar" id="toc-tablica-tylko-do-odczytu-i-osobny-rozmiar" class="nav-link" data-scroll-target="#tablica-tylko-do-odczytu-i-osobny-rozmiar">8. Tablica tylko do odczytu i osobny rozmiar</a></li>
+  <li><a href="#funkcja-zmieniająca-elementy-tablicy" id="toc-funkcja-zmieniająca-elementy-tablicy" class="nav-link" data-scroll-target="#funkcja-zmieniająca-elementy-tablicy">9. Funkcja zmieniająca elementy tablicy</a></li>
+  <li><a href="#podział-raportu-na-funkcje-o-różnych-zadaniach" id="toc-podział-raportu-na-funkcje-o-różnych-zadaniach" class="nav-link" data-scroll-target="#podział-raportu-na-funkcje-o-różnych-zadaniach">10. Podział raportu na funkcje o różnych zadaniach</a></li>
+  <li><a href="#dokumentacja-i-sprawdzenie-pracy" id="toc-dokumentacja-i-sprawdzenie-pracy" class="nav-link" data-scroll-target="#dokumentacja-i-sprawdzenie-pracy">Dokumentacja i sprawdzenie pracy</a></li>
+  <li><a href="#przygotowanie-do-kolejnych-zajęć" id="toc-przygotowanie-do-kolejnych-zajęć" class="nav-link" data-scroll-target="#przygotowanie-do-kolejnych-zajęć">Przygotowanie do kolejnych zajęć</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Okruszki chleba"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../laboratoria/01_projekt.html">Instrukcje laboratoryjne</a></li><li class="breadcrumb-item"><a href="../laboratoria/04_funkcje.html">Laboratorium 4</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Laboratorium 4</h1>
+<p class="subtitle lead">Funkcje w języku C++</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lab-meta">
+<p><strong>Wprowadzenie do programowania</strong> · C++ · instrukcja laboratoryjna</p>
+<p><strong>Cel ćwiczenia:</strong> Podział obliczeń na funkcje i świadomy wybór sposobu przekazywania argumentów.</p>
+<p><strong>Środowisko:</strong> Visual Studio Community, projekt Console App, standard C++17.</p>
+</div>
+<section id="wejściówka" class="level2">
+<h2 class="anchored" data-anchor-id="wejściówka">Wejściówka</h2>
+<p><strong>4 pytania wyboru z materiału laboratoriów 1–3</strong>, po 1 punkcie, oraz <strong>krótki program do ręcznego sprawdzenia</strong>. Pytania wymagają prześledzenia pętli, zmian tablicy i obliczeń. Funkcje pomocnicze, które poznasz na tych zajęciach, nie są jeszcze oceniane.</p>
+<p>Pracuj samodzielnie. Przyjmij, że fragmenty pytań wyboru znajdują się wewnątrz poprawnie zdefiniowanej funkcji <code>main</code> i dołączono <code>&lt;iostream&gt;</code>. Analizuj kod dokładnie w zapisanej postaci. Po potwierdzeniu zapisu pojawi się wynik testu wyboru (0–4); program sprawdzi prowadzący osobno.</p>
+<div id="rsod-quiz">
+
+</div>
+<script src="../assets/js/quiz-engine.js"></script>
+<script>
+CourseQuiz.mount(document.getElementById("rsod-quiz"), {
+  "course": "wdplab2026",
+  "lecture": "cpp04",
+  "title": "Wejściówka przed laboratorium 4",
+  "submitUrl": "https://sebastianzajac.pl/rsod-quiz/submit.php",
+  "questions": [
+    {
+      "id": "q1",
+      "points": 1,
+      "diff": "analiza kodu z laboratorium 3",
+      "text": "Jaką wartość wypisze program po zakończeniu pętli?",
+      "code": "int total = 0;\nfor (int i = 1; i <= 5; ++i) {\n    if (i % 2 == 0) {\n        continue;\n    }\n    total += i;\n}\nstd::cout << total;",
+      "options": [
+        {
+          "v": "A",
+          "t": "15"
+        },
+        {
+          "v": "B",
+          "t": "9"
+        },
+        {
+          "v": "C",
+          "t": "6"
+        },
+        {
+          "v": "D",
+          "t": "5"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "points": 1,
+      "diff": "analiza kodu z laboratorium 3",
+      "text": "Co zostanie wypisane po wykonaniu obu pętli?",
+      "code": "int value = 0;\ndo {\n    value += 2;\n} while (value < 0);\nwhile (value < 5) {\n    ++value;\n}\nstd::cout << value;",
+      "options": [
+        {
+          "v": "A",
+          "t": "0"
+        },
+        {
+          "v": "B",
+          "t": "5"
+        },
+        {
+          "v": "C",
+          "t": "2"
+        },
+        {
+          "v": "D",
+          "t": "6"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "points": 1,
+      "diff": "analiza kodu z laboratorium 3",
+      "text": "Co wypisze fragment? Elementy tablicy są zmieniane w trakcie przejścia.",
+      "code": "int values[4] = {2, 5, 1, 4};\nfor (int i = 1; i < 4; ++i) {\n    values[i] += values[i - 1];\n}\nstd::cout << values[2] << \" \" << values[3];",
+      "options": [
+        {
+          "v": "A",
+          "t": "6 5"
+        },
+        {
+          "v": "B",
+          "t": "8 12"
+        },
+        {
+          "v": "C",
+          "t": "1 4"
+        },
+        {
+          "v": "D",
+          "t": "7 8"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "points": 1,
+      "diff": "analiza kodu z laboratorium 3",
+      "text": "Jakie będą indeks pierwszego minimum i wypisana wartość average?",
+      "code": "int values[4] = {5, 2, 2, 4};\nint index = 0;\nfor (int i = 1; i < 4; ++i) {\n    if (values[i] < values[index]) {\n        index = i;\n    }\n}\ndouble average = static_cast<double>(values[0] + values[1]) / 2;\nstd::cout << index << \" \" << average;",
+      "options": [
+        {
+          "v": "A",
+          "t": "2 3.5"
+        },
+        {
+          "v": "B",
+          "t": "1 3.5"
+        },
+        {
+          "v": "C",
+          "t": "1 3"
+        },
+        {
+          "v": "D",
+          "t": "0 3.5"
+        }
+      ]
+    }
+  ],
+  "openQuestion": {
+    "title": "Zadanie otwarte. Średnia i liczba dodatnich pomiarów",
+    "text": "Napisz kompletny program w C++, który wczytuje pięć liczb całkowitych do tablicy, oblicza ich średnią arytmetyczną i liczbę wartości ściśle większych od zera. Średnią wypisz z dwoma miejscami po przecinku, a liczbę dodatnich elementów jako liczbę całkowitą. Załóż poprawny odczyt i wartości z zakresu od -100 do 100. Użyj pętli oraz tablicy. Samodzielnie napisz nagłówki, funkcję main, deklaracje i obliczenia; własne funkcje pomocnicze nie są wymagane."
+  }
+});
+</script>
+</section>
+<section id="nazwana-operacja-i-jej-wynik-definicja-funkcji" class="level2">
+<h2 class="anchored" data-anchor-id="nazwana-operacja-i-jej-wynik-definicja-funkcji">1. Nazwana operacja i jej wynik — definicja funkcji</h2>
+<p>Funkcja jest nazwanym fragmentem programu, który można wywołać z różnymi danymi. Parametry określają dane przyjmowane przez funkcję, a typ przed jej nazwą opisuje zwracany wynik. <code>return</code> przekazuje wynik do miejsca wywołania i kończy bieżące wykonanie funkcji.</p>
+<p><strong>Ogólna postać:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">return_type</span> function_name<span class="op">(</span><span class="dt">parameter_type</span> parameter_name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Compute the result.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Definicję zwykłej funkcji umieszczamy poza <code>main</code>. Na początku zapisuj ją przed <code>main</code>, aby kompilator znał funkcję przed jej użyciem. Nazwy parametrów obowiązują wewnątrz funkcji. Wyrażenie przekazane przy wywołaniu nazywamy argumentem; parametr otrzymuje jego wartość.</p>
+<p><strong>Przykład nowej konstrukcji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> square<span class="op">(</span><span class="dt">int</span> value<span class="op">)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> value <span class="op">*</span> value<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Wywołanie <code>square(4)</code> daje wynik 16. Możesz użyć go np. w <code>int result = square(4);</code> albo <code>std::cout &lt;&lt; square(4);</code> wewnątrz <code>main</code>. Sama funkcja <code>square</code> niczego nie wypisuje. Zapis <code>square(4);</code> bez wykorzystania wyniku wykona obliczenie, ale nie zapisze wyniku w zmiennej wywołującego i nie pokaże go na ekranie.</p>
+<section id="zadanie-1.-przeliczenie-temperatury" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-1.-przeliczenie-temperatury">Zadanie 1. Przeliczenie temperatury</h3>
+<p>Napisz funkcję <code>double celsiusToKelvin(double celsius)</code>, która zwraca temperaturę w kelwinach obliczoną jako temperatura w stopniach Celsjusza plus 273.15. W funkcji nie wczytuj ani nie wypisuj danych. W <code>main</code> wczytaj temperaturę, wywołaj funkcję, zapisz jej wynik i wypisz go z opisem. Załóż poprawny odczyt i temperaturę nie mniejszą niż -273.15°C.</p>
+<p><strong>Sprawdź:</strong> dla -273.15, 0 i 100 wyniki wynoszą odpowiednio 0, 273.15 i 373.15.</p>
+<p><strong>Wyjaśnij:</strong> czym różni się zwrócenie wyniku od jego wypisania? Dlaczego odczyt z klawiatury znajduje się w <code>main</code>, a nie w funkcji przeliczeniowej?</p>
+</section>
+</section>
+<section id="kilka-parametrów-i-kolejność-argumentów" class="level2">
+<h2 class="anchored" data-anchor-id="kilka-parametrów-i-kolejność-argumentów">2. Kilka parametrów i kolejność argumentów</h2>
+<p>Funkcja może przyjmować więcej niż jeden parametr. Oddzielamy je przecinkami i dla każdego podajemy typ. Przy wywołaniu liczba oraz kolejność argumentów muszą odpowiadać deklaracji funkcji. Nawet gdy parametry mają ten sam typ, ich znaczenia mogą być różne.</p>
+<p><strong>Ogólna postać:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">return_type</span> function_name<span class="op">(</span><span class="dt">first_type</span> first<span class="op">,</span> <span class="dt">second_type</span> second<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Use both parameters to compute the result.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Przykład nowej konstrukcji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> difference<span class="op">(</span><span class="dt">double</span> first<span class="op">,</span> <span class="dt">double</span> second<span class="op">)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> first <span class="op">-</span> second<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Wywołanie <code>difference(8.0, 3.0)</code> daje 5, a <code>difference(3.0, 8.0)</code> daje -5. Kompilator zaakceptuje obie kolejności, ponieważ typy pasują. Poprawność znaczenia argumentów musi zapewnić programista.</p>
+<section id="zadanie-2.-prędkość-średnia" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-2.-prędkość-średnia">Zadanie 2. Prędkość średnia</h3>
+<p>Napisz funkcję <code>double averageSpeed(double distance, double time)</code>, zwracającą iloraz drogi i czasu. Argumenty oznaczają drogę w kilometrach i czas w godzinach. Funkcja nie obsługuje wejścia ani wyjścia. W <code>main</code> wczytaj oba argumenty, wywołaj funkcję i wypisz prędkość w <code>km/h</code>. Na razie załóż poprawne liczby, nieujemną drogę oraz dodatni czas.</p>
+<p><strong>Sprawdź:</strong> <code>(120, 2)</code> daje 60, <code>(2.5, 0.5)</code> daje 5, a <code>(0, 3)</code> daje 0.</p>
+<p><strong>Wyjaśnij:</strong> dlaczego czas musi być dodatni? Co stanie się z wynikiem dla pierwszej pary po zamianie kolejności argumentów i dlaczego kompilator nie musi zgłosić takiej pomyłki?</p>
+</section>
+</section>
+<section id="funkcja-wykonująca-czynność-void" class="level2">
+<h2 class="anchored" data-anchor-id="funkcja-wykonująca-czynność-void">3. Funkcja wykonująca czynność — void</h2>
+<p>Nie każda funkcja musi zwracać wartość. Typ <code>void</code> oznacza brak wartości wyniku. Taką funkcję można wykorzystać np. do wyświetlania komunikatu lub fragmentu raportu. Jej wywołanie jest samodzielną instrukcją; nie przypisujemy go do zmiennej liczbowej.</p>
+<p><strong>Ogólna postać:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> function_name<span class="op">(</span>parameter_list<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Perform an action without returning a value.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Funkcja <code>void</code> kończy się po dojściu do końca ciała. Może też zakończyć się wcześniej przez <code>return;</code>, bez wyrażenia po słowie <code>return</code>.</p>
+<p><strong>Przykład nowej konstrukcji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> printStatus<span class="op">(</span><span class="dt">bool</span> ready<span class="op">)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>ready <span class="op">?</span> <span class="st">"Ready"</span> <span class="op">:</span> <span class="st">"Not ready"</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Wywołanie <code>printStatus(true);</code> wypisuje <code>Ready</code> i przechodzi do nowej linii. Nie daje jednak wartości, którą można przypisać np. do <code>int result</code>.</p>
+<section id="zadanie-3.-separator-raportu" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-3.-separator-raportu">Zadanie 3. Separator raportu</h3>
+<p>Napisz funkcję <code>void printSeparator(int width)</code>, która wypisuje w jednej linii <code>width</code> znaków <code>-</code>, a następnie znak nowej linii. Użyj pętli. Dla szerokości zero funkcja ma wypisać wyłącznie nową linię. W <code>main</code> wywołaj ją kilka razy z różnymi argumentami, umieszczając pomiędzy separatorami dowolny krótki komunikat. Przyjmij szerokości od 0 do 40.</p>
+<p><strong>Sprawdź:</strong> szerokości 0, 1 i 5 dają odpowiednio pusty wiersz, <code>-</code> oraz <code>-----</code>.</p>
+<p><strong>Wyjaśnij:</strong> dlaczego funkcja ma typ <code>void</code>, mimo że wywołuje instrukcje wypisujące? Czy próba przypisania <code>printSeparator(5)</code> do zmiennej <code>int</code> byłaby poprawna?</p>
+</section>
+</section>
+<section id="funkcja-odpowiadająca-na-pytanie-wynik-bool" class="level2">
+<h2 class="anchored" data-anchor-id="funkcja-odpowiadająca-na-pytanie-wynik-bool">4. Funkcja odpowiadająca na pytanie — wynik bool</h2>
+<p>Warunek można wydzielić do funkcji zwracającej <code>bool</code>. Taka funkcja odpowiada na jedno pytanie i może zostać użyta bezpośrednio w <code>if</code>, <code>while</code> albo innym wyrażeniu logicznym. Pozwala to nadać regule nazwę i stosować tę samą definicję w kilku miejscach programu.</p>
+<p><strong>Ogólna postać:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> predicate<span class="op">(</span>parameter_list<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> condition<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Przykład nowej konstrukcji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> isNonzero<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> value <span class="op">!=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Wywołanie <code>isNonzero(2.0)</code> daje <code>true</code>, a <code>isNonzero(0.0)</code> daje <code>false</code>. W <code>main</code> można użyć <code>if (!isNonzero(divisor))</code>, aby obsłużyć zerowy dzielnik przed dzieleniem. <code>return</code> z funkcji pomocniczej kończy tylko jej wywołanie, a nie cały program.</p>
+<section id="zadanie-4.-kontrola-poziomu-baterii" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-4.-kontrola-poziomu-baterii">Zadanie 4. Kontrola poziomu baterii</h3>
+<p>Napisz funkcję <code>bool isValidCharge(int charge)</code>, która zwraca prawdę wyłącznie dla wartości 0–100 włącznie. W funkcji nie wyświetlaj komunikatów. W <code>main</code> wczytaj liczbę i na podstawie wyniku funkcji wypisz <code>Valid charge</code> albo <code>Invalid charge</code>. Załóż poprawny odczyt liczby całkowitej.</p>
+<p><strong>Sprawdź:</strong> -1, 0, 30, 100 i 101. Tylko pierwsza i ostatnia wartość mają zostać odrzucone.</p>
+<p><strong>Wyjaśnij:</strong> dlaczego wynik typu <code>bool</code> jest przydatniejszy do ponownego użycia reguły niż samo wypisanie komunikatu w funkcji? Czy <code>return false;</code> wewnątrz tej funkcji kończy <code>main</code>?</p>
+</section>
+</section>
+<section id="kopia-argumentu-i-jawne-wykorzystanie-wyniku" class="level2">
+<h2 class="anchored" data-anchor-id="kopia-argumentu-i-jawne-wykorzystanie-wyniku">5. Kopia argumentu i jawne wykorzystanie wyniku</h2>
+<p>Parametr przekazywany przez wartość, np. <code>int value</code>, jest osobną zmienną lokalną funkcji. Zmiana tego parametru nie zmienia zmiennej użytej jako argument wywołania. Jeśli funkcja ma obliczyć nową wartość, można ją zwrócić, a następnie jawnie przypisać do wybranej zmiennej w <code>main</code>.</p>
+<p><strong>Ogólna postać:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> function_name<span class="op">(</span><span class="dt">int</span> value<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Modify the local copy.</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> value<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Przykład nowej konstrukcji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nextValue<span class="op">(</span><span class="dt">int</span> value<span class="op">)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    value <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> value<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Dla <code>int count = 4;</code> wywołanie <code>nextValue(count);</code> pozostawi <code>count</code> równe 4. Dopiero <code>count = nextValue(count);</code> zapisze w nim 5. Nazwa parametru i nazwa zmiennej w <code>main</code> mogą być takie same, ale nie oznacza to, że są jednym obiektem. Nie przenoś ich do zmiennych globalnych.</p>
+<section id="zadanie-5.-korekta-bez-zmiany-oryginału" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-5.-korekta-bez-zmiany-oryginału">Zadanie 5. Korekta bez zmiany oryginału</h3>
+<p>Napisz <code>int corrected(int value, int correction)</code>. W ciele funkcji dodaj poprawkę do parametru <code>value</code> i zwróć zmodyfikowaną wartość. Zacznij w <code>main</code> od <code>int measurement = 20;</code>. Najpierw wywołaj funkcję z poprawką 5 bez zapisania jej wyniku i wypisz <code>measurement</code>. Następnie zapisz wynik w drugiej zmiennej i wypisz obie. Na końcu przypisz wynik funkcji do samego <code>measurement</code> i ponownie go wypisz.</p>
+<p><strong>Sprawdź:</strong> pierwszy wydruk to 20, następna para to <code>20 25</code>, a końcowa wartość <code>measurement</code> to 25. Sprawdź także poprawkę -3 dla początkowego pomiaru 20.</p>
+<p><strong>Wyjaśnij:</strong> dlaczego zmiana parametru wewnątrz funkcji nie zmienia oryginału? W debuggerze użyj <strong>F11 / Step Into</strong>, aby wejść do funkcji i porównać jej parametr ze zmienną w <code>main</code>; <strong>F10 / Step Over</strong> wykonuje wywołanie bez wchodzenia do środka.</p>
+</section>
+</section>
+<section id="zamierzona-zmiana-argumentu-referencja" class="level2">
+<h2 class="anchored" data-anchor-id="zamierzona-zmiana-argumentu-referencja">6. Zamierzona zmiana argumentu — referencja</h2>
+<p>Parametr zapisany jako <code>int&amp; value</code> jest referencją: w tym wywołaniu stanowi inną nazwę obiektu przekazanego przez wywołującego. Przypisanie do takiego parametru zmienia oryginalną zmienną. Stosujemy referencję wtedy, gdy modyfikacja argumentu jest częścią zadania funkcji.</p>
+<p><strong>Ogólna postać:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> function_name<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> value<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Modify the caller's object through the reference.</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Przykład nowej konstrukcji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> increase<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> value<span class="op">)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    value <span class="op">+=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Dla <code>int count = 20;</code> wywołanie <code>increase(count);</code> zmieni <code>count</code> na 25. Nie trzeba przypisywać wyniku, bo funkcja go nie zwraca. Przy wywołaniu nie dopisujemy <code>&amp;</code> przed nazwą zmiennej. Zwykła referencja do nie-const <code>int</code> wymaga odpowiedniego obiektu, np. zmiennej: wywołanie <code>increase(20)</code> z literałem jest niepoprawne.</p>
+<section id="zadanie-6.-korekta-przez-referencję" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-6.-korekta-przez-referencję">Zadanie 6. Korekta przez referencję</h3>
+<p>Napisz <code>void addCorrection(int&amp; value, int correction)</code>, która zmienia pomiar przekazany jako pierwszy argument. Drugi argument przekazuj przez wartość. W <code>main</code> zacznij od 20, zastosuj kolejno poprawki 5 i -3 oraz wypisz pomiar po każdym wywołaniu. Następnie porównaj ten przebieg z funkcją <code>corrected</code> z zadania 5.</p>
+<p><strong>Sprawdź:</strong> kolejne wartości oryginalnego pomiaru to 25 i 22. Dla poprawki zero wartość pozostaje bez zmian. Używaj małych liczb, aby nie przekroczyć zakresu <code>int</code>.</p>
+<p><strong>Wyjaśnij:</strong> który parametr może zmienić oryginalny obiekt i dlaczego? Co zmieniłoby usunięcie <code>&amp;</code> z deklaracji i definicji tej funkcji?</p>
+</section>
+</section>
+<section id="deklaracja-przed-wywołaniem-prototyp-funkcji" class="level2">
+<h2 class="anchored" data-anchor-id="deklaracja-przed-wywołaniem-prototyp-funkcji">7. Deklaracja przed wywołaniem — prototyp funkcji</h2>
+<p>Kompilator musi znać deklarację funkcji przed miejscem jej wywołania. Dotychczas zapewnialiśmy to, umieszczając całą definicję nad <code>main</code>. Można też zapisać tam tylko deklarację, a definicję umieścić dalej. Deklaracja informuje o nazwie, typach parametrów i typie wyniku; definicja zawiera dodatkowo ciało.</p>
+<p><strong>Ogólna postać deklaracji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">return_type</span> function_name<span class="op">(</span>parameter_list<span class="op">);</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Średnik kończy deklarację. Jeżeli późniejsza definicja ma inne typy parametrów, może opisywać inną funkcję zamiast implementować zapowiedzianą. Zapis <code>int value</code> i <code>int&amp; value</code> nie oznacza tego samego sposobu przekazywania argumentu. Pilnuj zgodności deklaracji i definicji.</p>
+<p><strong>Przykład nowej konstrukcji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> doubled<span class="op">(</span><span class="dt">int</span> value<span class="op">);</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> doubled<span class="op">(</span><span class="dt">int</span> value<span class="op">)</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> value<span class="op">;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>W kompletnym programie możesz umieścić <code>main</code> pomiędzy tą deklaracją i definicją. Wywołanie <code>doubled(3)</code> w <code>main</code> nadal będzie poprawne, a wynik wyniesie 6. Sama deklaracja nie zastępuje definicji potrzebnej do zbudowania programu używającego tej funkcji.</p>
+<section id="zadanie-7.-zamiana-wartości-i-prototyp" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-7.-zamiana-wartości-i-prototyp">Zadanie 7. Zamiana wartości i prototyp</h3>
+<p>Napisz funkcję <code>void swapValues(int&amp; first, int&amp; second)</code> zamieniającą wartości za pomocą jednej zmiennej pomocniczej. Nie używaj gotowej funkcji zamiany. Nad <code>main</code> umieść tylko deklarację, a definicję własnej funkcji pod <code>main</code>. W <code>main</code> wywołaj ją dla dwóch zmiennych i wypisz wynik.</p>
+<p><strong>Sprawdź:</strong> <code>(3, 7)</code> zmienia się na <code>(7, 3)</code>, <code>(-2, 5)</code> na <code>(5, -2)</code>, a <code>(4, 4)</code> pozostaje bez zmian. Sprawdź też wywołanie z tą samą zmienną w obu argumentach — jej wartość powinna się zachować.</p>
+<p><strong>Wyjaśnij:</strong> dlaczego funkcja potrzebuje dwóch referencji? Co zgłosi proces budowania, gdy pozostawisz deklarację i wywołanie, ale usuniesz definicję? Po próbie przywróć definicję.</p>
+</section>
+</section>
+<section id="tablica-tylko-do-odczytu-i-osobny-rozmiar" class="level2">
+<h2 class="anchored" data-anchor-id="tablica-tylko-do-odczytu-i-osobny-rozmiar">8. Tablica tylko do odczytu i osobny rozmiar</h2>
+<p>Parametr <code>const int values[]</code> umożliwia funkcji odczyt elementów przekazanej tablicy. Taki parametr jest w języku traktowany jak wskaźnik do elementu tablicy, a nie kopia wszystkich elementów. Nie zawiera automatycznie informacji o ich liczbie, dlatego przekazujemy rozmiar osobno. <code>const</code> zabrania zmiany elementów przez ten parametr.</p>
+<p><strong>Ogólna postać:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">return_type</span> function_name<span class="op">(</span><span class="at">const</span> <span class="dt">int</span> values<span class="op">[],</span> <span class="dt">int</span> count<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Read values[0] through values[count - 1].</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Wywołując funkcję, podajemy nazwę tablicy, bez pustych nawiasów: np. <code>sumValues(measurements, 4)</code>. Kompilator nie sprawdzi, czy zadeklarowana liczba elementów jest dostępna. Funkcja może przetwarzać początkową część tablicy, ale nie wolno przekazać liczby większej od liczby dostępnych elementów.</p>
+<p><strong>Przykład nowej konstrukcji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sumValues<span class="op">(</span><span class="at">const</span> <span class="dt">int</span> values<span class="op">[],</span> <span class="dt">int</span> count<span class="op">)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> count<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> values<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total<span class="op">;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Dla tablicy <code>{2, 5, 1, 4}</code> wywołanie z liczbą elementów 4 daje 12, a z liczbą 2 daje 7. Dla liczby zero ta konkretna funkcja zwróci zero bez odczytu elementów. Nie oznacza to, że każda operacja, np. średnia, jest zdefiniowana dla pustego zbioru. <code>sizeof(values)</code> wewnątrz tej funkcji nie poda rozmiaru oryginalnej tablicy.</p>
+<section id="zadanie-8.-średnia-jako-funkcja" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-8.-średnia-jako-funkcja">Zadanie 8. Średnia jako funkcja</h3>
+<p>Napisz <code>double average(const int values[], int count)</code>, która oblicza i zwraca średnią z niepustej tablicy. Wykorzystaj konwersję przed dzieleniem, aby zachować część ułamkową. Nie wczytuj ani nie wypisuj danych w tej funkcji.</p>
+<p>W <code>main</code> przygotuj tablicę <code>{2, 5, 1, 4}</code> i wczytaj liczbę jej początkowych elementów do analizy. Dopuść zakres 0–4; inne liczby odrzuć. Dla zera wypisz <code>No data</code> bez wywoływania <code>average</code>. Załóż poprawny odczyt liczby. To <code>main</code> odpowiada za spełnienie warunku niepustych, dostępnych danych przed wywołaniem funkcji.</p>
+<p><strong>Sprawdź:</strong> dla liczby elementów 1, 2 i 4 średnie wynoszą 2, 3.5 i 3. W osobnej próbie dla tablicy <code>{1, 2}</code> i liczby 2 wynik ma wynieść 1.5. Sprawdź zero oraz odrzucenie -1 i 5.</p>
+<p><strong>Wyjaśnij:</strong> dlaczego rozmiar jest osobnym argumentem? Dlaczego funkcji nie wolno wywołać z zerem lub z liczbą większą niż dostępny rozmiar, nawet jeśli kod się skompiluje?</p>
+</section>
+</section>
+<section id="funkcja-zmieniająca-elementy-tablicy" class="level2">
+<h2 class="anchored" data-anchor-id="funkcja-zmieniająca-elementy-tablicy">9. Funkcja zmieniająca elementy tablicy</h2>
+<p>Usunięcie <code>const</code> z parametru tablicowego umożliwia modyfikowanie elementów przez ten parametr. Nie trzeba dodawać referencji <code>&amp;</code> do zapisu <code>int values[]</code>, aby zmiany były widoczne po wywołaniu: parametr nadal wskazuje elementy oryginalnej tablicy. To inna sytuacja niż pojedynczy parametr <code>int value</code> przekazywany przez wartość.</p>
+<p><strong>Ogólna postać:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> function_name<span class="op">(</span><span class="dt">int</span> values<span class="op">[],</span> <span class="dt">int</span> count<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> count<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Modify values[i].</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Przykład nowej konstrukcji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> addToAll<span class="op">(</span><span class="dt">int</span> values<span class="op">[],</span> <span class="dt">int</span> count<span class="op">,</span> <span class="dt">int</span> correction<span class="op">)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> count<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        values<span class="op">[</span>i<span class="op">]</span> <span class="op">+=</span> correction<span class="op">;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Dla tablicy <code>{2, 5, 1, 4}</code> wywołanie <code>addToAll(values, 4, 3)</code> zmienia dane na <code>{5, 8, 4, 7}</code>. Przekazanie liczby elementów 2 zmieniłoby tylko dwie pierwsze wartości. Nadal trzeba zapewnić poprawny zakres indeksów i takie dane, dla których dodawanie mieści się w <code>int</code>.</p>
+<section id="zadanie-9.-zerowanie-przekazanych-danych" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-9.-zerowanie-przekazanych-danych">Zadanie 9. Zerowanie przekazanych danych</h3>
+<p>Napisz <code>void resetValues(int values[], int count)</code>, która zeruje wskazaną liczbę początkowych elementów tablicy. W funkcji nie zakładaj stałego rozmiaru 4 ani 6. W <code>main</code> przygotuj tablicę <code>{2, 5, 1, 4}</code>, wywołaj funkcję i dopiero potem wypisz wszystkie elementy. Argument <code>count</code> ma być nieujemny i nie większy od dostępnego rozmiaru.</p>
+<p><strong>Sprawdź:</strong> dla 3 otrzymasz <code>{0, 0, 0, 4}</code>, a dla 4 — cztery zera. Osobno sprawdź 0 na ponownie zainicjalizowanej tablicy: żaden element nie powinien się zmienić.</p>
+<p><strong>Wyjaśnij:</strong> dlaczego zmiany są widoczne w <code>main</code> mimo braku <code>&amp;</code> w parametrze tablicowym? Dlaczego dodanie <code>const</code> uniemożliwiłoby wykonanie zadania? Nie usuwaj <code>const</code> w funkcjach, które mają wyłącznie czytać dane.</p>
+</section>
+</section>
+<section id="podział-raportu-na-funkcje-o-różnych-zadaniach" class="level2">
+<h2 class="anchored" data-anchor-id="podział-raportu-na-funkcje-o-różnych-zadaniach">10. Podział raportu na funkcje o różnych zadaniach</h2>
+<p>Funkcje można łączyć: jedna sprawdza dane, druga oblicza wynik, a kolejna przygotowuje wydruk. Funkcja może wywołać inną funkcję, jeśli zna jej deklarację. Wynik jednego wywołania może być argumentem następnego. Taki podział ułatwia sprawdzanie obliczeń niezależnie od formatowania i odczytu.</p>
+<p><strong>Ogólna postać złożenia wywołań:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">result_type</span> result <span class="op">=</span> outer_function<span class="op">(</span>inner_function<span class="op">(</span>argument<span class="op">));</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Najpierw musi powstać wynik wywołania wewnętrznego, aby można go było przekazać jako argument wywołania zewnętrznego. Jeśli czytelniejsze są dwa kroki, zapisz wynik pośredni w osobnej zmiennej.</p>
+<p><strong>Przykład nowej kombinacji:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> doubled<span class="op">(</span><span class="dt">int</span> value<span class="op">)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> value<span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> adjusted<span class="op">(</span><span class="dt">int</span> value<span class="op">)</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> doubled<span class="op">(</span>value<span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Wywołanie <code>adjusted(3)</code> daje 7. Funkcja <code>adjusted</code> korzysta z już zadeklarowanej funkcji <code>doubled</code>. Do przekazania danych nie są potrzebne zmienne globalne.</p>
+<section id="zadanie-10.-raport-gotowości-podzielony-na-funkcje" class="level3 lab-task">
+<h3 class="anchored" data-anchor-id="zadanie-10.-raport-gotowości-podzielony-na-funkcje">Zadanie 10. Raport gotowości podzielony na funkcje</h3>
+<p>Przebuduj raport z laboratorium 3. Użyj funkcji <code>bool isValidCharge(int charge)</code> i <code>double average(const int values[], int count)</code> z wcześniejszych zadań. Dodaj:</p>
+<ul>
+<li><code>int countBelow(const int values[], int count, int threshold)</code> — zwraca liczbę elementów ściśle mniejszych od progu;</li>
+<li><code>void printReport(const int values[], int count)</code> — wypisuje pomiary z indeksami, średnią z dwoma miejscami po przecinku oraz liczbę pomiarów poniżej 30; korzysta z funkcji obliczeniowych.</li>
+</ul>
+<p>W <code>main</code> wczytaj sześć poziomów baterii do tablicy. Sprawdzaj odczyt i używaj <code>isValidCharge</code> do kontroli zakresu. Błędny odczyt kończy program komunikatem <code>Invalid input</code>, a błędny zakres — <code>Invalid charge</code>; w obu przypadkach nie wywołuj raportu. Dla kompletu poprawnych danych wywołaj <code>printReport</code>. Nie używaj zmiennych globalnych, nie wpisuj rozmiaru sześć na stałe do funkcji pomocniczych i nie zmieniaj analizowanej tablicy.</p>
+<p><strong>Sprawdź:</strong> dla <code>80 20 55 0 100 30</code> raport ma średnią 47.50 i dwa pomiary poniżej 30. Dla sześciu zer średnia wynosi 0.00, a liczba takich pomiarów 6. Dla sześciu wartości 100 wyniki to 100.00 i 0. Dodatkowo sprawdź <code>countBelow</code> dla danych pierwszej próby i progów 0, 30, 80 oraz 101: oczekiwane liczby to 0, 2, 4 i 6.</p>
+<p><strong>Wyjaśnij:</strong> które funkcje zwracają wynik, która odpowiada za wypisywanie i czy którakolwiek powinna zmieniać analizowaną tablicę? Czy funkcję <code>average</code> można sprawdzić osobno bez uruchamiania całego menu lub raportu? Wskaż w kodzie, gdzie zapewniasz jej warunek niepustych danych.</p>
+</section>
+</section>
+<section id="dokumentacja-i-sprawdzenie-pracy" class="level2">
+<h2 class="anchored" data-anchor-id="dokumentacja-i-sprawdzenie-pracy">Dokumentacja i sprawdzenie pracy</h2>
+<p>Każde zadanie przygotuj jako kompletny program w osobnym projekcie. Przykłady pokazują wyłącznie nowe konstrukcje lub pojedyncze funkcje, a nie pełny program. Samodzielnie napisz <code>main</code>, dobierz nagłówki i połącz wywołania. Stosuj angielskie nazwy, komunikaty i komentarze.</p>
+<ul>
+<li>Zachowaj źródła <code>.cpp</code> oznaczone numerami zadań.</li>
+<li>Zapisz argumenty wywołań, oczekiwane wyniki i wyniki rzeczywiste dla wskazanych prób.</li>
+<li>Przy każdej funkcji wskaż, czy zwraca wynik, wypisuje dane lub modyfikuje argumenty.</li>
+<li>Przygotuj odpowiedzi na pytania „Wyjaśnij”.</li>
+<li>Prześledź co najmniej jedno wywołanie przez <strong>F11</strong> i porównaj stan przed nim oraz po powrocie do wywołującego.</li>
+</ul>
+<p>Sposób przekazania plików ustala prowadzący. Nie trzeba przekazywać katalogów <code>.vs</code> i <code>Debug</code> ani plików <code>.exe</code>.</p>
+</section>
+<section id="przygotowanie-do-kolejnych-zajęć" class="level2">
+<h2 class="anchored" data-anchor-id="przygotowanie-do-kolejnych-zajęć">Przygotowanie do kolejnych zajęć</h2>
+<section id="powtórz-materiał-laboratorium-4" class="level3">
+<h3 class="anchored" data-anchor-id="powtórz-materiał-laboratorium-4">Powtórz materiał laboratorium 4</h3>
+<ul>
+<li>Definicję, deklarację, parametry, argumenty i wywołanie funkcji.</li>
+<li>Różnicę między <code>return</code> a wypisywaniem oraz znaczenie <code>void</code>.</li>
+<li>Przekazywanie przez wartość i referencję, użycie wyniku i zamierzone modyfikacje.</li>
+<li>Tablicę jako argument, znaczenie <code>const</code> i osobnej liczby elementów.</li>
+<li>Warunki poprawnego wywołania, zwłaszcza niepuste dane dla średniej.</li>
+<li>Współpracę funkcji bez zmiennych globalnych.</li>
+</ul>
+</section>
+<section id="przygotuj-się-do-laboratorium-5" class="level3">
+<h3 class="anchored" data-anchor-id="przygotuj-się-do-laboratorium-5">Przygotuj się do laboratorium 5</h3>
+<p>Kolejne zajęcia wprowadzą obiekty biblioteczne i kontener <code>std::vector</code>. Wektor przechowuje elementy; <code>push_back</code> dopisuje element na końcu, a <code>size</code> zwraca aktualną liczbę elementów. Poniższy fragment wymaga nagłówka <code>&lt;vector&gt;</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> values<span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>values<span class="op">.</span>push_back<span class="op">(</span><span class="dv">8</span><span class="op">);</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>values<span class="op">.</span>push_back<span class="op">(</span><span class="dv">12</span><span class="op">);</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>values<span class="op">.</span>push_back<span class="op">(</span><span class="dv">16</span><span class="op">);</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> values<span class="op">.</span>size<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Fragment wypisuje 3. <code>values.size()</code> jest wywołaniem metody na obiekcie <code>values</code>; w odróżnieniu od zwykłej funkcji pokazuje również obiekt, do którego odnosi się operacja. Nie trzeba jeszcze samodzielnie implementować menu rejestru.</p>
+<p>Następna wejściówka będzie sprawdzać poznany materiał funkcji. Zakres pytań i krótkiego programu będzie podany w instrukcji kolejnego laboratorium.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Skopiowano!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Skopiowano!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/sebkaz-teaching\.github\.io\/wdplab2026");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Przewijany kod","output":"Przewijane wyjście"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2026, Sebastian Zając</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

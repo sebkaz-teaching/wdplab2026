@@ -9,7 +9,7 @@ project:
     - "laboratoria/01_projekt.qmd"
     - "laboratoria/02_warunki.qmd"
     - "laboratoria/03_petle_tablice.qmd"
-    # - "laboratoria/04_funkcje.qmd"
+    - "laboratoria/04_funkcje.qmd"
     # - "laboratoria/05_wektor.qmd"
     # - "laboratoria/06_klasa.qmd"
     # - "laboratoria/07_rejestr.qmd"
@@ -50,7 +50,7 @@ website:
           - laboratoria/01_projekt.qmd
           - laboratoria/02_warunki.qmd
           - laboratoria/03_petle_tablice.qmd
-          # - laboratoria/04_funkcje.qmd
+          - laboratoria/04_funkcje.qmd
           # - laboratoria/05_wektor.qmd
           # - laboratoria/06_klasa.qmd
           # - laboratoria/07_rejestr.qmd
